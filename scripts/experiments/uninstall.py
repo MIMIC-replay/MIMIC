@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment
 import glob
 
 def uninstall(raw_file):
@@ -8,6 +8,8 @@ def uninstall(raw_file):
     for script in soup.find_all('script'):
       if 'Owl' in script.get('class', []): 
         script.extract()
+    for comment in soup.find_all(text = lambda text: isinstance(text, Comment) and 'Owl' in text ):
+      comment.extract()
     with open(raw_file, 'w') as file:
       file.write(str(soup))
 
