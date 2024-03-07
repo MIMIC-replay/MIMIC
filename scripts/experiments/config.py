@@ -15,5 +15,5 @@ with open('./config.owl.json', 'r') as file:
 
 js_script = generate_script(json_data)
 
-with open('./owl_data.js', 'w') as file:
+with open('./post_data.owl.js', 'w') as file:
   file.write(js_script)
