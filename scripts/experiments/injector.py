@@ -21,8 +21,8 @@ def install(raw_file):
       file.write(str(soup))  
 
 def create_js():
-  with open('example.js', 'w') as file:
-    file.write("console.log('Veronika!')")
+  with open('./sample_files/hoot.owl.js', 'w') as file:
+    file.write("console.log('Hoot hoot motherbeaker!')")
 
 files = glob.glob('./**/*.html', recursive=True)
 for file in files:
