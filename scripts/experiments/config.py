@@ -2,7 +2,11 @@ import json
 from template import JS_TEMPLATE 
 
 def generate_script(json_data):
-  js_code = JS_TEMPLATE.format(value1 = json_data['color'], endpoint = json_data['endpoint'])
+  js_code = JS_TEMPLATE.format(
+    species = json_data['species'],
+    color = json_data['color'], 
+    feathers = json_data['feathers'],
+    endpoint = json_data['endpoint'])
   return js_code
 
 

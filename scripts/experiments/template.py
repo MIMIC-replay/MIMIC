@@ -1,11 +1,13 @@
 JS_TEMPLATE = """
-let color = {value1}
+let species = {species}
+let color = {color}
+let feathers = {feathers}
 let endpoint = {endpoint}
-console.log(color) 
+ 
 
 fetch(endpoint, {{
     method: 'POST',
         headers: {{ 'Content-Type': 'application/json' }},
-        body: JSON.stringify({{ message: color }})
+        body: JSON.stringify({{ message: `The ${{species}} has ${{color}}, ${{feathers}} feathers`}})
   }})
 """
