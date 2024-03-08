@@ -35,8 +35,6 @@ There is no strict directory structure or file naming convention that is require
 
 These are Node.js best practices, there is not a strict form (unlike Ruby on Rails)
 
-### Structure
-
 Example of a very simple Express app:
 
 ```bash
@@ -59,8 +57,6 @@ Example of a very simple Express app:
 ```
 
 Note that, sometimes, when middleware functions become more complex, a specific `middleware` folder is created.
-
-#### Brief explanation:
 
 - `node_modules`: Contains all the installed dependencies.
 - `dist`: this would contain the production version of the frontend app. Usually imported via a custom `npm run build:ui` command from the frontend repo.
@@ -150,26 +146,202 @@ For more info, visit: <https://github.com/devluxor/full-stack-open/blob/main/not
 
 ## Angular
 
+Angular is not very opinionated, but it provides a series of well-established conventions and good practices in its [official style guide](https://angular.io/guide/styleguide), where the reasons behind all these are explained. They emphasize the principles of single responsibility and separation of concerns.
+
+A typical, simple Angular project could look like this, with a shared module and a module for each feature. For instance, the project could be split into six main folders (`core`, `features`, `shares`, `apis`, `types`, and `store`), according the single responsibility and separation of concerns principles.
+
+Note that components have familiar extensions: `.html`, `.css`, `.ts`.
+
+```bash
+<project root>
+    |-- core
+    |   |-- components
+    |   |   |-- header
+    |   |   |   |-- header.component.ts
+    |   |   |   |-- header.component.html
+    |   |   |   |-- header.component.scss
+    |   |   |-- footer
+    |   |   |   |-- footer.component.ts
+    |   |   |   |-- footer.component.html
+    |   |   |   |-- footer.component.scss
+    |   |-- services
+    |   |   |-- auth.service.ts
+    |   |   |-- logging.service.ts
+    |   |   |-- exception.service.ts
+    |   |-- interceptors
+    |   |   |-- auth.interceptor.ts
+    |   |-- guards
+    |   |   |-- auth.guard.ts
+    |   |-- core.module.ts
+```
+
+```bash
+<project root>
+    |-- shared
+    |   |-- components
+    |   |   |-- spinner
+    |   |   |   |-- spinner.component.ts
+    |   |   |   |-- spinner.component.html
+    |   |   |   |-- spinner.component.scss
+    |   |   |-- modal
+    |   |   |   |-- modal.component.ts
+    |   |   |   |-- modal.component.html
+    |   |   |   |-- modal.component.scss
+    |   |-- directives
+    |   |   |-- highlight.directive.ts
+    |   |-- pipes
+    |   |   |-- capitalize.pipe.ts
+    |   |-- shared.module.ts
+    |   |-- third-party.module.ts
+```
+
+```bash
+<project root>
+    |-- features
+    |   |-- products
+    |   |   |-- components
+    |   |   |   |-- product-list
+    |   |   |   |   |-- product-list.component.ts
+    |   |   |   |   |-- product-list.component.html
+    |   |   |   |   |-- product-list.component.scss
+    |   |   |   |-- product-details
+    |   |   |   |   |-- product-details.component.ts
+    |   |   |   |   |-- product-details.component.html
+    |   |   |   |   |-- product-details.component.scss
+    |   |   |-- product-root.component.html
+    |   |   |-- product-root.component.ts
+    |   |   |-- product-routing.module.ts
+    |   |   |-- product.module.ts
+```
+
+etc.
 
 [Go back to Table of Contents](#table-of-contents)
 
 ## Next.js
 
+(_source: <https://www.linkedin.com/pulse/understanding-folder-structure-nextjs-reactjs-guide-m-sohail-maqsood-ehgrf/>_)
+
+>Next.js is a framework built on top of React.js (see [this](#react)), designed to facilitate server-side rendering and static site generation. It's known for its 'convention over configuration' approach, meaning that by following certain conventions, you can get up and running with minimal setup. Here's a typical Next.js folder structure:
+
+- `pages/`:The heart of a Next.js application. Each JavaScript file under this directory becomes a route based on its file name. Example: `pages/index.js` is the entry point (home page), and `pages/about.js` would correspond to the `/about` route.
+- `public/`:This directory holds static files like images, fonts, and other assets. You can reference these files in your code starting from the base URL of your site.
+- `components/`:Although not required by Next.js, it's a common practice to have this folder for all your shared React components. Example: `components/Header.js`, `components/Footer.js`.
+- `styles/`:This is where your CSS files live. You can have global styles, and with the support of CSS Modules, you can also have component-specific styles.
+- `node_modules/`:Contains all your project's dependencies.
+- `package.json`:Manages the list of packages that your project depends on, scripts, and versioning.
+- `next.config.js`:Optional configuration file for customizing various aspects of Next.js.
 
 [Go back to Table of Contents](#table-of-contents)
 
 ## ASP.NET CORE
 
+This framework is semi-opinionated, as it has a well-defined, common MVC pattern, but its structure can vary depending on the project type, framework version, etc:
+
+Note that it uses the C# programming language, which has a `.cs` extension.
+
+- Root (project folder):This is the main folder, It contains all the files and folders related to your application:
+
+- `Properties`: Contains files related to project properties such as `launchSettings.json`, which defines how the application will launch.
+
+- `obj`: Contains temporary files generated during the build process. These files can usually be safely ignored or deleted.
+
+- `bin`: Contains the compiled output of the project, including the executable files and DLLs.
+
+- `wwwroot`: This is the web root folder where static files like HTML, CSS, JavaScript, images, etc., are placed.
+
+- `Controllers`: Contains controller classes that handle incoming requests, process user input, and return appropriate responses.
+
+- `Views`: Contains the Razor views (`.cshtml` files) that define the presentation layer of the application. These views are typically HTML files with embedded C# code. 👈
+
+- `Models`: Contains the model classes that represent the data and business logic of the application. These classes are often used by controllers and views to interact with data.
+
+- `Data` folder (optional): May contain files related to data access, such as database contexts, entity classes, and migration files for Entity Framework Core.
+
+- `Services` folder (optional): May contain service classes that encapsulate reusable functionality, such as business logic, data access, or external API calls.
+
+- `appsettings.json`: Configuration file that stores application settings, such as database connection strings, API keys, etc.
+
+- `Startup.cs`: Contains the startup class where you configure services and middleware for your application.
+
+- `Program.cs`: Contains the entry point for the application and is responsible for building and running the ASP.NET Core host.
 
 [Go back to Table of Contents](#table-of-contents)
 
 ## WordPress
 
+WordPress is not a framework, but an open-source CMS (Content Management System). It allows users to easily update and modify entire websites without needing to write or edit HTML or CSS code directly. It is basically an interface that abstracts away all the classic html/css creation; and it generates its content form PHP files instead. Usually, their users are not developers, and don't tinker the WordPress files. It operates on a plugin architecture, allowing users to extend its functionality with thousands of plugins available for various purposes. It also supports themes, which control the design and layout of a WordPress site. 
+
+A WordPress project files can be categorized into four groups: WordPress configuration files, content, plugin and theme files and WordPress core system files. It looks like this:
+
+![WordPress folder structure in the root directory](assets-docs/2024-03-08-12-40-15.png)
+
+![WordPress folder structure in the wp-content/ folder](assets-docs/2024-03-08-12-40-33.png)
+
+_Images source: <https://devowl.io/2020/wordpress-file-folder-structure-explained/>_
+
+If we want to support WordPress, we need to write a plugin, and let users manage it from their WordPress dashboards.
 
 [Go back to Table of Contents](#table-of-contents)
 
 ## Flask
 
+Flask is a simple framework, but opinionated. The organization of the app files has to follow certain rules, so the app can work. Here is a diagram of a typical structure:
+
+```bash
+my-flask-app
+   ├── static/
+   │   └── css/
+   │       └── main.css
+   ├── templates/
+   │   ├── index.html
+   │   └── student.html
+   ├── data.py
+   └── students.py
+```
+
+Very important!:
+
+- The `static` folder contains assets used by the templates, including CSS files, JavaScript files, and images. In the example, we have only one asset file, `main.css`. Note that it’s inside a `css` folder that’s inside the static folder.
+
+- The `templates` folder contains only templates. These have an `.html` extension. As we will see, they contain more than just regular HTML.
+
+A more involved project could look like this:
+
+```bash
+/home/user/Projects/flask-tutorial
+├── flaskr/
+│   ├── __init__.py
+│   ├── db.py
+│   ├── schema.sql
+│   ├── auth.py
+│   ├── blog.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   └── blog/
+│   │       ├── create.html
+│   │       ├── index.html
+│   │       └── update.html
+│   └── static/
+│       └── style.css
+├── tests/
+│   ├── conftest.py
+│   ├── data.sql
+│   ├── test_factory.py
+│   ├── test_db.py
+│   ├── test_auth.py
+│   └── test_blog.py
+├── .venv/
+├── pyproject.toml
+└── MANIFEST.in
+```
+
+- `flaskr/`, a Python package containing your application code and files.
+- `tests/`, a directory containing test modules.
+- `.venv/`, a Python virtual environment where Flask and other dependencies are installed.
 
 [Go back to Table of Contents](#table-of-contents)
 
@@ -212,6 +384,36 @@ Usually, Django practitioners divide the codebase into modular components, based
 [Go back to Table of Contents](#table-of-contents)
 
 ## Svelte
+
+A typical SvelteKit project looks like this:
+
+```sh
+my-project/
+├ src/
+│ ├ lib/
+│ │ ├ server/
+│ │ │ └ [your server-only lib files]
+│ │ └ [your lib files]
+│ ├ params/
+│ │ └ [your param matchers]
+│ ├ routes/
+│ │ └ [your routes]
+│ ├ app.html
+│ ├ error.html
+│ ├ hooks.client.js
+│ ├ hooks.server.js
+│ └ service-worker.js
+├ static/
+│ └ [your static assets]
+├ tests/
+│ └ [your tests]
+├ package.json
+├ svelte.config.js
+├ tsconfig.json
+└ vite.config.js
+```
+
+see details in <https://kit.svelte.dev/docs/project-structure>
 
 [Go back to Table of Contents](#table-of-contents)
 
