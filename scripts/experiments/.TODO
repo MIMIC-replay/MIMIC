@@ -8,9 +8,14 @@ start experimenting with real JavaScript code using BeautifulSoup ✅
 Next Steps
 When running python injector, it will additionally create a unique identifier that is assigned to the application and stored in the HTML script 
 
-Need a way to disinguish HTML templates from real HTML files (maybe "<!DOCTYPE html>")
+Need a way to distinguish HTML templates from real HTML files (maybe "<!DOCTYPE html>")
 
 Design the shape of the scripting
 
 Making fetch calls 
 
+3/8
+
+.NET web apps use `.cshtml` files! 🔥
+
+  -  research more html templating extensions => find out if other common frameworks use different extensions for their html files.
