@@ -27,3 +27,5 @@ Add support for WordPress ??? ❓
       - a php file with the plugin
       - the script as a JS file
       - a json file that the developer will have to set manually, and the js will refer to
+
+return if file already contains injected code !
