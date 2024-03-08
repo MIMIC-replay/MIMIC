@@ -35,7 +35,7 @@ This is the main muscle of our application. It will recursively inject two `scri
 <!-- TOC --><a name="uninstallpy"></a>
 ### [`uninstall.py`](./uninstall.py)
 
-This script follows the inverse process of install_scripts (see `injector.py`)
+This script follows the inverse process of `install_scripts` (see `injector.py`)
 Looks recursively for every HTML file in the target app, and everything we injected, leaving no trace. It also removes our script files.
 
 <!-- TOC --><a name="other-components-and-files"></a>
