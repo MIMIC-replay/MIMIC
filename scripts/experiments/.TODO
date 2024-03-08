@@ -19,3 +19,11 @@ Making fetch calls
 .NET web apps use `.cshtml` files! 🔥
 
   -  research more html templating extensions => find out if other common frameworks use different extensions for their html files.
+
+Add support for WordPress ??? ❓
+
+  - write a plugin that injects scripts automatically. Not hard. It will be a separate component, independent from the injector: 
+
+      - a php file with the plugin
+      - the script as a JS file
+      - a json file that the developer will have to set manually, and the js will refer to
