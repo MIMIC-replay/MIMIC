@@ -1,7 +1,7 @@
 3/6
 add comments (by convention/good practice) ✅
-study common patterns
-fine tune scripting
+study common patterns ✅
+fine tune scripting (see COMMON_WEB_APP_STRUCTURE_PATTERNS.md)
 play around with arguments and flags/shell scripting ✅
 start experimenting with real JavaScript code using BeautifulSoup ✅
 
