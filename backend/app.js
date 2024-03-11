@@ -11,10 +11,7 @@ morgan.token("body", (req) => {
 app.use(cors());
 app.use(express.json());
 app.use(morgan(":method :url :status :body"));
-
-app.get("/test", (req, res) => {
-  res.status(200).send();
-});
-
+const recordRouter = require("./controllers/record.js");
 app.use(middleware.errorHandler);
+app.use("/api/record", recordRouter);
 module.exports = app;
