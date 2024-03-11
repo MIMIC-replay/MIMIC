@@ -11,7 +11,10 @@ morgan.token("body", (req) => {
 app.use(cors());
 app.use(express.json());
 app.use(morgan(":method :url :status :body"));
+const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");
 app.use(middleware.errorHandler);
 app.use("/api/record", recordRouter);
+app.use("/api/test", testRouter);
+
 module.exports = app;
