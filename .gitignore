@@ -1,3 +1,5 @@
 .env
 node_modules
 .git-coauthors
+/backend/.env
+/backend/node_modules
