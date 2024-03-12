@@ -1,3 +1,5 @@
+import Session from "./Session"
+
 const SessionsList = ({sessions}) => {
   return (
     <div className="sessions-container">
@@ -10,11 +12,6 @@ const SessionsList = ({sessions}) => {
   )
 }
 
-const Session = ({session}) => {
-  console.log(session)
-  return (
-    <li>{`Session #${session.metadata.id}`}</li>
-  )
-}
+
 
 export default SessionsList

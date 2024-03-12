@@ -53,9 +53,14 @@ body {
 }
 
 .sessions-list > li {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   border-bottom: 1px solid lightcyan;
   margin-bottom: 10px;
+}
+
+.session-list-element {
+  /* color:blue; */
+  background-color: salmon;
 }
 
 /* Main area */
@@ -143,8 +148,6 @@ body {
 .network-requests td {
   text-align: center;
 }
-
-
 
 
 /* Main content right bar */
