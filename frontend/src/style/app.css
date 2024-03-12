@@ -1,6 +1,11 @@
+@import url(./variables.css);
+
 body {
   color: white;
+  font-family: var(--general-font);
+  font-size: 0.9rem;
 }
+
 
 .main-grid {
   background-color: rgb(46, 60, 73);
