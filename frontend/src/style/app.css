@@ -111,10 +111,31 @@ body {
   margin-left: auto;
 }
 
+/* Extra info */
+
 .extra-info {
   grid-area: extra-info;
   background-color: rgb(108, 160, 31);
 }
+
+.network-requests {
+  border: 1px solid salmon;
+  width: 100%;
+  height: 100%;
+}
+
+.network-requests tr, th, td {
+  border: 1px solid pink;
+}
+
+.network-requests td {
+  text-align: center;
+}
+
+
+
+
+/* Main content right bar */
 
 .main-right-bar {
   grid-area: main-right-bar;
