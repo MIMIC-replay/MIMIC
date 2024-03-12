@@ -59,7 +59,7 @@ body {
   background-color: rgb(46, 60, 73);
   display: grid;
   grid-area: main-content-area;
-  grid-template: 40px 360px 90px 50px auto / auto 300px;
+  grid-template: 40px 50vh 90px 50px auto / auto 300px;
   grid-template-areas: 
     "content-header content-header"
     "player main-right-bar"
