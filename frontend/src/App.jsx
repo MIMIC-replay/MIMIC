@@ -9,6 +9,9 @@ function App() {
       <SiteHeader/>
       <LeftBar/>
       <MainContentArea/>
+
+
+      
     </div>
   )
 }
