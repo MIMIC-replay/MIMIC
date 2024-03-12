@@ -64,12 +64,10 @@ body {
   background-color: rgb(46, 60, 73);
   display: grid;
   grid-area: main-content-area;
-  grid-template: 40px 50vh 90px 50px auto / auto 300px;
+  grid-template: 40px auto 30vh / auto 300px;
   grid-template-areas: 
     "content-header content-header"
     "player main-right-bar"
-    "player-controls main-right-bar"
-    "extra-info main-right-bar"
     "extra-info main-right-bar";
   margin: 10px;
   border: 1px solid lightblue;
@@ -85,7 +83,19 @@ body {
   background-color: rgb(105, 112, 105);
 }
 
-.player {
+/* Player */
+
+#replayer {
+  background-color: orange;
+  width: auto;
+  height: auto;
+  border: 1px solid brown;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .player {
   background-color: rgb(67, 102, 168);
   grid-area: player;
   min-width: 500px;
@@ -96,20 +106,22 @@ body {
   border-radius: 5px;
   width: 100%;
   height: 95%;
-}
+} */
 
-.player-controls {
+/* .player-controls {
   grid-area: player-controls;
   background-color: rgb(194, 126, 0);
-}
+} */
 
-.controls {
+/* .controls {
   display: flex;
-}
+} */
 
-.right-controls {
+/* .right-controls {
   margin-left: auto;
-}
+} */
+
+
 
 /* Extra info */
 

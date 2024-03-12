@@ -42,7 +42,7 @@ const PlayerTest = () => {
           events: combinedEvents,
           // showController: false,
           width: 600,
-          height: 370,
+          height: 270,
           autoPlay: true,
           
         },
