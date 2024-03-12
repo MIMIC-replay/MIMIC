@@ -1,0 +1,117 @@
+body {
+  color: white;
+}
+
+.main-grid {
+  background-color: rgb(46, 60, 73);
+  display: grid;
+  height: 100vh;
+  grid-template: 40px auto / 300px auto;
+  grid-template-areas: 
+    "header header"
+    "left-bar main-content-area"
+}
+
+/* Header */
+
+.main-grid > header {
+  background-color: rgb(114, 44, 44);
+  height: 40px;
+  grid-area: header;
+}
+
+/* Left bar */
+
+.left-bar {
+  background-color: rgb(63, 63, 80);
+  width: 300px;
+  grid-area: left-bar
+}
+
+.left-bar > * {
+  padding: 15px;
+}
+
+.search {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search, .search > input {
+  background-color: rgb(112, 158, 112);
+}
+
+.sessions-container {
+  background-color: rgb(150, 120, 125);
+}
+
+.sessions-list > li {
+  padding-bottom: 50px;
+  border-bottom: 1px solid lightcyan;
+  margin-bottom: 10px;
+}
+
+/* Main area */
+
+.main-content-area {
+  background-color: rgb(46, 60, 73);
+  display: grid;
+  grid-area: main-content-area;
+  grid-template: 40px 360px 90px 50px auto / auto 300px;
+  grid-template-areas: 
+    "content-header content-header"
+    "player main-right-bar"
+    "player-controls main-right-bar"
+    "extra-info main-right-bar"
+    "extra-info main-right-bar";
+  margin: 10px;
+  border: 1px solid lightblue;
+  border-radius: 5px;
+}
+
+.main-content-area > * {
+  padding: 10px
+}
+
+.main-content-area > header {
+  grid-area: content-header;
+  background-color: rgb(105, 112, 105);
+}
+
+.player {
+  background-color: rgb(67, 102, 168);
+  grid-area: player;
+  min-width: 500px;
+}
+
+.screen {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 100%;
+  height: 95%;
+}
+
+.player-controls {
+  grid-area: player-controls;
+  background-color: rgb(194, 126, 0);
+}
+
+.controls {
+  display: flex;
+}
+
+.right-controls {
+  margin-left: auto;
+}
+
+.extra-info {
+  grid-area: extra-info;
+  background-color: rgb(108, 160, 31);
+}
+
+.main-right-bar {
+  grid-area: main-right-bar;
+  background-color: darkslateblue;
+}
