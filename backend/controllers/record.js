@@ -10,7 +10,7 @@ const allRecordedEvents = [];
 let sessionIndex;
 
 recordRouter.get("/", (req, res) => { // method to be deleted when we migrate from sandbox frontend to true frontend
-  postgres.db.one("SELECT encode(session_data::bytea, 'escape') as session_data FROM sessions WHERE id = $1", [3], session => session.session_data)
+  postgres.db.one("SELECT encode(session_data::bytea, 'escape') as session_data FROM sessions WHERE id = $1", [1], session => session.session_data)
     .then(data => JSON.parse(data))
     .then(data => Object.keys(data).map((key) => data[key]))
     .then(data => new Uint8Array(data))
@@ -40,7 +40,8 @@ recordRouter.post("/", (req, res) => {
       console.log(`Unable to update session ${sessionIndex} events in PostgreSQL:`, error.message);
     });
   } else {
-    postgres.db.one('INSERT INTO sessions(session_data) VALUES($1) RETURNING id', [allEventsCompressed], session => session.id)
+    postgres.db.one('INSERT INTO sessions(session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id', 
+      [allEventsCompressed, "www.website.com/stuff", "555.555.5.55", "Kakariko Village", "Dueling Peaks", "Hyrule", "Windows 11", "10.0.2", "Firefox", "123.0.1", true, 1280, 567], session => session.id)
     .then(data => {
         sessionIndex = data;
         res.sendStatus(200);
