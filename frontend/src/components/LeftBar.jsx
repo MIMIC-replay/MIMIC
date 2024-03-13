@@ -1,11 +1,11 @@
 import Search from './Search'
 import SessionsList from './SessionsList'
 
-const LeftBar = ({sessions, setSelectedSession}) => {
+const LeftBar = ({sessions, setSelectedSession, searchSessions}) => {
   return (
     <nav className="left-bar">
 
-      <Search/>
+      <Search searchSessions={searchSessions}/>
 
       <SessionsList sessions={sessions} setSelectedSession={setSelectedSession}/>
 

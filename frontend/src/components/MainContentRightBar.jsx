@@ -45,6 +45,16 @@ const MainContentRightBar = ({session}) => {
           onClick={setActive}
         >metadata</button>
 
+        <button 
+          className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
+          onClick={setActive}
+        >🔥</button>
+
+        <button 
+          className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
+          onClick={setActive}
+        >📤</button>
+
         </div>
         <div className="main-right-bar-session-tabs-content">
           {activeTab === 'events' ? <MainContentRightBarEvents events={session.events}/> : null}

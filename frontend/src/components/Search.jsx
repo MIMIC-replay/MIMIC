@@ -6,12 +6,14 @@ const Search = ({searchSessions}) => {
   */
 
 
+
+
   return (
     <div className="search">
       <input 
         type="text" 
-        placeholder="search"
-        onChange={(e) => console.log(e.target.value)}
+        placeholder="Search by session ID"
+        onChange={(e) => searchSessions(e.target.value)}
       ></input>
       <button>Search</button>
     </div>

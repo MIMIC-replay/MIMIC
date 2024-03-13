@@ -2,7 +2,7 @@ import requests from '../../mock-data/requests'
 import logs from '../../mock-data/logs'
 import errors from '../../mock-data/errors'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const ExtraInfo = ({session}) => {
   // this is a main container, a grid, with one column, two rows
@@ -11,9 +11,19 @@ const ExtraInfo = ({session}) => {
   // row 2 contains the actual info, Network requests, logs, errors
 
   const [activeTab, setActiveTab] = useState('network')
+  const [requestsInList, setRequestsInList] = useState([])
+
+  useEffect(() => {
+    setRequestsInList(session.requests)
+  }, [])
 
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
+  }
+
+  const searchExtraInfo = (string) => {
+    const filteredByName = session.requests.filter(r => r.name.includes(string))
+    setRequestsInList(filteredByName)
   }
 
   return (
@@ -34,15 +44,33 @@ const ExtraInfo = ({session}) => {
           className={`tab-button ${activeTab === 'errors' ? 'active' : null}`} 
           onClick={setActive}
         >errors</button>
+
+
+        <div className='extra-info-search'>
+          {activeTab === 'network' && <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>}
+        </div>
       </div>
 
-      <div>
-        {activeTab === 'network' ? <NetworkRequests requests={session.requests}/> : null}
+      <div className='extra-info-content'>
+        {activeTab === 'network' ? <NetworkRequests requests={requestsInList}/> : null}
         {activeTab === 'logs' ? <ConsoleLogs logs={session.logs}/> : null}
         {activeTab === 'errors' ? <Errors errors={session.errors}/> : null}
       </div>
 
     </div>
+  )
+}
+
+const ExtraInfoSearch = ({searchExtraInfo}) => {
+  return (
+    <>
+      🔎
+      <input 
+        type="text" 
+        placeholder="Search request by name"
+        onChange={(e) => searchExtraInfo(e.target.value)}
+      ></input>
+    </>
   )
 }
 

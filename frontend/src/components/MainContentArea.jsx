@@ -8,7 +8,7 @@ const MainContentArea = ({session}) => {
   const {sessionId, appName, viewport, https} = session.metadata
   return (
     <section className="main-content-area">
-    <header>{`${https ? '🔒' : '🔓' } Session ${sessionId} - ${appName} - ${viewport} - some other info??`}</header>
+    <header>{`${https ? '🔒' : '🔓' } Session #${sessionId} - ${appName} - ${viewport} - some other info??`}</header>
 
     {/* <div className="player">Player <div className="screen">Screen</div></div>
     <div className="player-controls">Player Controls<br></br>
