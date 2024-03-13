@@ -107,6 +107,8 @@
 /* Colors */
 :root {
 
+  --light-green-border: hsl(180, 93%, 23%);
+
   /* ----Greys */
   
   /* ----Primaries */
@@ -118,6 +120,7 @@
 
 /* Borders */
 :root {
-  --main-components-border: 1px solid lightblue;
+  /* --main-components-border: 1px solid lightblue; */
+  --main-components-border: 1px solid var(--light-green-border);
   --general-border-radius: 5px;
 }

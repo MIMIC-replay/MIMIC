@@ -1,7 +1,7 @@
 @import url(./systems.css);
 
 body {
-  color: white;
+  color: #b7bfc9;
   /* font-family: var(--general-font); */
   font-family: var(--safe-font);
   /* font-size: 0.9rem; */
@@ -11,7 +11,7 @@ body {
 }
 
 .main-grid {
-  background-color: rgb(46, 60, 73);
+  background-color: rgb(28, 41, 53);
 
   height: 100vh;
   width: 100vw;
@@ -38,7 +38,7 @@ body {
 /* Left bar */
 
 .left-bar {
-  background-color: rgb(63, 63, 80);
+  /* background-color: rgb(63, 63, 80); */
   /* width: 300px; */
 
   grid-area: left-bar;
@@ -69,18 +69,18 @@ body {
 }
 
 .sessions-container {
-  background-color: rgb(150, 120, 125);
+  /* background-color: rgb(150, 120, 125); */
 }
 
 .sessions-list > li {
   /* padding-bottom: 10px; */
-  border-bottom: 1px solid lightcyan;
+  border-bottom: var(--main-components-border);
   /* margin-bottom: 10px; */
 }
 
 .session-list-element {
   /* color:blue; */
-  background-color: salmon;
+  /* background-color: salmon; */
   /* border: 1px solid black; */
   cursor: pointer;
 }
@@ -92,7 +92,7 @@ body {
 /* Main area */
 
 .main-content-area {
-  background-color: rgb(46, 60, 73);
+  background-color: rgb(28, 41, 53);
   display: grid;
   grid-area: main-content-area;
   /* grid-template: 40px auto 30vh / auto 300px; */
@@ -110,21 +110,28 @@ body {
   /* padding: 10px */
 }
 
+/* Main Content Area Header  */
+
 .main-content-area > header {
   grid-area: content-header;
   background-color: rgb(105, 112, 105);
+  display: flex;
+  align-items: center;
+  padding: var(--sA);
+  border-bottom: var(--main-components-border);
 }
 
 /* Player */
 
 #replayer {
-  background-color: orange;
+  /* background-color: orange; */
   width: auto;
   height: auto;
   /* border: 1px solid brown; */
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: var(--main-components-border);
 }
 
 /* .player {
@@ -159,7 +166,7 @@ body {
 
 .extra-info {
   grid-area: extra-info;
-  background-color: rgb(108, 160, 31);
+  /* background-color: rgb(108, 160, 31); */
   overflow: auto;
   padding: var(--sB);
 }
@@ -171,14 +178,26 @@ body {
 }
 
 .tab-button {
-  background-color: salmon;
+  background-color:  rgb(89, 137, 153);
   /* border-radius: var(--general-border-radius) var(--general-border-radius) 0px 0px; */
   /* border-radius: 20px; */
 }
 
+.extra-info-tab-controls .tab-button:first-child {
+  border-top-left-radius: var(--general-border-radius);
+}
+
+.extra-info-tab-controls .tab-button:nth-child(3) {
+  border-top-right-radius: var(--general-border-radius);
+}
+
 .extra-info-search {
   margin-left: auto;
+  display: flex;
+  align-items: center;
 }
+
+/* Extra info -- requests table */
 
 .network-requests {
   /* border: 1px solid salmon; */
@@ -187,18 +206,73 @@ body {
 }
 
 .network-requests tr, th, td {
-  /* border: 1px solid pink; */
+  border: var(--main-components-border);
 }
 
-.network-requests td {
+.network-requests th {
+  background-color: rgb(92, 144, 161);
+}
+
+.network-requests th, .network-requests td {
+  padding: var(--sA);
+}
+
+
+th {
+  text-align: left;
+  /* max-width: 10px; */
+}
+
+
+.network-requests td, .network-requests th {
   text-align: center;
+  /* max-width: var(--sA); */
 }
 
+td.request-name {
+  text-align: left;
+}
+
+/* Extra Info Logs */
+
+.logs-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.log {
+  border-right: var(--main-components-border);
+  border-left: var(--main-components-border);
+  border-bottom: var(--main-components-border);
+  display: flex;
+  /* justify-content: space-evenly; */
+  padding: var(--sA);
+  gap: var(--sB);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Extra Info Errors  */
+
+.errors-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  border-right: var(--main-components-border);
+  border-left: var(--main-components-border);
+  border-bottom: var(--main-components-border);
+  display: flex;
+  /* justify-content: space-evenly; */
+  padding: var(--sA);
+  gap: var(--sB);
+}
 
 /* Main content right bar */
 
 .main-right-bar {
   grid-area: main-right-bar;
-  background-color: darkslateblue;
+  /* background-color: darkslateblue; */
   padding: var(--sB);
+  border-left: var(--main-components-border)
 }

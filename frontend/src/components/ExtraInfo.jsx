@@ -102,7 +102,7 @@ const Request = ({request}) => {
       <td>{time}</td>
       <td>{type}</td>
       <td>{status}</td>
-      <td>{name}</td>
+      <td className='request-name'>{`${name.slice(0, 45)}`}</td>
       <td>{latency}</td>
     </tr>
   )
@@ -120,8 +120,9 @@ const ConsoleLogs = ({logs}) => {
 const Log = ({log}) => {
   const {type, text} = log
   return (
-    <li>
-      {`${type} - ${text}`}
+    <li className='log'>
+      <p className='log-type'>[WARNING]</p>
+      <p className='log-message'>{`${type} - ${text}`}</p>
     </li>
   )
 }
@@ -138,7 +139,7 @@ const Error = ({error}) => {
   const {content, line, payload} = error
 
   return (
-    <li>
+    <li className='error'>
       {`${content.slice(0, 41)} - ${JSON.stringify(payload)} - Line: ${line}`}
     </li>
   )
