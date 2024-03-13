@@ -26,6 +26,7 @@ function App() {
   return (
     <div className="main-grid">
       <SiteHeader/>
+      
       <LeftBar
         sessions={sessionsInList} 
         setSelectedSession={setSelectedSession}
