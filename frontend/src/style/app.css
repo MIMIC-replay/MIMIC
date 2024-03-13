@@ -1,8 +1,9 @@
-@import url(./variables.css);
+@import url(./systems.css);
 
 body {
   color: white;
-  font-family: var(--general-font);
+  /* font-family: var(--general-font); */
+  font-family: var(--safe-font);
   font-size: 0.9rem;
 
   overflow-y: hidden;

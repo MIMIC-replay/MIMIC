@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 import './style/reset.css'
-import './style/variables.css'
+import './style/systems.css'
 import './style/app.css'
 import './style/toggles-and-functionality.css'
 
