@@ -67,7 +67,13 @@ body {
 .session-list-element {
   /* color:blue; */
   background-color: salmon;
+  /* border: 1px solid black; */
+  cursor: pointer;
 }
+.session-list-element * {
+  cursor: pointer;
+}
+
 
 /* Main area */
 

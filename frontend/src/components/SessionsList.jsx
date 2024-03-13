@@ -1,11 +1,17 @@
-import Session from "./Session"
+import SessionElement from "./SessionElement"
 
-const SessionsList = ({sessions}) => {
+const SessionsList = ({sessions, setSelectedSession}) => {
   return (
     <div className="sessions-container">
 
       <ul className="sessions-list">
-        {sessions.map(s => <Session key={s.metadata.id} session={s}/>)}
+        {sessions.map(s => 
+          <SessionElement 
+            key={s.metadata.sessionId} 
+            session={s} 
+            setSelectedSession={setSelectedSession}
+          />
+        )}
       </ul>
 
     </div>

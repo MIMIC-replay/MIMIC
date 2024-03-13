@@ -9,7 +9,7 @@ const data = [
   {uv: 500, pv: 3000, amt: 3000 },
 ];
 
-const Session = ({session}) => {
+const SessionElement = ({session, setSelectedSession}) => {
   const renderLineChart = (
     <LineChart width={200} height={50} data={data}>
       <Line type="monotone" dataKey="uv" stroke="#8884d8" />
@@ -17,13 +17,12 @@ const Session = ({session}) => {
   );
 
   return (
-    <li className="session-list-element">
-      <a>
-        <p>{`Session #${session.metadata.id}`}</p>
-        <p>{renderLineChart}</p>
-      </a>
+    <li className="session-list-element" onClick={() => setSelectedSession(session)}>
+      {`Session #${session.metadata.sessionId}`}
+      {renderLineChart}
+      {`${session.metadata.time.toISOString().split('T')}`}
     </li>
   )
 }
 
-export default Session
+export default SessionElement

@@ -8,16 +8,19 @@ import sessionService from "./services/sessions"
 
 function App() {
   const [sessions, setSessions] = useState([])
+  const [selectedSession, setSelectedSession] = useState(null)
   
   useEffect(() => {
-    sessionService.getSessions().then((r) => setSessions(r) )
+    sessionService.getSessions().then((res) => {
+      setSessions(res)
+    })
   }, [])
 
   return (
     <div className="main-grid">
       <SiteHeader/>
-      <LeftBar sessions={sessions}/>
-      <MainContentArea/>
+      <LeftBar sessions={sessions} setSelectedSession={setSelectedSession}/>
+      {selectedSession && <MainContentArea session={selectedSession}/>}
       
     </div>
   )

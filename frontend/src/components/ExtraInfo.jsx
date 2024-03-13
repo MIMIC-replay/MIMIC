@@ -4,7 +4,7 @@ import errors from '../../mock-data/errors'
 
 import { useState } from 'react'
 
-const ExtraInfo = () => {
+const ExtraInfo = ({session}) => {
   // this is a main container, a grid, with one column, two rows
   // each row is a flexbox
   // row 1 contains the tabs console logs, errors, network
@@ -18,6 +18,7 @@ const ExtraInfo = () => {
 
   return (
     <div className="extra-info">
+
       <div className="extra-info-tab-button">
         <button 
           className={`tab-button ${activeTab === 'network' ? 'active' : null}`} 
@@ -36,10 +37,11 @@ const ExtraInfo = () => {
       </div>
 
       <div>
-        {activeTab === 'network' ? <NetworkRequests requests={requests}/> : null}
-        {activeTab === 'logs' ? <ConsoleLogs logs={logs}/> : null}
-        {activeTab === 'errors' ? <Errors errors={errors}/> : null}
+        {activeTab === 'network' ? <NetworkRequests requests={session.requests}/> : null}
+        {activeTab === 'logs' ? <ConsoleLogs logs={session.logs}/> : null}
+        {activeTab === 'errors' ? <Errors errors={session.errors}/> : null}
       </div>
+
     </div>
   )
 }

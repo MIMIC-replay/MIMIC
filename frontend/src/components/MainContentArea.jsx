@@ -2,10 +2,13 @@ import ExtraInfo from "./ExtraInfo"
 
 import PlayerTest from "./PlayerTest"
 
-const MainContentArea = () => {
+import MainContentRightBar from "./MainContentRightBar"
+
+const MainContentArea = ({session}) => {
+  const {sessionId, appName, viewport, https} = session.metadata
   return (
     <section className="main-content-area">
-    <header>🔒/🔓 - Target App Url - 1200 x 800 (viewport size) - some other info??</header>
+    <header>{`${https ? '🔒' : '🔓' } Session ${sessionId} - ${appName} - ${viewport} - some other info??`}</header>
 
     {/* <div className="player">Player <div className="screen">Screen</div></div>
     <div className="player-controls">Player Controls<br></br>
@@ -21,10 +24,12 @@ const MainContentArea = () => {
     {/* <div className="extra-info">Extra info (Console Logs, Errors, Network)</div> */}
 
 
-    <ExtraInfo/>
-    <div className="main-right-bar">Main Right Bar</div>
+    <ExtraInfo session={session}/>
+
+    <MainContentRightBar session={session}/>
   </section>
   )
 }
+
 
 export default MainContentArea
