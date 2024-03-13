@@ -12,4 +12,4 @@ async function testPGConnection() {
           });
 }
 
-module.exports = { testPGConnection };
+module.exports = { testPGConnection, db };
