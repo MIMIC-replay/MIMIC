@@ -29,25 +29,26 @@ const ExtraInfo = ({session}) => {
   return (
     <div className="extra-info">
 
-      <div className="extra-info-tab-button">
+      <div className="extra-info-tab-controls">
         <button 
-          className={`tab-button ${activeTab === 'network' ? 'active' : null}`} 
+          className={`tab-button ${activeTab === 'network' ? 'active' : ''}`} 
           onClick={setActive}
         >network</button>
 
         <button 
-          className={`tab-button ${activeTab === 'logs' ? 'active' : null}`} 
+          className={`tab-button ${activeTab === 'logs' ? 'active' : ''}`} 
           onClick={setActive}
         >logs</button>
 
         <button 
-          className={`tab-button ${activeTab === 'errors' ? 'active' : null}`} 
+          className={`tab-button ${activeTab === 'errors' ? 'active' : ''}`} 
           onClick={setActive}
         >errors</button>
 
 
         <div className='extra-info-search'>
-          {activeTab === 'network' && <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>}
+          {/* {activeTab === 'network' && <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>} */}
+          <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>
         </div>
       </div>
 
@@ -64,7 +65,7 @@ const ExtraInfo = ({session}) => {
 const ExtraInfoSearch = ({searchExtraInfo}) => {
   return (
     <>
-      🔎
+      <img className='icon' src='../public/search.svg'></img>
       <input 
         type="text" 
         placeholder="Search request by name"

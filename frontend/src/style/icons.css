@@ -1,0 +1,5 @@
+@import url(./systems.css);
+
+.icon {
+  width: var(--sC);
+}

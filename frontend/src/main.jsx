@@ -7,6 +7,7 @@ import './style/reset.css'
 import './style/systems.css'
 import './style/app.css'
 import './style/toggles-and-functionality.css'
+import './style/icons.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>

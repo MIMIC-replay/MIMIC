@@ -115,3 +115,9 @@
   
 
 }
+
+/* Borders */
+:root {
+  --main-components-border: 1px solid lightblue;
+  --general-border-radius: 5px;
+}
