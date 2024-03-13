@@ -88,7 +88,9 @@
   --fJ: 60px;
   --fK: 72px;
 
-  /* General Relative Values for Fonts */
+  /* General Relative Values for Fonts, equivalent to the previous values,
+     assuming 1rem = 16px 
+  */
   --frA: 0.75rem;
   --frB: 0.875rem;
   --frC: 1rem; 
