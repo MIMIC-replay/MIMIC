@@ -1,0 +1,10 @@
+npm library async-express-errors
+
+https://www.npmjs.com/package/express-async-errors
+
+
+A dead simple ES6 async/await support hack for ExpressJS
+
+Shamelessly copied from express-yields
+
+This has been lightly reworked to handle async rather than generators.

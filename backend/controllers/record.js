@@ -1,8 +1,15 @@
 const express = require("express");
+
 const recordRouter = express.Router();
+
+
 const logger = require("../utils/logger.js");
 
 const allRecordedEvents = [];
+
+recordRouter.get("/", (req, res) => {
+  res.json(allRecordedEvents);
+});
 
 recordRouter.post("/", (req, res) => {
   const batchOfEvents = req.body;
@@ -28,8 +35,6 @@ recordRouter.post("/", (req, res) => {
   res.sendStatus(201);
 });
 
-recordRouter.get("/", (req, res) => {
-  res.json(allRecordedEvents);
-});
+
 
 module.exports = recordRouter;
