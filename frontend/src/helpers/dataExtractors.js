@@ -24,7 +24,6 @@ export const sessionMetadataExtractor = (session) => {
 }
 
 export const requestDataExtractor = (request) => {
-
   const data = request.data
 
   const time = String(epochToDate(request.timestamp)).slice(0, 24)

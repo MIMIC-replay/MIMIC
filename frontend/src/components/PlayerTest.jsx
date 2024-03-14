@@ -12,6 +12,7 @@ const PlayerTest = ({session}) => {
 
   const loadSessionPlayer = async () => {
     let replayerDiv = document.getElementById("replayer")
+
     if (replayerDiv.firstChild) {
       replayerDiv.removeChild(replayerDiv.firstChild)
     }

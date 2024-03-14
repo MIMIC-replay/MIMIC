@@ -10,6 +10,7 @@ const SessionsList = ({sessions, setSelectedSession}) => {
             key={s.id} 
             session={s} 
             setSelectedSession={setSelectedSession}
+            
           />
         )}
       </ul>
