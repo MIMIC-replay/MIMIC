@@ -26,7 +26,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.1",
     "morgan": "^1.10.0",
-    "pg-promise": "^11.5.4"
+    "pg-promise": "^11.5.4",
+    "request-ip": "^3.3.0",
+    "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

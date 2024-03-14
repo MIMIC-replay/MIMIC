@@ -5,9 +5,19 @@ const recordRouter = express.Router();
 const logger = require("../utils/logger.js");
 const postgres = require("../models/postgres.js")
 const fflate = require('fflate');
+const requestIp = require("request-ip");
+const uap = require("ua-parser-js");
+const app = express();
 
 const allRecordedEvents = [];
 let sessionIndex;
+
+const userMetadata = {
+  ip: null,
+  browser: null,
+  os: null,
+  location: null,
+};
 
 recordRouter.get("/", (req, res) => { // method to be deleted when we migrate from sandbox frontend to true frontend
   postgres.db.one("SELECT encode(session_data::bytea, 'escape') as session_data FROM sessions WHERE id = $1", [1], session => session.session_data)
@@ -23,6 +33,22 @@ recordRouter.get("/", (req, res) => { // method to be deleted when we migrate fr
 });
 
 recordRouter.post("/", (req, res) => {
+  if (!userMetadata.ip) {
+    //let testIP = "68.145.123.233";
+    //userMetadata.ip = testIP;
+    userMetadata.ip = requestIp.getClientIp(req);
+    fetch(`https://api.country.is/${userMetadata.ip}`)
+      .then((res) => res.json())
+      .then((data) => (userMetadata.location = data.country));
+  }
+
+  if (!userMetadata.browser || !userMetadata.os) {
+    let ua = uap(req.headers["user-agent"]);
+    userMetadata.browser = ua.browser;
+    userMetadata.os = ua.os;
+  }
+
+  console.log(userMetadata)
   const batchOfEvents = req.body;
   
   allRecordedEvents.push(batchOfEvents);
@@ -41,7 +67,7 @@ recordRouter.post("/", (req, res) => {
     });
   } else {
     postgres.db.one('INSERT INTO sessions(session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id', 
-      [allEventsCompressed, "www.website.com/stuff", "555.555.5.55", "Kakariko Village", "Dueling Peaks", "Hyrule", "Windows 11", "10.0.2", "Firefox", "123.0.1", true, 1280, 567], session => session.id)
+      [allEventsCompressed, "www.website.com/stuff", userMetadata.ip, "Kakariko Village", "Dueling Peaks", "Hyrule", userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, true, 1280, 567], session => session.id)
     .then(data => {
         sessionIndex = data;
         res.sendStatus(200);
