@@ -1,4 +1,4 @@
-import SessionElement from "./SessionElement"
+import SessionElement from "./singles/SessionElement"
 
 const SessionsList = ({sessions, setSelectedSession}) => {
   return (

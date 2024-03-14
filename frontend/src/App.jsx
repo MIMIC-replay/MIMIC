@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import SiteHeader from "./components/SiteHeader"
+import SiteHeader from "./components/singles/SiteHeader"
 import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
 

@@ -1,7 +1,6 @@
 import { requestDataExtractor } from '../helpers/dataExtractors'
-import { epochToDate } from '../helpers/dateFormatters'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const ExtraInfo = ({session}) => {
 
