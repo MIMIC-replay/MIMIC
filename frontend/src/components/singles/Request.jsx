@@ -1,17 +1,6 @@
 import { requestDataExtractor } from "../../helpers/dataExtractors"
 
 const Request = ({request}) => {
-  console.log(request)
-  // const data = request.data
-
-  // refactor, abstract later
-
-  // const time = String(epochToDate(request.timestamp)).slice(0, 24)
-  // const type = data.type
-  // const latency = data.latency
-  // const url = data.url.slice(0, 50)
-  // const responseStatus = data.status
-
   const {time, type, latency, url, responseStatus} = requestDataExtractor(request)
 
   return (

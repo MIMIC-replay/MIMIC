@@ -1,5 +1,8 @@
 import { useState } from "react"
 
+import MainContentListMetadata from './singles/MainContentListMetadata'
+import RightBarEventListElement from './singles/RightBarEventListElement'
+
 const MainContentRightBar = ({session}) => {
   const [activeTab, setActiveTab] = useState('events')
 
@@ -71,38 +74,15 @@ const MainContentRightBarEvents = ({events}) => {
   )
 }
 
-const RightBarEventListElement = ({event}) =>{
-  return (
-    <li>
-      {event.name}
-      {event.type}
-      {event.time}
-    </li>
-  )  
-}
+// const RightBarEventListElement = ({event}) =>{
+//   return (
+//     <li>
+//       {event.name}
+//       {event.type}
+//       {event.time}
+//     </li>
+//   )  
+// }
 
-const MainContentListMetadata = ({session}) => {
-  const metadata = session.metadata
-
-  const id = session.id
-  const appName = metadata.url
-  const time = metadata.date
-  const viewport = metadata.viewport
-  const https = metadata.https
-  const location = metadata.location
-  const os = metadata.os
-
-  return (
-    <ul>
-        <li>{`#${id}`}</li>
-        <li>{appName}</li>
-        <li>{time}</li>
-        <li>{location}</li>
-        <li>{`${os.name} ${os.version}`}</li>
-        <li>{`${viewport.width} ${viewport.height}`}</li>
-        <li>{`https: ${https}`}</li>
-    </ul>
-  )
-}
 
 export default MainContentRightBar
