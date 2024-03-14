@@ -5,6 +5,7 @@ import 'rrweb-player/dist/style.css';
 import '../style/unminified-rrplayer.css'
 
 const PlayerTest = ({session}) => {
+  
   useEffect(() => {
     loadSessionPlayer()
   })
@@ -15,29 +16,31 @@ const PlayerTest = ({session}) => {
       replayerDiv.removeChild(replayerDiv.firstChild)
     }
 
-    // console.log(session)
-
     try {
 
-      // const response = await fetch("http://localhost:3001/allRecordedEvents")
+      // from the sandbox server running on my machine
+      const response = await fetch("http://localhost:3001/allRecordedEvents")
 
-      // if (!response.ok) {
-      //   throw new Error(`Failed to fetch events: ${response.status}`)
-      // }
+      if (!response.ok) {
+        throw new Error(`Failed to fetch events: ${response.status}`)
+      }
 
-      // const eventData = await response.json()
+      const eventData = await response.json()
 
-      // if (eventData.length === 0) {
-      //   throw new Error("Event data is empty.")
-      // }
+      if (eventData.length === 0) {
+        throw new Error("Event data is empty.")
+      }
   
       // const combinedEvents = eventData.reduce(
       //   (allEvents, currentEvent) => allEvents.concat(currentEvent.events),
       //   []
       // )
 
-      // const combinedEvents = eventData.flat()
-      const combinedEvents = session.events
+
+      const combinedEvents = eventData.flat()
+
+
+      // const combinedEvents = session.events
 
       new rrwebPlayer({
         target: document.getElementById("replayer"),

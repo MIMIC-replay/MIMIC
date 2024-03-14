@@ -1,4 +1,5 @@
-import { epochToDate } from '../helpers/formatters'
+import { requestDataExtractor } from '../helpers/dataExtractors'
+import { epochToDate } from '../helpers/dateFormatters'
 
 import { useEffect, useState } from 'react'
 
@@ -41,7 +42,6 @@ const ExtraInfo = ({session}) => {
 
 
         <div className='extra-info-search'>
-          {/* {activeTab === 'network' && <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>} */}
           <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>
         </div>
       </div>
@@ -92,15 +92,17 @@ const NetworkRequests = ({requests}) => {
 
 const Request = ({request}) => {
   console.log(request)
-  const data = request.data
+  // const data = request.data
 
   // refactor, abstract later
 
-  const time = String(epochToDate(request.timestamp)).slice(0, 24)
-  const type = data.type
-  const latency = data.latency
-  const url = data.url
-  const responseStatus = data.status
+  // const time = String(epochToDate(request.timestamp)).slice(0, 24)
+  // const type = data.type
+  // const latency = data.latency
+  // const url = data.url.slice(0, 50)
+  // const responseStatus = data.status
+
+  const {time, type, latency, url, responseStatus} = requestDataExtractor(request)
 
   return (
     <tr className="request">
@@ -108,7 +110,7 @@ const Request = ({request}) => {
       <td>{type}</td>
       <td>[METHOD]</td>
       <td>{responseStatus}</td>
-      <td className='request-name'>{`${url.slice(0, 50)}`}</td>
+      <td className='request-name'>{url}</td>
       <td>{latency}</td>
     </tr>
   )
