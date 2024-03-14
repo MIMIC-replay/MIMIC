@@ -28,7 +28,7 @@ const MainContentRightBar = ({session}) => {
         <p><span className="main-right-bar-key">Visited: </span>{time}</p>
         <p><span className="main-right-bar-key">Location: </span>{location}</p>
         <p><span className="main-right-bar-key">OS: </span>{`${os.name} ${os.version}`}</p>
-        <p><span className="main-right-bar-key">Viewport Size: </span>{`${viewport.width} ${viewport.height}`}</p>
+        <p><span className="main-right-bar-key">Viewport Size: </span>{`${viewport.width}x${viewport.height}`}</p>
         <p><span className="main-right-bar-key">SSL: </span>{`${https}`}</p>
 
         {/* show more toggle?? */}
@@ -73,16 +73,5 @@ const MainContentRightBarEvents = ({events}) => {
     </ul>
   )
 }
-
-// const RightBarEventListElement = ({event}) =>{
-//   return (
-//     <li>
-//       {event.name}
-//       {event.type}
-//       {event.time}
-//     </li>
-//   )  
-// }
-
 
 export default MainContentRightBar
