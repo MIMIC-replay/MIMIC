@@ -5,10 +5,19 @@ import PlayerTest from "./PlayerTest"
 import MainContentRightBar from "./MainContentRightBar"
 
 const MainContentArea = ({session}) => {
-  const {sessionId, appName, viewport, https} = session.metadata
+  const metadata = session.metadata
+  
+  const id = session.id
+
+  const appName = metadata.url
+  const https = metadata.url
+  const viewport = metadata.viewport
+
   return (
     <section className="main-content-area">
-    <header>{`${https ? '🔒' : '🔓' } Session #${sessionId} - ${appName} - ${viewport} - some other info??`}</header>
+    <header>
+      {`${https ? '🔒' : '🔓' } Session #${id} - ${appName} - ${viewport.width}x${viewport.height} - some other info??`}
+      </header>
 
     {/* <div className="player">Player <div className="screen">Screen</div></div>
     <div className="player-controls">Player Controls<br></br>
@@ -18,7 +27,7 @@ const MainContentArea = ({session}) => {
       </div>
     </div> */}
         
-    <PlayerTest/>
+    <PlayerTest session={session}/>
 
 
     {/* <div className="extra-info">Extra info (Console Logs, Errors, Network)</div> */}

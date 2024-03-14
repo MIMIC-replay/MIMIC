@@ -1,5 +1,6 @@
 @import url(./systems.css);
 
-.icon {
+[class*="feather"]{
   width: var(--sC);
+
 }

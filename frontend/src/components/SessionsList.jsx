@@ -7,7 +7,7 @@ const SessionsList = ({sessions, setSelectedSession}) => {
       <ul className="sessions-list">
         {sessions.map(s => 
           <SessionElement 
-            key={s.metadata.sessionId} 
+            key={s.id} 
             session={s} 
             setSelectedSession={setSelectedSession}
           />

@@ -28,10 +28,12 @@
 
 .tab-button.active {
   background-color: white;
+  border-bottom-color: white;
 }
 
 .active {
   background-color: white;
+  border-bottom-color: white;
 }
 
 .content {

@@ -19,7 +19,7 @@ function App() {
   }, [])
 
   const searchSessions = (string) => {
-    const filteredById = sessions.filter(s => s.metadata.sessionId.includes(string))
+    const filteredById = sessions.filter(s => String(s.id).includes(string))
     setSessionsInList(filteredById)
   }
 

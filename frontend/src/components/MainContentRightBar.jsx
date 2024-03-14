@@ -3,16 +3,15 @@ import { useState } from "react"
 const MainContentRightBar = ({session}) => {
   const [activeTab, setActiveTab] = useState('events')
 
-  const {
-    sessionId, 
-    appName, 
-    viewport, 
-    https,
-    location,
-    browser,
-    os,
-    time
-  } = session.metadata
+  const metadata = session.metadata
+
+  const id = session.id
+  const appName = metadata.url
+  const time = metadata.date
+  const viewport = metadata.viewport
+  const https = metadata.https
+  const location = metadata.location
+  const os = metadata.os
 
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
@@ -21,14 +20,13 @@ const MainContentRightBar = ({session}) => {
   return (
     <div className="main-right-bar">
       <div className="main-right-bar-session-details">
-        <h2>{`#${sessionId}`}</h2>
-        <p>{appName}</p>
-        <p>{`${time}`}</p>
-        <p>{location}</p>
-        <p>{os}</p>
-        <p>{viewport}</p>
-        <p>{browser}</p>
-        <p>{`https: ${https}`}</p>
+        <h2>Session {`#${id}`}</h2>
+        <p><span className="main-right-bar-key">URL: </span>{appName}</p>
+        <p><span className="main-right-bar-key">Visited: </span>{time}</p>
+        <p><span className="main-right-bar-key">Location: </span>{location}</p>
+        <p><span className="main-right-bar-key">OS: </span>{`${os.name} ${os.version}`}</p>
+        <p><span className="main-right-bar-key">Viewport Size: </span>{`${viewport.width} ${viewport.height}`}</p>
+        <p><span className="main-right-bar-key">SSL: </span>{`${https}`}</p>
 
         {/* show more toggle?? */}
 
@@ -45,7 +43,7 @@ const MainContentRightBar = ({session}) => {
           onClick={setActive}
         >metadata</button>
 
-        <button 
+        {/* <button 
           className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
           onClick={setActive}
         >🔥</button>
@@ -53,12 +51,12 @@ const MainContentRightBar = ({session}) => {
         <button 
           className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
           onClick={setActive}
-        >📤</button>
+        >📤</button> */}
 
         </div>
         <div className="main-right-bar-session-tabs-content">
           {activeTab === 'events' ? <MainContentRightBarEvents events={session.events}/> : null}
-          {activeTab === 'metadata' ? <MainContentListMetadata metadata={session.metadata}/> : null}
+          {activeTab === 'metadata' ? <MainContentListMetadata session={session}/> : null}
         </div>
       </div>
     </div>
@@ -83,26 +81,26 @@ const RightBarEventListElement = ({event}) =>{
   )  
 }
 
-const MainContentListMetadata = ({metadata}) => {
-  const {
-    appName, 
-    viewport, 
-    https,
-    location,
-    browser,
-    os,
-    time
-  } = metadata
+const MainContentListMetadata = ({session}) => {
+  const metadata = session.metadata
+
+  const id = session.id
+  const appName = metadata.url
+  const time = metadata.date
+  const viewport = metadata.viewport
+  const https = metadata.https
+  const location = metadata.location
+  const os = metadata.os
 
   return (
     <ul>
+        <li>{`#${id}`}</li>
         <li>{appName}</li>
-        <li>{`${time}`}</li>
+        <li>{time}</li>
         <li>{location}</li>
-        <li>{os}</li>
-        <li>{viewport}</li>
-        <li>{browser}</li>
-        <p>{`https: ${https}`}</p>
+        <li>{`${os.name} ${os.version}`}</li>
+        <li>{`${viewport.width} ${viewport.height}`}</li>
+        <li>{`https: ${https}`}</li>
     </ul>
   )
 }

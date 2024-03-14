@@ -29,6 +29,7 @@
   */
 
   --base-general-pixel-size: 16;
+  
   --sA: calc(var(--base-general-pixel-size) * 0.25px);
   --sB: calc(var(--base-general-pixel-size) * 0.5px);
   --sC: calc(var(--base-general-pixel-size) * 1px); 

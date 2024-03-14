@@ -1,28 +1,22 @@
-import requests from '../../mock-data/requests'
-import logs from '../../mock-data/logs'
-import errors from '../../mock-data/errors'
+import { epochToDate } from '../helpers/formatters'
 
 import { useEffect, useState } from 'react'
 
 const ExtraInfo = ({session}) => {
-  // this is a main container, a grid, with one column, two rows
-  // each row is a flexbox
-  // row 1 contains the tabs console logs, errors, network
-  // row 2 contains the actual info, Network requests, logs, errors
+
 
   const [activeTab, setActiveTab] = useState('network')
-  const [requestsInList, setRequestsInList] = useState([])
+  const [requests] = useState(session.events.filter(e => e[0].type === 50).flat())
+  const [requestsInList, setRequestsInList] = useState(requests)
 
-  useEffect(() => {
-    setRequestsInList(session.requests)
-  }, [])
-
+  // should we flatter
+  
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
   }
 
   const searchExtraInfo = (string) => {
-    const filteredByName = session.requests.filter(r => r.name.includes(string))
+    const filteredByName = requests.filter(r => r.data.url.includes(string))
     setRequestsInList(filteredByName)
   }
 
@@ -65,7 +59,7 @@ const ExtraInfo = ({session}) => {
 const ExtraInfoSearch = ({searchExtraInfo}) => {
   return (
     <>
-      <img className='icon' src='../search.svg'></img>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input 
         type="text" 
         placeholder="Search request by name"
@@ -76,14 +70,16 @@ const ExtraInfoSearch = ({searchExtraInfo}) => {
 }
 
 const NetworkRequests = ({requests}) => {
+
   return (
     <table className="network-requests">
       <thead>
         <tr>
-          <th>Time</th>
+          <th>Received On</th>
           <th>Type</th>
-          <th>Status</th>
-          <th>Name</th>
+          <th>Method</th>
+          <th>Response</th>
+          <th>URL</th>
           <th>Latency</th>
         </tr>
       </thead>
@@ -95,14 +91,24 @@ const NetworkRequests = ({requests}) => {
 }
 
 const Request = ({request}) => {
-  const {time, type, status, name, latency} = request
+  console.log(request)
+  const data = request.data
+
+  // refactor, abstract later
+
+  const time = String(epochToDate(request.timestamp)).slice(0, 24)
+  const type = data.type
+  const latency = data.latency
+  const url = data.url
+  const responseStatus = data.status
 
   return (
     <tr className="request">
       <td>{time}</td>
       <td>{type}</td>
-      <td>{status}</td>
-      <td className='request-name'>{`${name.slice(0, 45)}`}</td>
+      <td>[METHOD]</td>
+      <td>{responseStatus}</td>
+      <td className='request-name'>{`${url.slice(0, 50)}`}</td>
       <td>{latency}</td>
     </tr>
   )
@@ -112,7 +118,7 @@ const Request = ({request}) => {
 const ConsoleLogs = ({logs}) => {
   return (
     <ul className='logs-list'>
-      {logs.map((l, i) => <Log key={i} log={l}/>)}
+      {/* {logs.map((l, i) => <Log key={i} log={l}/>)} */}
     </ul>
   )
 }
@@ -130,7 +136,7 @@ const Log = ({log}) => {
 const Errors = ({errors}) => {
   return (
     <ul className='errors-list'>
-      {errors.map((e, i) => <Error key={i} error={e}/>)}
+      {/* {errors.map((e, i) => <Error key={i} error={e}/>)} */}
     </ul>
   )
 }

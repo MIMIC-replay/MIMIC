@@ -18,9 +18,9 @@ const SessionElement = ({session, setSelectedSession}) => {
 
   return (
     <li className="session-list-element" onClick={() => setSelectedSession(session)}>
-      {`Session #${session.metadata.sessionId}`}
+      {`Session #${session.id}`}
       {renderLineChart}
-      {`${session.metadata.time.toISOString().split('T')}`}
+      {`${session.metadata.date}`}
     </li>
   )
 }

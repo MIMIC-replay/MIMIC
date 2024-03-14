@@ -1,5 +1,7 @@
-const SiteHeader = () => {
-  return <header className="site-header">Project Name - hello admin name - buttons</header>
+const SiteHeader = ({session}) => {
+  return <header className="site-header">
+    {`Our Supercalifragilisticexpialidocious Project - 🧝‍♂️🧝‍♀️ Hi Link! 🏰🐔`}
+    </header>
 }
 
 export default SiteHeader
