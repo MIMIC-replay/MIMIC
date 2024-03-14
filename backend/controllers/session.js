@@ -4,17 +4,28 @@ const postgres = require("../models/postgres.js")
 const fflate = require('fflate');
 const sessionsRouter = express.Router();
 const sessions = [];
-const validSessionIds = [2, 3, 4]; // temporary until we instate projects/admins in backend
+const validSessionIds = [2, 3, 4, 12, 14]; // temporary until we instate projects/admins in backend
 
-/*
-const extractConsoleEvents = (eventsArr) => {
-  return eventsArr.filter((obj) => obj.data.plugin === "rrweb/console@1");
+const extractLogEvents = (eventsArr) => {
+  return eventsArr.filter(
+    (obj) =>
+      obj.data.plugin === "rrweb/console@1" &&
+      obj.data.payload.level !== "error"
+  );
 };
 
 const extractNetworkEvents = (eventsArr) => {
   return eventsArr.filter((obj) => obj.type === 50);
 };
-*/
+
+const extractErrorEvents = (eventsArr) => {
+  return eventsArr.filter((obj) => {
+    return (
+      obj.data.plugin === "rrweb/console@1" &&
+      obj.data.payload.level === "error"
+    );
+  });
+};
 
 sessionsRouter.get('/:projectId', async (req, res) => {
   // requests all sessions associated with a project id
@@ -31,8 +42,12 @@ sessionsRouter.get('/:projectId', async (req, res) => {
                       console.log('Unable to retrieve event data from PostgreSQL:', error.message);
                       res.json(error)
                     });
-    
+
+    events = events.flat();
     session.events = events;
+    session.network = extractNetworkEvents(events);
+    session.logs = extractLogEvents(events);
+    session.errors = extractErrorEvents(events);
     /*
     session.network = extractNetworkEvents(events);
     session.logs = extractConsoleEvents(events)
