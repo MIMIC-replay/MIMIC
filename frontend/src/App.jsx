@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react"
 
+import {
+  Link,
+  Route, 
+  Routes,
+  useMatch
+} from 'react-router-dom'
+
+
+
 import SiteHeader from "./components/singles/SiteHeader"
 import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
@@ -8,8 +17,11 @@ import sessionService from "./services/sessions"
 
 function App() {
   const [sessions, setSessions] = useState([])
+  // const [currentSession, setCurrentSession] = useState(null)
   const [sessionsInList, setSessionsInList] = useState([])
   const [selectedSession, setSelectedSession] = useState(null)
+
+  const match = useMatch('/sessions/:id')
   
   useEffect(() => {
     sessionService.getSessions().then((res) => {
@@ -17,6 +29,11 @@ function App() {
       setSessionsInList(res)
     })
   }, [])
+
+  const currentSession = match
+    ? sessions.find(session => session.id === Number(match.params.id))
+    : null
+
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
@@ -29,11 +46,23 @@ function App() {
       
       <LeftBar
         sessions={sessionsInList} 
-        setSelectedSession={setSelectedSession}
+        // setSelectedSession={setSelectedSession}
         searchSessions={searchSessions}
       />
 
-      {selectedSession && <MainContentArea session={selectedSession}/>}
+      <Routes>
+        <Route 
+          path="/sessions/:id" 
+          element={ 
+            sessions.length > 0 && 
+            currentSession && 
+            <MainContentArea session={currentSession}/>
+          }
+        />
+        <Route path="/" element={null}/>
+      </Routes>
+
+      {/* {selectedSession && <MainContentArea session={selectedSession}/>} */}
       
     </div>
   )
