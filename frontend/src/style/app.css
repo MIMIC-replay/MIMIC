@@ -11,18 +11,18 @@ body {
 }
 
 .main-grid {
-  background-color: rgb(28, 41, 53);
+  background-color: rgb(15, 21, 26);
 
   height: 100vh;
   width: 100vw;
   
   display: grid;
   /* grid-template: 40px auto / 300px auto; */
-  grid-template: var(--sF) auto / var(--sM) auto;
+  grid-template: var(--sF) auto / var(--sL) auto;
   grid-template-areas: 
     "header header"
     "left-bar main-content-area";
-  gap:var(--sB);
+  column-gap:var(--sB);
 }
 
 /* Header */
@@ -43,13 +43,15 @@ body {
 
   grid-area: left-bar;
   overflow: auto;
-  border-radius: var(--general-border-radius);
-  border: var(--main-components-border);
+  /* border-radius: var(--general-border-radius); */
+  border-right: var(--main-components-border);
 }
 
 .left-bar > * {
   /* padding: 1var(--general-border-radius); */
 }
+
+/* Left Bar Search */
 
 .search {
   /* height: 80px; */
@@ -58,14 +60,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: var(--main-components-border);
 }
 
-.search, .search > input {
-  background-color: rgb(112, 158, 112);
+.search > input {
+  /* background-color: rgb(112, 158, 112); */
+  background-color: transparent;
 }
 
 .search input, .search input::placeholder {
-  color: white;
+  /* color: white; */
 }
 
 .sessions-container {
@@ -92,7 +96,6 @@ body {
 /* Main area */
 
 .main-content-area {
-  background-color: rgb(28, 41, 53);
   display: grid;
   grid-area: main-content-area;
   /* grid-template: 40px auto 30vh / auto 300px; */
@@ -102,8 +105,14 @@ body {
     "player main-right-bar"
     "extra-info main-right-bar";
   /* margin: 10px; */
+
+
+
+  /* To change later */
   border: var(--main-components-border);
-  border-radius: var(--general-border-radius);
+  border-top-left-radius: var(--general-border-radius);
+  margin-top: var(--sB);
+
 }
 
 .main-content-area > * {
@@ -114,7 +123,7 @@ body {
 
 .main-content-area > header {
   grid-area: content-header;
-  background-color: rgb(105, 112, 105);
+  /* background-color: rgb(105, 112, 105); */
   display: flex;
   align-items: center;
   padding: var(--sA);

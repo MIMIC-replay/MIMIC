@@ -65,7 +65,7 @@ const ExtraInfo = ({session}) => {
 const ExtraInfoSearch = ({searchExtraInfo}) => {
   return (
     <>
-      <img className='icon' src='../public/search.svg'></img>
+      <img className='icon' src='../search.svg'></img>
       <input 
         type="text" 
         placeholder="Search request by name"

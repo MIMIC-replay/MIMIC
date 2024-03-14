@@ -15,7 +15,6 @@ const Search = ({searchSessions}) => {
         placeholder="Search by session ID"
         onChange={(e) => searchSessions(e.target.value)}
       ></input>
-      <button>Search</button>
     </div>
   )
 }
