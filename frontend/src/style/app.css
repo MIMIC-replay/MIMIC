@@ -75,6 +75,8 @@ body {
   /* color: white; */
 }
 
+/* Session List */
+
 .sessions-container {
   /* background-color: rgb(150, 120, 125); */
 }
@@ -136,14 +138,15 @@ body {
 /* Player */
 
 #replayer {
-  /* background-color: orange; */
   width: auto;
   height: auto;
-  /* border: 1px solid brown; */
+  min-width: 600px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: var(--main-components-border);
+
 }
 
 /* .player {
@@ -341,5 +344,3 @@ td.request-name {
 .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
   border-top-right-radius: var(--general-border-radius);
 }
-
-
