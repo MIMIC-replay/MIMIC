@@ -329,12 +329,18 @@ td.request-name {
   border-top-right-radius: var(--general-border-radius);
   padding: var(--sB);
   height: var(--sL);
+  overflow: auto;
 }
 
 .main-right-bar-session-tabs-content ul {
   display: flex;
   flex-direction: column;
   gap: var(--sD);
+}
+
+.main-right-bar-session-tabs-content ul li {
+  border-bottom: var(--main-components-border);
+  padding: var(--sA);
 }
 
 .main-right-bar-session-tabs-container .tab-button:first-child {

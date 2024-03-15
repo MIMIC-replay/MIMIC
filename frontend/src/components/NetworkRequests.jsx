@@ -8,7 +8,7 @@ const NetworkRequests = ({requests, session}) => {
           <th>Time</th>
           <th>Type</th>
           <th>Method</th>
-          <th>Response</th>
+          <th>Status</th>
           <th>URL</th>
           <th>Latency</th>
         </tr>

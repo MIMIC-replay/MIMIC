@@ -1,9 +1,11 @@
-const RightBarEventListElement = ({event}) =>{
+import { relativeTime } from "../../helpers/dataExtractors"
+
+const RightBarEventListElement = ({event, session}) =>{
+
+  const time = relativeTime(event, session)
   return (
     <li>
-      {event.name}
-      {event.type}
-      {event.time}
+      {`Time: ${time} - Type: ${event.type}`}
     </li>
   )  
 }

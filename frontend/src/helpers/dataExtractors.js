@@ -29,6 +29,7 @@ export const requestDataExtractor = (request, session) => {
   // const time = String(epochToDate(request.timestamp)).slice(0, 24)
   const time = relativeTime(request, session)
   const type = data.type
+  const method = data.method
   const latency = data.latency
   const url = data.url.slice(0, 50)
   const responseStatus = data.status
@@ -36,6 +37,7 @@ export const requestDataExtractor = (request, session) => {
   return {
     time,
     type,
+    method,
     latency,
     url,
     responseStatus

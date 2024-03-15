@@ -58,7 +58,7 @@ const MainContentRightBar = ({session}) => {
 
         </div>
         <div className="main-right-bar-session-tabs-content">
-          {activeTab === 'events' ? <MainContentRightBarEvents events={session.events}/> : null}
+          {activeTab === 'events' ? <MainContentRightBarEvents events={session.events} session={session}/> : null}
           {activeTab === 'metadata' ? <MainContentListMetadata session={session}/> : null}
         </div>
       </div>
@@ -66,10 +66,10 @@ const MainContentRightBar = ({session}) => {
   )
 }
 
-const MainContentRightBarEvents = ({events}) => {
+const MainContentRightBarEvents = ({events, session}) => {
   return (
     <ul>
-      {events.map((e, i) => <RightBarEventListElement key={i} event={e}/>)}
+      {events.map((e, i) => <RightBarEventListElement key={i} event={e} session={session}/>)}
     </ul>
   )
 }
