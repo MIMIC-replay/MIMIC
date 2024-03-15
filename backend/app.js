@@ -24,11 +24,9 @@ const recordRouter = require("./controllers/record.js");
 const sessionRouter = require("./controllers/session.js")
 
 app.use("/api/record", recordRouter);
-
 app.use("/api/test", testRouter);
-
 app.use("/api/project", sessionRouter)
 
-app.use(middleware.errorHandler);
+app.use(middleware.errorHandler); // needs to be below all routes for all to use
 
 module.exports = app;
