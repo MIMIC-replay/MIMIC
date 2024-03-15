@@ -28,6 +28,8 @@ recordRouter.post("/", async (req, res) => {
 
   const allEventsCompressed = compressEvents(allRecordedEvents)
 
+  // When using cookie-session, causes there to be a response header "Set Cookie", that is consistent across post requests in targetApp
+  req.session.cat = "meow";
   if (sessionIndex) {
     updateSessionEvents(allEventsCompressed, sessionIndex, res)
   } else {
