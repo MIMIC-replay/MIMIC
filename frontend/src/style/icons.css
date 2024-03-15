@@ -1,0 +1,6 @@
+@import url(./systems.css);
+
+[class*="feather"]{
+  width: var(--sC);
+
+}

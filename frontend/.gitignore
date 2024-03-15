@@ -30,4 +30,4 @@ experiments/*
 mock-data
 personal-reference*
 assets-docs
-.notes
+.notes.md

@@ -1,0 +1,127 @@
+
+/* Remove all unnecessary calls later */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+/* Sizes */
+:root {
+  /* General Absolute Sizes based on 16px, the font size by default
+
+  --sA: 4px;
+  --sB: 8px;
+  --sC: 12px;
+  --sD: 16px;
+  --sE: 24px;
+  --sF: 32px;
+  --sG: 48px;
+  --sH: 64px;
+  --sI: 96px;
+  --sJ: 128px;
+  --sK: 192px;
+  --sL: 256px;
+  --sM: 384px;
+  --sN: 512px;
+  --sO: 640px;
+  --sP: 768px;   
+
+  */
+
+  --base-general-pixel-size: 16;
+  
+  --sA: calc(var(--base-general-pixel-size) * 0.25px);
+  --sB: calc(var(--base-general-pixel-size) * 0.5px);
+  --sC: calc(var(--base-general-pixel-size) * 1px); 
+  --sD: calc(var(--base-general-pixel-size) * 1.5px);
+  --sE: calc(var(--base-general-pixel-size) * 2px);
+  --sF: calc(var(--base-general-pixel-size) * 3px);
+  --sG: calc(var(--base-general-pixel-size) * 4px);
+  --sH: calc(var(--base-general-pixel-size) * 5px);
+  --sI: calc(var(--base-general-pixel-size) * 6px);
+  --sJ: calc(var(--base-general-pixel-size) * 8px);
+  --sK: calc(var(--base-general-pixel-size) * 12px);
+  --sL: calc(var(--base-general-pixel-size) * 16px);
+  --sM: calc(var(--base-general-pixel-size) * 24px);
+  --sN: calc(var(--base-general-pixel-size) * 32px);
+  --sO: calc(var(--base-general-pixel-size) * 40px);
+  --sP: calc(var(--base-general-pixel-size) * 48px);
+
+  /* General Relative Value based on 1rem (16px by default) */
+  --srA: calc(1rem * 0.25);
+  --srB: calc(1rem * 0.5);
+  --srC: calc(1rem * 1);
+  --srD: calc(1rem * 1.5);
+  --srE: calc(1rem * 2);
+  --srF: calc(1rem * 3);
+  --srG: calc(1rem * 4);
+  --srH: calc(1rem * 5);
+  --srI: calc(1rem * 6);
+  --srJ: calc(1rem * 8);
+  --srK: calc(1rem * 12);
+  --srL: calc(1rem * 16);
+  --srM: calc(1rem * 24);
+  --srN: calc(1rem * 32);
+  --srO: calc(1rem * 40);
+  --srP: calc(1rem * 48);
+}
+
+
+/* Fonts */
+:root {
+
+  --general-font: Montserrat, system-ui, Tahoma, Verdana, sans-serif;
+  /* --general-font: Inter, system-ui, Tahoma, Verdana, sans-serif; */
+  /* --general-font: Roboto, system-ui, Tahoma, Verdana, sans-serif; */
+
+  --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+
+  /* General Absolute Values for Fonts */
+  --fA: 12px;
+  --fB: 14px;
+  --fC: 16px; 
+  --fD: 18px;
+  --fE: 20px;
+  --fF: 24px;
+  --fG: 30px;
+  --fH: 36px;
+  --fI: 48px;
+  --fJ: 60px;
+  --fK: 72px;
+
+  /* General Relative Values for Fonts, equivalent to the previous values,
+     assuming 1rem = 16px 
+  */
+  --frA: 0.75rem;
+  --frB: 0.875rem;
+  --frC: 1rem; 
+  --frD: 1.125rem;
+  --frE: 1.25rem;
+  --frF: 1.5rem;
+  --frG: 1.875rem;
+  --frH: 2.25rem;
+  --frI: 3rem;
+  --frJ: 3.75rem;
+  --frK: 4.5rem;
+}
+
+/* Colors */
+:root {
+
+  --light-green-border: hsl(180, 93%, 23%);
+
+  /* ----Greys */
+  
+  /* ----Primaries */
+  
+  /* ----Accent */
+  
+
+}
+
+/* Borders */
+:root {
+  /* --main-components-border: 1px solid lightblue; */
+  --main-components-border: 1px solid var(--light-green-border);
+  --general-border-radius: 5px;
+}

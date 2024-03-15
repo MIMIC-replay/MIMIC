@@ -3,31 +3,52 @@ import ExtraInfo from "./ExtraInfo"
 import PlayerTest from "./PlayerTest"
 
 import MainContentRightBar from "./MainContentRightBar"
+import { sessionMetadataExtractor } from "../helpers/dataExtractors"
 
 const MainContentArea = ({session}) => {
-  const {sessionId, appName, viewport, https} = session.metadata
   return (
     <section className="main-content-area">
-    <header>{`${https ? '🔒' : '🔓' } Session #${sessionId} - ${appName} - ${viewport} - some other info??`}</header>
+      <SessionContentHeader session={session}/>
 
-    {/* <div className="player">Player <div className="screen">Screen</div></div>
-    <div className="player-controls">Player Controls<br></br>
-      <div className="controls">
-        <span>⏪⏯⏩</span>
-          <span className="right-controls">📶🔁</span>
-      </div>
-    </div> */}
+      {/* 
+      
+      
+        <div className="player">Player <div className="screen">Screen</div></div>
+
+        <div className="player-controls">
+
+          <div className="controls">
+            <span>⏪⏯⏩</span>
+              <span className="right-controls">📶🔁</span>
+          </div>
+
+        </div> 
+      
+      
+      */}
         
-    <PlayerTest/>
+      <PlayerTest session={session}/>
 
+      <ExtraInfo session={session}/>
 
-    {/* <div className="extra-info">Extra info (Console Logs, Errors, Network)</div> */}
-
-
-    <ExtraInfo session={session}/>
-
-    <MainContentRightBar session={session}/>
+      <MainContentRightBar session={session}/>
   </section>
+  )
+}
+
+const SessionContentHeader = ({session}) => {
+  const {id, url, https, viewport} = sessionMetadataExtractor(session)
+
+  return (
+    <header>
+      {`${https ? 
+          '🔒' : 
+          '🔓' 
+        }
+        Session #${id} - ${url} - 
+        ${viewport.width}x${viewport.height} - 
+        some other info??`}
+    </header>
   )
 }
 

@@ -6,12 +6,12 @@
   /* box-shadow: 0px 5px 15px rgba(0, 0, 0, .1); */
 }
 
-.buttonWrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.button-wrapper {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
 }
 
-button {
+.tab-button {
   /* letter-spacing: 3px; */
   border: none;
   /* padding: 10px; */
@@ -22,21 +22,18 @@ button {
   transition: 0.5s;
 }
 
-button:hover {
+.tab-button:hover {
   background-color: #d5e3ff;
 }
 
-button.active {
+.tab-button.active {
   background-color: white;
+  border-bottom-color: white;
 }
 
 .active {
-  /* background-color: white; */
-}
-
-p {
-  text-align: left;
-  padding: 10px;
+  background-color: white;
+  border-bottom-color: white;
 }
 
 .content {
@@ -45,5 +42,5 @@ p {
 }
 
 .content.active {
-  /* display: block; */
+  display: block;
 }

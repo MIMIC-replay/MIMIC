@@ -1,4 +1,4 @@
-import Search from './Search'
+import Search from './singles/Search'
 import SessionsList from './SessionsList'
 
 const LeftBar = ({sessions, setSelectedSession, searchSessions}) => {

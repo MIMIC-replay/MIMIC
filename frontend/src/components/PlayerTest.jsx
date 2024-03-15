@@ -4,20 +4,22 @@ import rrwebPlayer from 'rrweb-player';
 import 'rrweb-player/dist/style.css';
 import '../style/unminified-rrplayer.css'
 
-const PlayerTest = () => {
-
+const PlayerTest = ({session}) => {
+  
   useEffect(() => {
     loadSessionPlayer()
-  }, [])
+  })
 
   const loadSessionPlayer = async () => {
     let replayerDiv = document.getElementById("replayer")
+
     if (replayerDiv.firstChild) {
       replayerDiv.removeChild(replayerDiv.firstChild)
     }
 
     try {
 
+      // from the sandbox server running on my machine
       const response = await fetch("http://localhost:3001/allRecordedEvents")
 
       if (!response.ok) {
@@ -25,6 +27,7 @@ const PlayerTest = () => {
       }
 
       const eventData = await response.json()
+
       if (eventData.length === 0) {
         throw new Error("Event data is empty.")
       }
@@ -34,7 +37,11 @@ const PlayerTest = () => {
       //   []
       // )
 
+
       const combinedEvents = eventData.flat()
+
+
+      // const combinedEvents = session.events
 
       new rrwebPlayer({
         target: document.getElementById("replayer"),
@@ -44,7 +51,6 @@ const PlayerTest = () => {
           width: 600,
           height: 270,
           autoPlay: true,
-          
         },
       })
 
