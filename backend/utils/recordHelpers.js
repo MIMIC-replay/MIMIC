@@ -37,12 +37,13 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
 }
 
 function createNewSession(allEventsCompressed, userMetadata, res) {
-  postgres.db.one('INSERT INTO sessions(session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id', 
+  return postgres.db.one('INSERT INTO sessions(session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id', 
       [allEventsCompressed, "www.website.com/stuff", userMetadata.ip, "Kakariko Village", "Dueling Peaks", "Hyrule", userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, true, 1280, 567], session => session.id)
     .then(data => {
         sessionIndex = data;
         res.sendStatus(200);
         console.log(`Successfully added new session to database. Current ID is ${sessionIndex}`)
+        return data;
     })
     .catch((error) => {
       console.log('Unable to add new session to PostgreSQL:', error.message);
