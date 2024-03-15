@@ -19,7 +19,7 @@ const userMetadata = {
   location: null,
 };
 
-recordRouter.post("/", (req, res) => {
+recordRouter.post("/", async (req, res) => {
   extractMetadata(req, userMetadata)
 
   const batchOfEvents = req.body;
@@ -27,11 +27,11 @@ recordRouter.post("/", (req, res) => {
   allRecordedEvents.push(batchOfEvents);
 
   const allEventsCompressed = compressEvents(allRecordedEvents)
-  
+
   if (sessionIndex) {
     updateSessionEvents(allEventsCompressed, sessionIndex, res)
   } else {
-    sessionIndex = createNewSession(allEventsCompressed, userMetadata, res)
+    sessionIndex = await createNewSession(allEventsCompressed, userMetadata, res)
   }
 });
 
