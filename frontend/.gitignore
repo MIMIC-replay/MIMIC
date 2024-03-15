@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+experiments/*
+
+.vite
+.todo
+mock-data
+personal-reference*
+assets-docs
+.notes

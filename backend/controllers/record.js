@@ -1,35 +1,38 @@
 const express = require("express");
+
 const recordRouter = express.Router();
+
 const logger = require("../utils/logger.js");
+const postgres = require("../models/postgres.js")
+
+const { extractMetadata, compressEvents, updateSessionEvents, createNewSession } = require("../utils/recordHelpers.js")
+
+const app = express();
 
 const allRecordedEvents = [];
+let sessionIndex;
+
+const userMetadata = {
+  ip: null,
+  browser: null,
+  os: null,
+  location: null,
+};
 
 recordRouter.post("/", (req, res) => {
+  extractMetadata(req, userMetadata)
+
   const batchOfEvents = req.body;
-  // let consolePayloads = batchOfEvents.filter((obj) => obj.data.plugin);
-  // if (consolePayloads.length > 0) {
-  //   consolePayloads.forEach((consolePayload) => {
-  //     console.log("Payload: ", consolePayload);
-  //   });
-  // } else {
-  //   console.log("No console payload");
-  // }
-
-  // let networkEventPayload = batchOfEvents.filter((obj) => obj.type === 50);
-  // if (networkEventPayload.length > 0) {
-  //   networkEventPayload.forEach((event) => {
-  //     console.log("Network event: ", event);
-  //   });
-  // } else {
-  //   console.log("No network event payload");
-  // }
-  //   console.log(batchOfEvents);
+  
   allRecordedEvents.push(batchOfEvents);
-  res.sendStatus(201);
-});
 
-recordRouter.get("/", (req, res) => {
-  res.json(allRecordedEvents);
+  const allEventsCompressed = compressEvents(allRecordedEvents)
+  
+  if (sessionIndex) {
+    updateSessionEvents(allEventsCompressed, sessionIndex, res)
+  } else {
+    sessionIndex = createNewSession(allEventsCompressed, userMetadata, res)
+  }
 });
 
 module.exports = recordRouter;
