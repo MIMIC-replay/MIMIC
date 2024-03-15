@@ -1,7 +1,7 @@
 import { requestDataExtractor } from "../../helpers/dataExtractors"
 
-const Request = ({request}) => {
-  const {time, type, latency, url, responseStatus} = requestDataExtractor(request)
+const Request = ({request, session}) => {
+  const {time, type, latency, url, responseStatus} = requestDataExtractor(request, session)
 
   return (
     <tr className="request">

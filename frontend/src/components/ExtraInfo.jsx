@@ -9,7 +9,7 @@ import { useState } from 'react'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('network')
-  const [requests] = useState(session.events.filter(e => e[0].type === 50).flat())
+  const [requests] = useState(session.events.filter(e => e.type === 50).flat())
   const [requestsInList, setRequestsInList] = useState(requests)
 
   // should we flatten
@@ -48,7 +48,7 @@ const ExtraInfo = ({session}) => {
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'network' ? <NetworkRequests requests={requestsInList}/> : null}
+        {activeTab === 'network' ? <NetworkRequests requests={requestsInList} session={session}/> : null}
         {activeTab === 'logs' ? <ConsoleLogs logs={session.logs}/> : null}
         {activeTab === 'errors' ? <Errors errors={session.errors}/> : null}
       </div>

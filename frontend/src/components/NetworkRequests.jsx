@@ -1,11 +1,11 @@
 import Request from "./singles/Request"
 
-const NetworkRequests = ({requests}) => {
+const NetworkRequests = ({requests, session}) => {
   return (
     <table className="network-requests">
       <thead>
         <tr>
-          <th>Received On</th>
+          <th>Time</th>
           <th>Type</th>
           <th>Method</th>
           <th>Response</th>
@@ -14,7 +14,7 @@ const NetworkRequests = ({requests}) => {
         </tr>
       </thead>
       <tbody>
-        {requests.map((r, i) => <Request key={i} request={r}/>)}
+        {requests.map((r, i) => <Request key={i} request={r} session={session}/>)}
       </tbody>
     </table>
   )
