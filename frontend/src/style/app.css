@@ -98,10 +98,17 @@ body {
   /* background-color: salmon; */
   /* border: 1px solid black; */
   cursor: pointer;
+  padding: var(--sB);
 }
 .session-list-element * {
   cursor: pointer;
 }
+
+.session-list-element:hover {
+  background-color: #4b6c86;
+}
+
+
 
 
 /* Main area */
@@ -303,6 +310,11 @@ td.request-name {
   /* gap: var(--sB); */
 }
 
+.error:hover {
+  cursor: pointer;
+  background-color: #4b6c86;
+}
+
 .error-line {
   /* margin-left: auto; */
 }
@@ -371,4 +383,37 @@ td.request-name {
 
 .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
   border-top-right-radius: var(--general-border-radius);
+}
+
+/* Overlay and Modal */
+
+.modal-overlay {
+  transition: all 0.2s;
+}
+
+.modal-overlay.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.modal {
+  position: absolute;
+  background-color: var(--cK);
+  width: 730px;
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  top: 15%;
+  left: 20%;
+  padding: 30px;
+  border-radius: var(--general-border-radius);
+  color: var(--light-font);
+  max-height: 100%;
+  overflow-y: auto;
 }
