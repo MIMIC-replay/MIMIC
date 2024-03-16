@@ -17,7 +17,7 @@ const data = [
 ];
 
 // const SessionElement = ({session, setSelectedSession}) => {
-const SessionElement = ({session, setSelectedSession}) => {
+const SessionElement = ({session}) => {
   const renderLineChart = (
     <LineChart width={200} height={50} data={data}>
       <Line type="monotone" dataKey="uv" stroke="#8884d8" />

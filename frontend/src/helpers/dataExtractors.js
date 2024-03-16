@@ -1,4 +1,4 @@
-// import { epochToDate } from "./dateFormatters"
+import { epochToDate } from "./dateFormatters"
 
 export const sessionMetadataExtractor = (session) => {
   
@@ -71,6 +71,14 @@ const padWithZeros = (number, length) => {
   }
   return str;
 };
+
+export const errorDataExtractor = (error) => {
+  return {
+    trigger: errorTrigger(error),
+    time: epochToDate(error.timestamp),
+    trace: error.data.payload.trace,
+  }
+}
 
 export const errorTrigger = (error) => {
   const triggerMatch = error.data.payload.trace[0].match(/^(.+) /)[1]

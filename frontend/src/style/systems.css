@@ -76,8 +76,8 @@
 
   /* --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue; */
 
-  --base-font-weight: 400;
-  --bold-font-weight: 500;
+  --base-font-weight: 500;
+  --bold-font-weight: 600;
 
   /* General Absolute Values for Fonts */
   --fA: 12px;
