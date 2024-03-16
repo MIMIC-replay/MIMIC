@@ -1,7 +1,7 @@
 @import url(./systems.css);
 
 body {
-  color: #b7bfc9;
+  color: var(--general-font-color);
   /* font-family: var(--safe-font); */
   font-family: var(--general-font);
   font-size: var(--frB);
@@ -9,8 +9,7 @@ body {
 
   overflow-y: hidden;
   width: max-content;
-  background-color: rgb(15, 21, 26);
-  background-color: var(--cK);
+  background-color: var(--background-color);
 }
 
 
@@ -38,6 +37,11 @@ body {
   padding: var(--sA);
   display: flex;
   align-items: center;
+  gap: var(--sB);
+}
+
+.site-logo {
+  width: var(--sD);
 }
 
 /* Left bar */
