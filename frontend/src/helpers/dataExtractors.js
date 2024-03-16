@@ -53,7 +53,7 @@ export const relativeTime = (event, session) => {
 }
 
 // Function to convert seconds to the formatted time string (mm:ss)
-const formatTime = (seconds) => {
+export const formatTime = (seconds) => {
   const roundedSeconds = Math.floor(seconds);
   const minutes = Math.floor(roundedSeconds / 60);
   const remainingSeconds = roundedSeconds % 60;
@@ -71,4 +71,14 @@ const padWithZeros = (number, length) => {
   }
   return str;
 };
+
+export const errorTrigger = (error) => {
+  const triggerMatch = error.data.payload.trace[0].match(/^(.+) /)[1]
+  return triggerMatch
+}
+
+export const line = (error) => {
+  const errorLineMatch = error.data.payload.trace[0].match(/(\d+:\d+)\)$/)[1]
+  return errorLineMatch
+}
 

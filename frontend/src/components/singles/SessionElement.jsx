@@ -1,10 +1,10 @@
 import { LineChart, Line } from 'recharts';
 
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Link,
-  Route, 
-  Routes 
+  // Route, 
+  // Routes 
 } from 'react-router-dom'
 
 const data = [

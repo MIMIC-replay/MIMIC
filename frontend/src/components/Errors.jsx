@@ -1,7 +1,9 @@
+import Error from './singles/Error'
+
 const Errors = ({errors}) => {
   return (
     <ul className='errors-list'>
-      {/* {errors.map((e, i) => <Error key={i} error={e}/>)} */}
+      {errors.map((e, i) => <Error key={i} error={e}/>)}
     </ul>
   )
 }
