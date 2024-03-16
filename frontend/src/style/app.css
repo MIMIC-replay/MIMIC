@@ -2,13 +2,15 @@
 
 body {
   color: #b7bfc9;
-  /* font-family: var(--general-font); */
-  font-family: var(--safe-font);
+  /* font-family: var(--safe-font); */
+  font-family: var(--general-font);
   font-size: var(--frB);
+  font-weight: var(--base-font-weight);
 
   overflow-y: hidden;
   width: max-content;
   background-color: rgb(15, 21, 26);
+  background-color: var(--cK);
 }
 
 
@@ -110,8 +112,6 @@ body {
     "player main-right-bar"
     "extra-info main-right-bar";
   /* margin: 10px; */
-
-
 
   /* To change later */
   border: var(--main-components-border);

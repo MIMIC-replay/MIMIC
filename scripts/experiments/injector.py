@@ -67,3 +67,5 @@ for file in files:
   inject_scripts(file)
 
 # create_js()
+  
+  print
