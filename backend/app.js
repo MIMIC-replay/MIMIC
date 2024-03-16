@@ -1,8 +1,7 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const morgan = require("morgan");
-// const session = require("express-session");
-const cookieSession = require('cookie-session');
 
 const app = express();
 
@@ -16,62 +15,20 @@ morgan.token("body", (req) => {
   return JSON.stringify(req.body);
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // this we have to figure out, we can't manually add the origin in the backend for all target applications
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use(morgan(":method :url :status :body"));
 
-// Using cookie-session
-app.set('trust proxy', 1) // trust first proxy
+app.use(cookieParser())
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}))
-// End of using cookie-session
-
-/* Using express-session
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      // Configuration options for the session cookie
-      secure: true, // Ensures the cookie is only sent over HTTPS
-      maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour in this example)
-      httpOnly: true // Ensures the cookie is not accessible via client-side JavaScript
-  }
-}));
-
-
-app.use(session({
-  secret: 'neko',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    // Configuration options for the session cookie
-    secure: false, // Ensures the cookie is only sent over HTTPS
-    maxAge: 3600000, // Cookie expiration time in milliseconds (1 hour in this example)
-    httpOnly: true // Ensures the cookie is not accessible via client-side JavaScript
-}
-}))
-
-app.use(function (req, res, next) {
-  console.log("Recording: ", req.sessionID)
-  console.log("Recording?: ", req.session.id)
-  if (!req.session.cat) {
-    // req.session.id = genuuid()
-    req.session.cat = "Meow"
-    console.log("Cookie created!")
-  } else {
-    console.log("You already have a cookie!")
-    console.log(`The cat goes ${req.session.cat}`)
-  }
-
-  next()
-})
-//End of Express Session
-*/ 
+app.use(middleware.sessionIdCookie)
 
 const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");
