@@ -48,7 +48,9 @@ const ExtraInfo = ({session}) => {
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'network' ? <NetworkRequests requests={requestsInList} session={session}/> : null}
+        {activeTab === 'network' && requestsInList.length > 0 ? 
+          <NetworkRequests requests={requestsInList} session={session}/> : 
+          null}
         {activeTab === 'logs' ? <ConsoleLogs logs={session.logs}/> : null}
         {activeTab === 'errors' ? <Errors errors={session.errors} session={session}/> : null}
       </div>

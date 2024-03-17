@@ -7,9 +7,6 @@ const BASE_URL = `http://localhost:${PORT}/api/projects`
 const getSessions = async (projectId) => {
   // simulates an API call
 
-  const config = {
-    
-  }
   try {
     // console.log(sessions)
     // const response = await JSON.parse(sessions)
