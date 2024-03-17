@@ -14,7 +14,7 @@ body {
 
 
 .main-grid {
-  height: 100vh;
+  height: 100njjj2.328jjvh;
   width: 100vw;
   
   display: grid;
@@ -23,7 +23,8 @@ body {
   grid-template-areas: 
     "header header"
     "left-bar main-content-area";
-  column-gap:var(--sB);
+  column-gap:var(--sC);
+  overflow: auto;
 }
 
 /* Header */
@@ -34,10 +35,11 @@ body {
   /* height: var(--sG); */
   grid-area: header;
   border-bottom: var(--main-components-border);
-  padding: var(--sA);
+  padding: var(--sB);
   display: flex;
   align-items: center;
   gap: var(--sB);
+  background-color: var(--light-background-color);
 }
 
 .site-logo {
@@ -54,6 +56,7 @@ body {
   overflow: auto;
   /* border-radius: var(--general-border-radius); */
   border-right: var(--main-components-border);
+  background-color: var(--light-background-color);
 }
 
 .left-bar > * {
@@ -70,6 +73,7 @@ body {
   align-items: center;
   justify-content: center;
   border-bottom: var(--main-components-border);
+  border-left: var(--main-components-border)
 }
 
 .search > input {
@@ -99,7 +103,8 @@ body {
   /* background-color: salmon; */
   /* border: 1px solid black; */
   cursor: pointer;
-  padding: var(--sB);
+  padding: var(--sC);
+  border-left: 7px solid var(--main-app-color);
 }
 
 .session-list-element * {
@@ -118,6 +123,7 @@ body {
   grid-area: main-content-area;
   /* grid-template: 40px auto 30vh / auto 300px; */
   grid-template: var(--sF) auto 30vh / auto var(--sM);
+  /* grid-template: var(--sF) auto auto / auto var(--sM); */
   grid-template-areas: 
     "content-header content-header"
     "player main-right-bar"
@@ -126,9 +132,14 @@ body {
 
   /* To change later */
   border: var(--main-components-border);
+  /* border-top: var(--main-components-border);
+  border-left: var(--main-components-border); */
   border-top-left-radius: var(--general-border-radius);
-  margin-top: var(--sB);
-
+  margin-top: var(--sC);
+  margin-right: var(--sC);
+  margin-bottom: var(--sC);
+  /* max-height: 0%; */
+  /* height: 100%; */
 }
 
 .main-content-area > * {
@@ -138,11 +149,12 @@ body {
 /* Main Content Area Header  */
 
 .main-content-area > header {
+  background-color: var(--light-background-color);
   grid-area: content-header;
   /* background-color: rgb(105, 112, 105); */
   display: flex;
   align-items: center;
-  padding: var(--sA);
+  padding: var(--sC);
   border-bottom: var(--main-components-border);
 }
 
@@ -150,8 +162,8 @@ body {
 
 #replayer {
   width: auto;
-  height: auto;
-  min-width: 600px;
+  /* height: auto; */
+  min-width: var(--sN);
 
   display: flex;
   align-items: center;
@@ -194,8 +206,14 @@ body {
   grid-area: extra-info;
   /* background-color: rgb(108, 160, 31); */
   overflow: auto;
-  padding: var(--sB);
-  padding-top: var(--sC);
+  padding: var(--sD);
+  /* padding-top: var(--sC); */
+  background-color: var(--light-background-color);
+  
+}
+
+.extra-info-content {
+  background-color: var(--background-color);
 }
 
 .extra-info-search svg {
@@ -204,7 +222,7 @@ body {
 
 .extra-info-tab-controls {
   display: flex;
-  max-height: var(--sG);
+  /* max-height: var(--sG); */
   border-bottom: var(--main-components-border);
 }
 
@@ -234,7 +252,7 @@ body {
 .network-requests, .console-logs {
   border: 1px solid salmon;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .network-requests tr, 
@@ -252,7 +270,7 @@ body {
 
 .network-requests th, .network-requests td, 
 .console-logs th, .console-logs td {
-  padding: var(--sA);
+  padding: var(--sB);
 }
 
 th {
@@ -285,7 +303,7 @@ td.request-name {
   border-bottom: var(--main-components-border);
   display: flex;
   justify-content: space-between;
-  padding: var(--sB);
+  padding: var(--sC);
   gap: var(--sB);
   font-family: 'Courier New', Courier, monospace;
 }
@@ -307,7 +325,7 @@ td.request-name {
   border-bottom: var(--main-components-border);
   display: flex;
   justify-content: space-between;
-  padding: var(--sB);
+  padding: var(--sC);
   /* gap: var(--sB); */
 }
 
@@ -329,13 +347,15 @@ td.request-name {
 .main-right-bar {
   grid-area: main-right-bar;
   /* background-color: darkslateblue; */
-  padding: var(--sB);
+  padding: var(--sC);
   border-left: var(--main-components-border);
   display: flex;
   flex-direction: column;
   gap: var(--sD);
   /* justify-content: flex-start; */
-  max-height: 90vh;
+  /* max-height: 90vh; */
+  /* height: fit-content; */
+  /* max-height: 90vh; */
 }
 
 #map {
@@ -351,14 +371,22 @@ td.request-name {
   font-size: var(--sB);
 }
 
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
 .main-right-bar-session-details {
   /* background-color: salmon; */
   display: flex;
   flex-direction: column;
-  gap: var(--sC);
+  gap: var(--sD);
   border: var(--main-components-border);
   border-radius: var(--general-border-radius);
-  padding: var(--sB);
+  padding: var(--sC);
+  background-color: var(--light-background-color);
 }
 
 .main-right-bar-session-details h2 {
@@ -377,9 +405,16 @@ td.request-name {
 
 .main-right-bar-session-tabs-container {
   /* margin-bottom: var(--sC); */
+  max-height: var(--sM);
+  max-height: 100%;
+  height: var(--sM);
+  /* overflow: auto; */
+  /* border: var(--main-components-border); */
+  /* border-bottom: var(--main-components-border); */
 }
 
 .main-right-bar-session-tabs-content {
+  overflow-y: auto;
   gap: var(--sC);
   border: var(--main-components-border);
   border-bottom-right-radius: var(--general-border-radius);
@@ -388,19 +423,20 @@ td.request-name {
   /* padding: var(--sB); */
   /* height: calc(var(--sL) + var(--sH)); */
   /* height: 100%; */
-  max-height: auto;
-  overflow: auto;
+  /* max-height: auto; */
+  /* overflow: auto; */
   /* flex-grow: 10; */
   /* min-height: 100%; */
-  padding-top: var(--sB);
+  padding-top: var(--sC);
+  background-color: var(--light-background-color);
+  height: auto;
 }
 
 .main-right-bar-session-tabs-content ul {
   display: flex;
   flex-direction: column;
   gap: var(--sD);
-  
-  
+  overflow: auto;
 }
 
 .main-right-bar-session-tabs-content ul li {

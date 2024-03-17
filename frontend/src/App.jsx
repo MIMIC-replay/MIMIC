@@ -34,6 +34,10 @@ function App() {
     ? sessions.find(session => session.id === Number(match.params.id))
     : null
 
+  useEffect(() => {
+    document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
+  }, [currentSession])
+
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
