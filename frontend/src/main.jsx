@@ -10,6 +10,7 @@ import './style/app.css'
 import './style/toggles-and-functionality.css'
 import './style/icons.css'
 import './style/unminified-rrplayer.css'
+import './style/modal.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>

@@ -47,6 +47,9 @@
   --sN: calc(var(--base-general-pixel-size) * 32px);
   --sO: calc(var(--base-general-pixel-size) * 40px);
   --sP: calc(var(--base-general-pixel-size) * 48px);
+  --sQ: calc(var(--base-general-pixel-size) * 56px);
+  --sR: calc(var(--base-general-pixel-size) * 62px);
+  --sS: calc(var(--base-general-pixel-size) * 70px);
 
   /* General Relative Value based on 1rem (16px by default) */
   --srA: calc(1rem * 0.25);
@@ -65,7 +68,9 @@
   --srN: calc(1rem * 32);
   --srO: calc(1rem * 40);
   --srP: calc(1rem * 48);
-
+  --srQ: calc(1rem * 56);
+  --srR: calc(1rem * 62);
+  --srS: calc(1rem * 70);
 
 
   /* Fonts */

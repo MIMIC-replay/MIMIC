@@ -25,7 +25,7 @@ const Map = ({session}) => {
     let map = L.map('map', {
       zoomControl: false,
       // attributionControl: false,
-    }).setView(latLon, 5);
+    }).setView(latLon, 1);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 1,
@@ -37,7 +37,7 @@ const Map = ({session}) => {
   }, [latLon]); // 
 
   return (
-    <div id="map" style={{ height: '180px' }}>
+    <div id="map">
       {latLon}
     </div>
   )

@@ -338,6 +338,19 @@ td.request-name {
   max-height: 90vh;
 }
 
+#map {
+  height: var(--sJ);
+}
+
+#map svg {
+  position: absolute;
+  opacity: 0;
+}
+
+.leaflet-control-attribution.leaflet-control {
+  font-size: var(--sB);
+}
+
 .main-right-bar-session-details {
   /* background-color: salmon; */
   display: flex;
@@ -347,8 +360,6 @@ td.request-name {
   border-radius: var(--general-border-radius);
   padding: var(--sB);
 }
-
-
 
 .main-right-bar-session-details h2 {
   color: rgb(224, 234, 255);
@@ -406,78 +417,3 @@ td.request-name {
   border-top-right-radius: var(--general-border-radius);
 }
 
-/* Overlay and Modal */
-
-.modal-overlay {
-  transition: all 0.2s;
-}
-
-.modal-overlay.active {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
-.modal {
-  position: absolute;
-  background-color: var(--cK);
-  width: var(--sP);
-  min-height: var(--sO);
-  display: flex;
-  flex-direction: column;
-  z-index: 999;
-  top: 10%;
-  left: 20%;
-  padding: var(--sD);
-  border-radius: var(--general-border-radius);
-  color: var(--light-font);
-  /* max-height: 100%; */
-  overflow-y: auto;
-  align-items: start;
-  justify-content: stretch;
-  align-items: stretch;
-  gap: var(--sC);
-}
-
-.modal > * {
-  /* border: var(--main-components-border); */
-  padding: var(-ssB);
-}
-
-.modal button {
-  align-self: end;
-  position: absolute;
-  cursor: pointer;
-}
-
-.modal button:hover {
-  background-color: #4b6c86;
-}
-
-.modal > h2 {
-  font-size: var(--fE);
-  font-weight: bold;
-}
-
-.modal .data-container {
-  display: flex;
-  /* padding: var(--sB); */
-  justify-content: space-between;
-}
-
-.modal .metadata, .modal .user {
-  border: var(--main-components-border);
-}
-
-.modal .metadata td, .modal .metadata h2 {
-  padding: var(--sA);
-}
-
-.modal .stacktrace {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: var(--sC);
-}
