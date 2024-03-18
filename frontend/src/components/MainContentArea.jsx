@@ -1,3 +1,8 @@
+import {
+  Navigate
+} from 'react-router-dom'
+
+
 import ExtraInfo from "./ExtraInfo"
 
 import PlayerTest from "./PlayerTest"
@@ -6,6 +11,12 @@ import MainContentRightBar from "./MainContentRightBar"
 import { sessionMetadataExtractor } from "../helpers/dataExtractors"
 
 const MainContentArea = ({session}) => {
+  if (!session) {
+    return (
+      <Navigate to={'/'} replace />
+    )
+  }
+
   return (
     <section className="main-content-area">
       <SessionContentHeader session={session}/>

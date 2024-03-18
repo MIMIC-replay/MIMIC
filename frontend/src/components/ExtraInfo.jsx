@@ -6,6 +6,7 @@ import ExtraInfoSearch from './singles/ExtraInfoSearch'
 
 
 import { useState } from 'react'
+import { CustomScroll } from 'react-custom-scroll'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
@@ -24,22 +25,21 @@ const ExtraInfo = ({session}) => {
 
   return (
     <div className="extra-info">
-
       <div className="extra-info-tab-controls">
         <button 
           className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
           onClick={setActive}
-        >Network</button>
+          >Network</button>
 
         <button 
           className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
           onClick={setActive}
-        >Logs</button>
+          >Logs</button>
 
         <button 
           className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
           onClick={setActive}
-        >Errors</button>
+          >Errors</button>
 
 
         <div className='extra-info-search'>
@@ -54,7 +54,6 @@ const ExtraInfo = ({session}) => {
         {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
         {activeTab === 'Errors' ? <Errors errors={session.errors} session={session}/> : null}
       </div>
-
     </div>
   )
 }

@@ -37,10 +37,11 @@ function App() {
   
   document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
 
-  if (match && !currentSession) {
-    console.log('no valid id')
-    return <Navigate to='/' replace /> 
-  }
+  // if (match && !currentSession) {
+  //   console.log(match, currentSession)
+  //   console.log('no valid id')
+  //   return <Navigate to='/' replace /> 
+  // }
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
@@ -64,7 +65,7 @@ function App() {
           path="/sessions/:id" 
           element={ 
             sessions.length > 0 && 
-            currentSession && 
+            // currentSession && 
             <MainContentArea session={currentSession}/>
           }
         />

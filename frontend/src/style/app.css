@@ -7,7 +7,7 @@ body {
   font-size: var(--frB);
   font-weight: var(--base-font-weight);
 
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   width: max-content;
   background-color: var(--background-color);
 }
@@ -24,7 +24,7 @@ body {
     "header header"
     "left-bar main-content-area";
   column-gap:var(--sC);
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 /* Header */
@@ -43,7 +43,8 @@ body {
 }
 
 .site-logo {
-  width: var(--sD);
+  /* width: var(--sD); */
+  height: var(--sE);
 }
 
 /* Left bar */
@@ -53,7 +54,7 @@ body {
   /* width: 300px; */
 
   grid-area: left-bar;
-  overflow: auto;
+  /* overflow: auto; */
   /* border-radius: var(--general-border-radius); */
   border-right: var(--main-components-border);
   background-color: var(--light-background-color);
@@ -214,7 +215,7 @@ body {
 .extra-info {
   grid-area: extra-info;
   /* background-color: rgb(108, 160, 31); */
-  overflow: auto;
+  /* overflow: auto; */
   padding: var(--sD);
   /* padding-top: var(--sC); */
   background-color: var(--light-background-color);
@@ -254,6 +255,11 @@ body {
   margin-left: auto;
   display: flex;
   align-items: center;
+}
+
+.extra-info-search input {
+  background-color: transparent;
+  color: var(--general-font-color);
 }
 
 /* Extra info -- requests table */
@@ -423,7 +429,7 @@ td.request-name {
 }
 
 .main-right-bar-session-tabs-content {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   gap: var(--sC);
   border: var(--main-components-border);
   border-bottom-right-radius: var(--general-border-radius);
@@ -445,7 +451,7 @@ td.request-name {
   display: flex;
   flex-direction: column;
   gap: var(--sD);
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .main-right-bar-session-tabs-content ul li {
