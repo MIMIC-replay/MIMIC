@@ -1,5 +1,4 @@
 /*
-- Replace DB id with sessionId
 - Nuke database and add: 
   - Project table, with one project with the ID of one
   - Add give all sessions a project ID of one

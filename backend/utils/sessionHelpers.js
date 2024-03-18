@@ -54,4 +54,12 @@ const retrieveMetadata = async (sessionId) => {
   return metadata;
 }
 
-module.exports = { extractLogEvents, extractNetworkEvents, extractErrorEvents, retrieveEventData, retrieveMetadata }
+const findSessionIds = (projectId) => {
+  return postgres.db.query("SELECT id FROM sessions WHERE project_id = $1", [projectId])
+    .catch((error) => {
+      console.log('Unable to retrieve relevant session IDs from PostgreSQL:', error.message);
+      return [];
+    });
+}
+
+module.exports = { extractLogEvents, extractNetworkEvents, extractErrorEvents, retrieveEventData, retrieveMetadata, findSessionIds }

@@ -11,14 +11,14 @@ DROP TABLE IF EXISTS admins CASCADE;
 DROP TABLE IF EXISTS projects_admins CASCADE;
 
 CREATE TABLE projects (
-  id serial PRIMARY KEY,
-  created_at timestamp NOT NULL DEFAULT NOW(),
-  last_session timestamp -- can be null as when the project is created there won't be any sessions yet
+  id UUID PRIMARY KEY,
+  created_at timestamp NOT NULL DEFAULT NOW()
+  -- last_session timestamp -- can be null as when the project is created there won't be any sessions yet
 );
 
 CREATE TABLE sessions (
   id UUID PRIMARY KEY,
-  -- project_id integer NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   session_data bytea NOT NULL, --compressed blob data
   session_start timestamp NOT NULL DEFAULT NOW(),
   -- session_end timestamp NOT NULL DEFAULT NOW(),
@@ -48,6 +48,8 @@ CREATE TABLE admins (
 );
 
 CREATE TABLE projects_admins (
-  project_id integer NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   admin_id integer NOT NULL REFERENCES admins(id) ON DELETE CASCADE
 );
+
+INSERT INTO projects(id) VALUES ('986953cc-b0d6-4a54-a026-0bad9a629656');

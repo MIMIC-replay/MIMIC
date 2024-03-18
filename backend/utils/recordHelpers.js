@@ -38,8 +38,8 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
 }
 
 function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
-  postgres.db.one('INSERT INTO sessions(id, session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id', 
-      [sessionId, allEventsCompressed, "www.website.com/stuff", userMetadata.ip, "Kakariko Village", "Dueling Peaks", "Hyrule", userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, true, 1280, 567], session => session.id)
+  postgres.db.one('INSERT INTO sessions(id, project_id, session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id', 
+      [sessionId, '986953cc-b0d6-4a54-a026-0bad9a629656', allEventsCompressed, "www.website.com/stuff", userMetadata.ip, "Kakariko Village", "Dueling Peaks", "Hyrule", userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, true, 1280, 567], session => session.id)
     .then(data => {
         res.sendStatus(200);
         console.log(`Successfully added new session to database. Current ID is ${sessionId}`)
