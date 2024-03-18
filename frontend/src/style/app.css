@@ -104,7 +104,13 @@ body {
   /* border: 1px solid black; */
   cursor: pointer;
   padding: var(--sC);
-  border-left: 7px solid var(--main-app-color);
+  border-left: var(--main-components-border);
+  /* position: relative; */
+}
+
+.session-list-element.active {
+  border-left: 7px solid var(--complementary);
+  padding-left: calc(var(--sC) - 6px);
 }
 
 .session-list-element * {
@@ -122,7 +128,7 @@ body {
   display: grid;
   grid-area: main-content-area;
   /* grid-template: 40px auto 30vh / auto 300px; */
-  grid-template: var(--sF) auto 30vh / auto var(--sM);
+  grid-template: var(--sF) auto var(--sM) / auto var(--sM);
   /* grid-template: var(--sF) auto auto / auto var(--sM); */
   grid-template-areas: 
     "content-header content-header"
@@ -250,7 +256,6 @@ body {
 /* Extra info -- requests table */
 
 .network-requests, .console-logs {
-  border: 1px solid salmon;
   width: 100%;
   /* height: 100%; */
 }
@@ -355,7 +360,7 @@ td.request-name {
   /* justify-content: flex-start; */
   /* max-height: 90vh; */
   /* height: fit-content; */
-  /* max-height: 90vh; */
+  min-height: 90vh;
 }
 
 #map {
@@ -390,7 +395,8 @@ td.request-name {
 }
 
 .main-right-bar-session-details h2 {
-  color: rgb(224, 234, 255);
+  /* color: rgb(224, 234, 255); */
+  color: #e6813a;
   font-weight: bold;
   font-size: var(--fE);
 }
@@ -405,9 +411,9 @@ td.request-name {
 
 .main-right-bar-session-tabs-container {
   /* margin-bottom: var(--sC); */
-  max-height: var(--sM);
-  max-height: 100%;
-  height: var(--sM);
+  /* max-height: var(--sM); */
+  /* max-height: 100%; */
+  /* height: var(--sM); */
   /* overflow: auto; */
   /* border: var(--main-components-border); */
   /* border-bottom: var(--main-components-border); */

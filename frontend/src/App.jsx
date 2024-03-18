@@ -49,7 +49,8 @@ function App() {
       <SiteHeader/>
       
       <LeftBar
-        sessions={sessionsInList} 
+        sessions={sessionsInList}
+        currentSession={currentSession}
         // setSelectedSession={setSelectedSession}
         searchSessions={searchSessions}
       />

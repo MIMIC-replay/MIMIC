@@ -17,11 +17,13 @@ import {
 // ];
 
 // const SessionElement = ({session, setSelectedSession}) => {
-const SessionElement = ({session}) => {
+const SessionElement = ({session, currentSession}) => {
   
   const data = session.events.map(e =>{
     return {...e.data}
   })
+
+
   
   // console.log(data)
   const renderLineChart = (
@@ -31,7 +33,7 @@ const SessionElement = ({session}) => {
   );
 
   return (
-    <li className="session-list-element">
+    <li className={`session-list-element ${currentSession.id === session.id ? 'active' : ''}`}>
       <Link to={`/sessions/${session.id}`}>
         {`Session #${session.id}`}
         {renderLineChart}

@@ -28,7 +28,7 @@ const SessionMetadataTable = ({session}) => {
         <td>{`${os.name} ${os.version}`}</td>
       </tr>
       <tr>
-        <td className="main-right-bar-key">Viewport Size</td>
+        <td className="main-right-bar-key">Viewport</td>
         <td>{`${viewport.width}x${viewport.height}`}</td>
       </tr>
       <tr>

@@ -11,8 +11,8 @@ const getSessions = async (projectId) => {
     // console.log(sessions)
     // const response = await JSON.parse(sessions)
     // const response = await axios.get(TEST_URL)
-    // console.log([sessions])
-    return sessions
+    console.log(sessions)
+    return [sessions[0], {...sessions[0], id: 3}]
   } catch (e) {
     console.log(e)
   }

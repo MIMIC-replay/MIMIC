@@ -8,7 +8,7 @@ import ExtraInfoSearch from './singles/ExtraInfoSearch'
 import { useState } from 'react'
 
 const ExtraInfo = ({session}) => {
-  const [activeTab, setActiveTab] = useState('network')
+  const [activeTab, setActiveTab] = useState('Network')
   const [requests] = useState(session.events.filter(e => e.type === 50).flat())
   const [requestsInList, setRequestsInList] = useState(requests)
 
@@ -27,19 +27,19 @@ const ExtraInfo = ({session}) => {
 
       <div className="extra-info-tab-controls">
         <button 
-          className={`tab-button ${activeTab === 'network' ? 'active' : ''}`} 
+          className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
           onClick={setActive}
-        >network</button>
+        >Network</button>
 
         <button 
-          className={`tab-button ${activeTab === 'logs' ? 'active' : ''}`} 
+          className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
           onClick={setActive}
-        >logs</button>
+        >Logs</button>
 
         <button 
-          className={`tab-button ${activeTab === 'errors' ? 'active' : ''}`} 
+          className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
           onClick={setActive}
-        >errors</button>
+        >Errors</button>
 
 
         <div className='extra-info-search'>
@@ -48,11 +48,11 @@ const ExtraInfo = ({session}) => {
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'network' && requestsInList.length > 0 ? 
+        {activeTab === 'Network' && requestsInList.length > 0 ? 
           <NetworkRequests requests={requestsInList} session={session}/> : 
           null}
-        {activeTab === 'logs' ? <ConsoleLogs logs={session.logs}/> : null}
-        {activeTab === 'errors' ? <Errors errors={session.errors} session={session}/> : null}
+        {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
+        {activeTab === 'Errors' ? <Errors errors={session.errors} session={session}/> : null}
       </div>
 
     </div>
