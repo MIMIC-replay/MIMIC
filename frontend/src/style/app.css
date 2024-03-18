@@ -457,6 +457,7 @@ td.request-name {
 .main-right-bar-session-tabs-content ul li {
   border-bottom: var(--main-components-border);
   padding: var(--sA);
+  padding-left: var(--sC);
   border-color: var(--cJ);
 }
 
@@ -467,4 +468,30 @@ td.request-name {
 .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
   border-top-right-radius: var(--general-border-radius);
 }
+
+/* Notification */
+
+.notification {
+  position: absolute;
+  width: var(--sI);
+  height: var((--sM));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification.fail {
+  top: 0;
+  left: 45vw;
+  background-color: rgb(179, 72, 90);
+  color: rgb(24, 21, 29);
+}
+
+.notification.success {
+  top: 0;
+  left: 30vw;
+  background-color: lightgreen;
+  color: rgb(31, 29, 39);
+}
+
 

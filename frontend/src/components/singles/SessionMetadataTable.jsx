@@ -7,8 +7,9 @@ const SessionMetadataTable = ({session}) => {
     https,
     location,
     os,
+    ip,
   } = sessionMetadataExtractor(session)
-
+  console.log(session.metadata)
   return (
     <table>
       <tbody>
@@ -23,6 +24,10 @@ const SessionMetadataTable = ({session}) => {
         <tr>
           <td className="main-right-bar-key">Location</td>
           <td>{location.slice(0, 31)}</td>
+        </tr>
+        <tr>
+          <td className="main-right-bar-key">IP</td>
+          <td>{ip}</td>
         </tr>
         <tr>
           <td className="main-right-bar-key">OS</td>

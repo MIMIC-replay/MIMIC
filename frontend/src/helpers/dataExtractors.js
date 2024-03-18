@@ -11,6 +11,7 @@ export const sessionMetadataExtractor = (session) => {
   const https = metadata.https
   const location = metadata.location
   const os = metadata.os
+  const ip = metadata.ip
 
   return {
     id,
@@ -20,6 +21,7 @@ export const sessionMetadataExtractor = (session) => {
     https,
     location,
     os,
+    ip,
   }
 }
 
