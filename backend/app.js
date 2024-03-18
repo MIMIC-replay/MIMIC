@@ -1,3 +1,15 @@
+/*
+- Replace DB id with sessionId
+- Nuke database and add: 
+  - Project table, with one project with the ID of one
+  - Add give all sessions a project ID of one
+  - Real location data (see if I can use ngrok to get real IPs ?)
+- Wait for Louis and Erik to implement:
+  - Viewport
+  - Real URL (if I hae time, work on this method ahead of time)
+  - HTTPS????
+*/
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -28,7 +40,7 @@ app.use(morgan(":method :url :status :body"));
 
 app.use(cookieParser())
 
-app.use(middleware.sessionIdCookie)
+app.use(middleware.sessionCookie)
 
 const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");

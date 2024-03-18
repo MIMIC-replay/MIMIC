@@ -17,7 +17,7 @@ CREATE TABLE projects (
 );
 
 CREATE TABLE sessions (
-  id serial PRIMARY KEY,
+  id UUID PRIMARY KEY,
   -- project_id integer NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   session_data bytea NOT NULL, --compressed blob data
   session_start timestamp NOT NULL DEFAULT NOW(),
