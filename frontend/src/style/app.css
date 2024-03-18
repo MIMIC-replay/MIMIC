@@ -14,7 +14,7 @@ body {
 
 
 .main-grid {
-  height: 100njjj2.328jjvh;
+  height: 100vh;
   width: 100vw;
   
   display: grid;
@@ -57,6 +57,8 @@ body {
   /* border-radius: var(--general-border-radius); */
   border-right: var(--main-components-border);
   background-color: var(--light-background-color);
+  display: flex;
+  flex-direction: column;
 }
 
 .left-bar > * {
@@ -92,10 +94,11 @@ body {
   /* background-color: rgb(150, 120, 125); */
 }
 
-.sessions-list > li {
+.sessions-list li {
   /* padding-bottom: 10px; */
   border-bottom: var(--main-components-border);
   /* margin-bottom: 10px; */
+  /* background-color: pink; */
 }
 
 .session-list-element {

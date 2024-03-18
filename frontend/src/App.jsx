@@ -4,7 +4,8 @@ import {
   Link,
   Route, 
   Routes,
-  useMatch
+  useMatch,
+  Navigate
 } from 'react-router-dom'
 
 
@@ -31,18 +32,21 @@ function App() {
   }, [])
 
   const currentSession = match
-    ? sessions.find(session => session.id === Number(match.params.id))
-    : null
+  ? sessions.find(session => session.id === Number(match.params.id))
+  : null
+  
+  document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
 
-  useEffect(() => {
-    document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
-  }, [currentSession])
-
+  if (match && !currentSession) {
+    console.log('no valid id')
+    return <Navigate to='/' replace /> 
+  }
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
     setSessionsInList(filteredById)
   }
+
 
   return (
     <div className="main-grid">
@@ -64,6 +68,7 @@ function App() {
             <MainContentArea session={currentSession}/>
           }
         />
+        <Route path="/*" element={<Navigate to={'/'}replace/>}/>
         <Route path="/" element={null}/>
       </Routes>
 

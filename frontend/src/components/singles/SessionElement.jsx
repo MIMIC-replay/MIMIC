@@ -7,14 +7,6 @@ import {
   // Routes 
 } from 'react-router-dom'
 
-// const data = [
-//   {uv: 10, pv: 400, amt: 400 },
-//   {uv: 120, pv: 2520, amt: 1520 },
-//   {uv: 440, pv: 2640, amt: 2640 },
-//   {uv: 60, pv: 760, amt: 760 },
-//   {uv: 80, pv: 2880, amt: 2880 },
-//   {uv: 500, pv: 3000, amt: 3000 },
-// ];
 
 // const SessionElement = ({session, setSelectedSession}) => {
 const SessionElement = ({session, currentSession}) => {
@@ -23,9 +15,6 @@ const SessionElement = ({session, currentSession}) => {
     return {...e.data}
   })
 
-
-  
-  // console.log(data)
   const renderLineChart = (
     <LineChart width={200} height={50} data={data}>
       <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false} />
@@ -33,13 +22,13 @@ const SessionElement = ({session, currentSession}) => {
   );
 
   return (
-    <li className={`session-list-element ${currentSession.id === session.id ? 'active' : ''}`}>
-      <Link to={`/sessions/${session.id}`}>
+    <Link to={`/sessions/${session.id}`}>
+      <li className={`session-list-element ${currentSession?.id === session.id ? 'active' : ''}`}>
         {`Session #${session.id}`}
         {renderLineChart}
         {`${session.metadata.date}`}
-      </Link>
-    </li>
+      </li>
+    </Link>
   )
 }
 
