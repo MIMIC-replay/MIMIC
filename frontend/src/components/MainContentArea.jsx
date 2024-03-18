@@ -10,8 +10,9 @@ import PlayerTest from "./PlayerTest"
 import MainContentRightBar from "./MainContentRightBar"
 import { sessionMetadataExtractor } from "../helpers/dataExtractors"
 
-const MainContentArea = ({session}) => {
+const MainContentArea = ({session, displayNotification}) => {
   if (!session) {
+    displayNotification({ type: 'fail', message: 'Invalid Id' })
     return (
       <Navigate to={'/'} replace />
     )

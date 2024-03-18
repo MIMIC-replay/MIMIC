@@ -1,4 +1,5 @@
 import { sessionMetadataExtractor } from "../../helpers/dataExtractors"
+
 const SessionMetadataTable = ({session}) => {
   const {
     time,
@@ -9,7 +10,7 @@ const SessionMetadataTable = ({session}) => {
     os,
     ip,
   } = sessionMetadataExtractor(session)
-  console.log(session.metadata)
+
   return (
     <table>
       <tbody>
