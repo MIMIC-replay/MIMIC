@@ -13,7 +13,9 @@ const userMetadata = {
   ip: null,
   browser: null,
   os: null,
-  location: null,
+  location: {},
+  https: null,
+  url: null
 };
 
 recordRouter.post("/", async (req, res) => {
@@ -28,7 +30,8 @@ recordRouter.post("/", async (req, res) => {
   } else {
     currentSessions[sessionId] = [batchOfEvents];
     const allEventsCompressed = compressEvents(currentSessions[sessionId]);
-    extractMetadata(req, userMetadata)
+    await extractMetadata(req, userMetadata)
+    console.log("Updated metadata: ", userMetadata)
     createNewSession(allEventsCompressed, sessionId, userMetadata, res)
   }
 });

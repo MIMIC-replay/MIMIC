@@ -1,10 +1,7 @@
 /*
 - Nuke database and add: 
-  - Project table, with one project with the ID of one
-  - Add give all sessions a project ID of one
   - Real location data (see if I can use ngrok to get real IPs ?)
 - Wait for Louis and Erik to implement:
-  - Viewport
   - Real URL (if I hae time, work on this method ahead of time)
   - HTTPS????
 */
@@ -35,9 +32,10 @@ app.use(
 
 app.use(express.json());
 
-app.use(morgan(":method :url :status :body"));
+// app.use(morgan(":method :url :status :body"));
 
-app.use(cookieParser())
+app.use(cookieParser());
+app.set('trust proxy', true);
 
 app.use(middleware.sessionCookie)
 

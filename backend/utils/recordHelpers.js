@@ -2,21 +2,39 @@ const requestIp = require("request-ip");
 const uap = require("ua-parser-js");
 const fflate = require('fflate');
 const postgres = require("../models/postgres.js");
+const config = require("../utils/config.js");
 
-function extractMetadata(req, userMetadata) {
+async function extractMetadata(req, userMetadata) {
   if (!userMetadata.ip) {
-    //let testIP = "68.145.123.233";
-    //userMetadata.ip = testIP;
-    userMetadata.ip = requestIp.getClientIp(req);
+    let testIP = "68.145.123.233";
+    userMetadata.ip = testIP;
+    
+    // userMetadata.ip = requestIp.getClientIp(req);
+    
+    await fetch(`${config.LOCATION_API_URL}/${testIP}/?token=${config.LOCATION_API_TOKEN}`)
+      .then((res) => res.json())
+      .then((data) => {
+        userMetadata.location["city"] = data.city.names.en;
+        userMetadata.location["region"] = data.subdivisions[0]['iso_code']
+        userMetadata.location["country"] = data.country.names.en;
+        userMetadata.location["time_zone"] = data.location["time_zone"]
+      })
+    /*
     fetch(`https://api.country.is/${userMetadata.ip}`)
       .then((res) => res.json())
       .then((data) => (userMetadata.location = data.country));
+    */
   }
   
   if (!userMetadata.browser || !userMetadata.os) {
     let ua = uap(req.headers["user-agent"]);
     userMetadata.browser = ua.browser;
     userMetadata.os = ua.os;
+  }
+
+  if (!userMetadata.https || !userMetadata.url) {
+    userMetadata.https = (req.protocol === "https");
+    userMetadata.url = (req.headers.referer);
   }
 }
 
@@ -39,7 +57,7 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
 
 function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
   postgres.db.one('INSERT INTO sessions(id, project_id, session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id', 
-      [sessionId, '986953cc-b0d6-4a54-a026-0bad9a629656', allEventsCompressed, "www.website.com/stuff", userMetadata.ip, "Kakariko Village", "Dueling Peaks", "Hyrule", userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, true, 1280, 567], session => session.id)
+      [sessionId, '986953cc-b0d6-4a54-a026-0bad9a629656', allEventsCompressed, userMetadata.url, userMetadata.ip, userMetadata.location.city, userMetadata.location.region, userMetadata.location.country, userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, userMetadata.https, 1280, 567], session => session.id)
     .then(data => {
         res.sendStatus(200);
         console.log(`Successfully added new session to database. Current ID is ${sessionId}`)

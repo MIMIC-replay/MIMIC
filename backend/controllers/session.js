@@ -13,7 +13,6 @@ sessionsRouter.get('/:projectId', async (req, res) => {
 
   const sessions = [];
   for (index = 0; index < validSessionIds.length; index++) {
-    console.log("Index: ", index)
     const sessionId = validSessionIds[index].id;
     
     const session = {id: sessionId};
