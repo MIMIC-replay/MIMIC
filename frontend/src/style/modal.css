@@ -1,3 +1,4 @@
+@import url(systems.css);
 /* Overlay and Modal */
 
 .modal-overlay {
@@ -34,6 +35,7 @@
   align-items: stretch;
   gap: var(--sC);
   /* white-space: nowrap; */
+  border: var(--main-components-border);
 }
 
 .modal > * {
