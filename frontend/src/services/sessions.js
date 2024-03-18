@@ -18,14 +18,15 @@ const getSessions = async (projectId) => {
     // const response = await JSON.parse(sessions)
     // const response = await axios.get(TEST_URL)
     // console.log(sessions)
-    const response = await axios.get('https://468f-38-99-108-149.ngrok-free.app/', config)
-    console.log(response.data)
+    // const response = await axios.get('https://468f-38-99-108-149.ngrok-free.app/api/project/1', config)
+    // console.log(response.data.sessions)
+
+    // return [response.data.sessions[0]]
 
     return [sessions[0], {...sessions[0], id: 3}]
   } catch (e) {
-    console.log(e)
-
-    return [sessions[0], {...sessions[0], id: 3}] 
+    console.error(e)
+    return []
   }
 }
 

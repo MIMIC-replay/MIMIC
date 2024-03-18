@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { getLatLon } from "../../services/map"
 
 import L from 'leaflet'
