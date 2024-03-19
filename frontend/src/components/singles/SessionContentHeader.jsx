@@ -1,4 +1,5 @@
 import { sessionMetadataExtractor } from "../../helpers/dataExtractors"
+import { short } from "../../helpers/dataFormatters"
 
 const SessionContentHeader = ({session}) => {
   const {id, url, https} = sessionMetadataExtractor(session)
@@ -9,7 +10,7 @@ const SessionContentHeader = ({session}) => {
           '🔒' : 
           '🔓' 
         }
-        Session #${id} - ${url} - 
+        Session #${short(id)} - ${url} - 
         some other info??`}
     </header>
   )

@@ -23,11 +23,11 @@ const getSessions = async (projectId) => {
     // return response.data.sessions
 
     return [sessions[0], {...sessions[0], id:"766ygdf-6546465d-gdfgfd-6565g5gg", 
-      events: [
-        ...sessions[0].events, 
-        ...sessions[0].events
-      ]
-    }
+        events: [
+          ...sessions[0].events, 
+          ...sessions[0].events
+        ]
+      }
     ]
 
   } catch (e) {

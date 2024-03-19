@@ -1,14 +1,12 @@
 import { LineChart, Line } from 'recharts';
 
-import {
-  // BrowserRouter as Router,
+import { short } from '../../helpers/dataFormatters';
+
+import { 
   Link,
-  // Route, 
-  // Routes 
 } from 'react-router-dom'
 
 
-// const SessionElement = ({session, setSelectedSession}) => {
 const SessionElement = ({session, currentSession}) => {
   
   const data = session.events.map(e =>{
@@ -20,12 +18,13 @@ const SessionElement = ({session, currentSession}) => {
       <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false} />
     </LineChart>
   );
+  console.log(session)
+  console.log(currentSession)
 
   return (
-    <Link to={`/sessions/${session.id}`}>
-      <li className={`session-list-element ${currentSession?.id === session.id ? 'active' : ''}`}>
-        {/* {`Session #${session.id.slice(0,8)}...`} */}
-        {`Session #${session.id}`}
+    <Link to={`/sessions/${short(session.id)}`}>
+      <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
+        {`Session #${short(session.id)}`}
         {renderLineChart}
         {`${session.metadata.date}`}
       </li>

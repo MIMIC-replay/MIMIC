@@ -1,4 +1,4 @@
-import { epochToDate } from "./dateFormatters"
+import { epochToDate } from "./dataFormatters"
 
 export const sessionMetadataExtractor = (session) => {
   

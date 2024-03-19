@@ -12,6 +12,8 @@ import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
 import Notification from "./components/singles/Notification"
 
+import { short } from "./helpers/dataFormatters"
+
 import sessionService from "./services/sessions"
 
 function App() {
@@ -29,10 +31,17 @@ function App() {
   }, [])
 
   const currentSession = match
-  ? sessions.find(session => session.id === match.params.id)
+  ? sessions.find(session => session.id.includes(match.params.id))
+  // ? findSessionById(match.params.id)
   : null
   
-  document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
+  document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
+
+  // const findSessionById = (idInPath) => {
+  //   return sessions.find(session => {
+  //     return session.id.includes(idInPath)
+  //   })
+  // }
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))

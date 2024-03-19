@@ -1,6 +1,5 @@
 import SessionElement from "./singles/SessionElement"
 
-// const SessionsList = ({sessions, setSelectedSession}) => {
 const SessionsList = ({sessions, currentSession}) => {
   return (
     <div className="sessions-container">
@@ -11,7 +10,6 @@ const SessionsList = ({sessions, currentSession}) => {
             key={s.id} 
             session={s}
             currentSession={currentSession}
-            // setSelectedSession={setSelectedSession}
           />
         )}
       </ul>
