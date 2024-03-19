@@ -9,7 +9,7 @@ import {
 
 const SessionElement = ({session, currentSession}) => {
   return (
-    <Link to={`/sessions/${short(session.id)}`}>
+    <Link to={`/sessions/${short(session.id).toLowerCase()}`}>
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
         {`Session #${short(session.id)}`}
         <MiniChart session={session}/>

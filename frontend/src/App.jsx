@@ -30,8 +30,15 @@ function App() {
     })
   }, [])
 
+  const findSessionsById = (id) => {
+    const idRegex = new RegExp(id, 'i')
+    return sessions.find(session => {
+      return idRegex.test(session.id)
+    })
+  }
+
   const currentSession = match
-  ? sessions.find(session => session.id.includes(match.params.id))
+  ? findSessionsById(match.params.id)
   : null
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
