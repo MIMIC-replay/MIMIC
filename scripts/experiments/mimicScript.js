@@ -223,7 +223,7 @@ const save = () => {
   const body = JSON.stringify(events);
   events = [];
 
-  fetch("http://localhost:3001/record", {
+  fetch("http://localhost:3001/api/record", {
     credentials: "include",
     method: "POST",
     headers: {
