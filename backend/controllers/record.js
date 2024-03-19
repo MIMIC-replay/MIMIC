@@ -1,37 +1,43 @@
 const express = require("express");
 
 const recordRouter = express.Router();
-
 const logger = require("../utils/logger.js");
-const postgres = require("../models/postgres.js")
+const postgres = require("../models/postgres.js");
 
-const { extractMetadata, compressEvents, updateSessionEvents, createNewSession } = require("../utils/recordHelpers.js")
+const {
+  extractMetadata,
+  compressEvents,
+  updateSessionEvents,
+  createNewSession,
+} = require("../utils/recordHelpers.js");
 
 const app = express();
-
-const allRecordedEvents = [];
-let sessionIndex;
+const currentSessions = {};
 
 const userMetadata = {
   ip: null,
   browser: null,
   os: null,
-  location: null,
+  location: {},
+  https: null,
+  url: null,
 };
 
 recordRouter.post("/", async (req, res) => {
-  extractMetadata(req, userMetadata)
-
+  console.log("sessionData is: ", req.sessionData);
+  const sessionId = req.sessionData.id;
   const batchOfEvents = req.body;
-  
-  allRecordedEvents.push(batchOfEvents);
 
-  const allEventsCompressed = compressEvents(allRecordedEvents)
-
-  if (sessionIndex) {
-    updateSessionEvents(allEventsCompressed, sessionIndex, res)
+  if (currentSessions[sessionId]) {
+    currentSessions[sessionId].push(batchOfEvents);
+    const allEventsCompressed = compressEvents(currentSessions[sessionId]);
+    updateSessionEvents(allEventsCompressed, sessionId, res);
   } else {
-    sessionIndex = await createNewSession(allEventsCompressed, userMetadata, res)
+    currentSessions[sessionId] = [batchOfEvents];
+    const allEventsCompressed = compressEvents(currentSessions[sessionId]);
+    await extractMetadata(req, userMetadata);
+    console.log("Updated metadata: ", userMetadata);
+    createNewSession(allEventsCompressed, sessionId, userMetadata, res);
   }
 });
 

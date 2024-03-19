@@ -11,21 +11,21 @@ DROP TABLE IF EXISTS admins CASCADE;
 DROP TABLE IF EXISTS projects_admins CASCADE;
 
 CREATE TABLE projects (
-  id serial PRIMARY KEY,
-  created_at timestamp NOT NULL DEFAULT NOW(),
-  last_session timestamp -- can be null as when the project is created there won't be any sessions yet
+  id UUID PRIMARY KEY,
+  created_at timestamp NOT NULL DEFAULT NOW()
+  -- last_session timestamp -- can be null as when the project is created there won't be any sessions yet
 );
 
 CREATE TABLE sessions (
-  id serial PRIMARY KEY,
-  -- project_id integer NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  id UUID PRIMARY KEY,
+  project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   session_data bytea NOT NULL, --compressed blob data
   session_start timestamp NOT NULL DEFAULT NOW(),
   -- session_end timestamp NOT NULL DEFAULT NOW(),
   -- has_rage_clicks boolean NOT NULL,
   -- has_errors boolean NOT NULL,
   url varchar(100), 
-  ip_address varchar(39), -- will we always be able to get the ip/all the below info? currently can be null
+  ip_address varchar(39),
   city varchar(30),
   region varchar(30),
   country varchar(30),
@@ -34,8 +34,11 @@ CREATE TABLE sessions (
   browser_name varchar(20),
   browser_version varchar(20),
   https_protected boolean,
-  viewport_height integer,
-  viewport_width integer
+  timezone varchar(30),
+  longitude FLOAT,
+  latitude FLOAT
+  -- viewport_height integer,
+  -- viewport_width integer
 );
 
 CREATE TABLE admins (
@@ -48,6 +51,8 @@ CREATE TABLE admins (
 );
 
 CREATE TABLE projects_admins (
-  project_id integer NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   admin_id integer NOT NULL REFERENCES admins(id) ON DELETE CASCADE
 );
+
+INSERT INTO projects(id) VALUES ('986953cc-b0d6-4a54-a026-0bad9a629656');
