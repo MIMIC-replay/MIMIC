@@ -30,10 +30,10 @@ function App() {
       setSessionsInList(res)
     })
   }, [])
-  console.log(match)
+
   const currentSession = match
-  // ? sessions.find(session => session.id === match.params.id)
-  ? sessions.find(session => session.id === Number(match.params.id))
+  ? sessions.find(session => session.id === match.params.id)
+  // ? sessions.find(session => session.id === Number(match.params.id))
   : null
   
   document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
@@ -57,7 +57,6 @@ function App() {
     }, delay)
     return true
   }
-
 
   return (
     <div className="main-grid">

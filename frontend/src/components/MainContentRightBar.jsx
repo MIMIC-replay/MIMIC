@@ -25,14 +25,15 @@ const MainContentRightBar = ({session}) => {
       <div className="main-right-bar-session-tabs-container">
         <div className="main-right-bar-session-tabs-buttons">
         <button 
-          className={`tab-button ${activeTab === 'Events' ? 'active' : null}`} 
+          // className={`tab-button ${activeTab === 'Events' ? 'active' : null}`} 
+          className="tab-button" 
           onClick={setActive}
         >Events</button>
 
-        <button 
+        {/* <button 
           className={`tab-button ${activeTab === 'Metadata' ? 'active' : null}`} 
           onClick={setActive}
-        >Metadata</button>
+        >Metadata</button> */}
 
         {/* <button 
           className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
@@ -46,8 +47,9 @@ const MainContentRightBar = ({session}) => {
 
         </div>
         <div className="main-right-bar-session-tabs-content">
-          {activeTab === 'Events' ? <MainContentRightBarEvents events={session.events} session={session}/> : null}
-          {activeTab === 'Metadata' ? <MainContentListMetadata session={session}/> : null}
+          {/* {activeTab === 'Events' ? <MainContentRightBarEvents events={session.events} session={session}/> : null}
+          {activeTab === 'Metadata' ? <MainContentListMetadata session={session}/> : null} */}
+          <MainContentRightBarEvents events={session.events} session={session}/>
         </div>
       </div>
     </div>
