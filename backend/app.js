@@ -46,6 +46,7 @@ app.use("/api/project", sessionRouter);
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
+app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler); // needs to be below all routes for all to use
 
 module.exports = app;
