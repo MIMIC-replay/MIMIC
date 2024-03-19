@@ -2,7 +2,7 @@ import { useEffect } from "react"
 
 import rrwebPlayer from 'rrweb-player';
 import 'rrweb-player/dist/style.css';
-import '../style/unminified-rrplayer.css'
+// import '../style/unminified-rrplayer.css'
 
 const PlayerTest = ({session}) => {
 
