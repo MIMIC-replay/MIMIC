@@ -5,13 +5,11 @@ const SessionMetadataTable = ({session}) => {
     time,
     url,
     https,
-    location,
     os,
     ip,
     city,
     country,
     region,
-    timezone,
   } = sessionMetadataExtractor(session)
 
   return (
@@ -22,7 +20,7 @@ const SessionMetadataTable = ({session}) => {
           <td>{url}</td>
         </tr>
         <tr>
-          <td className="main-right-bar-key">Started On</td>
+          <td className="main-right-bar-key">Time</td>
           <td>{String(time)}</td>
         </tr>
         <tr>
