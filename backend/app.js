@@ -24,7 +24,9 @@ app.use(
 
 app.use(express.json());
 
-// app.use(morgan(":method :url :status :body"));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan(":method :url :status :body"));
+}
 
 app.use(cookieParser());
 app.set("trust proxy", true);
@@ -40,6 +42,7 @@ const loginRouter = require('./controllers/login')
 app.use("/api/record", recordRouter);
 app.use("/api/test", testRouter);
 app.use("/api/project", sessionRouter);
+
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
