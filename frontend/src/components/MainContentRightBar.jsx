@@ -2,19 +2,14 @@ import { useState } from "react"
 
 import MainContentListMetadata from './singles/MainContentListMetadata'
 import RightBarEventListElement from './singles/RightBarEventListElement'
+import { sessionMetadataExtractor } from "../helpers/dataExtractors"
+import Map from "./singles/Map"
+import SessionMetadataTable from "./singles/SessionMetadataTable"
+
+import { short } from "../helpers/dataFormatters"
 
 const MainContentRightBar = ({session}) => {
-  const [activeTab, setActiveTab] = useState('events')
-
-  const metadata = session.metadata
-
-  const id = session.id
-  const appName = metadata.url
-  const time = metadata.date
-  const viewport = metadata.viewport
-  const https = metadata.https
-  const location = metadata.location
-  const os = metadata.os
+  const [activeTab, setActiveTab] = useState('Events')
 
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
@@ -22,29 +17,25 @@ const MainContentRightBar = ({session}) => {
 
   return (
     <div className="main-right-bar">
+
       <div className="main-right-bar-session-details">
-        <h2>Session {`#${id}`}</h2>
-        <p><span className="main-right-bar-key">URL: </span>{appName}</p>
-        <p><span className="main-right-bar-key">Visited: </span>{time}</p>
-        <p><span className="main-right-bar-key">Location: </span>{location}</p>
-        <p><span className="main-right-bar-key">OS: </span>{`${os.name} ${os.version}`}</p>
-        <p><span className="main-right-bar-key">Viewport Size: </span>{`${viewport.width}x${viewport.height}`}</p>
-        <p><span className="main-right-bar-key">SSL: </span>{`${https}`}</p>
-
-        {/* show more toggle?? */}
-
+        <h2>Session {`#${short(session.id)}`}</h2>
+        <Map session={session}/>
+        <SessionMetadataTable session={session} /> 
       </div>
+
       <div className="main-right-bar-session-tabs-container">
         <div className="main-right-bar-session-tabs-buttons">
         <button 
-          className={`tab-button ${activeTab === 'events' ? 'active' : null}`} 
+          // className={`tab-button ${activeTab === 'Events' ? 'active' : null}`} 
+          className="tab-button" 
           onClick={setActive}
-        >events</button>
+        >Events</button>
 
-        <button 
-          className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
+        {/* <button 
+          className={`tab-button ${activeTab === 'Metadata' ? 'active' : null}`} 
           onClick={setActive}
-        >metadata</button>
+        >Metadata</button> */}
 
         {/* <button 
           className={`tab-button ${activeTab === 'metadata' ? 'active' : null}`} 
@@ -58,8 +49,9 @@ const MainContentRightBar = ({session}) => {
 
         </div>
         <div className="main-right-bar-session-tabs-content">
-          {activeTab === 'events' ? <MainContentRightBarEvents events={session.events} session={session}/> : null}
-          {activeTab === 'metadata' ? <MainContentListMetadata session={session}/> : null}
+          {/* {activeTab === 'Events' ? <MainContentRightBarEvents events={session.events} session={session}/> : null}
+          {activeTab === 'Metadata' ? <MainContentListMetadata session={session}/> : null} */}
+          <MainContentRightBarEvents events={session.events} session={session}/>
         </div>
       </div>
     </div>

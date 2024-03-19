@@ -1,4 +1,4 @@
-// import { epochToDate } from "./dateFormatters"
+import { epochToDate } from "./dataFormatters"
 
 export const sessionMetadataExtractor = (session) => {
   
@@ -7,26 +7,38 @@ export const sessionMetadataExtractor = (session) => {
 
   const url = metadata.url.slice(0, 50)
   const time = metadata.date
-  const viewport = metadata.viewport
   const https = metadata.https
-  const location = metadata.location
   const os = metadata.os
+  const ip = metadata.ip
+  
+  const location = metadata.location
+
+  const city = location.city
+  const region = location.region
+  const country = location.country
+  const longitude = location.longitude
+  const latitude = location.latitude
+  const timezone = location.timezone
 
   return {
     id,
     url,
     time,
-    viewport,
     https,
-    location,
     os,
+    ip,
+    city,
+    region,
+    country,
+    longitude,
+    latitude,
+    timezone
   }
 }
 
 export const requestDataExtractor = (request, session) => {
   const data = request.data
 
-  // const time = String(epochToDate(request.timestamp)).slice(0, 24)
   const time = relativeTime(request, session)
   const type = data.type
   const method = data.method
@@ -53,7 +65,7 @@ export const relativeTime = (event, session) => {
 }
 
 // Function to convert seconds to the formatted time string (mm:ss)
-const formatTime = (seconds) => {
+export const formatTime = (seconds) => {
   const roundedSeconds = Math.floor(seconds);
   const minutes = Math.floor(roundedSeconds / 60);
   const remainingSeconds = roundedSeconds % 60;
@@ -71,4 +83,22 @@ const padWithZeros = (number, length) => {
   }
   return str;
 };
+
+export const errorDataExtractor = (error) => {
+  return {
+    trigger: errorTrigger(error),
+    time: epochToDate(error.timestamp),
+    trace: error.data.payload.trace,
+  }
+}
+
+export const errorTrigger = (error) => {
+  const triggerMatch = error.data.payload.trace[0].match(/^(.+) /)[1]
+  return triggerMatch
+}
+
+export const line = (error) => {
+  const errorLineMatch = error.data.payload.trace[0].match(/(\d+:\d+)\)$/)[1]
+  return errorLineMatch
+}
 

@@ -1,12 +1,10 @@
 
 /* Remove all unnecessary calls later */
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:wght@300;400&family=Raleway:wght@200;300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
 
-
-/* Sizes */
 :root {
+  /* Sizes */
+
   /* General Absolute Sizes based on 16px, the font size by default
 
   --sA: 4px;
@@ -46,6 +44,9 @@
   --sN: calc(var(--base-general-pixel-size) * 32px);
   --sO: calc(var(--base-general-pixel-size) * 40px);
   --sP: calc(var(--base-general-pixel-size) * 48px);
+  --sQ: calc(var(--base-general-pixel-size) * 56px);
+  --sR: calc(var(--base-general-pixel-size) * 62px);
+  --sS: calc(var(--base-general-pixel-size) * 70px);
 
   /* General Relative Value based on 1rem (16px by default) */
   --srA: calc(1rem * 0.25);
@@ -64,17 +65,21 @@
   --srN: calc(1rem * 32);
   --srO: calc(1rem * 40);
   --srP: calc(1rem * 48);
-}
+  --srQ: calc(1rem * 56);
+  --srR: calc(1rem * 62);
+  --srS: calc(1rem * 70);
 
 
-/* Fonts */
-:root {
+  /* Fonts */
 
   --general-font: Montserrat, system-ui, Tahoma, Verdana, sans-serif;
   /* --general-font: Inter, system-ui, Tahoma, Verdana, sans-serif; */
   /* --general-font: Roboto, system-ui, Tahoma, Verdana, sans-serif; */
 
-  --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+  /* --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue; */
+
+  --base-font-weight: 500;
+  --bold-font-weight: 600;
 
   /* General Absolute Values for Fonts */
   --fA: 12px;
@@ -89,9 +94,12 @@
   --fJ: 60px;
   --fK: 72px;
 
+
+
   /* General Relative Values for Fonts, equivalent to the previous values,
      assuming 1rem = 16px 
   */
+
   --frA: 0.75rem;
   --frB: 0.875rem;
   --frC: 1rem; 
@@ -103,12 +111,57 @@
   --frI: 3rem;
   --frJ: 3.75rem;
   --frK: 4.5rem;
-}
 
-/* Colors */
-:root {
+
+  /* Colors */
+
+  /* Main derivatives */
 
   --light-green-border: hsl(180, 93%, 23%);
+
+  --main-app-color: #3AD0E6;
+  --complementary: #e6813a;
+
+  --border-color: #1a8494;
+
+  --background-color:  hsl(210, 6%, 7%);
+  --light-background-color:  hsl(0, 0%, 9%);
+
+  --general-font-color: #b7bfc9;
+
+  /*
+
+  A: 50;
+  B: 100;
+  C: 200;
+  D: 300;
+
+  E: 400; Main app color
+
+  F: 500;
+  G: 600;
+  H: 700;
+  I: 800;
+  J: 900;
+  K: 950;
+
+  */
+
+  --cA: hsl(184, 89%, 96%);
+  --cB: hsl(186, 88%, 90%);
+  --cC: hsl(186, 85%, 82%);
+  --cD: hsl(186, 84%, 69%);
+
+  --cE: hsl(188, 77%, 56%); /* Main app color*/
+
+  --cF: hsl(188, 85%, 43%);
+  --cG: hsl(191, 83%, 36%);
+  --cH: hsl(193, 75%, 31%);
+  --cI: hsl(194, 62%, 27%);
+  --cJ: hsl(197, 57%, 24%);
+  --cK: hsl(198, 71%, 7%);
+
+  /* Accents */
 
   /* ----Greys */
   
@@ -117,11 +170,9 @@
   /* ----Accent */
   
 
-}
+  /* Borders */
 
-/* Borders */
-:root {
   /* --main-components-border: 1px solid lightblue; */
-  --main-components-border: 1px solid var(--light-green-border);
-  --general-border-radius: 5px;
+  --main-components-border: 1px solid var(--border-color);
+  --general-border-radius: 3px;
 }

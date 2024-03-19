@@ -1,25 +1,25 @@
 import { useState, useEffect } from "react"
 
 import {
-  Link,
   Route, 
   Routes,
-  useMatch
+  useMatch,
+  Navigate
 } from 'react-router-dom'
-
-
 
 import SiteHeader from "./components/singles/SiteHeader"
 import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
+import Notification from "./components/singles/Notification"
+
+import { short } from "./helpers/dataFormatters"
 
 import sessionService from "./services/sessions"
 
 function App() {
   const [sessions, setSessions] = useState([])
-  // const [currentSession, setCurrentSession] = useState(null)
   const [sessionsInList, setSessionsInList] = useState([])
-  const [selectedSession, setSelectedSession] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   const match = useMatch('/sessions/:id')
   
@@ -31,8 +31,10 @@ function App() {
   }, [])
 
   const currentSession = match
-    ? sessions.find(session => session.id === Number(match.params.id))
-    : null
+  ? sessions.find(session => session.id.includes(match.params.id))
+  : null
+  
+  document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
 
 
   const searchSessions = (string) => {
@@ -40,13 +42,22 @@ function App() {
     setSessionsInList(filteredById)
   }
 
+  const displayNotification = (notification, delay=4000) => {
+    setNotification(notification)
+    setTimeout(() => {
+      setNotification(null)
+    }, delay)
+    return true
+  }
+
   return (
     <div className="main-grid">
+      <Notification notification={notification}/>
       <SiteHeader/>
       
       <LeftBar
-        sessions={sessionsInList} 
-        // setSelectedSession={setSelectedSession}
+        sessions={sessionsInList}
+        currentSession={currentSession}
         searchSessions={searchSessions}
       />
 
@@ -55,15 +66,17 @@ function App() {
           path="/sessions/:id" 
           element={ 
             sessions.length > 0 && 
-            currentSession && 
-            <MainContentArea session={currentSession}/>
+            <MainContentArea session={currentSession} displayNotification={displayNotification}/>
           }
         />
+        <Route 
+          path="/*"
+          element={
+          <Navigate to={'/'} replace/>
+        }
+        />
         <Route path="/" element={null}/>
-      </Routes>
-
-      {/* {selectedSession && <MainContentArea session={selectedSession}/>} */}
-      
+      </Routes>      
     </div>
   )
 }

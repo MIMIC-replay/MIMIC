@@ -1,7 +1,6 @@
 import SessionElement from "./singles/SessionElement"
 
-// const SessionsList = ({sessions, setSelectedSession}) => {
-const SessionsList = ({sessions}) => {
+const SessionsList = ({sessions, currentSession}) => {
   return (
     <div className="sessions-container">
 
@@ -9,8 +8,8 @@ const SessionsList = ({sessions}) => {
         {sessions.map(s => 
           <SessionElement 
             key={s.id} 
-            session={s} 
-            // setSelectedSession={setSelectedSession}
+            session={s}
+            currentSession={currentSession}
           />
         )}
       </ul>
@@ -18,7 +17,5 @@ const SessionsList = ({sessions}) => {
     </div>
   )
 }
-
-
 
 export default SessionsList

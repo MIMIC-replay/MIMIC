@@ -1,9 +1,14 @@
-const Error = ({error}) => {
-  const {content, line, payload} = error
+import { errorTrigger, line, relativeTime } from "../../helpers/dataExtractors"
 
-  return (
-    <li className='error'>
-      {`${content.slice(0, 41)} - ${JSON.stringify(payload)} - Line: ${line}`}
+const Error = ({error, session, toggleErrorModal}) => {
+  // const {content, line, payload} = error
+  // const data = error.data
+  const time = relativeTime(error, session)
+  return (  
+    <li className='error' onClick={() => toggleErrorModal(error)}>
+      <p>{time}</p>
+      <p className="error-trigger">{`${errorTrigger(error)}`}</p>
+      <p className="error-line">{`Line: ${line(error)}`}</p>
     </li>
   )
 }
