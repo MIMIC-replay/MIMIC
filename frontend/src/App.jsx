@@ -32,16 +32,10 @@ function App() {
 
   const currentSession = match
   ? sessions.find(session => session.id.includes(match.params.id))
-  // ? findSessionById(match.params.id)
   : null
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
 
-  // const findSessionById = (idInPath) => {
-  //   return sessions.find(session => {
-  //     return session.id.includes(idInPath)
-  //   })
-  // }
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))

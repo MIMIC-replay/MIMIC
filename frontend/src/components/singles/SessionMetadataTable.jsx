@@ -8,6 +8,10 @@ const SessionMetadataTable = ({session}) => {
     location,
     os,
     ip,
+    city,
+    country,
+    region,
+    timezone,
   } = sessionMetadataExtractor(session)
 
   return (
@@ -23,7 +27,7 @@ const SessionMetadataTable = ({session}) => {
         </tr>
         <tr>
           <td className="main-right-bar-key">Location</td>
-          <td>{location.slice(0, 31)}</td>
+          <td>{`${city}, ${region}, ${country}`}</td>
         </tr>
         <tr>
           <td className="main-right-bar-key">IP</td>

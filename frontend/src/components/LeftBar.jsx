@@ -8,7 +8,6 @@ const LeftBar = ({sessions, searchSessions, currentSession}) => {
       <Search searchSessions={searchSessions}/>
 
       <SessionsList sessions={sessions} currentSession={currentSession}/>
-
     </nav>
   )
 }

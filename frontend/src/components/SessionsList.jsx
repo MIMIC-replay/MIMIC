@@ -18,6 +18,4 @@ const SessionsList = ({sessions, currentSession}) => {
   )
 }
 
-
-
 export default SessionsList

@@ -7,28 +7,38 @@ export const sessionMetadataExtractor = (session) => {
 
   const url = metadata.url.slice(0, 50)
   const time = metadata.date
-  const viewport = metadata.viewport
   const https = metadata.https
-  const location = metadata.location
   const os = metadata.os
   const ip = metadata.ip
+  
+  const location = metadata.location
+
+  const city = location.city
+  const region = location.region
+  const country = location.country
+  const longitude = location.longitude
+  const latitude = location.latitude
+  const timezone = location.timezone
 
   return {
     id,
     url,
     time,
-    viewport,
     https,
-    location,
     os,
     ip,
+    city,
+    region,
+    country,
+    longitude,
+    latitude,
+    timezone
   }
 }
 
 export const requestDataExtractor = (request, session) => {
   const data = request.data
 
-  // const time = String(epochToDate(request.timestamp)).slice(0, 24)
   const time = relativeTime(request, session)
   const type = data.type
   const method = data.method

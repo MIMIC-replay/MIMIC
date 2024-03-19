@@ -10,8 +10,7 @@ const SessionContentHeader = ({session}) => {
           '🔒' : 
           '🔓' 
         }
-        Session #${short(id)} - ${url} - 
-        some other info??`}
+        Session #${short(id)} - ${url}`}
     </header>
   )
 }
