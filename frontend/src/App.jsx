@@ -30,8 +30,9 @@ function App() {
       setSessionsInList(res)
     })
   }, [])
-
+  console.log(match)
   const currentSession = match
+  // ? sessions.find(session => session.id === match.params.id)
   ? sessions.find(session => session.id === Number(match.params.id))
   : null
   
@@ -44,7 +45,8 @@ function App() {
   // }
 
   const searchSessions = (string) => {
-    const filteredById = sessions.filter(s => String(s.id).includes(string))
+    // const filteredById = sessions.filter(s => String(s.id).includes(string))
+    const filteredById = sessions.filter(s => s.id === Number(string))
     setSessionsInList(filteredById)
   }
 

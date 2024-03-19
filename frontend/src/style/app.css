@@ -132,7 +132,7 @@ body {
   display: grid;
   grid-area: main-content-area;
   /* grid-template: 40px auto 30vh / auto 300px; */
-  grid-template: var(--sF) auto var(--sM) / auto var(--sM);
+  grid-template: var(--sF) var(--sN) auto / auto var(--sM);
   /* grid-template: var(--sF) auto auto / auto var(--sM); */
   grid-template-areas: 
     "content-header content-header"
@@ -173,7 +173,8 @@ body {
 #replayer {
   width: auto;
   /* height: auto; */
-  min-width: var(--sN);
+  min-width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
+  /* max-height: 100px; */
 
   display: flex;
   align-items: center;
@@ -215,7 +216,8 @@ body {
 .extra-info {
   grid-area: extra-info;
   /* background-color: rgb(108, 160, 31); */
-  /* overflow: auto; */
+  overflow: auto;
+  height: var(--sM);
   padding: var(--sD);
   /* padding-top: var(--sC); */
   background-color: var(--light-background-color);
@@ -224,6 +226,7 @@ body {
 
 .extra-info-content {
   background-color: var(--background-color);
+  /* overflow: auto; */
 }
 
 .extra-info-search svg {
@@ -438,13 +441,13 @@ td.request-name {
   /* padding: var(--sB); */
   /* height: calc(var(--sL) + var(--sH)); */
   /* height: 100%; */
-  /* max-height: auto; */
-  /* overflow: auto; */
+  max-height: var(--sM);
+  overflow: auto;
   /* flex-grow: 10; */
   /* min-height: 100%; */
   padding-top: var(--sC);
   background-color: var(--light-background-color);
-  height: auto;
+  /* height: auto; */
 }
 
 .main-right-bar-session-tabs-content ul {

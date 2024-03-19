@@ -24,6 +24,7 @@ const SessionElement = ({session, currentSession}) => {
   return (
     <Link to={`/sessions/${session.id}`}>
       <li className={`session-list-element ${currentSession?.id === session.id ? 'active' : ''}`}>
+        {/* {`Session #${session.id.slice(0,8)}...`} */}
         {`Session #${session.id}`}
         {renderLineChart}
         {`${session.metadata.date}`}
