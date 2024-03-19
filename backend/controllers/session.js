@@ -9,7 +9,6 @@ sessionsRouter.get('/:projectId', async (req, res) => {
   // requests all sessions associated with a project id
 
   const validSessionIds = await findSessionIds(req.params.projectId)// ["02bc742b-e176-4780-ae1c-5d62d569d9f0"]
-  console.log("Valid session IDs", validSessionIds)
 
   const sessions = [];
   for (index = 0; index < validSessionIds.length; index++) {

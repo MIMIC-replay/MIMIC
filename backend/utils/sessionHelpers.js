@@ -36,18 +36,17 @@ const retrieveEventData = (sessionId) => {
 
 const retrieveMetadata = async (sessionId) => {
   const metadata = {};
-  const rawMetadata = await postgres.db.one("SELECT session_start, ip_address, url, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width FROM sessions WHERE id = $1", [sessionId])              
+  const rawMetadata = await postgres.db.one("SELECT session_start, ip_address, url, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, timezone, longitude, latitude FROM sessions WHERE id = $1", [sessionId])              
                       .catch((error) => {
                         console.log('Unable to retrieve event data from PostgreSQL:', error.message);
                         res.json(error)
                       });
 
   metadata.ip = rawMetadata.ip_address;
-  metadata.location = rawMetadata.city + ", " + rawMetadata.region + ", " + rawMetadata.country;
+  metadata.location = { city: rawMetadata.city, region: rawMetadata.region, country: rawMetadata.country, longitude: rawMetadata.longitude, latitude: rawMetadata.latitude, timezone: rawMetadata.timezone };
   metadata.os = { name: rawMetadata.os_name, version: rawMetadata.os_version };
   metadata.browser = { name: rawMetadata.browser_name, version: rawMetadata.browser_version };
   metadata.https = rawMetadata.https_protected;
-  metadata.viewport = { height: rawMetadata.viewport_height, width: rawMetadata.viewport_width };
   metadata.date = rawMetadata.session_start;
   metadata.url = rawMetadata.url;
 

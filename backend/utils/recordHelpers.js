@@ -15,9 +15,11 @@ async function extractMetadata(req, userMetadata) {
       .then((res) => res.json())
       .then((data) => {
         userMetadata.location["city"] = data.city.names.en;
-        userMetadata.location["region"] = data.subdivisions[0]['iso_code']
+        userMetadata.location["region"] = data.subdivisions[0]['iso_code'];
         userMetadata.location["country"] = data.country.names.en;
-        userMetadata.location["time_zone"] = data.location["time_zone"]
+        userMetadata.location["timezone"] = data.location["time_zone"];
+        userMetadata.location["latitude"] = data.location["latitude"];
+        userMetadata.location["longitude"] = data.location["longitude"];
       })
     /*
     fetch(`https://api.country.is/${userMetadata.ip}`)
@@ -56,8 +58,8 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
 }
 
 function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
-  postgres.db.one('INSERT INTO sessions(id, project_id, session_data, url, ip_address, city, region, country, os_name, os_version, browser_name, browser_version, https_protected, viewport_height, viewport_width) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id', 
-      [sessionId, '986953cc-b0d6-4a54-a026-0bad9a629656', allEventsCompressed, userMetadata.url, userMetadata.ip, userMetadata.location.city, userMetadata.location.region, userMetadata.location.country, userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, userMetadata.https, 1280, 567], session => session.id)
+  postgres.db.one('INSERT INTO sessions(id, project_id, session_data, url, ip_address, city, region, country, timezone, longitude, latitude, os_name, os_version, browser_name, browser_version, https_protected) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id', 
+      [sessionId, '986953cc-b0d6-4a54-a026-0bad9a629656', allEventsCompressed, userMetadata.url, userMetadata.ip, userMetadata.location.city, userMetadata.location.region, userMetadata.location.country, userMetadata.location.timezone, userMetadata.location.longitude, userMetadata.location.latitude, userMetadata.os.name, userMetadata.os.version, userMetadata.browser.name, userMetadata.browser.version, userMetadata.https], session => session.id)
     .then(data => {
         res.sendStatus(200);
         console.log(`Successfully added new session to database. Current ID is ${sessionId}`)

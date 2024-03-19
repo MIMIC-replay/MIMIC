@@ -1,11 +1,3 @@
-/*
-- Nuke database and add: 
-  - Real location data (see if I can use ngrok to get real IPs ?)
-- Wait for Louis and Erik to implement:
-  - Real URL (if I hae time, work on this method ahead of time)
-  - HTTPS????
-*/
-
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");

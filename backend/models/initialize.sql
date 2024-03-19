@@ -25,7 +25,7 @@ CREATE TABLE sessions (
   -- has_rage_clicks boolean NOT NULL,
   -- has_errors boolean NOT NULL,
   url varchar(100), 
-  ip_address varchar(39), -- will we always be able to get the ip/all the below info? currently can be null
+  ip_address varchar(39),
   city varchar(30),
   region varchar(30),
   country varchar(30),
@@ -34,8 +34,11 @@ CREATE TABLE sessions (
   browser_name varchar(20),
   browser_version varchar(20),
   https_protected boolean,
-  viewport_height integer,
-  viewport_width integer
+  timezone varchar(30),
+  longitude FLOAT,
+  latitude FLOAT
+  -- viewport_height integer,
+  -- viewport_width integer
 );
 
 CREATE TABLE admins (
