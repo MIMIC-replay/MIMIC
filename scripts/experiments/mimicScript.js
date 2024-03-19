@@ -1,5 +1,4 @@
 import { record, getRecordConsolePlugin } from "rrweb";
-import axios from "axios";
 
 let events = [];
 
@@ -40,6 +39,8 @@ const fetchRequestInterceptor = (resource, config, networkEventObj) => {
 
 const fetchResponseInterceptor = (response, networkEventObj) => {
   const currentTime = Date.now();
+  // assigning timestamp at this point to ensure network event is pushed to event array in correct order related to other events
+  // need to wait till response received to push the object as we need the status of the response
   networkEventObj.timestamp = currentTime;
   networkEventObj.data.responseReceivedAt = currentTime;
   networkEventObj.data.latency =
@@ -243,74 +244,3 @@ window.addEventListener("beforeunload", (e) => {
   window.XMLHttpRequest.prototype.open = originalXHROpen;
   window.WebSocket = OriginalWebSocket;
 });
-
-const ws = new WebSocket("ws://localhost:3000");
-ws.onopen = () => {
-  console.log("ws opened on browser");
-  ws.send("hello world");
-};
-
-ws.onmessage = (message) => {
-  console.log(`message received`, message.data);
-};
-
-const TargetApp = () => {
-  return (
-    <>
-      <h1 onClick={() => console.log("Hello world clicked")}>Hello world!</h1>
-      <h3 onClick={() => console.log("Welcome message clicked")}>
-        Welcome to my site!
-      </h3>
-      <input type="text" onChange={() => console.log("typed in input")}></input>
-      <button onClick={() => console.error(new Error())}>
-        Click for error
-      </button>
-      <button
-        onClick={() =>
-          fetch("http://localhost:3001/random")
-            .then((res) => console.log("successful random"))
-            .catch((rej) => console.log("failure random"))
-        }
-      >
-        FETCH Get Random
-      </button>
-      <button
-        onClick={() =>
-          fetch("http://localhost:3001/deleteTest", { method: "DELETE" })
-            .then((res) => console.log("successful delete"))
-            .catch((rej) => console.log("failure delete"))
-        }
-      >
-        Delete
-      </button>
-      <button
-        onClick={() => {
-          const req = new XMLHttpRequest();
-          req.addEventListener("load", () => console.log("successful XHR"));
-          req.open("GET", "https://jsonplaceholder.typicode.com/todos/1");
-          req.send();
-        }}
-      >
-        XHR JSON Placeholder
-      </button>
-      <button
-        onClick={() => {
-          ws.close();
-        }}
-      >
-        Close WS Connection
-      </button>
-      <button
-        onClick={() =>
-          axios
-            .get("http://localhost:3001/random")
-            .then(() => console.log("successful axios"))
-        }
-      >
-        Axios
-      </button>
-    </>
-  );
-};
-
-export default TargetApp;
