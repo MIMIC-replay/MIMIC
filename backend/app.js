@@ -27,17 +27,17 @@ app.use(express.json());
 // app.use(morgan(":method :url :status :body"));
 
 app.use(cookieParser());
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 
-app.use(middleware.sessionCookie)
+app.use(middleware.sessionCookie);
 
 const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");
-const sessionRouter = require("./controllers/session.js")
+const sessionRouter = require("./controllers/session.js");
 
 app.use("/api/record", recordRouter);
 app.use("/api/test", testRouter);
-app.use("/api/project", sessionRouter)
+app.use("/api/project", sessionRouter);
 
 app.use(middleware.errorHandler); // needs to be below all routes for all to use
 
