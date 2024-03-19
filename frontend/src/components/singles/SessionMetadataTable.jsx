@@ -4,7 +4,6 @@ const SessionMetadataTable = ({session}) => {
   const {
     time,
     url,
-    viewport,
     https,
     location,
     os,
@@ -33,10 +32,6 @@ const SessionMetadataTable = ({session}) => {
         <tr>
           <td className="main-right-bar-key">OS</td>
           <td>{`${os.name} ${os.version}`}</td>
-        </tr>
-        <tr>
-          <td className="main-right-bar-key">Viewport</td>
-          <td>{`${viewport.width}x${viewport.height}`}</td>
         </tr>
         <tr>
           <td className="main-right-bar-key">HTTPS</td>

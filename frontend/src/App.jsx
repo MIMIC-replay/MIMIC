@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 
 import {
-  Link,
   Route, 
   Routes,
   useMatch,
@@ -17,9 +16,7 @@ import sessionService from "./services/sessions"
 
 function App() {
   const [sessions, setSessions] = useState([])
-  // const [currentSession, setCurrentSession] = useState(null)
   const [sessionsInList, setSessionsInList] = useState([])
-  // const [selectedSession, setSelectedSession] = useState(null)
   const [notification, setNotification] = useState(null)
 
   const match = useMatch('/sessions/:id')
@@ -33,20 +30,12 @@ function App() {
 
   const currentSession = match
   ? sessions.find(session => session.id === match.params.id)
-  // ? sessions.find(session => session.id === Number(match.params.id))
   : null
   
   document.title = `M I M I C${currentSession ? ` #${currentSession.id}` : ''}`
 
-  // if (match && !currentSession) {
-  //   console.log(match, currentSession)
-  //   console.log('no valid id')
-  //   return <Navigate to='/' replace /> 
-  // }
-
   const searchSessions = (string) => {
-    // const filteredById = sessions.filter(s => String(s.id).includes(string))
-    const filteredById = sessions.filter(s => s.id === Number(string))
+    const filteredById = sessions.filter(s => String(s.id).includes(string))
     setSessionsInList(filteredById)
   }
 
@@ -66,7 +55,6 @@ function App() {
       <LeftBar
         sessions={sessionsInList}
         currentSession={currentSession}
-        // setSelectedSession={setSelectedSession}
         searchSessions={searchSessions}
       />
 
@@ -75,7 +63,6 @@ function App() {
           path="/sessions/:id" 
           element={ 
             sessions.length > 0 && 
-            // currentSession && 
             <MainContentArea session={currentSession} displayNotification={displayNotification}/>
           }
         />
@@ -86,10 +73,7 @@ function App() {
         }
         />
         <Route path="/" element={null}/>
-      </Routes>
-
-      {/* {selectedSession && <MainContentArea session={selectedSession}/>} */}
-      
+      </Routes>      
     </div>
   )
 }

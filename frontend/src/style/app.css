@@ -54,7 +54,7 @@ body {
   /* width: 300px; */
 
   grid-area: left-bar;
-  /* overflow: auto; */
+  overflow: auto;
   /* border-radius: var(--general-border-radius); */
   border-right: var(--main-components-border);
   background-color: var(--light-background-color);

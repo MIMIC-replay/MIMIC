@@ -8,11 +8,12 @@ import ExtraInfo from "./ExtraInfo"
 import PlayerTest from "./PlayerTest"
 
 import MainContentRightBar from "./MainContentRightBar"
-import { sessionMetadataExtractor } from "../helpers/dataExtractors"
+import SessionContentHeader from './singles/SessionContentHeader'
 
 const MainContentArea = ({session, displayNotification}) => {
   if (!session) {
     displayNotification({ type: 'fail', message: 'Invalid Id' })
+    
     return (
       <Navigate to={'/'} replace />
     )
@@ -48,21 +49,7 @@ const MainContentArea = ({session, displayNotification}) => {
   )
 }
 
-const SessionContentHeader = ({session}) => {
-  const {id, url, https, viewport} = sessionMetadataExtractor(session)
 
-  return (
-    <header>
-      {`${https ? 
-          '🔒' : 
-          '🔓' 
-        }
-        Session #${id} - ${url} - 
-        ${viewport.width}x${viewport.height} - 
-        some other info??`}
-    </header>
-  )
-}
 
 
 export default MainContentArea
