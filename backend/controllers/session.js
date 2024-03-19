@@ -12,6 +12,13 @@ const {
   findSessionIds,
 } = require("../utils/sessionHelpers.js");
 
+// const { userExtractor } = require('../utils/middleware')
+
+// the idea is to add a userExtractor middleware function to
+// allow only to authorized users access to the session database:
+// (you can see the function signature above the actual signature)
+
+// sessionsRouter.get("/:projectId", userExtractor, async (req, res) => {
 sessionsRouter.get("/:projectId", async (req, res) => {
   // requests all sessions associated with a project id
 
