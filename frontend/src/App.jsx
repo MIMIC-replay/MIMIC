@@ -76,7 +76,7 @@ function App() {
         }
         />
         <Route path="/" element={null}/>
-      </Routes>      
+      </Routes> 
     </div>
   )
 }
