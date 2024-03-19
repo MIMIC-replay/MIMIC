@@ -28,18 +28,15 @@
   padding: var(--sD);
   border-radius: var(--general-border-radius);
   color: var(--light-font);
-  /* max-height: 100%; */
   overflow-y: auto;
   align-items: start;
   justify-content: stretch;
   align-items: stretch;
   gap: var(--sC);
-  /* white-space: nowrap; */
   border: var(--main-components-border);
 }
 
 .modal > * {
-  /* border: var(--main-components-border); */
   padding: var(-ssB);
 }
 
@@ -60,7 +57,6 @@
 
 .modal .data-container {
   display: flex;
-  /* padding: var(--sB); */
   justify-content: space-between;
 }
 
