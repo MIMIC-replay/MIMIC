@@ -35,10 +35,30 @@ body {
   align-items: center;
   gap: var(--sB);
   background-color: var(--light-background-color);
+  /* box-shadow: 8px 10px 10px rgba(34, 33, 33, 0.5); */
 }
 
 .site-logo {
   height: var(--sE);
+}
+
+.logout-button {
+  margin-left: auto;
+  margin-right: var(--sD);
+  background-color: transparent;
+  border: var(--main-components-border);
+  border-radius: var(--general-border-radius);
+  padding: var(--sA) var(--sC);
+  color: var(--main-app-color);
+  font-weight: 600;
+  box-shadow: 5px 5px 5px rgba(27, 27, 27, 0.5);
+}
+
+.logout-button:hover {
+  background-color: var(--complementary);
+  color: var(--cK);
+  border-color: transparent;
+  cursor: pointer;
 }
 
 /* Left bar */
@@ -123,6 +143,11 @@ body {
   align-items: center;
   padding: var(--sC);
   border-bottom: var(--main-components-border);
+  gap: var(--sB);
+}
+
+.header-session-id {
+  font-weight: 600;
 }
 
 /* Player */
@@ -341,13 +366,19 @@ td.request-name {
   border-color: var(--cJ);
 }
 
-.main-right-bar-session-tabs-container .tab-button:first-child {
+.main-right-bar-session-tabs-container .tab-button {
+  border-top-right-radius: var(--general-border-radius);
   border-top-left-radius: var(--general-border-radius);
+  cursor: default;
 }
 
-.main-right-bar-session-tabs-container .tab-button:nth-child(2) {
-  border-top-right-radius: var(--general-border-radius);
+.main-right-bar-session-tabs-container .tab-button:hover {
+  background-color: rgb(39, 77, 90);
 }
+
+/* .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
+  border-top-right-radius: var(--general-border-radius);
+}  */
 
 /* Notification */
 

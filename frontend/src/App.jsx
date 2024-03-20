@@ -14,24 +14,72 @@ import Notification from "./components/singles/Notification"
 
 import { short } from "./helpers/dataFormatters"
 
-import sessionService from "./services/sessions"
+import { getSessions, setToken } from "./services/sessions"
+import LoginForm from "./components/login/LoginForm"
+
+import { login } from "./services/login"
 
 function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
+  const [user, setUser] = useState(true)
 
   const match = useMatch('/sessions/:id')
   
   useEffect(() => {
-    sessionService.getSessions().then((res) => {
+    getSessions().then((res) => {
       setSessions(res)
       setSessionsInList(res)
     })
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      setToken(user.token)
+    }
+  }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      setToken(user.token)
+    }
+  }, [])
+
+  const loginUser = async (username, password) => {
+    try {
+      const user = await login({ username, password })
+
+      window.localStorage.setItem(
+        'loggedMimicUser', JSON.stringify(user)
+      )
+
+      setToken(user.token)
+      setUser(user)
+      return true
+    } catch (exception) {
+      displayNotification({ type: 'fail', message: 'Wrong credentials' })
+    }
+  }
+
+  const handleLogout = () => {
+    setUser(null)
+    window.localStorage.clear()
+  }
+
+  const findSessionsById = (id) => {
+    const idRegex = new RegExp(id, 'i')
+    return sessions.find(session => idRegex.test(session.id))
+  }
+
   const currentSession = match
-  ? sessions.find(session => session.id.includes(match.params.id))
+  ? findSessionsById(match.params.id)
   : null
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
@@ -50,8 +98,9 @@ function App() {
     return true
   }
 
-  return (
-    <div className="main-grid">
+  const loggedUserUI = () => {
+    return (
+      <div className="main-grid">
       <Notification notification={notification}/>
       <SiteHeader/>
       
@@ -76,8 +125,17 @@ function App() {
         }
         />
         <Route path="/" element={null}/>
-      </Routes>      
+      </Routes> 
     </div>
+    )
+  }
+
+  const loginForm = () => {
+    return <LoginForm/>
+  }
+
+  return (
+    user ? loggedUserUI() : loginForm()
   )
 }
 

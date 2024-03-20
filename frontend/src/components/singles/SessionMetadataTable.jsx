@@ -10,6 +10,7 @@ const SessionMetadataTable = ({session}) => {
     city,
     country,
     region,
+    browser,
   } = sessionMetadataExtractor(session)
 
   return (
@@ -34,6 +35,10 @@ const SessionMetadataTable = ({session}) => {
         <tr>
           <td className="main-right-bar-key">OS</td>
           <td>{`${os.name} ${os.version}`}</td>
+        </tr>
+        <tr>
+          <td className="main-right-bar-key">Browser</td>
+          <td>{`${browser.name} ${browser.version}`}</td>
         </tr>
         <tr>
           <td className="main-right-bar-key">HTTPS</td>

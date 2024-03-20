@@ -1,6 +1,5 @@
 
-import { useState, useEffect } from "react"
-import { getLatLon } from "../../services/map"
+import { useEffect } from "react"
 
 import L from 'leaflet'
 
@@ -24,7 +23,7 @@ const Map = ({session}) => {
 
     L.marker([latitude, longitude]).addTo(map);
 
-  }, [latitude, longitude]); // 
+  }, [latitude, longitude]);
 
   return (
     <div id="map"></div>

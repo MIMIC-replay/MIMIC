@@ -5,11 +5,12 @@ export const sessionMetadataExtractor = (session) => {
   const id = session.id
   const metadata = session.metadata
 
-  const url = metadata.url.slice(0, 50)
+  const url = metadata.url
   const time = metadata.date
   const https = metadata.https
   const os = metadata.os
   const ip = metadata.ip
+  const browser = metadata.browser
   
   const location = metadata.location
 
@@ -24,6 +25,7 @@ export const sessionMetadataExtractor = (session) => {
     id,
     url,
     time,
+    browser,
     https,
     os,
     ip,
