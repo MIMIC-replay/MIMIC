@@ -6,7 +6,6 @@ import {
   Link,
 } from 'react-router-dom'
 
-
 const SessionElement = ({session, currentSession, setCurrentSession}) => {
   return (
     <Link 

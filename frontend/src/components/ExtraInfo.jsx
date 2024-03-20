@@ -4,16 +4,17 @@ import Errors from './Errors'
 
 import ExtraInfoSearch from './singles/ExtraInfoSearch'
 
-
 import { useState, useEffect } from 'react'
-// import { CustomScroll } from 'react-custom-scroll'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
-  const [requests, setRequests] = useState(session.network)
-  // const [requestsInList, setRequestsInList] = useState(session.network)
+  const [requests, setRequests] = useState(() => session.network)
 
-  // should we flatten
+  useEffect(() => {
+    setRequests(session.network)
+    console.log('FROM USEEFFECT ', session.network)
+  }, [session.network])
+
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
   }

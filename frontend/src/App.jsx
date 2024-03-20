@@ -33,17 +33,16 @@ function App() {
   }, [])
 
   const findSessionById = (id) => {
-    const idRegex = new RegExp(id, 'i')
-    return sessions.find(session => idRegex.test(session.id))
+    return sessions.find(session => session.id.includes(id))
   }
   
   const match = useMatch('/sessions/:id')
-  const [currentSession, setCurrentSession] = useState(
-    match
-    ? findSessionById(match.params.id)
-    : null
+  const [currentSession, setCurrentSession] = useState(() => {
+      return match
+        ? findSessionById(match.params.id)
+        : null
+    }
   )
-  console.log(currentSession)
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
     if (loggedUserJSON) {
@@ -80,7 +79,6 @@ function App() {
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
 
-
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
     setSessionsInList(filteredById)
@@ -112,7 +110,10 @@ function App() {
           path="/sessions/:id" 
           element={ 
             sessions.length > 0 && 
-            <MainContentArea session={currentSession} displayNotification={displayNotification}/>
+            <MainContentArea 
+              session={findSessionById(match.params.id)} 
+              displayNotification={displayNotification}
+            />
           }
         />
         <Route 

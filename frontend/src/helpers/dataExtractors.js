@@ -39,9 +39,7 @@ export const sessionMetadataExtractor = (session) => {
 }
 
 export const requestDataExtractor = (request, session) => {
-  // const data = session.network
   const data = request.data
-
   const time = relativeTime(request, session)
   const type = data.type
   const url = data.url
@@ -58,7 +56,6 @@ export const requestDataExtractor = (request, session) => {
     latency = data.latency
     responseStatus = data.status
   }
-
   return {
     time,
     type,
