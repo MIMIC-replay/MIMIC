@@ -20,17 +20,18 @@ function App() {
         throw new Error(`Failed to fetch events: ${response.status}`);
       }
 
-      const events = await response.json();
+      const { events, userMetadata } = await response.json();
       if (events.length === 0) {
         throw new Error("Event data is empty.");
       }
+
+      setError(null);
 
       const combinedEvents = events.reduce(
         (allEvents, currentBatch) => allEvents.concat(currentBatch),
         []
       );
 
-      setError(null);
       initialTimeStamp = combinedEvents[0].timestamp;
       player = new rrwebPlayer({
         target: document.getElementById("replayer"),
@@ -47,31 +48,98 @@ function App() {
       const consoleEvents = extractConsoleEvents(combinedEvents);
       populateConsoleDiv(consoleEvents);
 
+      const errorEvents = extractErrorEvents(combinedEvents);
+      populateErrorDiv(errorEvents);
+
       const networkEvents = extractNetworkEvents(combinedEvents);
       populateNetworkDiv(networkEvents);
+
+      populateMetadataDiv(userMetadata);
     } catch (error) {
       setError(error.message || "Error fetching events");
     }
+  };
+
+  const extractErrorEvents = (eventsArr) => {
+    return eventsArr.filter((obj) => {
+      return (
+        obj.data.plugin === "rrweb/console@1" &&
+        obj.data.payload.level === "error"
+      );
+    });
+  };
+
+  const populateMetadataDiv = (userMetadata) => {
+    const list = document.getElementById("metadata-list");
+    const ip = document.createElement("li");
+    ip.textContent = `IP: ${userMetadata.ip}`;
+
+    const country = document.createElement("li");
+    country.textContent = `Country: ${userMetadata.location}`;
+
+    const browser = document.createElement("li");
+    browser.textContent = `Browser: ${userMetadata.browser.name} V ${userMetadata.browser.version}`;
+
+    const os = document.createElement("li");
+    os.textContent = `OS: ${userMetadata.os.name} V ${userMetadata.os.version}`;
+
+    [ip, country, browser, os].forEach((li) => {
+      list.appendChild(li);
+    });
   };
 
   const extractNetworkEvents = (eventsArr) => {
     return eventsArr.filter((obj) => obj.type === 50);
   };
 
+  const populateErrorDiv = (eventsArr) => {
+    console.log(eventsArr);
+    const list = document.getElementById("error-list");
+
+    eventsArr.forEach((event) => {
+      const listItem = document.createElement("li");
+      const relTime = relativeTime(event.timestamp);
+      listItem.textContent = `${formatTime(relTime)} | ${
+        event.data.payload.payload
+      }`;
+
+      listItem.onclick = () => {
+        if (playerState === "paused") {
+          player.play(); // prevents session replay from restarting from beginning if replay was at end
+          player.goto(Math.floor(relTime * 1000));
+          player.pause(); // returns to paused state for UX
+        } else {
+          player.goto(Math.floor(relTime * 1000));
+        }
+      };
+
+      list.appendChild(listItem);
+    });
+  };
+
   const populateNetworkDiv = (eventsArr) => {
     const list = document.getElementById("network-list");
 
     eventsArr.forEach((event) => {
-      const listItem = document.createElement("li");
-      // we're recording the time the response to the request was received at as event.timestamp to keep the events array in order
-      //      we push the network event to the events array AFTER the response is received so we can capture all the desired data
-      // we believe we should present the relative time of these network requests pertaining to when the request was made
-      const relTime = relativeTime(event.data.requestMadeAt);
-      listItem.textContent = `${formatTime(relTime)} | ${event.data.type} | ${
-        event.data.method
-      } | ${event.data.url} | Status: ${event.data.status} | Latency: ${
-        event.data.latency
-      }ms`;
+      let listItem = document.createElement("li");
+      let relTime;
+
+      if (event.data.type === "WebSocket") {
+        relTime = relativeTime(event.timestamp);
+        listItem.textContent = `${formatTime(relTime)} | ${event.data.type} | ${
+          event.data.event
+        } | ${event.data.url}`;
+      } else {
+        // we're recording the time the response to the request was received at as event.timestamp to keep the events array in order
+        //      we push the network event to the events array AFTER the response is received so we can capture all the desired data
+        // we believe we should present the relative time of these network requests pertaining to when the request was made
+        relTime = relativeTime(event.data.requestMadeAt);
+        listItem.textContent = `${formatTime(relTime)} | ${event.data.type} | ${
+          event.data.method
+        } | ${event.data.url} | Status: ${event.data.status} | Latency: ${
+          event.data.latency
+        }ms`;
+      }
 
       listItem.onclick = () => {
         if (playerState === "paused") {
@@ -88,7 +156,11 @@ function App() {
   };
 
   const extractConsoleEvents = (eventsArr) => {
-    return eventsArr.filter((obj) => obj.data.plugin === "rrweb/console@1");
+    return eventsArr.filter(
+      (obj) =>
+        obj.data.plugin === "rrweb/console@1" &&
+        obj.data.payload.level !== "error"
+    );
   };
 
   const populateConsoleDiv = (eventsArr) => {
@@ -157,6 +229,14 @@ function App() {
       <div id="network">
         <h1>Network:</h1>
         <ul id="network-list"></ul>
+      </div>
+      <div id="error">
+        <h1>Errors:</h1>
+        <ul id="error-list"></ul>
+      </div>
+      <div id="metadata">
+        <h1>User Metadata:</h1>
+        <ul id="metadata-list"></ul>
       </div>
     </>
   );
