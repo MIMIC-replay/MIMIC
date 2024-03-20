@@ -2,19 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "targetServer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node targetServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.18.3",
-    "request-ip": "^3.3.0",
-    "rrweb": "^2.0.0-alpha.4",
-    "ua-parser-js": "^1.0.37"
+    "ws": "^8.16.0"
   }
 }

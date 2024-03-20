@@ -17,7 +17,7 @@ morgan.token("body", (req) => {
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // this we have to figure out, we can't manually add the origin in the backend for all target applications
+    origin: true, //"http://localhost:5173", // this we have to figure out, we can't manually add the origin in the backend for all target applications
     credentials: true,
   })
 );

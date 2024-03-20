@@ -5,6 +5,12 @@ let events = [];
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {
   let [resource, config] = args;
+
+  // Conditionally returns to avoid capture of requests sending events to our server
+  if (resource === "http://localhost:3001/api/record") {
+    const response = await originalFetch(resource, config);
+    return response;
+  }
   // Type 50 arbitrarily assigned for us to know it's a network event object in the array of event objects
   const networkEventObj = { type: 50 };
 
@@ -39,8 +45,6 @@ const fetchRequestInterceptor = (resource, config, networkEventObj) => {
 
 const fetchResponseInterceptor = (response, networkEventObj) => {
   const currentTime = Date.now();
-  // assigning timestamp at this point to ensure network event is pushed to event array in correct order related to other events
-  // need to wait till response received to push the object as we need the status of the response
   networkEventObj.timestamp = currentTime;
   networkEventObj.data.responseReceivedAt = currentTime;
   networkEventObj.data.latency =

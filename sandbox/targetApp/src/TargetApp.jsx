@@ -6,6 +6,12 @@ let events = [];
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {
   let [resource, config] = args;
+
+  // Conditionally returns to avoid capture of requests sending events to our server
+  if (resource === "http://localhost:3001/api/record") {
+    const response = await originalFetch(resource, config);
+    return response;
+  }
   // Type 50 arbitrarily assigned for us to know it's a network event object in the array of event objects
   const networkEventObj = { type: 50 };
 
@@ -262,26 +268,15 @@ const TargetApp = () => {
         Welcome to my site!
       </h3>
       <input type="text" onChange={() => console.log("typed in input")}></input>
-      <button onClick={() => console.error(new Error())}>
-        Click for error
-      </button>
+      <button onClick={() => console.error(new Error())}>Error</button>
       <button
         onClick={() =>
-          fetch("http://localhost:3001/random")
-            .then((res) => console.log("successful random"))
+          fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then((res) => console.log("successful fetch"))
             .catch((rej) => console.log("failure random"))
         }
       >
-        FETCH Get Random
-      </button>
-      <button
-        onClick={() =>
-          fetch("http://localhost:3001/deleteTest", { method: "DELETE" })
-            .then((res) => console.log("successful delete"))
-            .catch((rej) => console.log("failure delete"))
-        }
-      >
-        Delete
+        FETCH
       </button>
       <button
         onClick={() => {
@@ -303,7 +298,7 @@ const TargetApp = () => {
       <button
         onClick={() =>
           axios
-            .get("http://localhost:3001/random")
+            .get("https://jsonplaceholder.typicode.com/todos/1")
             .then(() => console.log("successful axios"))
         }
       >
