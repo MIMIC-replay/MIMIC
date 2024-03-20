@@ -4,8 +4,8 @@ UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
 def process():
   subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID])
+  subprocess.run(['python3', 'injector.py'])
   send_project_id()
-  # subprocess.run(['echo', "🔥Mimic is successfully installed🔥"])
 
 def send_project_id():
   r = requests.post("http://localhost:3001/api/project/new", json={'projectId': UNIQUE_PROJECT_ID })
