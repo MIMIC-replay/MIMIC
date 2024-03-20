@@ -1,5 +1,5 @@
 import Error from './singles/Error'
-import Modal from './Modal'
+import Modal from './modal/Modal'
 import { useState } from 'react'
 
 const Errors = ({errors, session}) => {

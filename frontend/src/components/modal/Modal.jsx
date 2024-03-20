@@ -1,5 +1,5 @@
-import { errorDataExtractor } from "../helpers/dataExtractors"
-import SessionMetadataTable from "./singles/SessionMetadataTable"
+import { errorDataExtractor } from "../../helpers/dataExtractors"
+import SessionMetadataTable from "../singles/SessionMetadataTable"
 
 const Modal = ({error, session, toggle}) => {
   const {time, trigger, trace} = errorDataExtractor(error)
