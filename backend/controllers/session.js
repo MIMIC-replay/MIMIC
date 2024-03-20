@@ -4,6 +4,7 @@ const postgres = require("../models/postgres.js");
 const fflate = require("fflate");
 const sessionsRouter = express.Router();
 const {
+  addNewProjectId,
   extractLogEvents,
   extractNetworkEvents,
   extractErrorEvents,
@@ -15,9 +16,12 @@ const {
 sessionsRouter.post("/new", async (req, res) => {
   // collects all new project IDs and add them to the database
   const projectId = req.body.projectId;
+  addNewProjectId(projectId, res)
+  /*
   console.log(`New Project: ${projectId}`)
   res.status(200)
   res.send()
+  */
 }) 
 
 // const { userExtractor } = require('../utils/middleware')
