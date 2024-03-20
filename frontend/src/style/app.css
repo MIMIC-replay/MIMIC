@@ -123,6 +123,11 @@ body {
   align-items: center;
   padding: var(--sC);
   border-bottom: var(--main-components-border);
+  gap: var(--sB);
+}
+
+.header-session-id {
+  font-weight: 600;
 }
 
 /* Player */
