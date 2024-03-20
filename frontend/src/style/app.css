@@ -341,13 +341,19 @@ td.request-name {
   border-color: var(--cJ);
 }
 
-.main-right-bar-session-tabs-container .tab-button:first-child {
+.main-right-bar-session-tabs-container .tab-button {
+  border-top-right-radius: var(--general-border-radius);
   border-top-left-radius: var(--general-border-radius);
+  cursor: default;
 }
 
-.main-right-bar-session-tabs-container .tab-button:nth-child(2) {
-  border-top-right-radius: var(--general-border-radius);
+.main-right-bar-session-tabs-container .tab-button:hover {
+  background-color: rgb(39, 77, 90);
 }
+
+/* .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
+  border-top-right-radius: var(--general-border-radius);
+}  */
 
 /* Notification */
 
