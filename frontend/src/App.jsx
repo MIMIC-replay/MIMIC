@@ -15,6 +15,7 @@ import Notification from "./components/singles/Notification"
 import { short } from "./helpers/dataFormatters"
 
 import sessionService from "./services/sessions"
+import LoginForm from "./components/login/LoginForm"
 
 function App() {
   const [sessions, setSessions] = useState([])
@@ -57,8 +58,9 @@ function App() {
     return true
   }
 
-  return (
-    <div className="main-grid">
+  const loggedUserUI = () => {
+    return (
+      <div className="main-grid">
       <Notification notification={notification}/>
       <SiteHeader/>
       
@@ -85,6 +87,16 @@ function App() {
         <Route path="/" element={null}/>
       </Routes> 
     </div>
+    )
+  }
+
+  const loginForm = () => {
+    return <LoginForm/>
+  }
+
+  return (
+    loginForm()
+    // loggedUserUI()
   )
 }
 

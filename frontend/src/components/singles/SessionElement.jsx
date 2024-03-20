@@ -2,7 +2,7 @@ import { LineChart, Line } from 'recharts';
 
 import { short } from '../../helpers/dataFormatters';
 
-import { 
+import {
   Link,
 } from 'react-router-dom'
 
@@ -26,7 +26,7 @@ const MiniChart = ({session}) => {
 
   return (
     <LineChart width={200} height={50} data={data}>
-      <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false} />
+      <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false}/>
     </LineChart>
   );
 }

@@ -12,6 +12,7 @@ import './style/toggles-and-functionality.css'
 import './style/icons.css'
 // import './style/unminified-rrplayer.css'
 import './style/modal.css'
+import './style/login.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>

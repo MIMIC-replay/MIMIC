@@ -1,0 +1,56 @@
+@import url(systems.css);
+
+.login-background {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/login-background.png');
+  background-size: var(--sN);
+}
+
+.login-container {
+  height: var(--sM);
+  width: var(--sM);
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--complementary);
+  border-color: var(--complementary);
+  border-radius: 5px;
+  box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-title {
+  margin-bottom: var(--sG);
+  font-size: var(--fF);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sD);
+}
+
+.login-form input {
+  max-width: 100%;
+  padding: var(--sA);
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form button {
+  display: flex;
+  border: none;
+  border-radius: var(--general-border-radius);
+  background-color: var(--cJ);
+  padding: var(--sB) var(--sE);
+}
