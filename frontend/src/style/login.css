@@ -39,6 +39,7 @@
 .login-form input {
   max-width: 100%;
   padding: var(--sA);
+  font-family: var(--general-font);
 }
 
 .login-buttons {
@@ -48,9 +49,11 @@
 }
 
 .login-form button {
+  font-family: var(--general-font);
   display: flex;
   border: none;
   border-radius: var(--general-border-radius);
   background-color: var(--cJ);
   padding: var(--sB) var(--sE);
+  color: var(--general-font-color);
 }
