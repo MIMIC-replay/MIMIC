@@ -35,10 +35,30 @@ body {
   align-items: center;
   gap: var(--sB);
   background-color: var(--light-background-color);
+  /* box-shadow: 8px 10px 10px rgba(34, 33, 33, 0.5); */
 }
 
 .site-logo {
   height: var(--sE);
+}
+
+.logout-button {
+  margin-left: auto;
+  margin-right: var(--sD);
+  background-color: transparent;
+  border: var(--main-components-border);
+  border-radius: var(--general-border-radius);
+  padding: var(--sA) var(--sC);
+  color: var(--main-app-color);
+  font-weight: 600;
+  box-shadow: 5px 5px 5px rgba(27, 27, 27, 0.5);
+}
+
+.logout-button:hover {
+  background-color: var(--complementary);
+  color: var(--cK);
+  border-color: transparent;
+  cursor: pointer;
 }
 
 /* Left bar */
