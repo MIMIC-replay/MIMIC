@@ -12,6 +12,14 @@ const {
   findSessionIds,
 } = require("../utils/sessionHelpers.js");
 
+sessionsRouter.post("/new", async (req, res) => {
+  // collects all new project IDs and add them to the database
+  const projectId = req.body.projectId;
+  console.log(`New Project: ${projectId}`)
+  res.status(200)
+  res.send()
+}) 
+
 // const { userExtractor } = require('../utils/middleware')
 
 // the idea is to add a userExtractor middleware function to
