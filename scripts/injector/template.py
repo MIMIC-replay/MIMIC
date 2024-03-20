@@ -1,6 +1,4 @@
 MIMIC_TEMPLATE = """
-import {{ record, getRecordConsolePlugin }} from "rrweb";
-
 let events = [];
 const projectId = "{projectId}";
 
@@ -210,7 +208,7 @@ const websocketSendInterceptor = (data, networkEventObj) => {{
   events.push(networkEventObj);
 }};
 
-const stopRecording = record({{
+const stopRecording = rrweb.record({{
   emit(event) {{
     events.push(event);
 
@@ -218,7 +216,7 @@ const stopRecording = record({{
       ? console.log["__rrweb_original__"]
       : console.log;
   }},
-  plugins: [getRecordConsolePlugin()],
+  plugins: [rrweb.getRecordConsolePlugin()],
 }});
 
 const save = () => {{

@@ -10,7 +10,7 @@ def inject_scripts(raw_file):
     soup = BeautifulSoup(html_content, 'html.parser')
 
     rrweb_script = soup.new_tag('script') 
-    rrweb_script['src'] = "https://cdn.jsdelivr.net/npm/rrweb@latest/dist/record/rrweb-record.min.js"
+    rrweb_script['src'] = "https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb-all.min.js"
     rrweb_script['class'] = 'mimic'
 
     mimic_script = soup.new_tag('script')
