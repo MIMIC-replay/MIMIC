@@ -31,11 +31,38 @@ export const getSessions = async (projectId) => {
 
     //  return response.data.sessions
 
-    return [sessions[0], {...sessions[0], id:"766ygdf-6546465d-gdfgfd-6565g5gg", 
-        events: [
+    return [sessions[0], {
+      ...sessions[0], 
+      id:"766ygdf-6546465d-gdfgfd-6565g5gg", 
+      network: [
+        {
+          "type": 50,
+          "data": {
+            "url": "TEST",
+            "type": "WebSocket",
+            "event": "TEST",
+            "message": "Hello, you sent -> hello world"
+          },
+          "timestamp": 1710364883670
+        },
+          {
+            "type": 50,
+            "data": {
+              "url": "http://localhost:3001/api/record",
+              "type": "FETCH",
+              "requestMadeAt": 1710364883645,
+              "method": "PUT",
+              "responseReceivedAt": 1710364883670,
+              "latency": 333,
+              "status": 204
+            },
+            "timestamp": 1710364883670
+          }
+      ],
+      events: [
           ...sessions[0].events, 
           ...sessions[0].events
-        ]
+        ],
       }
     ]
 

@@ -39,6 +39,7 @@ export const sessionMetadataExtractor = (session) => {
 }
 
 export const requestDataExtractor = (request, session) => {
+  // const data = session.network
   const data = request.data
 
   const time = relativeTime(request, session)

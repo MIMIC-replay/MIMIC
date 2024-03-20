@@ -24,8 +24,6 @@ function App() {
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
   const [user, setUser] = useState(true)
-
-  const match = useMatch('/sessions/:id')
   
   useEffect(() => {
     getSessions().then((res) => {
@@ -34,15 +32,18 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setToken(user.token)
-    }
-  }, [])
-
+  const findSessionById = (id) => {
+    const idRegex = new RegExp(id, 'i')
+    return sessions.find(session => idRegex.test(session.id))
+  }
+  
+  const match = useMatch('/sessions/:id')
+  const [currentSession, setCurrentSession] = useState(
+    match
+    ? findSessionById(match.params.id)
+    : null
+  )
+  console.log(currentSession)
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
     if (loggedUserJSON) {
@@ -72,15 +73,10 @@ function App() {
     setUser(null)
     window.localStorage.clear()
   }
-
-  const findSessionsById = (id) => {
-    const idRegex = new RegExp(id, 'i')
-    return sessions.find(session => idRegex.test(session.id))
-  }
-
-  const currentSession = match
-  ? findSessionsById(match.params.id)
-  : null
+  
+  // const currentSession = match
+  // ? findSessionsById(match.params.id)
+  // : null
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
 
@@ -107,6 +103,7 @@ function App() {
       <LeftBar
         sessions={sessionsInList}
         currentSession={currentSession}
+        setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
       />
 

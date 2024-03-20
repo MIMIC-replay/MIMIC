@@ -1,6 +1,8 @@
 import Request from "./singles/Request"
 
 const NetworkRequests = ({requests, session}) => {
+
+
   return (
     <table className="network-requests">
       <thead>

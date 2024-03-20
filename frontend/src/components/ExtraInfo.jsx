@@ -5,13 +5,13 @@ import Errors from './Errors'
 import ExtraInfoSearch from './singles/ExtraInfoSearch'
 
 
-import { useState } from 'react'
-import { CustomScroll } from 'react-custom-scroll'
+import { useState, useEffect } from 'react'
+// import { CustomScroll } from 'react-custom-scroll'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
-  const [requests] = useState(session.events.filter(e => e.type === 50).flat())
-  const [requestsInList, setRequestsInList] = useState(requests)
+  const [requests, setRequests] = useState(session.network)
+  // const [requestsInList, setRequestsInList] = useState(session.network)
 
   // should we flatten
   const setActive = (e) => {
@@ -48,8 +48,8 @@ const ExtraInfo = ({session}) => {
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'Network' && requestsInList.length > 0 ? 
-          <NetworkRequests requests={requestsInList} session={session}/> : 
+        {activeTab === 'Network' && requests.length > 0 ? 
+          <NetworkRequests requests={requests} session={session}/> : 
           null}
         {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
         {activeTab === 'Errors' ? <Errors errors={session.errors} session={session}/> : null}

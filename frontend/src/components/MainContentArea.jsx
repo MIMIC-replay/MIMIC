@@ -13,7 +13,7 @@ import SessionContentHeader from './singles/SessionContentHeader'
 const MainContentArea = ({session, displayNotification}) => {
   if (!session) {
     displayNotification({ type: 'fail', message: 'Invalid Id' })
-    
+
     return (
       <Navigate to={'/'} replace />
     )

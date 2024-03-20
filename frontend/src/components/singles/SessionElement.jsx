@@ -7,9 +7,12 @@ import {
 } from 'react-router-dom'
 
 
-const SessionElement = ({session, currentSession}) => {
+const SessionElement = ({session, currentSession, setCurrentSession}) => {
   return (
-    <Link to={`/sessions/${short(session.id).toLowerCase()}`}>
+    <Link 
+      to={`/sessions/${short(session.id).toLowerCase()}`} 
+      onClick={() => setCurrentSession(session)}
+    >
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
         {`Session #${short(session.id)}`}
         <MiniChart session={session}/>
