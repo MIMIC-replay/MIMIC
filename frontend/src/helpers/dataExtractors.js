@@ -43,10 +43,20 @@ export const requestDataExtractor = (request, session) => {
 
   const time = relativeTime(request, session)
   const type = data.type
-  const method = data.method
-  const latency = data.latency
-  const url = data.url.slice(0, 50)
-  const responseStatus = data.status
+  const url = data.url
+
+  let method;
+  let responseStatus;
+  let latency;
+  if (data.type === 'WebSocket') {
+    method = data.event
+    responseStatus = 'N/A'
+    latency = 'N/A'
+  } else {
+    method = data.method
+    latency = data.latency
+    responseStatus = data.status
+  }
 
   return {
     time,
