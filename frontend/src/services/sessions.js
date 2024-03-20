@@ -4,7 +4,23 @@ import axios from 'axios'
 const PORT = 3001
 const BASE_URL = `http://localhost:${PORT}/api/project`
 
-const getSessions = async (projectId) => {
+
+let token = null // private variable to this module
+
+export const setToken = newToken => {
+  token = `Bearer ${newToken}`
+}
+
+export const getSessions = async (projectId) => {
+  // only token bearers can access???
+  // use this:
+  //
+  // const config = { headers: {
+  //   Authorization: token
+  // } }
+  // 
+
+
   // simulates an API call
 
   try {
@@ -27,9 +43,4 @@ const getSessions = async (projectId) => {
     console.error(e)
     return []
   }
-}
-
-
-export default { 
-  getSessions
 }
