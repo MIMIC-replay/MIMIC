@@ -216,34 +216,35 @@ body {
 
 /* Extra info -- requests table */
 
-.network-requests, .console-logs {
+.network-requests, .console-logs, .errors-list {
   width: 100%;
 }
 
 .network-requests tr, 
-.console-logs tr {
+.console-logs tr,
+.errors-list tr {
   border: var(--main-components-border);
 }
 
 .network-requests th, 
-.console-logs th {
+.console-logs th,
+.errors-list th {
   background-color: rgb(39, 77, 90);
   color: rgb(70, 148, 158);
 }
 
 .network-requests th, .network-requests td, 
-.console-logs th, .console-logs td {
+.console-logs th, .console-logs td,
+.errors-list th, .errors-list td {
   padding: var(--sB);
-}
-
-th {
-  text-align: left;
 }
 
 .network-requests td, 
 .network-requests th,
 .console-logs td,
-.console-logs th {
+.console-logs th,
+.errors-list td,
+.errors-list th {
   text-align: center;
 }
 
@@ -270,16 +271,6 @@ td.request-name {
 }
 
 /* Extra Info Errors  */
-
-
-.error {
-  border-right: var(--main-components-border);
-  border-left: var(--main-components-border);
-  border-bottom: var(--main-components-border);
-  display: flex;
-  justify-content: space-between;
-  padding: var(--sC);
-}
 
 .error:hover {
   cursor: pointer;

@@ -12,9 +12,20 @@ const Errors = ({errors, session}) => {
   return (
     <>
       <div className={`modal-overlay ${activeError ? 'active' : ''}`} onClick={toggleErrorModal}></div>
-      <ul className='errors-list'>
-        {errors.map((e, i) => <Error key={i} error={e} session={session} toggleErrorModal={toggleErrorModal}/>)}
-      </ul>
+
+      <table className="errors-list">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Last Trigger</th>
+            <th>Line</th>
+          </tr>
+        </thead>
+        <tbody>
+          {errors.map((e, i) => <Error key={i} error={e} session={session} toggleErrorModal={toggleErrorModal}/>)}
+        </tbody>
+      </table>
+      
       {activeError && <Modal error={activeError} session={session} toggle={toggleErrorModal}/>}
     </>
   )
