@@ -50,7 +50,6 @@ body {
   border-radius: var(--general-border-radius);
   padding: var(--sA) var(--sC);
   color: var(--main-app-color);
-  font-weight: 600;
   box-shadow: 5px 5px 5px rgba(27, 27, 27, 0.5);
 }
 

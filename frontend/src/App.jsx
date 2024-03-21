@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 import {
   Route, 
@@ -24,7 +24,6 @@ function App() {
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
   const [user, setUser] = useState(true)
-
   const match = useMatch('/sessions/:id')
   
   useEffect(() => {
@@ -34,14 +33,22 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setToken(user.token)
+  const findSessionById = useCallback((id) => {
+    return sessions.find(session => session.id.includes(id))
+  }, [sessions])
+  
+  const [currentSession, setCurrentSession] = useState(() => {
+      return match
+        ? findSessionById(match.params.id)
+        : null
     }
-  }, [])
+  )
+
+  useEffect(() => {
+    if (sessions.length < 1 || !match) return
+
+    setCurrentSession(findSessionById(match.params.id))
+  }, [sessions, findSessionById, match])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
@@ -72,18 +79,12 @@ function App() {
     setUser(null)
     window.localStorage.clear()
   }
-
-  const findSessionsById = (id) => {
-    const idRegex = new RegExp(id, 'i')
-    return sessions.find(session => idRegex.test(session.id))
-  }
-
-  const currentSession = match
-  ? findSessionsById(match.params.id)
-  : null
+  
+  // const currentSession = match
+  // ? findSessionsById(match.params.id)
+  // : null
   
   document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
-
 
   const searchSessions = (string) => {
     const filteredById = sessions.filter(s => String(s.id).includes(string))
@@ -107,23 +108,28 @@ function App() {
       <LeftBar
         sessions={sessionsInList}
         currentSession={currentSession}
+        setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
       />
 
       <Routes>
         <Route 
           path="/sessions/:id" 
-          element={ 
-            sessions.length > 0 && 
-            <MainContentArea session={currentSession} displayNotification={displayNotification}/>
+          element={
+            <MainContentArea 
+              session={currentSession}
+              displayNotification={displayNotification}
+            />
           }
         />
+
         <Route 
           path="/*"
           element={
-          <Navigate to={'/'} replace/>
-        }
+            <Navigate to={'/'} replace/>
+          }
         />
+
         <Route path="/" element={null}/>
       </Routes> 
     </div>

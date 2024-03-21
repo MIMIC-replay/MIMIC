@@ -38,23 +38,31 @@ export const sessionMetadataExtractor = (session) => {
   }
 }
 
-export const requestDataExtractor = (request, session) => {
-  const data = request.data
-
-  const time = relativeTime(request, session)
+export const eventDataExtractor = (event, session) => {
+  const data = event.data
+  const time = relativeTime(event, session)
   const type = data.type
-  const method = data.method
-  const latency = data.latency
-  const url = data.url.slice(0, 50)
-  const responseStatus = data.status
+  const url = data.url
 
+  let method;
+  let responseStatus;
+  let latency;
+  if (data.type === 'WebSocket') {
+    method = data.event
+    responseStatus = 'N/A'
+    latency = 'N/A'
+  } else {
+    method = data.method
+    responseStatus = data.status
+    latency = data.latency
+  }
   return {
     time,
     type,
+    url,
+    responseStatus,
     method,
     latency,
-    url,
-    responseStatus
   }
 }
 
