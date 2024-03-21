@@ -29,9 +29,6 @@ const ExtraInfo = ({session}) => {
     setSearchResultsNetwork(networkFilteredByName)
 
     const logsFilteredByType = logs.filter(l => {
-      console.log(l)
-      console.log(searchInput)
-      console.log(l.data.payload.payload[0])
       return l.data.payload.payload[0].toLowerCase().includes(searchInput.toLowerCase())
     })
     setSearchResultsLogs(logsFilteredByType)
