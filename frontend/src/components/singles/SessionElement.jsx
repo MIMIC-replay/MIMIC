@@ -24,7 +24,7 @@ const SessionElement = ({session, currentSession, setCurrentSession}) => {
 }
 
 const MiniChart = ({session}) => {
-  const data = session.events.filter(e => e.data.type !== 'WebSocket')
+  const data = session.events.filter(e => e.data.type !== 'WebSocket' && e.data.latency )
                              .map(e => { return {...e.data} })
 
   return (
