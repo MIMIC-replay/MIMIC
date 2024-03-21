@@ -1,21 +1,29 @@
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
 
-const addNewProjectId = (projectId, res) => {
+const addProjectCredentials = (
+  projectId,
+  projectName,
+  projectPassword,
+  res
+) => {
   postgres.db
-  .one(
-    "INSERT INTO projects (id) VALUES($1) RETURNING id", [projectId], (project) => project.id)
-  .then((data) => {
-    res.sendStatus(200);
-    console.log(
-      `Successfully added new project to database. The project ID is ${projectId}`
-    );
-  })
-  .catch((error) => {
-    res.sendStatus(500);
-    console.log("Unable to add new project ID to PostgreSQL:", error.message);
-  });
-}
+    .one(
+      "INSERT INTO projects (id, name, password_hash) VALUES($1, $2, $3) RETURNING id",
+      [projectId, projectName, projectPassword],
+      (project) => project.id
+    )
+    .then((data) => {
+      res.sendStatus(200);
+      console.log(
+        `Successfully added new project to database. The project ID is ${projectId}`
+      );
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log("Unable to add new project ID to PostgreSQL:", error.message);
+    });
+};
 
 const extractLogEvents = (eventsArr) => {
   return eventsArr.filter(
@@ -107,7 +115,7 @@ const findSessionIds = (projectId) => {
 };
 
 module.exports = {
-  addNewProjectId,
+  addProjectCredentials,
   extractLogEvents,
   extractNetworkEvents,
   extractErrorEvents,
