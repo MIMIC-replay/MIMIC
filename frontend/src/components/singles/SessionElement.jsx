@@ -24,9 +24,8 @@ const SessionElement = ({session, currentSession, setCurrentSession}) => {
 }
 
 const MiniChart = ({session}) => {
-  const data = session.events.map(e =>{
-    return {...e.data}
-  })
+  const data = session.events.filter(e => e.data.type !== 'WebSocket')
+                             .map(e => { return {...e.data} })
 
   return (
     <LineChart width={200} height={50} data={data}>
