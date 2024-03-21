@@ -12,7 +12,6 @@ const ExtraInfo = ({session}) => {
 
   useEffect(() => {
     setRequests(session.network)
-    console.log('FROM USEEFFECT ', session.network)
   }, [session.network])
 
   const setActive = (e) => {
