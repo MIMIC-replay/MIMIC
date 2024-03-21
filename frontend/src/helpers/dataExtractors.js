@@ -1,4 +1,5 @@
 import { epochToDate } from "./dataFormatters"
+import { eventReference } from "./eventAnalysis"
 
 export const sessionMetadataExtractor = (session) => {
   
@@ -137,5 +138,31 @@ export const getDeviceFromSize = (viewport) => {
   if (width <= 480) return 'phone'
   if (width <= 1025) return 'tablet'
   else return 'desktop'
+}
+
+export const eventAnalyzer = (event) => {
+  const numberType = event.type
+  const decodedType = eventReference.EventType[numberType]
+
+  const isUserInteraction = decodedType === 'IncrementalSnapshot'
+  
+  const interactionSource = isUserInteraction ? 
+    eventReference.IncrementalSource[event?.data?.source] :
+    'N/A'
+
+  const isMouseInteraction = interactionSource === 'MouseInteraction'
+
+  const mouseInteraction = isMouseInteraction ? 
+    eventReference.MouseInteractions[event?.data?.type] :
+    'N/A'
+
+  return {
+    numberType,
+    decodedType,
+    isUserInteraction,
+    interactionSource,
+    isMouseInteraction,
+    mouseInteraction,
+  }
 }
 
