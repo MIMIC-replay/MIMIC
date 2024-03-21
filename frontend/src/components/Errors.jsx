@@ -18,6 +18,7 @@ const Errors = ({errors, session}) => {
           <tr>
             <th>Time</th>
             <th>Last Trigger</th>
+            <th>Payload</th>
             <th>Line</th>
           </tr>
         </thead>

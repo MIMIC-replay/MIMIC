@@ -2,8 +2,8 @@ const ExtraInfoSearch = ({activeTab, setSearchInput}) => {
 
   let placeHolder
   if (activeTab === 'Network') placeHolder = 'Search network events by target URL'
-  else if (activeTab === 'Logs') placeHolder = 'Search log by content'
-  else placeHolder === 'Search errors by trigger trace'
+  else if (activeTab === 'Logs') placeHolder = 'Search logs by content'
+  else placeHolder = 'Search errors by trigger trace'
 
   return (
     <>

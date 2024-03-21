@@ -172,7 +172,6 @@ body {
   height: var(--sM);
   padding: var(--sD);
   background-color: var(--light-background-color);
-  
 }
 
 .extra-info-content {
@@ -212,6 +211,10 @@ body {
   background-color: transparent;
   color: var(--general-font-color);
   width: var(--sL);
+}
+
+.extra-info-content th:first-child {
+  width: var(--sF);
 }
 
 /* Extra info -- requests table */
@@ -255,7 +258,7 @@ td.request-name {
 /* Extra Info Logs */
 
 
-.log-content {
+.log-content, .error-trigger {
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -385,5 +388,4 @@ td.request-name {
   background-color: lightgreen;
   color: rgb(31, 29, 39);
 }
-
 
