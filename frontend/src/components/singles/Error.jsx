@@ -1,9 +1,9 @@
 import { errorTrigger, line, relativeTime } from "../../helpers/dataExtractors"
 
 const Error = ({error, session, toggleErrorModal}) => {
-  // const {content, line, payload} = error
-  // const data = error.data
+
   const time = relativeTime(error, session)
+  
   return (  
     <li className='error' onClick={() => toggleErrorModal(error)}>
       <p>{time}</p>
