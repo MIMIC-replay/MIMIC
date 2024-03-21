@@ -1,6 +1,5 @@
 import {
   Navigate,
-  useMatch
 } from 'react-router-dom'
 
 
@@ -12,7 +11,7 @@ import MainContentRightBar from "./MainContentRightBar"
 import SessionContentHeader from './singles/SessionContentHeader'
 
 const MainContentArea = ({session, displayNotification}) => {
-  const match = useMatch('/sessions/:id')
+  // const match = useMatch('/sessions/:id')
   // if (!session) return <Navigate to={'/'} replace />
 
   // if (!session && match) {
