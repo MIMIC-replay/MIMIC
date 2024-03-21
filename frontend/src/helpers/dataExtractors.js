@@ -53,16 +53,16 @@ export const requestDataExtractor = (request, session) => {
     latency = 'N/A'
   } else {
     method = data.method
-    latency = data.latency
     responseStatus = data.status
+    latency = data.latency
   }
   return {
     time,
     type,
+    url,
+    responseStatus,
     method,
     latency,
-    url,
-    responseStatus
   }
 }
 
