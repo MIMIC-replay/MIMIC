@@ -216,14 +216,11 @@ const stopRecording = rrweb.record({{
       ? console.log["__rrweb_original__"]
       : console.log;
   }},
+  maskAllInputs: true,
   plugins: [rrweb.getRecordConsolePlugin()],
 }});
 
 const save = () => {{
-  if (events.length === 0) {{
-    return;
-  }}
-
   const body = JSON.stringify(events);
   events = [];
 
