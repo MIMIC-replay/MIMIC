@@ -23,13 +23,20 @@ const ExtraInfo = ({session}) => {
     setLogs(session.logs)
     setErrors(session.errors)
 
-    const networkFilteredByName = network.filter(r => r.data.url.includes(searchInput))
+    const networkFilteredByName = network.filter(r => {
+      r.data.url.toLowerCase().includes(searchInput.toLowerCase())
+    })
     setSearchResultsNetwork(networkFilteredByName)
 
-    const logsFilteredByType = logs.filter(l =>  l.data.payload.payload[0].includes(searchInput))
+    const logsFilteredByType = logs.filter(l => {
+      l.data.payload.payload[0].toLowerCase().includes(searchInput.toLowerCase())
+    })
     setSearchResultsLogs(logsFilteredByType)
 
-    const filteredByName = errors.filter(r => r.data.payload.trace.join().includes(searchInput))
+    const filteredByName = errors.filter(r => {
+      r.data.payload.trace.join().toLowerCase().includes(searchInput.toLowerCase())
+    })
+    
     setSearchResultsErrors(filteredByName)
   }, [session, searchInput, network, logs, errors])
 
