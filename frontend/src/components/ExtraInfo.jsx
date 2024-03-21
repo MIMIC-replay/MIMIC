@@ -24,25 +24,10 @@ const ExtraInfo = ({session}) => {
     setActiveTab(e.target.textContent)
   }
 
-
   return (
     <div className="extra-info">
       <div className="extra-info-tab-controls">
-        <button 
-          className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Network</button>
-
-        <button 
-          className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Logs</button>
-
-        <button 
-          className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Errors</button>
-
+        <ExtraInfoTabButtons activeTab={activeTab} setActive={setActive} />
 
         <div className='extra-info-search'>
           <ExtraInfoSearch setSearchInput={setSearchInput}/>
@@ -60,6 +45,25 @@ const ExtraInfo = ({session}) => {
     </div>
   )
 }
+
+const ExtraInfoTabButtons = ({activeTab, setActive}) => {
+  return (
+    <>
+      <button 
+         className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Network</button>
+       <button 
+         className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Logs</button>
+       <button 
+         className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Errors</button>
+    </>
+  )
+} 
 
 
 export default ExtraInfo
