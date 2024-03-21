@@ -13,6 +13,9 @@ const SessionMetadataTable = ({session}) => {
     browser,
   } = sessionMetadataExtractor(session)
 
+  const date = time.match(/^(.+)T/)[1]
+  const exactTime = time.match(/T(.{8})/)[1]
+
   return (
     <table>
       <tbody>
@@ -21,8 +24,12 @@ const SessionMetadataTable = ({session}) => {
           <td>{url}</td>
         </tr>
         <tr>
+          <td className="main-right-bar-key">Date</td>
+          <td>{date}</td>
+        </tr>
+        <tr>
           <td className="main-right-bar-key">Time</td>
-          <td>{String(time)}</td>
+          <td>{exactTime}</td>
         </tr>
         <tr>
           <td className="main-right-bar-key">Location</td>
