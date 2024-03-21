@@ -27,8 +27,11 @@ recordRouter.post("/", async (req, res) => {
   console.log("sessionData is: ", req.sessionData);
   const sessionId = req.sessionData.id;
   const batchOfEvents = req.body;
-  
-  if (currentSessions[sessionId]) {
+
+  if (batchOfEvents.length === 0 && currentSessions[sessionId]) {
+    res.sendStatus(200);
+    console.log(`No new events to store. Current ID is ${sessionId}`)
+  } else if (currentSessions[sessionId]) {
     currentSessions[sessionId].push(batchOfEvents);
     const allEventsCompressed = compressEvents(currentSessions[sessionId]);
     updateSessionEvents(allEventsCompressed, sessionId, res);
