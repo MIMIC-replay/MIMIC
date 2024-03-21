@@ -7,18 +7,31 @@ import { useState, useEffect } from 'react'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
-  const [requests, setRequests] = useState(() => session.network)
+
+  const [network, setNetwork] = useState(() => session.network)
+  const [logs, setLogs] = useState(() => session.logs)
+  const [errors, setErrors] = useState(() => session.errors)
+
   const [searchResultsNetwork, setSearchResultsNetwork] = useState(() => session.network)
+  const [searchResultsLogs, setSearchResultsLogs] = useState(() => session.logs)
+  const [searchResultsErrors, setSearchResultsErrors] = useState(() => session.errors)
 
   const [searchInput, setSearchInput] = useState('')
 
   useEffect(() => {
-    setRequests(session.network)
-    if (!searchInput) setSearchResultsNetwork(requests)
+    setNetwork(session.network)
+    setLogs(session.logs)
+    setErrors(session.errors)
 
-    const filteredByName = requests.filter(r => r.data.url.includes(searchInput))
-    setSearchResultsNetwork(filteredByName)
-  }, [session, setSearchInput, searchInput, requests])
+    const networkFilteredByName = network.filter(r => r.data.url.includes(searchInput))
+    setSearchResultsNetwork(networkFilteredByName)
+
+    const logsFilteredByType = logs.filter(l =>  l.data.payload.payload[0].includes(searchInput))
+    setSearchResultsLogs(logsFilteredByType)
+
+    const filteredByName = errors.filter(r => r.data.payload.trace.join().includes(searchInput))
+    setSearchResultsErrors(filteredByName)
+  }, [session, searchInput, network, logs, errors])
 
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
@@ -35,12 +48,12 @@ const ExtraInfo = ({session}) => {
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'Network' && requests.length > 0 ? 
+        {activeTab === 'Network' && network.length > 0 ? 
           <NetworkRequests requests={searchResultsNetwork} session={session}/> : 
           null
         }
-        {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
-        {activeTab === 'Errors' ? <Errors errors={session.errors} session={session}/> : null}
+        {activeTab === 'Logs' ? <ConsoleLogs logs={searchResultsLogs} session={session}/> : null}
+        {activeTab === 'Errors' ? <Errors errors={searchResultsErrors} session={session}/> : null}
       </div>
     </div>
   )
