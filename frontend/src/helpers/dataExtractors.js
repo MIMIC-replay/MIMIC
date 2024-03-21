@@ -38,9 +38,9 @@ export const sessionMetadataExtractor = (session) => {
   }
 }
 
-export const requestDataExtractor = (request, session) => {
-  const data = request.data
-  const time = relativeTime(request, session)
+export const eventDataExtractor = (event, session) => {
+  const data = event.data
+  const time = relativeTime(event, session)
   const type = data.type
   const url = data.url
 

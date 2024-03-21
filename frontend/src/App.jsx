@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 import {
   Route, 
@@ -24,6 +24,7 @@ function App() {
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
   const [user, setUser] = useState(true)
+  const match = useMatch('/sessions/:id')
   
   useEffect(() => {
     getSessions().then((res) => {
@@ -32,17 +33,23 @@ function App() {
     })
   }, [])
 
-  const findSessionById = (id) => {
+  const findSessionById = useCallback((id) => {
     return sessions.find(session => session.id.includes(id))
-  }
+  }, [sessions])
   
-  const match = useMatch('/sessions/:id')
   const [currentSession, setCurrentSession] = useState(() => {
       return match
         ? findSessionById(match.params.id)
         : null
     }
   )
+
+  useEffect(() => {
+    if (sessions.length < 1 || !match) return
+
+    setCurrentSession(findSessionById(match.params.id))
+  }, [sessions, findSessionById, match])
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
     if (loggedUserJSON) {
@@ -108,20 +115,21 @@ function App() {
       <Routes>
         <Route 
           path="/sessions/:id" 
-          element={ 
-            sessions.length > 0 && 
+          element={
             <MainContentArea 
-              session={findSessionById(match.params.id)} 
+              session={currentSession}
               displayNotification={displayNotification}
             />
           }
         />
+
         <Route 
           path="/*"
           element={
-          <Navigate to={'/'} replace/>
-        }
+            <Navigate to={'/'} replace/>
+          }
         />
+
         <Route path="/" element={null}/>
       </Routes> 
     </div>

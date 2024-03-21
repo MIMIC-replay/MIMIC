@@ -1,7 +1,7 @@
-import { requestDataExtractor } from "../../helpers/dataExtractors"
+import { eventDataExtractor } from "../../helpers/dataExtractors"
 
 const Request = ({request, session}) => {
-  const {time, type, method, latency, url, responseStatus} = requestDataExtractor(request, session)
+  const {time, type, method, latency, url, responseStatus} = eventDataExtractor(request, session)
 
   return (
     <tr className="request">

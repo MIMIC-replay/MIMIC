@@ -7,13 +7,15 @@ import {
 } from 'react-router-dom'
 
 const SessionElement = ({session, currentSession, setCurrentSession}) => {
+
+  const searchMode = document.querySelector('.search-input').value !== ''
   return (
     <Link 
       to={`/sessions/${short(session.id).toLowerCase()}`} 
       onClick={() => setCurrentSession(session)}
     >
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
-        {`Session #${short(session.id)}`}
+        {`Session #${searchMode ? session.id.toUpperCase() : short(session.id)}`}
         <MiniChart session={session}/>
         {`${session.metadata.date}`}
       </li>
