@@ -254,19 +254,8 @@ td.request-name {
 
 /* Extra Info Logs */
 
-.logs-list {
-  display: flex;
-  flex-direction: column;
-}
 
-.log {
-  border-right: var(--main-components-border);
-  border-left: var(--main-components-border);
-  border-bottom: var(--main-components-border);
-  display: flex;
-  justify-content: space-between;
-  padding: var(--sC);
-  gap: var(--sB);
+.log-content {
   font-family: 'Courier New', Courier, monospace;
 }
 

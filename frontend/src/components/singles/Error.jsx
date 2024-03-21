@@ -8,7 +8,7 @@ const Error = ({error, session, toggleErrorModal}) => {
     <tr className="error" onClick={() => toggleErrorModal(error)}>
       <td> {time}</td>
       <td className="error-trigger">{`${errorTrigger(error)}`}</td>
-      <td className="error-line">{`Line: ${line(error)}`}</td>
+      <td className="error-line">{line(error)}</td>
     </tr>
   )
 }

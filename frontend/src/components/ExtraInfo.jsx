@@ -29,12 +29,15 @@ const ExtraInfo = ({session}) => {
     setSearchResultsNetwork(networkFilteredByName)
 
     const logsFilteredByType = logs.filter(l => {
+      console.log(l)
+      console.log(searchInput)
+      console.log(l.data.payload.payload[0])
       return l.data.payload.payload[0].toLowerCase().includes(searchInput.toLowerCase())
     })
     setSearchResultsLogs(logsFilteredByType)
 
-    const filteredByName = errors.filter(r => {
-      return r.data.payload.trace.join().toLowerCase().includes(searchInput.toLowerCase())
+    const filteredByName = errors.filter(e => {
+      return e.data.payload.trace.join().toLowerCase().includes(searchInput.toLowerCase())
     })
 
     setSearchResultsErrors(filteredByName)
