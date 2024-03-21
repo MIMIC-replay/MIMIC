@@ -8,16 +8,16 @@ import { useState, useEffect } from 'react'
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
   const [requests, setRequests] = useState(() => session.network)
-  const [searchResults, setSearchResults] = useState(() => session.network)
+  const [searchResultsNetwork, setSearchResultsNetwork] = useState(() => session.network)
 
   const [searchInput, setSearchInput] = useState('')
 
   useEffect(() => {
     setRequests(session.network)
-    if (!searchInput) setSearchResults(requests)
+    if (!searchInput) setSearchResultsNetwork(requests)
 
     const filteredByName = requests.filter(r => r.data.url.includes(searchInput))
-    setSearchResults(filteredByName)
+    setSearchResultsNetwork(filteredByName)
   }, [session, setSearchInput, searchInput, requests])
 
   const setActive = (e) => {
@@ -30,13 +30,13 @@ const ExtraInfo = ({session}) => {
         <ExtraInfoTabButtons activeTab={activeTab} setActive={setActive} />
 
         <div className='extra-info-search'>
-          <ExtraInfoSearch setSearchInput={setSearchInput}/>
+          <ExtraInfoSearch activeTab={activeTab} setSearchInput={setSearchInput}/>
         </div>
       </div>
 
       <div className='extra-info-content'>
         {activeTab === 'Network' && requests.length > 0 ? 
-          <NetworkRequests requests={searchResults} session={session}/> : 
+          <NetworkRequests requests={searchResultsNetwork} session={session}/> : 
           null
         }
         {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
