@@ -63,6 +63,7 @@ export const getSessions = async (projectId) => {
             "timestamp": 1710364883670
           }
       ],
+      
       events: [
           ...sessions[0].events, 
           ...sessions[0].events
