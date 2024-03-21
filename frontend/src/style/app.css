@@ -205,11 +205,13 @@ body {
   margin-left: auto;
   display: flex;
   align-items: center;
+  gap: var(--sA);
 }
 
 .extra-info-search input {
   background-color: transparent;
   color: var(--general-font-color);
+  width: var(--sL);
 }
 
 /* Extra info -- requests table */
