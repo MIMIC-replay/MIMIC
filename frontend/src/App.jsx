@@ -23,14 +23,17 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [user, setUser] = useState(true)
+  const [project, setProject] = useState(true)
   const match = useMatch('/sessions/:id')
+
   useEffect(() => {
-    getSessions().then((res) => {
+    if (!project) return 
+
+    getSessions(project.id).then((res) => {
       setSessions(res)
       setSessionsInList(res)
     })
-  }, [])
+  }, [project])
 
   
   const findSessionById = useCallback((id) => {
@@ -50,27 +53,28 @@ function App() {
     setCurrentSession(findSessionById(match.params.id))
   }, [sessions, findSessionById, match])
   
+  
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setToken(user.token)
+    const storedProject = window.localStorage.getItem('loggedMimicProject')
+
+    if (storedProject) {
+      const project = JSON.parse(storedProject)
+      setProject(project)
+      setToken(project.token)
     }
   }, [])
   
   
-  const loginUser = async (username, password) => {
+  const loginUser = async (projectName, password) => {
     try {
-      // const user = await login({ username, password })
+      const project = await login({ projectName, password })
       
-      // window.localStorage.setItem(
-      //   'loggedMimicUser', JSON.stringify(user)
-      //   )
+      window.localStorage.setItem(
+        'loggedMimicProject', JSON.stringify(project)
+      )
         
-      //   setToken(user.token)
-        console.log('login user')
-        setUser(true)
+        setToken(project.token)
+        setProject(project)
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
@@ -79,7 +83,7 @@ function App() {
     
     const handleLogout = () => {
       setCurrentSession(null)
-      setUser(null)
+      setProject(null)
       window.localStorage.clear()
     }
     
@@ -144,7 +148,7 @@ function App() {
   }
   
   return (
-    user ? loggedUserUI() : loginForm()
+    project ? loggedUserUI() : loginForm()
     )
   }
   
