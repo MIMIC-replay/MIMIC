@@ -86,11 +86,7 @@ function App() {
       setProject(null)
       window.localStorage.clear()
     }
-    
-    // const currentSession = match
-    // ? findSessionsById(match.params.id)
-    // : null
-    
+        
     document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
