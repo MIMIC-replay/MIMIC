@@ -23,7 +23,7 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [project, setProject] = useState(true)
+  const [project, setProject] = useState(null)
   const match = useMatch('/sessions/:id')
 
   useEffect(() => {
