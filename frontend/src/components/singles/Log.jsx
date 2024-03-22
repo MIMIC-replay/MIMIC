@@ -1,17 +1,16 @@
+import { relativeTime } from "../../helpers/dataExtractors"
+
 const Log = ({log, session}) => {
-  // const {type, text} = log
-  const [time, type, message] = ['123', '12321', '1231']
+
+  const time = relativeTime(log, session)
+  const content = log.data.payload.payload.join()
   
   return (
-    <li className='log'>
-      <p className='log-type'>[TYPE]{` type: ${log.type}`}</p>
-      <p className='log-message'>{log.data.payload.payload}</p>
-    </li>
-      // <tr className="log">
-      //   <td className="time">{`time`}</td>
-      //   <td className="type">{`type`}</td>
-      //   <td className="message">{`message`}</td>
-      // </tr>
+      <tr className="log">
+        <td className="log-time">{time}</td>
+        <td className="log-type">{log.type}</td>
+        <td className="log-content">{content}</td>
+      </tr>
   )
 }
 

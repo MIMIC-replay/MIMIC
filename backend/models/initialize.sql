@@ -5,15 +5,14 @@
     -- postgres-# exit
   -- command line: psql -d mimic < initialize.sql
 
-DROP TABLE IF EXISTS projects CASCADE; -- might want to remove lines 7-10 in deployment so we can't easily nuke all our data
+DROP TABLE IF EXISTS projects CASCADE; -- might want to remove these lines in deployment so users can't easily nuke all their data
 DROP TABLE IF EXISTS sessions CASCADE;
-DROP TABLE IF EXISTS admins CASCADE;
-DROP TABLE IF EXISTS projects_admins CASCADE;
 
 CREATE TABLE projects (
   id UUID PRIMARY KEY,
-  created_at timestamp NOT NULL DEFAULT NOW()
-  -- last_session timestamp -- can be null as when the project is created there won't be any sessions yet
+  created_at timestamp NOT NULL DEFAULT NOW(),
+  name varchar(64) NOT NULL,
+  password_hash varchar(72) NOT NULL
 );
 
 CREATE TABLE sessions (
@@ -40,19 +39,3 @@ CREATE TABLE sessions (
   -- viewport_height integer,
   -- viewport_width integer
 );
-
-CREATE TABLE admins (
-  id serial PRIMARY KEY,
-  username varchar(20) NOT NULL,
-  first_name varchar(20) NOT NULL, -- do we want to limit this info in the beginning
-  last_name varchar(20) NOT NULL,
-  email varchar(320) NOT NULL,
-  created_at timestamp NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE projects_admins (
-  project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-  admin_id integer NOT NULL REFERENCES admins(id) ON DELETE CASCADE
-);
-
-INSERT INTO projects(id) VALUES ('986953cc-b0d6-4a54-a026-0bad9a629656');

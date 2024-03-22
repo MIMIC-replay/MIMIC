@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ loginUser }) => {
-  const [username, setUsername] = useState('')
+  const [projectName, setProjectName] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    navigate('/')
+  }, [navigate])
 
   const login = async (event) => {
     event.preventDefault()
-    const success = await loginUser(username, password)
+    const success = await loginUser(projectName, password)
 
     if (success) {
-      setUsername('')
+      setProjectName('')
       setPassword('')
     } else setPassword('')
   }
@@ -18,15 +24,15 @@ const LoginForm = ({ loginUser }) => {
     <div className='login-background'>
       <div className='login-container'>
         <h1 className='login-title'>M I M I C</h1>
-        <form className='login-form' onSubmit={login}>
+        <div className='login-form'>
           <div>
             <input
-              id='login-username-input'
+              id='login-projectName-input'
               type="text"
-              value={username}
-              name="Username"
+              value={projectName}
+              name="ProjectName"
               placeholder='User...'
-              onChange={({ target }) => setUsername(target.value)}
+              onChange={({ target }) => setProjectName(target.value)}
               />
           </div>
           <div>
@@ -39,9 +45,9 @@ const LoginForm = ({ loginUser }) => {
               />
           </div>
           <div className='login-buttons'>
-            <button type="submit">log in</button>
+            <button onClick={login}>log in</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   )

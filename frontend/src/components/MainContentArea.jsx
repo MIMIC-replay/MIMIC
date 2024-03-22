@@ -1,8 +1,3 @@
-import {
-  Navigate
-} from 'react-router-dom'
-
-
 import ExtraInfo from "./ExtraInfo"
 
 import PlayerTest from "./PlayerTest"
@@ -10,15 +5,10 @@ import PlayerTest from "./PlayerTest"
 import MainContentRightBar from "./MainContentRightBar"
 import SessionContentHeader from './singles/SessionContentHeader'
 
-const MainContentArea = ({session, displayNotification}) => {
-  if (!session) {
-    displayNotification({ type: 'fail', message: 'Invalid Id' })
-    
-    return (
-      <Navigate to={'/'} replace />
-    )
-  }
 
+const MainContentArea = ({session}) => {
+  if (!session) return
+  
   return (
     <section className="main-content-area">
       <SessionContentHeader session={session}/>

@@ -1,4 +1,5 @@
 import { epochToDate } from "./dataFormatters"
+import { eventReference } from "./eventAnalysis"
 
 export const sessionMetadataExtractor = (session) => {
   
@@ -38,23 +39,31 @@ export const sessionMetadataExtractor = (session) => {
   }
 }
 
-export const requestDataExtractor = (request, session) => {
-  const data = request.data
-
-  const time = relativeTime(request, session)
+export const eventDataExtractor = (event, session) => {
+  const data = event.data
+  const time = relativeTime(event, session)
   const type = data.type
-  const method = data.method
-  const latency = data.latency
-  const url = data.url.slice(0, 50)
-  const responseStatus = data.status
+  const url = data.url
 
+  let method;
+  let responseStatus;
+  let latency;
+  if (data.type === 'WebSocket') {
+    method = data.event
+    responseStatus = 'N/A'
+    latency = 'N/A'
+  } else {
+    method = data.method
+    responseStatus = data.status
+    latency = data.latency
+  }
   return {
     time,
     type,
+    url,
+    responseStatus,
     method,
     latency,
-    url,
-    responseStatus
   }
 }
 
@@ -103,4 +112,62 @@ export const line = (error) => {
   const errorLineMatch = error.data.payload.trace[0].match(/(\d+:\d+)\)$/)[1]
   return errorLineMatch
 }
+
+export const originalViewport = (session) => {
+  const viewport = session.events.find(e => String(e.type) === '4')
+
+  return {
+    width: viewport.data.width,
+    height: viewport.data.height,
+  }
+}
+
+export const getDeviceFromSize = (viewport) => {
+  /*
+    Based on well-established media queries:
+    
+    @media (min-width:320px)  => smartphones, iPhone, portrait 480x320 phones
+    @media (min-width:481px)  => portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide.
+    @media (min-width:641px)  => portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones
+    @media (min-width:961px)  => tablet, landscape iPad, lo-res laptops ands desktops
+    @media (min-width:1025px) => big landscape tablets, laptops, and desktops
+    @media (min-width:1281px) => hi-res laptops and desktops
+  */
+
+  const width = viewport.width
+  if (width <= 480) return 'phone'
+  if (width <= 1025) return 'tablet'
+  else return 'desktop'
+}
+
+export const eventAnalyzer = (event) => {
+  const numberType = event.type
+  const decodedType = eventReference.EventType[numberType]
+
+  const isUserInteraction = decodedType === 'IncrementalSnapshot'
+  
+  const source = isUserInteraction ? 
+    eventReference.IncrementalSource[event?.data?.source] :
+    'N/A'
+
+  const isMouseInteraction = source === 'MouseInteraction'
+
+  const mouseInteraction = isMouseInteraction ? 
+    eventReference.MouseInteractions[event?.data?.type] :
+    'N/A'
+
+  return {
+    numberType,
+    decodedType,
+    isUserInteraction,
+    source,
+    isMouseInteraction,
+    mouseInteraction,
+  }
+}
+
+export const totalDuration = (session) => {
+  return relativeTime(session.events[session.events.length - 1], session)
+}
+
 

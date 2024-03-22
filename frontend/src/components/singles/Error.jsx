@@ -1,15 +1,16 @@
 import { errorTrigger, line, relativeTime } from "../../helpers/dataExtractors"
 
 const Error = ({error, session, toggleErrorModal}) => {
-  // const {content, line, payload} = error
-  // const data = error.data
+
   const time = relativeTime(error, session)
+  const payload = error.data.payload.payload.join(', ')
   return (  
-    <li className='error' onClick={() => toggleErrorModal(error)}>
-      <p>{time}</p>
-      <p className="error-trigger">{`${errorTrigger(error)}`}</p>
-      <p className="error-line">{`Line: ${line(error)}`}</p>
-    </li>
+    <tr className="error" onClick={() => toggleErrorModal(error)}>
+      <td> {time}</td>
+      <td className="error-trigger">{`${errorTrigger(error)}`}</td>
+      <td className="error-payload">{payload}</td>
+      <td className="error-line">{line(error)}</td>
+    </tr>
   )
 }
 

@@ -1,62 +1,89 @@
 import NetworkRequests from './NetworkRequests'
 import ConsoleLogs from './ConsoleLogs'
 import Errors from './Errors'
-
 import ExtraInfoSearch from './singles/ExtraInfoSearch'
 
-
-import { useState } from 'react'
-import { CustomScroll } from 'react-custom-scroll'
+import { useState, useEffect } from 'react'
 
 const ExtraInfo = ({session}) => {
   const [activeTab, setActiveTab] = useState('Network')
-  const [requests] = useState(session.events.filter(e => e.type === 50).flat())
-  const [requestsInList, setRequestsInList] = useState(requests)
 
-  // should we flatten
+  const [network, setNetwork] = useState(() => session.network)
+  const [logs, setLogs] = useState(() => session.logs)
+  const [errors, setErrors] = useState(() => session.errors)
+
+  const [searchResultsNetwork, setSearchResultsNetwork] = useState(() => session.network)
+  const [searchResultsLogs, setSearchResultsLogs] = useState(() => session.logs)
+  const [searchResultsErrors, setSearchResultsErrors] = useState(() => session.errors)
+
+  const [searchInput, setSearchInput] = useState('')
+
+  useEffect(() => {
+    setNetwork(session.network)
+    setLogs(session.logs)
+    setErrors(session.errors)
+
+    const networkFilteredByName = network.filter(r => {
+      return r.data.url.toLowerCase().includes(searchInput.toLowerCase())
+    })
+    setSearchResultsNetwork(networkFilteredByName)
+
+    const logsFilteredByType = logs.filter(l => {
+      return l.data.payload.payload[0].toLowerCase().includes(searchInput.toLowerCase())
+    })
+    setSearchResultsLogs(logsFilteredByType)
+
+    const filteredByName = errors.filter(e => {
+      return e.data.payload.trace.join().toLowerCase().includes(searchInput.toLowerCase())
+    })
+
+    setSearchResultsErrors(filteredByName)
+  }, [session, searchInput, network, logs, errors])
+
   const setActive = (e) => {
     setActiveTab(e.target.textContent)
-  }
-
-  const searchExtraInfo = (string) => {
-    const filteredByName = requests.filter(r => r.data.url.includes(string))
-    setRequestsInList(filteredByName)
   }
 
   return (
     <div className="extra-info">
       <div className="extra-info-tab-controls">
-        <button 
-          className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Network</button>
-
-        <button 
-          className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Logs</button>
-
-        <button 
-          className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
-          onClick={setActive}
-          >Errors</button>
-
+        <ExtraInfoTabButtons activeTab={activeTab} setActive={setActive} />
 
         <div className='extra-info-search'>
-          <ExtraInfoSearch searchExtraInfo={searchExtraInfo}/>
+          <ExtraInfoSearch activeTab={activeTab} setSearchInput={setSearchInput}/>
         </div>
       </div>
 
       <div className='extra-info-content'>
-        {activeTab === 'Network' && requestsInList.length > 0 ? 
-          <NetworkRequests requests={requestsInList} session={session}/> : 
-          null}
-        {activeTab === 'Logs' ? <ConsoleLogs logs={session.logs}/> : null}
-        {activeTab === 'Errors' ? <Errors errors={session.errors} session={session}/> : null}
+        {activeTab === 'Network' && network.length > 0 ? 
+          <NetworkRequests requests={searchResultsNetwork} session={session}/> : 
+          null
+        }
+        {activeTab === 'Logs' ? <ConsoleLogs logs={searchResultsLogs} session={session}/> : null}
+        {activeTab === 'Errors' ? <Errors errors={searchResultsErrors} session={session}/> : null}
       </div>
     </div>
   )
 }
+
+const ExtraInfoTabButtons = ({activeTab, setActive}) => {
+  return (
+    <>
+      <button 
+         className={`tab-button ${activeTab === 'Network' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Network</button>
+       <button 
+         className={`tab-button ${activeTab === 'Logs' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Logs</button>
+       <button 
+         className={`tab-button ${activeTab === 'Errors' ? 'active' : ''}`} 
+         onClick={setActive}
+       >Errors</button>
+    </>
+  )
+} 
 
 
 export default ExtraInfo

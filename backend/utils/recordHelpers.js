@@ -77,13 +77,13 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
     });
 }
 
-function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
+function createNewSession(allEventsCompressed, sessionId, userMetadata, projectId, res) {
   postgres.db
     .one(
       "INSERT INTO sessions(id, project_id, url, ip_address, city, region, country, timezone, longitude, latitude, os_name, os_version, browser_name, browser_version, https_protected) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id",
       [
         sessionId,
-        "986953cc-b0d6-4a54-a026-0bad9a629656",
+        projectId,
         userMetadata.url,
         userMetadata.ip,
         userMetadata.location.city,
