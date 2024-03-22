@@ -70,7 +70,7 @@ function App() {
         )
         
         setToken(project.token)
-        setProject(true)
+        setProject(project)
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
@@ -144,7 +144,7 @@ function App() {
   }
   
   return (
-    user ? loggedUserUI() : loginForm()
+    project ? loggedUserUI() : loginForm()
     )
   }
   

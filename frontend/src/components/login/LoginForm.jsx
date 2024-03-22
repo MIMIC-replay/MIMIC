@@ -12,6 +12,8 @@ const LoginForm = ({ loginUser }) => {
 
   const login = async (event) => {
     event.preventDefault()
+    console.log("project name: ", projectName)
+    console.log("password: ", password)
     const success = await loginUser(projectName, password)
 
     if (success) {
@@ -45,7 +47,7 @@ const LoginForm = ({ loginUser }) => {
               />
           </div>
           <div className='login-buttons'>
-            <button onClick={loginUser}>log in</button>
+            <button onClick={login}>log in</button>
           </div>
         </div>
       </div>

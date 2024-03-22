@@ -8,9 +8,13 @@ loginRouter.post('/', async (request, response) => {
   const { projectName, password } = request.body
 
   let project
-  postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName])
-             .then(r => project = r )
+  await postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName])
+             .then((r) => {
+              console.log("result: ", r)
+              project = r 
+            })
              .catch(e => {
+              console.log("Error: ", e)
                 return response.status(401).json({
                   error: 'invalid project name'
                 })
