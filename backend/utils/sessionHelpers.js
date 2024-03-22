@@ -1,5 +1,7 @@
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
 
 const addProjectCredentials = (
   projectId,
@@ -7,22 +9,26 @@ const addProjectCredentials = (
   projectPassword,
   res
 ) => {
-  postgres.db
-    .one(
-      "INSERT INTO projects (id, name, password_hash) VALUES($1, $2, $3) RETURNING id",
-      [projectId, projectName, projectPassword],
-      (project) => project.id
-    )
-    .then((data) => {
-      res.sendStatus(200);
-      console.log(
-        `Successfully added new project to database. The project ID is ${projectId}`
-      );
-    })
-    .catch((error) => {
-      res.sendStatus(500);
-      console.log("Unable to add new project ID to PostgreSQL:", error.message);
-    });
+
+  bcrypt.hash(projectPassword, saltRounds, function (err, hash) {
+    postgres.db
+      .one(
+        "INSERT INTO projects (id, name, password_hash) VALUES($1, $2, $3) RETURNING id",
+        [projectId, projectName, hash],
+        (project) => project.id
+      )
+      .then((data) => {
+        res.sendStatus(200);
+        console.log(
+          `Successfully added new project to database. The project ID is ${projectId}`
+        );
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+        console.log("Unable to add new project ID to PostgreSQL:", error.message);
+      });
+
+  })
 };
 
 const extractLogEvents = (eventsArr) => {
