@@ -23,7 +23,7 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [project, setProject] = useState(true)
+  const [project, setProject] = useState(null)
   const match = useMatch('/sessions/:id')
 
   useEffect(() => {
@@ -86,11 +86,7 @@ function App() {
       setProject(null)
       window.localStorage.clear()
     }
-    
-    // const currentSession = match
-    // ? findSessionsById(match.params.id)
-    // : null
-    
+        
     document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
@@ -106,7 +102,7 @@ function App() {
       return true
     }
     
-    const loggedUserUI = () => {
+    const loggedProjectUI = () => {
       return (
         <div className="main-grid">
       <Notification notification={notification}/>
@@ -136,8 +132,6 @@ function App() {
             <Navigate to={'/'} replace/>
           }
         />
-
-        {/* <Route path="/" element={null}/> */}
       </Routes> 
     </div>
     )
@@ -148,7 +142,7 @@ function App() {
   }
   
   return (
-    project ? loggedUserUI() : loginForm()
+    project ? loggedProjectUI() : loginForm()
     )
   }
   

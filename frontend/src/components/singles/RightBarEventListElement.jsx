@@ -2,6 +2,11 @@ import { eventAnalyzer, relativeTime } from "../../helpers/dataExtractors"
 import MouseIcon from "../iconComponents/mouse"
 import NetworkIcon from "../iconComponents/network"
 import MetaIcon from "../iconComponents/meta"
+import FullSnapshotIcon from "../iconComponents/fullSnapshot"
+import UserIcon from "../iconComponents/user"
+import LoadIcon from "../iconComponents/load"
+import CustomIcon from "../iconComponents/custom"
+import PluginIcon from "../iconComponents/plugin"
 
 const RightBarEventListElement = ({event, session}) =>{
   
@@ -17,12 +22,17 @@ const RightBarEventListElement = ({event, session}) =>{
   const eventData = eventAnalyzer(event)
 
   const time = relativeTime(event, session)
+  let type
+  if (eventData.source.includes('Mouse')) type = 'MouseInteraction'
+  else if (eventData.decodedType === 'IncrementalSnapshot') type = eventData.source
+  else type = eventData.decodedType
+
   return (
     <li className="right-bar-event-element">
       <div>
         <p>{time}</p>
         <EventTypeIcon eventData={eventData}/>
-        <p>{eventData.source.includes('Mouse') ? 'MouseInteraction' : eventData.decodedType}</p>
+        <p>{type}</p>
       </div>
     </li>
   )  
@@ -35,6 +45,16 @@ const EventTypeIcon = ({eventData}) => {
     return <NetworkIcon/>
   } else if (eventData.decodedType === 'Meta') {
     return <MetaIcon/>
+  } else if (eventData.decodedType === 'FullSnapshot') {
+    return <FullSnapshotIcon/>
+  } else if (eventData.decodedType === 'Load') {
+    return <LoadIcon/>
+  } else if (eventData.decodedType === 'Custom') {
+    return <CustomIcon/>
+  } else if (eventData.decodedType === 'Plugin') {
+    return <PluginIcon/>
+  } else {
+    return <UserIcon/>
   }
 }
 

@@ -8,9 +8,25 @@
 [class*="network"]{
   fill: rgb(184, 184, 184);
 }
-[class*="error"]{
+[class*="error"],
+[class*="load"], 
+[class*="custom"] 
+{
   fill: rgb(148, 148, 148);
 }
-[class*="mouse"]{
+
+[class*="snapshot"],
+[class*="mouse"],
+[class*="meta"]
+{
   stroke: rgb(148, 148, 148);
+}
+
+[class*="plugin"]{
+  fill: none;
+}
+
+[class*="user"]{
+  stroke: rgb(148, 148, 148);
+  width: var(--sC);
 }

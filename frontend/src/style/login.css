@@ -48,12 +48,21 @@
   align-items: center;
 }
 
-.login-form button {
+.login-buttons button {
   font-family: var(--general-font);
   display: flex;
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--general-border-radius);
   background-color: var(--cJ);
   padding: var(--sB) var(--sE);
-  color: var(--general-font-color);
+  color: white;
+}
+
+.login-buttons button:hover {
+  cursor: pointer;
+  background-color:transparent;
+  border: 1px solid;
+  border-color:var(--main-app-color);
+
+  color: var(--main-app-color);
 }
