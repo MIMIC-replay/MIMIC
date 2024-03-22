@@ -4,6 +4,7 @@ import {
   Route, 
   Routes,
   useMatch,
+  Navigate
 } from 'react-router-dom'
 
 import SiteHeader from "./components/singles/SiteHeader"
