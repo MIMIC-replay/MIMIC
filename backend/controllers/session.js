@@ -5,6 +5,7 @@ const fflate = require("fflate");
 const sessionsRouter = express.Router();
 const {
   addProjectCredentials,
+  validateProjectName,
   extractLogEvents,
   extractNetworkEvents,
   extractErrorEvents,
@@ -13,18 +14,18 @@ const {
   findSessionIds,
 } = require("../utils/sessionHelpers.js");
 
+sessionsRouter.post("/validate", async (req, res) => {
+  // checks if the provided project name exists in the database
+  const projectName = req.body.name;
+  validateProjectName(projectName, res);
+});
+
 sessionsRouter.post("/new", async (req, res) => {
   // collects all new project IDs and add them to the database
   const projectId = req.body.projectId;
   const projectName = req.body.name;
   const projectPassword = req.body.password
   addProjectCredentials(projectId, projectName, projectPassword, res);
-
-  /*
-  console.log(`New Project: ${projectId}`)
-  res.status(200)
-  res.send()
-  */
 });
 
 // const { userExtractor } = require('../utils/middleware')

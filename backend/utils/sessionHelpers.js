@@ -31,6 +31,16 @@ const addProjectCredentials = (
   })
 };
 
+const validateProjectName = (projectName, res) => {
+  postgres.db.none("SELECT * FROM projects WHERE name = $1", [projectName])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(() => {
+      res.sendStatus(400)
+    })
+}
+
 const extractLogEvents = (eventsArr) => {
   return eventsArr.filter(
     (obj) =>
@@ -122,6 +132,7 @@ const findSessionIds = (projectId) => {
 
 module.exports = {
   addProjectCredentials,
+  validateProjectName,
   extractLogEvents,
   extractNetworkEvents,
   extractErrorEvents,

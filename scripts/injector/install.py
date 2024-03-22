@@ -4,8 +4,7 @@ UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
 def process():
   subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID])
-  name = name_credentials()
-  password = pw_credentials()
+  name, password = credentials()
   print("🛑 Please keep the project name and password for your records - you will be unable to access or change them later 🛑")
   subprocess.run(['python3', 'injector.py'])
   send_project_info(name, password)
@@ -16,6 +15,18 @@ def send_project_info(name, password):
   print(r.status_code, r.reason)
   print("MIMIC is successfully installed🔥") if r.status_code == 200 else print("💔There was an error installing MIMIC💔")
   
+def credentials():
+  unique_name = False
+  while unique_name == False:
+    name = name_credentials()
+    r = requests.post("http://localhost:3001/api/project/validate", json={ "name": name })
+    print(r.status_code, r.reason)
+    if r.status_code == 200:
+      unique_name = True
+    else:
+      print("A project with that name already exists. Please try again.")
+  password = pw_credentials()
+  return name, password
 
 def name_credentials():
   prompt = "Please enter a project name for logging in, one word between 6 and 64 characters:"
@@ -23,7 +34,7 @@ def name_credentials():
   valid_name = False
   while valid_name == False:
     print(prompt)
-    name = input()
+    name = input().lower()
     prompt, valid_name = validate_credentials(name, 6, 64)
 
   return name
