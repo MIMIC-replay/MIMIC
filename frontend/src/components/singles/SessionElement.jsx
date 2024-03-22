@@ -9,16 +9,21 @@ import {
 const SessionElement = ({session, currentSession, setCurrentSession}) => {
 
   const searchMode = document.querySelector('.search-input').value !== ''
+
+  const date = session.metadata.date.match(/^(.+)T/)[1]
+  const exactTime = session.metadata.date.match(/T(.{8})/)[1]
+
   return (
     <Link 
       to={`/sessions/${short(session.id).toLowerCase()}`} 
       onClick={() => setCurrentSession(session)}
     >
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
-        {`Session #${searchMode ? session.id.toUpperCase() : short(session.id)}`}
+        <p>{`Session #${searchMode ? session.id.toUpperCase() : short(session.id)}`}</p>
         <MiniChart session={session}/>
-        {`${session.metadata.date}`}
+        <p>{`${date} at ${exactTime}`}</p>
       </li>
+      
     </Link>
   )
 }

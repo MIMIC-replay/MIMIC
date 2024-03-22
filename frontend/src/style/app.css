@@ -98,6 +98,9 @@ body {
   cursor: pointer;
   padding: var(--sC);
   border-left: var(--main-components-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sC);
 }
 
 .session-list-element.active {
@@ -162,7 +165,6 @@ body {
   border-bottom: var(--main-components-border);
 
 }
-
 
 /* Extra info */
 
@@ -255,6 +257,34 @@ td.request-name {
   text-align: left;
 }
 
+/* Method colors */
+
+.POST {
+  color: var(--post-color);
+}
+
+.GET {
+  color: var(--get-color);
+}
+
+.DELETE {
+  color: var(--delete-color);
+}
+
+.PUT {
+  color: var(--put-color);
+}
+
+.PATCH {
+  color: var(--patch-color);
+}
+
+.HEAD {
+  color: var(--head-color);
+}
+
+
+
 /* Extra Info Logs */
 
 
@@ -326,21 +356,21 @@ td.request-name {
 }
 
 .main-right-bar-session-tabs-content {
-  gap: var(--sC);
+  /* gap: var(--sC); */
   border: var(--main-components-border);
   border-bottom-right-radius: var(--general-border-radius);
   border-bottom-left-radius: var(--general-border-radius);
   border-top-right-radius: var(--general-border-radius);
   max-height: var(--sM);
   overflow: auto;
-  padding-top: var(--sC);
+  /* padding-top: var(--sC); */
   background-color: var(--light-background-color);
 }
 
 .main-right-bar-session-tabs-content ul {
   display: flex;
   flex-direction: column;
-  gap: var(--sD);
+  gap: var(--sB);
 }
 
 .main-right-bar-session-tabs-content ul li {
@@ -363,6 +393,17 @@ td.request-name {
 /* .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
   border-top-right-radius: var(--general-border-radius);
 }  */
+
+.right-bar-event-element div {
+  display: flex;
+  gap: var(--sF);
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.right-bar-event-element div p {
+  width: var(--sE);
+}
 
 /* Notification */
 
