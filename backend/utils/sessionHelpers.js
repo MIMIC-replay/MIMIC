@@ -34,7 +34,7 @@ const extractErrorEvents = (eventsArr) => {
   });
 };
 
-const retrieveEventData = (sessionId) => {
+const retrieveEventData = async (sessionId) => {
   return getObjectContent("mimic", sessionId)
     .then((data) => new Uint8Array(data))
     .then((data) => JSON.parse(fflate.strFromU8(fflate.decompressSync(data))))

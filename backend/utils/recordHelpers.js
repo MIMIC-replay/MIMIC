@@ -61,15 +61,7 @@ function compressEvents(allRecordedEvents) {
 }
 
 function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
-  postgres.db
-    .any("UPDATE sessions SET session_data = $1 WHERE id = $2", [
-      allEventsCompressed,
-      sessionIndex,
-    ])
-    .then((data) => {
-      uploadToEventStorage(sessionIndex, allEventsCompressed);
-      return data;
-    })
+  uploadToEventStorage(sessionIndex, allEventsCompressed)
     .then((data) => {
       res.sendStatus(200);
       console.log(
@@ -88,11 +80,10 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
 function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
   postgres.db
     .one(
-      "INSERT INTO sessions(id, project_id, session_data, url, ip_address, city, region, country, timezone, longitude, latitude, os_name, os_version, browser_name, browser_version, https_protected) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id",
+      "INSERT INTO sessions(id, project_id, url, ip_address, city, region, country, timezone, longitude, latitude, os_name, os_version, browser_name, browser_version, https_protected) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id",
       [
         sessionId,
         "986953cc-b0d6-4a54-a026-0bad9a629656",
-        allEventsCompressed,
         userMetadata.url,
         userMetadata.ip,
         userMetadata.location.city,
@@ -127,10 +118,16 @@ function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
 
 function uploadToEventStorage(sessionId, allEventsCompressed) {
   const buffer = Buffer.from(allEventsCompressed);
-
-  minioClient.putObject("mimic", `${sessionId}`, buffer, function (err, etag) {
-    if (err) return console.log(err, etag); // err should be null
-    console.log("File uploaded to S3 successfully.");
+  return new Promise((resolve, reject) => {
+    minioClient.putObject("mimic", `${sessionId}`, buffer, (err, etag) => {
+      if (err) {
+        console.error("Error uploading data:", err);
+        reject(err); 
+      } else {
+        console.log("Data uploaded successfully");
+        resolve(etag);
+      }
+    });
   });
 }
 
