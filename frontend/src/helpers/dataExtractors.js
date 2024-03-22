@@ -146,11 +146,11 @@ export const eventAnalyzer = (event) => {
 
   const isUserInteraction = decodedType === 'IncrementalSnapshot'
   
-  const interactionSource = isUserInteraction ? 
+  const source = isUserInteraction ? 
     eventReference.IncrementalSource[event?.data?.source] :
     'N/A'
 
-  const isMouseInteraction = interactionSource === 'MouseInteraction'
+  const isMouseInteraction = source === 'MouseInteraction'
 
   const mouseInteraction = isMouseInteraction ? 
     eventReference.MouseInteractions[event?.data?.type] :
@@ -160,7 +160,7 @@ export const eventAnalyzer = (event) => {
     numberType,
     decodedType,
     isUserInteraction,
-    interactionSource,
+    source,
     isMouseInteraction,
     mouseInteraction,
   }
