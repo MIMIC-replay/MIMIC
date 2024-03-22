@@ -100,7 +100,18 @@ body {
   border-left: var(--main-components-border);
   display: flex;
   flex-direction: column;
-  gap: var(--sC);
+  gap: var(--sB);
+  font-size: var(--fA);
+}
+
+.session-list-element .id {
+  font-size: var(--fC);
+  font-weight: 600;
+}
+
+.session-list-element .time {
+  margin-bottom: var(--sB);
+
 }
 
 .session-list-element.active {
@@ -114,6 +125,24 @@ body {
 
 .session-list-element:hover {
   background-color: #4b6c86;
+}
+
+.session-numbers {
+  display: flex;
+  align-items: center;
+  gap: var(--sC) ;
+}
+
+.session-numbers svg {
+  /* border: 1px solid pink; */
+  padding: 0px;
+  margin: 0px;
+  height: var(--sC);
+}
+
+.session-numbers .number {
+  font-size: var(--fB);
+  margin-left: var(--sA);
 }
 
 
