@@ -136,8 +136,6 @@ function App() {
             <Navigate to={'/'} replace/>
           }
         />
-
-        {/* <Route path="/" element={null}/> */}
       </Routes> 
     </div>
     )
