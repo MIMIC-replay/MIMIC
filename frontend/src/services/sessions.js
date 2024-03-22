@@ -1,6 +1,5 @@
 //import sessions from '../../mock-data/TESTsessions.json'
 import axios from 'axios'
-import Errors from '../components/Errors'
 
 const PORT = 3001
 const BASE_URL = `http://localhost:${PORT}/api/project`
@@ -19,18 +18,12 @@ export const getSessions = async (projectId) => {
   const config = { headers: {
     Authorization: token
   } }
-  
-
-
-  // simulates an API call
 
   try {
     const response = await axios.get(
       `${BASE_URL}/${projectId}`,
       config
      )
-     
-     console.log(response.data.sessions)
 
      return response.data.sessions
 
