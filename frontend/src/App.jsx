@@ -27,11 +27,13 @@ function App() {
   const match = useMatch('/sessions/:id')
 
   useEffect(() => {
-    getSessions().then((res) => {
+    if (!project) return 
+
+    getSessions(project.id).then((res) => {
       setSessions(res)
       setSessionsInList(res)
     })
-  }, [])
+  }, [project])
 
   
   const findSessionById = useCallback((id) => {
@@ -51,14 +53,16 @@ function App() {
     setCurrentSession(findSessionById(match.params.id))
   }, [sessions, findSessionById, match])
   
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
-  //   if (loggedUserJSON) {
-  //     const user = JSON.parse(loggedUserJSON)
-  //     setUser(user)
-  //     setToken(user.token)
-  //   }
-  // }, [])
+  
+  useEffect(() => {
+    const storedProject = window.localStorage.getItem('loggedMimicProject')
+
+    if (storedProject) {
+      const project = JSON.parse(storedProject)
+      setProject(project)
+      setToken(project.token)
+    }
+  }, [])
   
   
   const loginUser = async (projectName, password) => {
@@ -67,7 +71,7 @@ function App() {
       
       window.localStorage.setItem(
         'loggedMimicProject', JSON.stringify(project)
-        )
+      )
         
         setToken(project.token)
         setProject(project)
