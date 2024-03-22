@@ -1,8 +1,13 @@
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import {useNavigate } from 'react-router-dom'
 const LoginForm = ({ loginUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    navigate('/')
+  }, [navigate])
 
   const login = async (event) => {
     event.preventDefault()
@@ -18,7 +23,7 @@ const LoginForm = ({ loginUser }) => {
     <div className='login-background'>
       <div className='login-container'>
         <h1 className='login-title'>M I M I C</h1>
-        <form className='login-form' onSubmit={login}>
+        <div className='login-form'>
           <div>
             <input
               id='login-username-input'
@@ -39,9 +44,9 @@ const LoginForm = ({ loginUser }) => {
               />
           </div>
           <div className='login-buttons'>
-            <button type="submit">log in</button>
+            <button onClick={loginUser}>log in</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   )

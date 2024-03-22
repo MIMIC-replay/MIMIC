@@ -166,3 +166,8 @@ export const eventAnalyzer = (event) => {
   }
 }
 
+export const totalDuration = (session) => {
+  return relativeTime(session.events[session.events.length - 1], session)
+}
+
+

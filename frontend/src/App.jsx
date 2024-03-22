@@ -62,14 +62,15 @@ function App() {
   
   const loginUser = async (username, password) => {
     try {
-      const user = await login({ username, password })
+      // const user = await login({ username, password })
       
-      window.localStorage.setItem(
-        'loggedMimicUser', JSON.stringify(user)
-        )
+      // window.localStorage.setItem(
+      //   'loggedMimicUser', JSON.stringify(user)
+      //   )
         
-        setToken(user.token)
-        setUser(user)
+      //   setToken(user.token)
+        console.log('login user')
+        setUser(true)
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
@@ -77,6 +78,7 @@ function App() {
     }
     
     const handleLogout = () => {
+      setCurrentSession(null)
       setUser(null)
       window.localStorage.clear()
     }
@@ -104,14 +106,14 @@ function App() {
       return (
         <div className="main-grid">
       <Notification notification={notification}/>
-      <SiteHeader/>
+      <SiteHeader handleLogout={handleLogout}/>
       
       <LeftBar
         sessions={sessionsInList}
         currentSession={currentSession}
         setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
-        />
+      />
 
       <Routes>
         <Route 
@@ -122,23 +124,23 @@ function App() {
             displayNotification={displayNotification}
             />
           }
-          />
+        />
 
         <Route 
           path="/*"
           element={
             <Navigate to={'/'} replace/>
           }
-          />
+        />
 
-        <Route path="/" element={null}/>
+        {/* <Route path="/" element={null}/> */}
       </Routes> 
     </div>
     )
   }
   
   const loginForm = () => {
-    return <LoginForm/>
+    return <LoginForm loginUser={loginUser}/>
   }
   
   return (
