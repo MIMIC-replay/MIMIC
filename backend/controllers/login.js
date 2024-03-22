@@ -5,9 +5,12 @@ const User = require('../models/user')
 const config = require('../utils/config')
 
 loginRouter.post('/', async (request, response) => {
+  // we will recive a projectname property, and the password
   const { username, password } = request.body
 
+  // replace by SQL query
   const user = await User.findOne({ username })
+
   const passwordCorrect = user === null
     ? false
     : await bcrypt.compare(password, user.passwordHash)
@@ -18,6 +21,7 @@ loginRouter.post('/', async (request, response) => {
     })
   }
 
+  // only needs projectid
   const userForToken = {
     username: user.username,
     id: user._id,
@@ -25,6 +29,7 @@ loginRouter.post('/', async (request, response) => {
   
   const token = jwt.sign(userForToken, config.SECRET, { expiresIn: 60*60 })
 
+  // send token, projectName, projectId
   response
     .status(200)
     .send({ token, username: user.username, name: user.name, id: user._id })

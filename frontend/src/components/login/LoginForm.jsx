@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 const LoginForm = ({ loginUser }) => {
-  const [username, setUsername] = useState('')
+  const [projectName, setProjectName] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
   
@@ -11,10 +12,10 @@ const LoginForm = ({ loginUser }) => {
 
   const login = async (event) => {
     event.preventDefault()
-    const success = await loginUser(username, password)
+    const success = await loginUser(projectName, password)
 
     if (success) {
-      setUsername('')
+      setProjectName('')
       setPassword('')
     } else setPassword('')
   }
@@ -26,12 +27,12 @@ const LoginForm = ({ loginUser }) => {
         <div className='login-form'>
           <div>
             <input
-              id='login-username-input'
+              id='login-projectName-input'
               type="text"
-              value={username}
-              name="Username"
+              value={projectName}
+              name="ProjectName"
               placeholder='User...'
-              onChange={({ target }) => setUsername(target.value)}
+              onChange={({ target }) => setProjectName(target.value)}
               />
           </div>
           <div>

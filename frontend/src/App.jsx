@@ -23,8 +23,9 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [user, setUser] = useState(true)
+  const [project, setProject] = useState(true)
   const match = useMatch('/sessions/:id')
+
   useEffect(() => {
     getSessions().then((res) => {
       setSessions(res)
@@ -50,27 +51,26 @@ function App() {
     setCurrentSession(findSessionById(match.params.id))
   }, [sessions, findSessionById, match])
   
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setToken(user.token)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
+  //   if (loggedUserJSON) {
+  //     const user = JSON.parse(loggedUserJSON)
+  //     setUser(user)
+  //     setToken(user.token)
+  //   }
+  // }, [])
   
   
-  const loginUser = async (username, password) => {
+  const loginUser = async (projectName, password) => {
     try {
-      // const user = await login({ username, password })
+      const project = await login({ projectName, password })
       
-      // window.localStorage.setItem(
-      //   'loggedMimicUser', JSON.stringify(user)
-      //   )
+      window.localStorage.setItem(
+        'loggedMimicProject', JSON.stringify(project)
+        )
         
-      //   setToken(user.token)
-        console.log('login user')
-        setUser(true)
+        setToken(project.token)
+        setProject(true)
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
@@ -79,7 +79,7 @@ function App() {
     
     const handleLogout = () => {
       setCurrentSession(null)
-      setUser(null)
+      setProject(null)
       window.localStorage.clear()
     }
     
