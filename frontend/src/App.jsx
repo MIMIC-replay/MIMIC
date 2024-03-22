@@ -4,7 +4,6 @@ import {
   Route, 
   Routes,
   useMatch,
-  Navigate
 } from 'react-router-dom'
 
 import SiteHeader from "./components/singles/SiteHeader"
@@ -25,7 +24,6 @@ function App() {
   const [notification, setNotification] = useState(null)
   const [user, setUser] = useState(true)
   const match = useMatch('/sessions/:id')
-  
   useEffect(() => {
     getSessions().then((res) => {
       setSessions(res)
@@ -33,23 +31,24 @@ function App() {
     })
   }, [])
 
+  
   const findSessionById = useCallback((id) => {
     return sessions.find(session => session.id.includes(id))
   }, [sessions])
   
   const [currentSession, setCurrentSession] = useState(() => {
       return match
-        ? findSessionById(match.params.id)
-        : null
+      ? findSessionById(match.params.id)
+      : null
     }
   )
-
+  
   useEffect(() => {
     if (sessions.length < 1 || !match) return
-
+    
     setCurrentSession(findSessionById(match.params.id))
   }, [sessions, findSessionById, match])
-
+  
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedMimicUser')
     if (loggedUserJSON) {
@@ -58,50 +57,51 @@ function App() {
       setToken(user.token)
     }
   }, [])
-
+  
+  
   const loginUser = async (username, password) => {
     try {
       const user = await login({ username, password })
-
+      
       window.localStorage.setItem(
         'loggedMimicUser', JSON.stringify(user)
-      )
-
-      setToken(user.token)
-      setUser(user)
-      return true
-    } catch (exception) {
-      displayNotification({ type: 'fail', message: 'Wrong credentials' })
+        )
+        
+        setToken(user.token)
+        setUser(user)
+        return true
+      } catch (exception) {
+        displayNotification({ type: 'fail', message: 'Wrong credentials' })
+      }
     }
-  }
-
-  const handleLogout = () => {
-    setUser(null)
-    window.localStorage.clear()
-  }
-  
-  // const currentSession = match
-  // ? findSessionsById(match.params.id)
-  // : null
-  
-  document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
-
-  const searchSessions = (string) => {
-    const filteredById = sessions.filter(s => String(s.id).includes(string))
-    setSessionsInList(filteredById)
-  }
-
-  const displayNotification = (notification, delay=4000) => {
-    setNotification(notification)
-    setTimeout(() => {
-      setNotification(null)
-    }, delay)
-    return true
-  }
-
-  const loggedUserUI = () => {
-    return (
-      <div className="main-grid">
+    
+    const handleLogout = () => {
+      setUser(null)
+      window.localStorage.clear()
+    }
+    
+    // const currentSession = match
+    // ? findSessionsById(match.params.id)
+    // : null
+    
+    document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
+    
+    const searchSessions = (string) => {
+      const filteredById = sessions.filter(s => String(s.id).includes(string))
+      setSessionsInList(filteredById)
+    }
+    
+    const displayNotification = (notification, delay=4000) => {
+      setNotification(notification)
+      setTimeout(() => {
+        setNotification(null)
+      }, delay)
+      return true
+    }
+    
+    const loggedUserUI = () => {
+      return (
+        <div className="main-grid">
       <Notification notification={notification}/>
       <SiteHeader/>
       
@@ -110,39 +110,40 @@ function App() {
         currentSession={currentSession}
         setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
-      />
+        />
 
       <Routes>
         <Route 
           path="/sessions/:id" 
           element={
             <MainContentArea 
-              session={currentSession}
-              displayNotification={displayNotification}
+            session={currentSession}
+            displayNotification={displayNotification}
             />
           }
-        />
+          />
 
         <Route 
           path="/*"
           element={
             <Navigate to={'/'} replace/>
           }
-        />
+          />
 
         <Route path="/" element={null}/>
       </Routes> 
     </div>
     )
   }
-
+  
   const loginForm = () => {
     return <LoginForm/>
   }
-
+  
   return (
     user ? loggedUserUI() : loginForm()
-  )
-}
-
-export default App
+    )
+  }
+  
+  export default App
+  
