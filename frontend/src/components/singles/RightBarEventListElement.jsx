@@ -1,6 +1,7 @@
 import { eventAnalyzer, relativeTime } from "../../helpers/dataExtractors"
 import MouseIcon from "../iconComponents/mouse"
 import NetworkIcon from "../iconComponents/network"
+import MetaIcon from "../iconComponents/meta"
 
 const RightBarEventListElement = ({event, session}) =>{
   
@@ -33,7 +34,7 @@ const EventTypeIcon = ({eventData}) => {
   } else if (eventData.decodedType.includes('Network')) {
     return <NetworkIcon/>
   } else if (eventData.decodedType === 'Meta') {
-    return <MouseIcon/>
+    return <MetaIcon/>
   }
 }
 
