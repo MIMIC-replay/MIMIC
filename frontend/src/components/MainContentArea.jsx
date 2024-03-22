@@ -1,8 +1,3 @@
-import {
-  Navigate,
-} from 'react-router-dom'
-
-
 import ExtraInfo from "./ExtraInfo"
 
 import PlayerTest from "./PlayerTest"
@@ -10,18 +5,8 @@ import PlayerTest from "./PlayerTest"
 import MainContentRightBar from "./MainContentRightBar"
 import SessionContentHeader from './singles/SessionContentHeader'
 
-const MainContentArea = ({session, displayNotification}) => {
-  // const match = useMatch('/sessions/:id')
-  // if (!session) return <Navigate to={'/'} replace />
 
-  // if (!session && match) {
-  //   displayNotification({ type: 'fail', message: 'Invalid Id' })
-
-  //   return (
-  //     <Navigate to={'/'} replace />
-  //   )
-  // }
-  
+const MainContentArea = ({session}) => {
   if (!session) return
   
   return (

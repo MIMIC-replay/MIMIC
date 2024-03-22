@@ -2,4 +2,15 @@
 
 [class*="feather"]{
   width: var(--sC);
+  stroke: var(--general-font-color);
+}
+
+[class*="network"]{
+  fill: rgb(184, 184, 184);
+}
+[class*="error"]{
+  fill: rgb(148, 148, 148);
+}
+[class*="mouse"]{
+  stroke: rgb(148, 148, 148);
 }

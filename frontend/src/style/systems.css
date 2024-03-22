@@ -161,6 +161,15 @@
   --cJ: hsl(197, 57%, 24%);
   --cK: hsl(198, 71%, 7%);
 
+  /* Methods */
+
+  --get-color:rgb(80, 204, 133);
+  --post-color:rgb(235, 144, 25);
+  --put-color: rgb(69, 157, 223);
+  --delete-color:rgb(194, 73, 87);
+  --patch-color:rgb(240, 225, 55);
+  --head-color:rgb(209, 162, 238);
+
   /* Accents */
 
   /* ----Greys */

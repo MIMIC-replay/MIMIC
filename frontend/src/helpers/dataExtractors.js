@@ -1,4 +1,5 @@
 import { epochToDate } from "./dataFormatters"
+import { eventReference } from "./eventAnalysis"
 
 export const sessionMetadataExtractor = (session) => {
   
@@ -111,4 +112,62 @@ export const line = (error) => {
   const errorLineMatch = error.data.payload.trace[0].match(/(\d+:\d+)\)$/)[1]
   return errorLineMatch
 }
+
+export const originalViewport = (session) => {
+  const viewport = session.events.find(e => String(e.type) === '4')
+
+  return {
+    width: viewport.data.width,
+    height: viewport.data.height,
+  }
+}
+
+export const getDeviceFromSize = (viewport) => {
+  /*
+    Based on well-established media queries:
+    
+    @media (min-width:320px)  => smartphones, iPhone, portrait 480x320 phones
+    @media (min-width:481px)  => portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide.
+    @media (min-width:641px)  => portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones
+    @media (min-width:961px)  => tablet, landscape iPad, lo-res laptops ands desktops
+    @media (min-width:1025px) => big landscape tablets, laptops, and desktops
+    @media (min-width:1281px) => hi-res laptops and desktops
+  */
+
+  const width = viewport.width
+  if (width <= 480) return 'phone'
+  if (width <= 1025) return 'tablet'
+  else return 'desktop'
+}
+
+export const eventAnalyzer = (event) => {
+  const numberType = event.type
+  const decodedType = eventReference.EventType[numberType]
+
+  const isUserInteraction = decodedType === 'IncrementalSnapshot'
+  
+  const source = isUserInteraction ? 
+    eventReference.IncrementalSource[event?.data?.source] :
+    'N/A'
+
+  const isMouseInteraction = source === 'MouseInteraction'
+
+  const mouseInteraction = isMouseInteraction ? 
+    eventReference.MouseInteractions[event?.data?.type] :
+    'N/A'
+
+  return {
+    numberType,
+    decodedType,
+    isUserInteraction,
+    source,
+    isMouseInteraction,
+    mouseInteraction,
+  }
+}
+
+export const totalDuration = (session) => {
+  return relativeTime(session.events[session.events.length - 1], session)
+}
+
 
