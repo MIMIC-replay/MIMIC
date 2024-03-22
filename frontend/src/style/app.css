@@ -96,11 +96,11 @@ body {
 
 .session-list-element {
   cursor: pointer;
-  padding: var(--sC);
+  padding: var(--sB) var(--sC);
   border-left: var(--main-components-border);
   display: flex;
   flex-direction: column;
-  gap: var(--sB);
+  gap: var(--sA);
   font-size: var(--fA);
 }
 
@@ -111,6 +111,7 @@ body {
 
 .session-list-element .time {
   margin-bottom: var(--sB);
+  color: #547b99;
 
 }
 
