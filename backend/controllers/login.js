@@ -1,38 +1,40 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const loginRouter = require('express').Router()
-const User = require('../models/user')
 const config = require('../utils/config')
+const postgres = require('../models/postgres')
 
 loginRouter.post('/', async (request, response) => {
-  // we will recive a projectname property, and the password
-  const { username, password } = request.body
+  const { projectName, password } = request.body
 
-  // replace by SQL query
-  const user = await User.findOne({ username })
+  let project
+  postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName])
+             .then(r => project = r )
+             .catch(e => {
+                return response.status(401).json({
+                  error: 'invalid project name'
+                })
+             })
 
-  const passwordCorrect = user === null
-    ? false
-    : await bcrypt.compare(password, user.passwordHash)
+  
+  const passwordCorrect = await bcrypt.compare(password, project['password_hash'])
 
-  if (!(user && passwordCorrect)) {
+  if (!passwordCorrect) {
     return response.status(401).json({
-      error: 'invalid username or password'
+      error: 'invalid project password'
     })
   }
-
-  // only needs projectid
-  const userForToken = {
-    username: user.username,
-    id: user._id,
+  
+  const projectDataForToken = {
+    id: project.id,
+    name: project.name,
   }
   
-  const token = jwt.sign(userForToken, config.SECRET, { expiresIn: 60*60 })
+  const token = jwt.sign(projectDataForToken, config.SECRET, { expiresIn: 60*60 })
 
-  // send token, projectName, projectId
   response
     .status(200)
-    .send({ token, username: user.username, name: user.name, id: user._id })
+    .send({ token, ...projectDataForToken })
 })
 
 module.exports = loginRouter
