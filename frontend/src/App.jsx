@@ -106,7 +106,7 @@ function App() {
       return true
     }
     
-    const loggedUserUI = () => {
+    const loggedProjectUI = () => {
       return (
         <div className="main-grid">
       <Notification notification={notification}/>
@@ -148,7 +148,7 @@ function App() {
   }
   
   return (
-    project ? loggedUserUI() : loginForm()
+    project ? loggedProjectUI() : loginForm()
     )
   }
   
