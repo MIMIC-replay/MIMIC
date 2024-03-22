@@ -85,7 +85,7 @@ const retrieveEventData = async (sessionId) => {
         "Unable to retrieve event data from PostgreSQL:",
         error.message
       );
-      res.json(error);
+      return [];
     });
 };
 

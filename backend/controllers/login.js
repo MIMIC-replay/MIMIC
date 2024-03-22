@@ -8,7 +8,7 @@ loginRouter.post('/', async (request, response) => {
   const { projectName, password } = request.body
 
   let project
-  await postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName])
+  await postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName.toLowerCase()])
              .then((r) => {
               console.log("result: ", r)
               project = r 

@@ -19,7 +19,7 @@ app.use(middleware.tokenExtractor)
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // this we have to figure out, we can't manually add the origin in the backend for all target applications
+    origin: true,
     credentials: true,
   })
 );
