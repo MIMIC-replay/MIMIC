@@ -3,6 +3,17 @@ const uap = require("ua-parser-js");
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
 const config = require("../utils/config.js");
+const Minio = require("minio");
+
+// Instantiate the MinIO client with the endpoint
+// and access keys as shown below.
+const minioClient = new Minio.Client({
+  endPoint: config.MINIO_URL,
+  port: config.MINIO_PORT,
+  useSSL: false,
+  accessKey: config.MINIO_USER,
+  secretKey: config.MINIO_USER_PASSWORD,
+});
 
 async function extractMetadata(req, userMetadata) {
   if (!userMetadata.ip) {
@@ -56,6 +67,10 @@ function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
       sessionIndex,
     ])
     .then((data) => {
+      uploadToEventStorage(sessionIndex, allEventsCompressed);
+      return data;
+    })
+    .then((data) => {
       res.sendStatus(200);
       console.log(
         `Successfully updated session ${sessionIndex} events in PostgreSQL.`
@@ -95,6 +110,10 @@ function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
       (session) => session.id
     )
     .then((data) => {
+      uploadToEventStorage(sessionId, allEventsCompressed);
+      return data;
+    })
+    .then((data) => {
       res.sendStatus(200);
       console.log(
         `Successfully added new session to database. Current ID is ${sessionId}`
@@ -105,6 +124,16 @@ function createNewSession(allEventsCompressed, sessionId, userMetadata, res) {
       console.log("Unable to add new session to PostgreSQL:", error.message);
     });
 }
+
+function uploadToEventStorage(sessionId, allEventsCompressed) {
+  const buffer = Buffer.from(allEventsCompressed);
+
+  minioClient.putObject("mimic", `${sessionId}`, buffer, function (err, etag) {
+    if (err) return console.log(err, etag); // err should be null
+    console.log("File uploaded to S3 successfully.");
+  });
+}
+
 module.exports = {
   extractMetadata,
   compressEvents,

@@ -1,5 +1,17 @@
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
+const config = require("../utils/config.js");
+const Minio = require("minio");
+
+// Instantiate the MinIO client with the endpoint
+// and access keys as shown below.
+const minioClient = new Minio.Client({
+  endPoint: config.MINIO_URL,
+  port: config.MINIO_PORT,
+  useSSL: false,
+  accessKey: config.MINIO_USER,
+  secretKey: config.MINIO_USER_PASSWORD,
+});
 
 const extractLogEvents = (eventsArr) => {
   return eventsArr.filter(
@@ -23,14 +35,7 @@ const extractErrorEvents = (eventsArr) => {
 };
 
 const retrieveEventData = (sessionId) => {
-  return postgres.db
-    .one(
-      "SELECT encode(session_data::bytea, 'escape') as session_data FROM sessions WHERE id = $1",
-      [sessionId],
-      (session) => session.session_data
-    )
-    .then((data) => JSON.parse(data))
-    .then((data) => Object.keys(data).map((key) => data[key]))
+  return getObjectContent("mimic", sessionId)
     .then((data) => new Uint8Array(data))
     .then((data) => JSON.parse(fflate.strFromU8(fflate.decompressSync(data))))
     .catch((error) => {
@@ -88,6 +93,36 @@ const findSessionIds = (projectId) => {
       );
       return [];
     });
+};
+
+// Function to retrieve object content
+const getObjectContent = (bucketName, objectName) => {
+  return new Promise((resolve, reject) => {
+    minioClient.getObject(bucketName, objectName, (err, dataStream) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      let chunks = [];
+
+      // Read data from the stream
+      dataStream.on("data", (chunk) => {
+        chunks.push(chunk);
+      });
+
+      // Handle errors during data retrieval
+      dataStream.on("error", (error) => {
+        reject(error);
+      });
+
+      // When the stream ends, concatenate chunks and resolve with the content
+      dataStream.on("end", () => {
+        const content = Buffer.concat(chunks);
+        resolve(content);
+      });
+    });
+  });
 };
 
 module.exports = {
