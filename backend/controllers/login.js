@@ -15,12 +15,16 @@ loginRouter.post('/', async (request, response) => {
             })
              .catch(e => {
               console.log("Error: ", e)
-                return response.status(401).json({
+                response.status(401).json({
                   error: 'invalid project name'
                 })
              })
 
-  
+  if (!project) {
+    response.send()
+    return
+  }
+
   const passwordCorrect = await bcrypt.compare(password, project['password_hash'])
 
   if (!passwordCorrect) {
