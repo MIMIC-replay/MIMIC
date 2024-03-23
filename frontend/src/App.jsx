@@ -12,7 +12,7 @@ import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
 import Notification from "./components/singles/Notification"
 
-import { short } from "./helpers/dataFormatters"
+import { shorten } from "./helpers/dataFormatters"
 
 import { getSessions, setToken } from "./services/sessions"
 import LoginForm from "./components/login/LoginForm"
@@ -93,7 +93,7 @@ function App() {
     }
         
     document.title = 
-      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${short(currentSession.id)}` : ''}`
+      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => String(s.id).includes(string))

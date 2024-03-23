@@ -36,6 +36,7 @@ body {
   gap: var(--sB);
   background-color: var(--light-background-color);
   /* box-shadow: 8px 10px 10px rgba(34, 33, 33, 0.5); */
+  letter-spacing: 0.1rem;
 }
 
 .site-logo {
@@ -43,8 +44,12 @@ body {
 }
 
 .site-header .project-name {
-  font-size: var(--fE);
+  font-size: var(--fF);
   font-weight: 600;
+}
+
+.site-header .project-id {
+  font-size: var(--fD);
 }
 
 .logout-button {
@@ -116,7 +121,7 @@ body {
 
 .session-list-element .time {
   margin-bottom: var(--sB);
-  color: #547b99;
+  color: #466a86;
 
 }
 

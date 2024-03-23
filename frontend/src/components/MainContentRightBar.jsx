@@ -4,7 +4,7 @@ import RightBarEventListElement from './singles/RightBarEventListElement'
 import Map from "./singles/Map"
 import SessionMetadataTable from "./singles/SessionMetadataTable"
 
-import { short } from "../helpers/dataFormatters"
+import { shorten } from "../helpers/dataFormatters"
 
 const MainContentRightBar = ({session}) => {
 
@@ -12,7 +12,7 @@ const MainContentRightBar = ({session}) => {
     <div className="main-right-bar">
 
       <div className="main-right-bar-session-details">
-        <h2>Session {`#${short(session.id)}`}</h2>
+        <h2>Session {`#${shorten(session.id)}`}</h2>
         <Map session={session}/>
         <SessionMetadataTable session={session} /> 
       </div>
