@@ -1,4 +1,4 @@
-import subprocess, sys, uuid, requests
+import subprocess, sys, uuid, requests, bcrypt
 
 UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
@@ -48,7 +48,9 @@ def pw_credentials():
     password = input()
     prompt, valid_password = validate_credentials(password, 8, 64)
 
-  return password
+  password = password.encode()
+  salt = bcrypt.gensalt() 
+  return bcrypt.hashpw(password, salt).decode("utf-8")
 
 def validate_credentials(entry, min, max):
   if len(entry) < min: 
