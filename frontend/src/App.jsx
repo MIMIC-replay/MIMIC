@@ -23,7 +23,12 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [project, setProject] = useState(null)
+
+  // TEST:
+  const [project, setProject] = useState({id: 1234123, name: 'super_project'})
+
+  // const [project, setProject] = useState(null)
+
   const match = useMatch('/sessions/:id')
 
   useEffect(() => {
@@ -87,7 +92,8 @@ function App() {
       window.localStorage.clear()
     }
         
-    document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
+    document.title = 
+      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${short(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => String(s.id).includes(string))
@@ -106,7 +112,7 @@ function App() {
       return (
         <div className="main-grid">
       <Notification notification={notification}/>
-      <SiteHeader handleLogout={handleLogout}/>
+      <SiteHeader handleLogout={handleLogout} project={project}/>
       
       <LeftBar
         sessions={sessionsInList}

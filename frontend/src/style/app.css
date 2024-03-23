@@ -27,7 +27,7 @@ body {
 
 /* Header */
 
-.main-grid > header {
+.site-header {
   grid-area: header;
   border-bottom: var(--main-components-border);
   padding: var(--sB);
@@ -40,6 +40,11 @@ body {
 
 .site-logo {
   height: var(--sE);
+}
+
+.site-header .project-name {
+  font-size: var(--fE);
+  font-weight: 600;
 }
 
 .logout-button {
@@ -312,8 +317,6 @@ td.request-name {
 .HEAD {
   color: var(--head-color);
 }
-
-
 
 /* Extra Info Logs */
 
