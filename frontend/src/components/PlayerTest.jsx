@@ -105,8 +105,12 @@ const PlayerControls = ({player}) => {
 
   return (
     <div className="player-controls">
-      <button>Play</button>
-      <button>Pause</button>
+      <button
+        onClick={() => player.play()}
+        >Play</button>
+      <button
+        onClick={() => player.pause()}
+      >Pause</button>
     </div>    
   )
 }
