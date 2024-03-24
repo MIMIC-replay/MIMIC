@@ -108,9 +108,49 @@ export const errorTrigger = (error) => {
   return triggerMatch
 }
 
+export const traceDataExtractor = (traceElement) => {
+  const functionCall = traceElement.match(/^(.+) /)[1]
+  const link = traceElement.match(/\((.+)\)$/)[1]
+  return {
+    functionCall,
+    link,
+  }
+}
+
 export const line = (error) => {
   const errorLineMatch = error.data.payload.trace[0].match(/(\d+:\d+)\)$/)[1]
   return errorLineMatch
+}
+
+export const recentEventsFromError = (error, events) => {
+  const MAX_EVENTS = 7
+  if (events.length <= MAX_EVENTS) return events
+  
+  /*
+     get error timestamp
+     traverse events in reverse order
+     if timestamp is greater, skip
+     if timestamp is smaller, get index, return
+
+     return events: [i - 2, i - 1, i]
+  */
+
+  // TO OPTIMIZE = MAKE IT O(LOG)
+  const errorTimestamp = error.timestamp
+  let event
+  let index
+  for (index = events.length - 1; index >= MAX_EVENTS; index -= 1) {
+    event = events[index]
+
+    if (errorTimestamp <= event.timestamp) break
+  }
+
+  let result = []
+  for (let i = index - (MAX_EVENTS - 1); i <= index; i++) {
+    result.push(events[i])
+  }
+
+  return result
 }
 
 export const originalViewport = (session) => {
