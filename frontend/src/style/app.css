@@ -420,6 +420,7 @@ td.request-name {
 .main-right-bar-session-tabs-content ul {
   display: flex;
   flex-direction: column;
+  height: 350px;
   /* gap: var(--sB); */
 }
 
