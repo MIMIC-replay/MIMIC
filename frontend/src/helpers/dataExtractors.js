@@ -68,11 +68,18 @@ export const eventDataExtractor = (event, session) => {
 }
 
 export const relativeTime = (event, session) => {
+  // const initialTimestamp = session.events[0].timestamp
+  // const timestamp = event.timestamp
+
+  // const relativeSeconds = (timestamp - initialTimestamp) / 1000
+  return formatTime(relativeSeconds(event, session))
+}
+
+export const relativeSeconds = (event, session) => {
   const initialTimestamp = session.events[0].timestamp
   const timestamp = event.timestamp
 
-  const relativeSeconds = (timestamp - initialTimestamp) / 1000
-  return formatTime(relativeSeconds)
+  return (timestamp - initialTimestamp) / 1000
 }
 
 // Function to convert seconds to the formatted time string (mm:ss)
