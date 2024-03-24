@@ -197,9 +197,9 @@ body {
 /* Player */
 
 #replayer {
-  /* width: auto; */
+  width: auto;
 
-  width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
+  min-width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
 
   display: flex;
   align-items: center;
