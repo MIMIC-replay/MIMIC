@@ -434,10 +434,6 @@ td.request-name {
   background-color: rgb(39, 77, 90);
 }
 
-/* .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
-  border-top-right-radius: var(--general-border-radius);
-}  */
-
 .right-bar-event-element:hover {
   background-color: rgb(39, 77, 90);
 
