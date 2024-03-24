@@ -164,10 +164,10 @@ body {
 .main-content-area {
   display: grid;
   grid-area: main-content-area;
-  grid-template: var(--sF) var(--sN) auto / auto var(--sM);
+  grid-template: var(--sF) var(--sM) var(--sN) / auto var(--sM);
   grid-template-areas: 
     "content-header content-header"
-    "player main-right-bar"
+    "player-area main-right-bar"
     "extra-info main-right-bar";
 
   border: var(--main-components-border);
@@ -196,6 +196,10 @@ body {
 
 /* Player */
 
+.player-area {
+  grid-area: player-area;
+}
+
 #replayer {
   width: auto;
 
@@ -209,7 +213,8 @@ body {
 
 .player-controls {
   background-color: teal;
-  height: 100px;
+  /* border: var(--main-components-border); */
+  height: var(--sE);
 }
 
 /* Extra info */
@@ -217,7 +222,8 @@ body {
 .extra-info {
   grid-area: extra-info;
   overflow: auto;
-  height: var(--sM);
+  /* height: var(--sM); */
+  height: 62vh;
   padding: var(--sD);
   background-color: var(--light-background-color);
 }

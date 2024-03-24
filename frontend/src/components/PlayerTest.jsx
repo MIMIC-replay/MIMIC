@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react"
 
 import rrwebPlayer from 'rrweb-player';
@@ -10,7 +11,7 @@ const PlayerTest = ({session}) => {
   useEffect(() => {
     if (session.events.length < 1) return
 
-    (async () => {
+    (() => {
 
       let replayerDiv = document.getElementById("replayer")
 
@@ -19,6 +20,7 @@ const PlayerTest = ({session}) => {
       }
   
       try {
+        console.log('player activated')
         const newPlayer = 
           new rrwebPlayer({
             target: document.getElementById("replayer"),
@@ -70,9 +72,42 @@ const PlayerTest = ({session}) => {
 
   return (
     <div className="player-area"> 
-      <div id="replayer"></div>    
-      <div className="player-controls"></div>    
+      <div id="replayer"></div>
+      <PlayerControls player={player}/>    
     </div>
+  )
+}
+
+const PlayerControls = ({player}) => {
+  const [searchParams] = useSearchParams();
+
+  const playerNavigate = async (player) => {
+    let playerState
+
+    player.addEventListener('ui-update-current-state', (event) => {
+      playerState = event.payload
+    })
+    
+    const seconds = searchParams.get('time')
+
+    if (playerState === "paused") {
+      player.play(); // prevents session replay from restarting from beginning if replay was at end
+      player.goto(Math.floor(seconds * 1000));
+      player.pause(); // returns to paused state for UX
+    } else {
+      player.goto(Math.floor(seconds * 1000));
+    }
+  }
+
+  if (searchParams.get('time') && player) {
+    playerNavigate(player)
+  }
+
+  return (
+    <div className="player-controls">
+      <button>Play</button>
+      <button>Pause</button>
+    </div>    
   )
 }
 
