@@ -29,7 +29,7 @@ const PlayerTest = ({session}) => {
               // showController: false,
               width: 600,
               height: 270,
-              autoPlay: true,
+              // autoPlay: true,
             },
           })
         
@@ -43,33 +43,6 @@ const PlayerTest = ({session}) => {
     })() 
   }, [session])
 
-  // const loadSessionPlayer = async () => {
-  //   let replayerDiv = document.getElementById("replayer")
-
-  //   if (replayerDiv.firstChild) {
-  //     replayerDiv.removeChild(replayerDiv.firstChild)
-  //   }
-
-  //   try {
-  //     const newPlayer = 
-  //       new rrwebPlayer({
-  //         target: document.getElementById("replayer"),
-  //         props: {
-  //           events: session.events,
-  //           // showController: false,
-  //           width: 600,
-  //           height: 270,
-  //           autoPlay: true,
-  //         },
-  //       })
-      
-  //     return newPlayer
-
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   return (
     <div className="player-area"> 
       <div id="replayer"></div>
@@ -79,9 +52,10 @@ const PlayerTest = ({session}) => {
 }
 
 const PlayerControls = ({player}) => {
-  const [searchParams] = useSearchParams();
-
-  const playerNavigate = async (player) => {
+  const [searchParams] = useSearchParams()
+  const [playing, setPlaying] = useState(false)
+  
+  const playerNavigate = (player) => {
     let playerState
 
     player.addEventListener('ui-update-current-state', (event) => {
@@ -90,7 +64,7 @@ const PlayerControls = ({player}) => {
     
     const seconds = searchParams.get('time')
 
-    if (playerState === "paused") {
+    if (playerState === 'paused') {
       player.play(); // prevents session replay from restarting from beginning if replay was at end
       player.goto(Math.floor(seconds * 1000));
       player.pause(); // returns to paused state for UX
@@ -101,16 +75,38 @@ const PlayerControls = ({player}) => {
 
   if (searchParams.get('time') && player) {
     playerNavigate(player)
+    // setPlaying(true)
+  }
+
+  // const play = () => {
+  //   if (playing) return
+
+  //   player.play()
+  //   setPlaying(true)
+  // }
+
+  const pause = () => {
+    player.pause()
+    setPlaying(false)
   }
 
   return (
     <div className="player-controls">
       <button
-        onClick={() => player.play()}
-        >Play</button>
+        onClick={() => player.toggle()}
+      >
+        ⏯
+      </button>
       <button
-        onClick={() => player.pause()}
-      >Pause</button>
+        onClick={pause}
+      >
+        ⏸
+      </button>
+      <button
+        onClick={pause}
+      >
+        💻
+      </button>
     </div>    
   )
 }
