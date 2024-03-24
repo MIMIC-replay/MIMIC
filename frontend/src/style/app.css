@@ -197,15 +197,19 @@ body {
 /* Player */
 
 #replayer {
-  width: auto;
+  /* width: auto; */
 
-  min-width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
+  width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
 
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: var(--main-components-border);
+}
 
+.player-controls {
+  background-color: teal;
+  height: 100px;
 }
 
 /* Extra info */
@@ -433,6 +437,11 @@ td.request-name {
 /* .main-right-bar-session-tabs-container .tab-button:nth-child(2) {
   border-top-right-radius: var(--general-border-radius);
 }  */
+
+.right-bar-event-element:hover {
+  background-color: rgb(39, 77, 90);
+
+}
 
 .right-bar-event-element div {
   display: flex;
