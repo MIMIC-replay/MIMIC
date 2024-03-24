@@ -414,12 +414,12 @@ td.request-name {
 .main-right-bar-session-tabs-content ul {
   display: flex;
   flex-direction: column;
-  gap: var(--sB);
+  /* gap: var(--sB); */
 }
 
 .main-right-bar-session-tabs-content ul li {
   border-bottom: var(--main-components-border);
-  padding: var(--sA);
+  padding: var(--sB) var(--sB);
   padding-left: var(--sC);
   border-color: var(--cJ);
 }
