@@ -161,6 +161,8 @@
   --cJ: hsl(197, 57%, 24%);
   --cK: hsl(198, 71%, 7%);
 
+  --low-contrast-font:  #466a86;
+
   /* Methods */
 
   --get-color:rgb(80, 204, 133);
@@ -169,6 +171,7 @@
   --delete-color:rgb(194, 73, 87);
   --patch-color:rgb(240, 225, 55);
   --head-color:rgb(209, 162, 238);
+
 
   /* Accents */
 
