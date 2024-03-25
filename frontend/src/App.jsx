@@ -93,7 +93,7 @@ function App() {
     }
         
     document.title = 
-      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
+      `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => String(s.id).includes(string))
