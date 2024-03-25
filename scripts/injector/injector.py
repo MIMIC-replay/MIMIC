@@ -1,7 +1,12 @@
 from bs4 import BeautifulSoup, Comment
-import glob
+import glob, os
+
+root_dir = os.path.dirname(__file__)
 
 def inject_scripts(raw_file):
+  current_dir = os.path.dirname(raw_file)
+  rel_dir = os.path.relpath(root_dir, current_dir)
+
   with open(raw_file, 'r') as file:
     html_content = file.read()
     if "Mimic Start" in html_content: 
@@ -14,7 +19,7 @@ def inject_scripts(raw_file):
     rrweb_script['class'] = 'mimic'
 
     mimic_script = soup.new_tag('script')
-    mimic_script['src'] = "./script.mimic.js"
+    mimic_script['src'] = os.path.join(rel_dir, 'script.mimic.js') #"./script.mimic.js"
     mimic_script['class'] = 'mimic'
 
     soup.head.extend([ 
