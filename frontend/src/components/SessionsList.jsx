@@ -1,6 +1,7 @@
 import SessionElement from "./singles/SessionElement"
 
 const SessionsList = ({sessions, currentSession, setCurrentSession, searchMode}) => {
+  if (!sessions) return
 
   const changeSession = (session) => {
     // if (session === currentSession) return
@@ -19,6 +20,7 @@ const SessionsList = ({sessions, currentSession, setCurrentSession, searchMode})
       player.removeChild(player.firstChild)
     }
   }
+  
 
   return (
     <div className="sessions-container">
