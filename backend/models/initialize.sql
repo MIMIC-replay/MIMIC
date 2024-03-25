@@ -20,7 +20,7 @@ CREATE TABLE sessions (
   project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
   -- session_data bytea NOT NULL, --compressed blob data
   session_start timestamp NOT NULL DEFAULT NOW(),
-  -- session_end timestamp NOT NULL DEFAULT NOW(),
+  session_end timestamp,
   -- has_rage_clicks boolean NOT NULL,
   -- has_errors boolean NOT NULL,
   url varchar(100), 

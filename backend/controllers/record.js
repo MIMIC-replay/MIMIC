@@ -3,6 +3,7 @@ const express = require("express");
 const recordRouter = express.Router();
 const logger = require("../utils/logger.js");
 const postgres = require("../models/postgres.js");
+const redis = require("../models/redis.js");
 
 const {
   extractMetadata,
@@ -12,38 +13,46 @@ const {
 } = require("../utils/recordHelpers.js");
 
 const app = express();
-const currentSessions = {};
-
-const userMetadata = {
-  ip: null,
-  browser: null,
-  os: null,
-  location: {},
-  https: null,
-  url: null,
-};
+const SESSION_DURATION = 10000;
 
 recordRouter.post("/", async (req, res) => {
   console.log("sessionData is: ", req.sessionData);
   const sessionId = req.sessionData.id;
   const batchOfEvents = req.body;
 
-  if (batchOfEvents.length === 0 && currentSessions[sessionId]) {
-    res.sendStatus(200);
-    console.log(`No new events to store. Current ID is ${sessionId}`)
-  } else if (currentSessions[sessionId]) {
-    currentSessions[sessionId].push(batchOfEvents);
-    const allEventsCompressed = compressEvents(currentSessions[sessionId]);
-    updateSessionEvents(allEventsCompressed, sessionId, res);
+  const keyExists = await redis.publisher.json.type(sessionId);
+  if (keyExists) {
+    // if the batch wasn't empty - so we don't make unneccesary requests to redis
+    if (batchOfEvents.length > 0) {
+      //json.arrAppend adds the JSON values to the end of the array
+      await redis.publisher.json.arrAppend(sessionId, "$", batchOfEvents);
+    }
   } else {
-    const projectId = req.get("Project-ID")
-    console.log("The project ID is: ", projectId)
-    currentSessions[sessionId] = [batchOfEvents];
-    const allEventsCompressed = compressEvents(currentSessions[sessionId]);
+    const projectId = req.get("Project-ID");
+    console.log("The project ID is: ", projectId);
+
+    const userMetadata = {
+      ip: null,
+      browser: null,
+      os: null,
+      location: {},
+      https: null,
+      url: null,
+    };
     await extractMetadata(req, userMetadata);
     console.log("Updated metadata: ", userMetadata);
-    createNewSession(allEventsCompressed, sessionId, userMetadata, projectId, res);
+
+    //JSON.SET: Will creates new path adds the values to a JSON object.
+    //$ represents root path
+    await redis.publisher.json.set(sessionId, "$", [batchOfEvents]);
+    await redis.publisher.set(sessionId + "_exp", "");
+
+    createNewSession(sessionId, userMetadata, projectId, res);
   }
+  console.log("events saved");
+  // Refresh (reset) expiry time for the key
+  redis.publisher.expire(sessionId + "_exp", SESSION_DURATION / 1000);
+  return res.sendStatus(200);
 });
 
 module.exports = recordRouter;
