@@ -1,9 +1,7 @@
 const { createClient } = require("redis");
-const {
-  compressEvents,
-  uploadToEventStorage,
-} = require("../utils/recordHelpers");
+const { compressEvents } = require("../utils/recordHelpers");
 const { updateSessionEndTime } = require("../utils/sessionHelpers");
+const { uploadToEventStorage } = require("../models/minio");
 
 // redis connection (will act as publisher of expiration messages and main data mangement client)
 const publisher = createClient({

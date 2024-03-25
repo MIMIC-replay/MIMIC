@@ -23,5 +23,5 @@ module.exports = {
   MINIO_USER_PASSWORD,
   MINIO_URL,
   MINIO_PORT,
-  SECRET
+  SECRET,
 };

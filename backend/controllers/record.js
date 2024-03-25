@@ -1,14 +1,10 @@
 const express = require("express");
 
 const recordRouter = express.Router();
-const logger = require("../utils/logger.js");
-const postgres = require("../models/postgres.js");
 const redis = require("../models/redis.js");
 
 const {
   extractMetadata,
-  compressEvents,
-  updateSessionEvents,
   createNewSession,
 } = require("../utils/recordHelpers.js");
 
