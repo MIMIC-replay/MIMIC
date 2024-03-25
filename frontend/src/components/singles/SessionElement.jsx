@@ -54,7 +54,7 @@ const MiniChart = ({session}) => {
   return (
     <div className='session-element-latency-chart'>
       <p className='latency'>Latency</p>
-      <LineChart width={200} height={85} data={data}>
+      <LineChart width={225} height={85} data={data}>
         <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false}/>
       </LineChart>
     </div>

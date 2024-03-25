@@ -148,25 +148,33 @@ body {
 }
 
 .session-list-element:hover {
-  background-color: #4b6c86;
+  background-color: var(--table-key);
 }
 
 .session-numbers {
   display: flex;
   align-items: center;
-  gap: var(--sC) ;
+  gap: var(--sA);
+}
+
+.session-numbers p {
+  width: 50px;
 }
 
 .session-numbers svg {
   /* border: 1px solid pink; */
   padding: 0px;
-  margin: 0px;
+  /* margin: 0px; */
   height: var(--sC);
 }
 
 .session-numbers .number {
   font-size: var(--fB);
   margin-left: var(--sA);
+}
+
+.session-numbers .numbers-duration {
+  width: 60px;
 }
 
 
@@ -285,7 +293,21 @@ body {
 }
 
 .extra-info-content th:first-child {
-  width: var(--sF);
+  width: var(--sG);
+}
+
+.extra-info-content th:nth-child(2),
+.console-logs-type-header {
+  width: var(--sI);
+}
+
+.errors-list th:nth-child(2) {
+  width: var(--sK);
+}
+
+.errors-list-trigger-header {
+  width: var(--sK);
+  background-color: aqua;
 }
 
 /* Extra info -- requests table */
@@ -330,6 +352,7 @@ td.request-name {
   text-align: left;
 }
 
+
 /* Method colors */
 
 .POST {
@@ -369,7 +392,7 @@ td.request-name {
 .request:hover,
 .error:hover {
   cursor: pointer;
-  background-color: #4b6c86;
+  background-color: var(--table-key);
 }
 
 /* Main content right bar */
@@ -465,10 +488,11 @@ td.request-name {
 
 .main-right-bar-session-tabs-content ul li {
   border-bottom: var(--main-components-border);
-  padding: var(--sB) var(--sB);
-  padding-left: var(--sC);
+  /* padding: var(--sB) var(--sB);
+  padding-left: var(--sC); */
   border-color: var(--cJ);
 }
+
 
 .main-right-bar-session-tabs-container .tab-button {
   border-top-right-radius: var(--general-border-radius);
@@ -481,8 +505,8 @@ td.request-name {
 }
 
 .right-bar-event-element:hover {
-  background-color: var(--cK);
-
+  /* background-color: var(--cK); */
+  background-color: var(--table-key);
 }
 
 .right-bar-event-element div {
@@ -490,6 +514,7 @@ td.request-name {
   gap: var(--sF);
   align-items: center;
   /* justify-content: space-between; */
+  padding: var(--sB)
 }
 
 .right-bar-event-element div p {
@@ -521,3 +546,4 @@ td.request-name {
   color: rgb(31, 29, 39);
 }
 
+/* To Remove Later */
