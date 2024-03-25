@@ -1,6 +1,9 @@
+import SearchIcon from "../iconComponents/search"
+
 const Search = ({searchSessions}) => {
   return (
     <div className="search">
+      <SearchIcon/>
       <input
         className="search-input" 
         type="text" 
