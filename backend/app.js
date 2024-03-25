@@ -33,20 +33,20 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cookieParser());
 app.set("trust proxy", true);
 
-app.use(middleware.sessionCookie);
-
 const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");
 const sessionRouter = require("./controllers/session.js");
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 
-app.use("/api/record", recordRouter);
 app.use("/api/test", testRouter);
 app.use("/api/project", sessionRouter);
 
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+
+app.use(middleware.sessionCookie);
+app.use("/api/record", recordRouter);
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler); // needs to be below all routes for all to use
