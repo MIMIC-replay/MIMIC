@@ -209,6 +209,8 @@ body {
 
 .player-area {
   grid-area: player-area;
+  display: flex;
+  flex-direction: column;
 }
 
 #replayer {
@@ -223,8 +225,10 @@ body {
 }
 
 .player-controls {
+  margin-top: auto;
   background-color: var(--cK);
   /* border: var(--main-components-border); */
+  border-top: var(--main-components-border);
   border-bottom: var(--main-components-border);
   height: var(--sE);
 }
