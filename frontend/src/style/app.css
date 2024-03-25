@@ -294,6 +294,10 @@ body {
   width: 100%;
 }
 
+.extra-info td {
+  cursor: pointer;
+}
+
 .network-requests tr, 
 .console-logs tr,
 .errors-list tr {
@@ -361,6 +365,8 @@ td.request-name {
 
 /* Extra Info Errors  */
 
+.log:hover,
+.request:hover,
 .error:hover {
   cursor: pointer;
   background-color: #4b6c86;

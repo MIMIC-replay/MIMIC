@@ -1,10 +1,15 @@
-import { eventDataExtractor } from "../../helpers/dataExtractors"
+import { useNavigate, useLocation} from "react-router-dom"
+
+import { eventDataExtractor, relativeSeconds } from "../../helpers/dataExtractors"
 
 const Request = ({request, session}) => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const {time, type, method, latency, url, responseStatus} = eventDataExtractor(request, session)
-
+  const seconds = Math.floor(relativeSeconds(request, session))
+  
   return (
-    <tr className='request'>
+    <tr className='request' onClick={() => navigate(`${location.pathname}?time=${seconds}`)}>
       <td>{time}</td>
       <td>{type}</td>
       <td className={method}>{method}</td>
