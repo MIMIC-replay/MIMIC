@@ -238,8 +238,8 @@ body {
 .extra-info {
   grid-area: extra-info;
   overflow: auto;
-  /* height: var(--sM); */
-  height: 62vh;
+  max-height: auto;
+  /* height: 62vh; */
   padding: var(--sD);
   background-color: var(--light-background-color);
 }
