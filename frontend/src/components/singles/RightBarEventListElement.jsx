@@ -1,4 +1,6 @@
-import { eventAnalyzer, relativeTime } from "../../helpers/dataExtractors"
+import { Link, useLocation } from "react-router-dom"
+
+import { eventAnalyzer, relativeSeconds, relativeTime } from "../../helpers/dataExtractors"
 import MouseIcon from "../iconComponents/mouse"
 import NetworkIcon from "../iconComponents/network"
 import MetaIcon from "../iconComponents/meta"
@@ -9,7 +11,7 @@ import CustomIcon from "../iconComponents/custom"
 import PluginIcon from "../iconComponents/plugin"
 
 const RightBarEventListElement = ({event, session}) =>{
-  
+  const location = useLocation()
   // {
   //   numberType,
   //   decodedType,
@@ -29,11 +31,16 @@ const RightBarEventListElement = ({event, session}) =>{
 
   return (
     <li className="right-bar-event-element">
-      <div>
-        <p>{time}</p>
-        <EventTypeIcon eventData={eventData}/>
-        <p>{type}</p>
-      </div>
+      <Link
+        to={`${location.pathname}?time=${Math.floor(relativeSeconds(event, session))}`}
+      >
+        <div>
+          <p>{time}</p>
+          <EventTypeIcon eventData={eventData}/>
+          <p>{type}</p>
+        </div>
+
+      </Link>
     </li>
   )  
 }

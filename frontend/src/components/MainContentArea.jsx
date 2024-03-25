@@ -1,35 +1,28 @@
+// import { useState, useEffect } from "react"
+
 import ExtraInfo from "./ExtraInfo"
-
-import PlayerTest from "./PlayerTest"
-
 import MainContentRightBar from "./MainContentRightBar"
 import SessionContentHeader from './singles/SessionContentHeader'
-
+import PlayerArea from "./PlayerArea"
+import { useEffect, useState } from "react"
+import PlayerTest from "./PlayerTest"
 
 const MainContentArea = ({session}) => {
+  // const [events, setEvents] = useState([])
+
+  // useEffect(() => {
+  //   if (!session) return 
+  // }, [session])
+
+  // useEffect()
+
   if (!session) return
-  
+
   return (
     <section className="main-content-area">
       <SessionContentHeader session={session}/>
-
-      {/* 
-      
-      
-        <div className="player">Player <div className="screen">Screen</div></div>
-
-        <div className="player-controls">
-
-          <div className="controls">
-            <span>⏪⏯⏩</span>
-              <span className="right-controls">📶🔁</span>
-          </div>
-
-        </div> 
-      
-      
-      */}
         
+      {/* <PlayerArea session={session}/> */}
       <PlayerTest session={session}/>
 
       <ExtraInfo session={session}/>

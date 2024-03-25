@@ -12,7 +12,7 @@ import LeftBar from "./components/LeftBar"
 import MainContentArea from "./components/MainContentArea"
 import Notification from "./components/singles/Notification"
 
-import { short } from "./helpers/dataFormatters"
+import { shorten } from "./helpers/dataFormatters"
 
 import { getSessions, setToken } from "./services/sessions"
 import LoginForm from "./components/login/LoginForm"
@@ -24,6 +24,11 @@ function App() {
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
   const [project, setProject] = useState(null)
+
+  // DEVELOPMENT:
+  // const [project, setProject] = useState({id: 1234123, name: 'super_project'})
+
+
   const match = useMatch('/sessions/:id')
 
   useEffect(() => {
@@ -87,7 +92,8 @@ function App() {
       window.localStorage.clear()
     }
         
-    document.title = `M I M I C${currentSession ? ` #${short(currentSession.id)}` : ''}`
+    document.title = 
+      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => String(s.id).includes(string))
@@ -106,7 +112,7 @@ function App() {
       return (
         <div className="main-grid">
       <Notification notification={notification}/>
-      <SiteHeader handleLogout={handleLogout}/>
+      <SiteHeader handleLogout={handleLogout} project={project}/>
       
       <LeftBar
         sessions={sessionsInList}

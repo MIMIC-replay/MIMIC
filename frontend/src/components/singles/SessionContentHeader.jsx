@@ -1,5 +1,5 @@
 import { getDeviceFromSize, originalViewport, sessionMetadataExtractor } from "../../helpers/dataExtractors"
-import { short } from "../../helpers/dataFormatters"
+import { shorten } from "../../helpers/dataFormatters"
 
 const SessionContentHeader = ({session}) => {
   const {id, url, https} = sessionMetadataExtractor(session)
@@ -10,7 +10,7 @@ const SessionContentHeader = ({session}) => {
       - 
       <DeviceIcon session={session} />
       <p>Session 
-        <span className="header-session-id">{`#${short(id)}`}</span>
+        <span className="header-session-id">{` #${shorten(id)}`}</span>
         {` -  ${url}`}
       </p>
     </header>

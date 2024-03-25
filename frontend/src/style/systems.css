@@ -124,10 +124,12 @@
 
   --border-color: #1a8494;
 
-  --background-color:  hsl(210, 6%, 7%);
+  --background-color:  hsl(210, 6%, 4%);
   --light-background-color:  hsl(0, 0%, 9%);
 
   --general-font-color: #b7bfc9;
+
+  --table-key: #4b6c86;
 
   /*
 
@@ -161,6 +163,8 @@
   --cJ: hsl(197, 57%, 24%);
   --cK: hsl(198, 71%, 7%);
 
+  --low-contrast-font:  #466a86;
+
   /* Methods */
 
   --get-color:rgb(80, 204, 133);
@@ -169,6 +173,7 @@
   --delete-color:rgb(194, 73, 87);
   --patch-color:rgb(240, 225, 55);
   --head-color:rgb(209, 162, 238);
+
 
   /* Accents */
 

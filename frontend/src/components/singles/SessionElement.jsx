@@ -1,6 +1,6 @@
 import { LineChart, Line } from 'recharts';
 
-import { short } from '../../helpers/dataFormatters';
+import { shorten } from '../../helpers/dataFormatters';
 
 import {
   Link,
@@ -20,14 +20,16 @@ const SessionElement = ({session, currentSession, setCurrentSession}) => {
 
   return (
     <Link 
-      to={`/sessions/${short(session.id).toLowerCase()}`} 
+      to={`/sessions/${shorten(session.id).toLowerCase()}`} 
       onClick={() => setCurrentSession(session)}
     >
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
-        <p className='id'>{`#${searchMode ? session.id.toUpperCase() : short(session.id)}`}</p>
+        <p className='id'>{`#${searchMode ? session.id.toUpperCase() : shorten(session.id)}`}</p>
         <p className='time'>{`${date} at ${exactTime}`}</p>
-        <p>Latency: </p>
-        <MiniChart session={session}/>
+        <div className='session-element-latency-chart'>
+          <p className='latency'>Latency</p>
+          <MiniChart session={session}/>
+        </div>
         <div className='session-numbers'>
           <p className='numbers-network'>{<NetworkIcon/>}<span className='number'>{session.network.length}</span> </p>
           <p className='numbers-logs'>{<LogsIcon/>}<span className='number'>{session.logs.length}</span> </p>
@@ -45,7 +47,7 @@ const MiniChart = ({session}) => {
                              .map(e => { return {...e.data} })
 
   return (
-    <LineChart width={200} height={50} data={data}>
+    <LineChart width={200} height={85} data={data}>
       <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false}/>
     </LineChart>
   )
