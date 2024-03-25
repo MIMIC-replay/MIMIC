@@ -23,7 +23,8 @@
 }
 
 [class*="plugin"]{
-  fill: none;
+  stroke: rgb(219, 219, 219);
+  fill: none
 }
 
 [class*="user"]{
