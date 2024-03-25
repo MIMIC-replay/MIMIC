@@ -126,6 +126,18 @@ body {
 
 }
 
+.session-element-latency-chart {
+  display: flex;
+}
+
+.session-element-latency-chart .latency {
+  font-size: var(--sB);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-weight: 600;
+}
+
+
 .session-list-element.active {
   border-left: 7px solid var(--complementary);
   padding-left: calc(var(--sC) - 6px);
@@ -392,7 +404,7 @@ td.request-name {
 }
 
 .main-right-bar-session-details h2 {
-  color: #e6813a;
+  color: var(--complementary);
   font-weight: bold;
   font-size: var(--fE);
 }
@@ -402,7 +414,7 @@ td.request-name {
 }
 
 .main-right-bar-key {
-  color: #4b6c86;
+  color: var(--table-key);
 }
 
 .main-right-bar-session-tabs-buttons {
