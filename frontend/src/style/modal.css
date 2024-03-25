@@ -102,7 +102,7 @@
 
 .modal .last-three-events > h2, 
 .modal .metadata > h2 {
-  background-color: teal;
+  background-color: var(--cK);
   padding: var(--sA);
 }
 
@@ -138,7 +138,7 @@
 
 .modal .stacktrace thead {
   font-family: var(--general-font);
-  background-color: teal;
+  background-color: var(--cK);
 }
 
 .stacktrace .trace-header-index {

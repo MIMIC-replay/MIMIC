@@ -211,8 +211,9 @@ body {
 }
 
 .player-controls {
-  background-color: teal;
+  background-color: var(--cK);
   /* border: var(--main-components-border); */
+  border-bottom: var(--main-components-border);
   height: var(--sE);
 }
 
@@ -241,7 +242,7 @@ body {
 }
 
 .tab-button {
-  background-color: rgb(39, 77, 90);
+  background-color: var(--cK);
   color:  rgb(66, 133, 155);
 }
 
@@ -285,8 +286,8 @@ body {
 .network-requests th, 
 .console-logs th,
 .errors-list th {
-  background-color: rgb(39, 77, 90);
-  color: rgb(70, 148, 158);
+  background-color: var(--cK);
+  color: var(--cD);
 }
 
 .network-requests th, .network-requests td, 
@@ -417,6 +418,7 @@ td.request-name {
 
 .events-search input {
   background-color: transparent;
+  color: var(--general-font-color)
 }
 
 .main-right-bar-session-tabs-content {
@@ -452,11 +454,11 @@ td.request-name {
 }
 
 .main-right-bar-session-tabs-container .tab-button:hover {
-  background-color: rgb(39, 77, 90);
+  background-color: var(--cK);
 }
 
 .right-bar-event-element:hover {
-  background-color: rgb(39, 77, 90);
+  background-color: var(--cK);
 
 }
 
