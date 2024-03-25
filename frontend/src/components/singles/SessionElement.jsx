@@ -26,10 +26,9 @@ const SessionElement = ({session, currentSession, setCurrentSession}) => {
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
         <p className='id'>{`#${searchMode ? session.id.toUpperCase() : shorten(session.id)}`}</p>
         <p className='time'>{`${date} at ${exactTime}`}</p>
-        <div className='session-element-latency-chart'>
-          <p className='latency'>Latency</p>
-          <MiniChart session={session}/>
-        </div>
+
+        <MiniChart session={session}/>
+
         <div className='session-numbers'>
           <p className='numbers-network'>{<NetworkIcon/>}<span className='number'>{session.network.length}</span> </p>
           <p className='numbers-logs'>{<LogsIcon/>}<span className='number'>{session.logs.length}</span> </p>
@@ -46,10 +45,19 @@ const MiniChart = ({session}) => {
   const data = session.events.filter(e => e.data.type !== 'WebSocket' && e.data.latency )
                              .map(e => { return {...e.data} })
 
+  if (data.length < 1) return (
+    <div className='session-element-latency-chart'>
+      <p>No network requests yet!</p>
+    </div>
+  )
+
   return (
-    <LineChart width={200} height={85} data={data}>
-      <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false}/>
-    </LineChart>
+    <div className='session-element-latency-chart'>
+      <p className='latency'>Latency</p>
+      <LineChart width={200} height={85} data={data}>
+        <Line type="monotone" dataKey="latency" stroke="#8884d8" dot={false}/>
+      </LineChart>
+    </div>
   )
 }
 
