@@ -14,9 +14,6 @@ const minioClient = new Minio.Client({
   secretKey: config.MINIO_USER_PASSWORD,
 });
 
-const bcrypt = require('bcrypt');
-const saltRounds = 12;
-
 const addProjectCredentials = (
   projectId,
   projectName,
@@ -24,25 +21,22 @@ const addProjectCredentials = (
   res
 ) => {
 
-  bcrypt.hash(projectPassword, saltRounds, function (err, hash) {
-    postgres.db
-      .one(
-        "INSERT INTO projects (id, name, password_hash) VALUES($1, $2, $3) RETURNING id",
-        [projectId, projectName, hash],
-        (project) => project.id
-      )
-      .then((data) => {
-        res.sendStatus(200);
-        console.log(
-          `Successfully added new project to database. The project ID is ${projectId}`
-        );
-      })
-      .catch((error) => {
-        res.sendStatus(500);
-        console.log("Unable to add new project ID to PostgreSQL:", error.message);
-      });
-
-  })
+  postgres.db
+    .one(
+      "INSERT INTO projects (id, name, password_hash) VALUES($1, $2, $3) RETURNING id",
+      [projectId, projectName, projectPassword],
+      (project) => project.id
+    )
+    .then((data) => {
+      res.sendStatus(200);
+      console.log(
+        `Successfully added new project to database. The project ID is ${projectId}`
+      );
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log("Unable to add new project ID to PostgreSQL:", error.message);
+    });
 };
 
 const validateProjectName = (projectName, res) => {
