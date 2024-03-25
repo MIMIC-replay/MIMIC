@@ -161,11 +161,11 @@ export const recentEventsFromError = (error, events) => {
 }
 
 export const originalViewport = (session) => {
-  const viewport = session.events.find(e => String(e.type) === '4')
+  const viewport = session.events.find(e => e.data.width && e.data.height )
 
   return {
-    width: viewport.data.width,
-    height: viewport.data.height,
+    width: viewport ? viewport.data.width : 'x' ,
+    height: viewport ? viewport.data.height : 'y',
   }
 }
 
