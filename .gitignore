@@ -1,5 +1,6 @@
 .env
 node_modules
 .git-coauthors
-/backend/.env
-/backend/node_modules
+__pycache__
+package-lock.json
+script.mimic.js
