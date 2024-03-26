@@ -237,7 +237,7 @@ const save = () => {{
 
 const saveEventsInterval = setInterval(save, 5000);
 
-window.addEventListener("beforeunload", (e) => {{
+window.addEventListener("visibilitychange", (e) => {{
   stopRecording();
   clearInterval(saveEventsInterval);
   save();
