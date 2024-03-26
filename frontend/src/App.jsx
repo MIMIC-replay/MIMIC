@@ -4,7 +4,8 @@ import {
   Route, 
   Routes,
   useMatch,
-  Navigate
+  Navigate,
+  useNavigate
 } from 'react-router-dom'
 
 import SiteHeader from "./components/singles/SiteHeader"
@@ -30,6 +31,8 @@ function App() {
 
 
   const match = useMatch('/sessions/:id')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!project) return 
@@ -59,11 +62,12 @@ function App() {
 
     if (!session) {
       displayNotification({type: 'fail', message: 'invalid session id'})
+      navigate('/')
       return
     }
     
     setCurrentSession(findSessionById(match.params.id))
-  }, [sessions, findSessionById, match])
+  }, [sessions, findSessionById, match, navigate])
   
   
   useEffect(() => {
