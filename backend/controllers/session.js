@@ -1,7 +1,4 @@
 const express = require("express");
-
-const postgres = require("../models/postgres.js");
-const fflate = require("fflate");
 const sessionsRouter = express.Router();
 const {
   addProjectCredentials,
@@ -24,7 +21,7 @@ sessionsRouter.post("/new", async (req, res) => {
   // collects all new project IDs and add them to the database
   const projectId = req.body.projectId;
   const projectName = req.body.name;
-  const projectPassword = req.body.password
+  const projectPassword = req.body.password;
   addProjectCredentials(projectId, projectName, projectPassword, res);
 });
 

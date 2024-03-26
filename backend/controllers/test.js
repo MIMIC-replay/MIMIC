@@ -1,6 +1,5 @@
 const express = require("express");
 const testRouter = express.Router();
-const logger = require("../utils/logger.js");
 
 testRouter.get("/random", (req, res) => {
   res.json("aslkdfgnalksgnalksdgnaksl");

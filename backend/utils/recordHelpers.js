@@ -3,17 +3,6 @@ const uap = require("ua-parser-js");
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
 const config = require("../utils/config.js");
-const Minio = require("minio");
-
-// Instantiate the MinIO client with the endpoint
-// and access keys as shown below.
-const minioClient = new Minio.Client({
-  endPoint: config.MINIO_URL,
-  port: config.MINIO_PORT,
-  useSSL: false,
-  accessKey: config.MINIO_USER,
-  secretKey: config.MINIO_USER_PASSWORD,
-});
 
 async function extractMetadata(req, userMetadata) {
   if (!userMetadata.ip) {
@@ -60,24 +49,7 @@ function compressEvents(allRecordedEvents) {
   return fflate.compressSync(compressedEventsString, { level: 6 });
 }
 
-function updateSessionEvents(allEventsCompressed, sessionIndex, res) {
-  uploadToEventStorage(sessionIndex, allEventsCompressed)
-    .then((data) => {
-      res.sendStatus(200);
-      console.log(
-        `Successfully updated session ${sessionIndex} events in PostgreSQL.`
-      );
-    })
-    .catch((error) => {
-      res.sendStatus(500);
-      console.log(
-        `Unable to update session ${sessionIndex} events in PostgreSQL:`,
-        error.message
-      );
-    });
-}
-
-function createNewSession(allEventsCompressed, sessionId, userMetadata, projectId, res) {
+function createNewSession(sessionId, userMetadata, projectId, res) {
   postgres.db
     .one(
       "INSERT INTO sessions(id, project_id, url, ip_address, city, region, country, timezone, longitude, latitude, os_name, os_version, browser_name, browser_version, https_protected) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id",
@@ -101,11 +73,6 @@ function createNewSession(allEventsCompressed, sessionId, userMetadata, projectI
       (session) => session.id
     )
     .then((data) => {
-      uploadToEventStorage(sessionId, allEventsCompressed);
-      return data;
-    })
-    .then((data) => {
-      res.sendStatus(200);
       console.log(
         `Successfully added new session to database. Current ID is ${sessionId}`
       );
@@ -116,24 +83,8 @@ function createNewSession(allEventsCompressed, sessionId, userMetadata, projectI
     });
 }
 
-function uploadToEventStorage(sessionId, allEventsCompressed) {
-  const buffer = Buffer.from(allEventsCompressed);
-  return new Promise((resolve, reject) => {
-    minioClient.putObject("mimic", `${sessionId}`, buffer, (err, etag) => {
-      if (err) {
-        console.error("Error uploading data:", err);
-        reject(err); 
-      } else {
-        console.log("Data uploaded successfully");
-        resolve(etag);
-      }
-    });
-  });
-}
-
 module.exports = {
   extractMetadata,
   compressEvents,
-  updateSessionEvents,
   createNewSession,
 };
