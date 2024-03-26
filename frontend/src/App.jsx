@@ -61,7 +61,7 @@ function App() {
     const session = findSessionById(match.params.id)
 
     if (!session) {
-      displayNotification({type: 'fail', message: 'invalid session id'})
+      displayNotification({type: 'fail', message: 'Invalid session id'})
       navigate('/')
       return
     }

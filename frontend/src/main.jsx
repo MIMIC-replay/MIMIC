@@ -10,9 +10,10 @@ import './style/systems.css'
 import './style/app.css'
 import './style/toggles-and-functionality.css'
 import './style/icons.css'
-// import './style/unminified-rrplayer.css'
 import './style/modal.css'
 import './style/login.css'
+// import 'rrweb-player/dist/style.css'
+import './style/custom-player-ui.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
