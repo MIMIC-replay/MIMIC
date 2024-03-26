@@ -25,6 +25,11 @@ body {
   /* overflow: auto; */
 }
 
+input {
+  padding: var(--sA);
+  border: 1px solid var(--table-key)
+}
+
 /* Header */
 
 .site-header {
@@ -85,12 +90,12 @@ body {
 
 .search {
   height: var(--sG);
-
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: var(--main-components-border);
-  border-left: var(--main-components-border)
+  border-left: var(--main-components-border);
+  gap: var(--sA);
 }
 
 .search > input {
@@ -177,7 +182,6 @@ body {
   width: 60px;
 }
 
-
 /* Main area */
 
 .main-content-area {
@@ -215,29 +219,32 @@ body {
 
 /* Player */
 
-.player-area {
+/* .player-area {
   grid-area: player-area;
   display: flex;
   flex-direction: column;
-}
+
+} */
 
 #replayer {
-  width: auto;
+  width: 100%;
 
   min-width: 600px; /* DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH  */
 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: var(--main-components-border);
+  /* align-items: end; */
+  justify-content: center; 
+  /* border-bottom: var(--main-components-border); */
+  /* border: 1px solid pink; */
+  /* justify-content: stretch; */
 }
 
 .player-controls {
   margin-top: auto;
   background-color: var(--cK);
   /* border: var(--main-components-border); */
-  border-top: var(--main-components-border);
-  border-bottom: var(--main-components-border);
+  /* border-top: var(--main-components-border);
+  border-bottom: var(--main-components-border); */
   height: var(--sE);
 }
 
@@ -247,10 +254,11 @@ body {
   grid-area: extra-info;
   overflow: auto;
   /* height: 350px; */
-  max-height: auto;
+  /* max-height: auto; */
   /* height: 62vh; */
   padding: var(--sD);
   background-color: var(--light-background-color);
+  border-top: var(--main-components-border);
 }
 
 .extra-info-content {
@@ -488,8 +496,8 @@ td.request-name {
 
 .main-right-bar-session-tabs-content ul li {
   border-bottom: var(--main-components-border);
-  /* padding: var(--sB) var(--sB);
-  padding-left: var(--sC); */
+  /* padding: var(--sB) var(--sB); */
+  padding-left: var(--sB); 
   border-color: var(--cJ);
 }
 
@@ -525,25 +533,34 @@ td.request-name {
 
 .notification {
   position: absolute;
-  width: var(--sI);
-  height: var(--sM);
+  width: var(--sM);
+  height: var(--sF);
   display: flex;
   justify-content: center;
   align-items: center;
+  top: 0;
+  left: 35vw;
+  /* display: none; */
+  opacity: 0;
 }
 
 .notification.fail {
-  top: 0;
-  left: 45vw;
+  /* display: inline-block; */
+  opacity: 1;
   background-color: rgb(179, 72, 90);
-  color: rgb(24, 21, 29);
+  color: rgb(36, 2, 2);
 }
 
 .notification.success {
-  top: 0;
-  left: 30vw;
+  opacity: 1;
   background-color: lightgreen;
   color: rgb(31, 29, 39);
+}
+
+/* Tooltip */
+
+.tooltip {
+  
 }
 
 /* To Remove Later */

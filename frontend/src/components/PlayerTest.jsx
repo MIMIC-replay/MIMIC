@@ -1,8 +1,8 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import rrwebPlayer from 'rrweb-player';
-import 'rrweb-player/dist/style.css';
+import rrwebPlayer from 'rrweb-player'
+// import 'rrweb-player/dist/style.css'
 // import '../style/unminified-rrplayer.css'
 
 const PlayerTest = ({session}) => {
@@ -20,15 +20,14 @@ const PlayerTest = ({session}) => {
       }
   
       try {
-        console.log('player activated')
         const newPlayer = 
           new rrwebPlayer({
             target: document.getElementById("replayer"),
             props: {
               events: session.events,
               // showController: false,
-              width: 600,
-              height: 270,
+              width: 800,
+              height: 304,
               // autoPlay: true,
             },
           })
@@ -44,17 +43,15 @@ const PlayerTest = ({session}) => {
   }, [session])
 
   return (
-    <div className="player-area"> 
       <div id="replayer"></div>
-      <PlayerControls player={player}/>    
-    </div>
   )
 }
 
 const PlayerControls = ({player}) => {
   const [searchParams] = useSearchParams()
   const [playing, setPlaying] = useState(false)
-  
+  const [currentSpeed, setCurrentSpeed] = useState('2')
+
   const playerNavigate = (player) => {
     let playerState
 
@@ -74,8 +71,8 @@ const PlayerControls = ({player}) => {
   }
 
   if (searchParams.get('time') && player) {
-    playerNavigate(player)
     // setPlaying(true)
+    playerNavigate(player)
   }
 
   // const play = () => {
@@ -90,23 +87,72 @@ const PlayerControls = ({player}) => {
     setPlaying(false)
   }
 
+  const isPlaying = () => {
+    if (!player) return
+    let playerState
+
+    player.addEventListener('ui-update-current-state', (event) => {
+      playerState = event.payload
+      console.log(playerState)
+    })
+
+    return playerState
+  }
+
+  const [isChecked, setIsChecked] = useState(true);
+
+  const handleToggle = () => {
+    player.toggleSkipInactive()
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div className="player-controls">
       <button
         onClick={() => player.toggle()}
       >
-        ⏯
+      {isPlaying() === 'paused' ? `not playing` : 'playing'}
       </button>
-      <button
-        onClick={pause}
-      >
-        ⏸
-      </button>
-      <button
-        onClick={pause}
+
+      {/* <button
+        onClick={() => {
+          player.$set({width: window.screen.width, height: window.screen.height})
+          player.triggerResize()
+          document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+              player.$set({width: 600, height: 275})
+              player.triggerResize()
+            }
+          });
+        }
+        }
       >
         💻
+      </button> */}
+      <button
+        onClick={() => player.setSpeed(2)}
+      >
+        {}
       </button>
+      <button
+        onClick={() => player.setSpeed(2)}
+      >
+      5
+      </button>
+      <button
+        onClick={() => player.setSpeed(4)}
+      >
+        4x
+      </button>
+      <button
+        onClick={() => player.setSpeed(8)}
+      >
+        8x
+      </button>
+      <label className="toggle-button">
+        <input type="checkbox" checked={isChecked} onChange={handleToggle} />
+        <span className="slider"></span>
+      </label>
     </div>    
   )
 }
