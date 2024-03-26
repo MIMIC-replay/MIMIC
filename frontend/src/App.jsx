@@ -54,6 +54,13 @@ function App() {
   
   useEffect(() => {
     if (sessions.length < 1 || !match) return
+
+    const session = findSessionById(match.params.id)
+
+    if (!session) {
+      displayNotification({type: 'fail', message: 'invalid session id'})
+      return
+    }
     
     setCurrentSession(findSessionById(match.params.id))
   }, [sessions, findSessionById, match])
@@ -83,6 +90,7 @@ function App() {
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
+        console.error(exception)
       }
     }
     
