@@ -2,5 +2,8 @@
 node_modules
 .git-coauthors
 __pycache__
-package-lock.json
 script.mimic.js
+/client/node_modules
+/server/node_modules
+/targetApp/node_modules
+package-lock.json
