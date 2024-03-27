@@ -132,8 +132,7 @@ export const line = (error) => {
 export const recentEventsFromError = (error, events) => {
   const MAX_EVENTS = 7
   if (events.length <= MAX_EVENTS) return events
-  
-  // TO OPTIMIZE = MAKE IT O(LOG)
+
   const errorTimestamp = error.timestamp
   let event
   let index

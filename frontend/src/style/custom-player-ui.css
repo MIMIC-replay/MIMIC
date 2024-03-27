@@ -90,12 +90,8 @@
   position: relative;
   background: white;
   background-color: var(--background-color);
-  /* float: left; */
-  /* border-radius: 5px; */
   box-shadow: 0 24px 48px rgba(17, 16, 62, 0.12);
-  /* background-color: pink;
-  background-color: blue; */
-  /* width: 100%; */
+
 }
 .rr-player__frame {
   overflow: hidden;
@@ -115,62 +111,42 @@
 
 .rr-controller.svelte-19ke1iv.svelte-19ke1iv {
   position: relative;
-  /* left: -28%; */
-  /* width: 156%; */
+
   height: 79px;
-  /* background: #fff;
-  background: pink; */
-  /* background: green; */
+
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* justify-content: space-around; */
   align-items: center;
-  /*border-radius: 0 0 5px 5px;*/
+
   border-top: var(--main-components-border);
 }
 
 /* Progress Bar */
 
 .rr-timeline.svelte-19ke1iv.svelte-19ke1iv {
-  /* width: 60vw; */
-  /* width: 50%; */
-  /* width: clamp(10%, 20%, 40vh); */
   width: 98%;
   display: flex;
   align-items: center;
-  /* padding-left: 10px;
-  padding-right: 10px; */
-  /* align-items: space-around; */
-  /* margin-left: -150px; */
-  /* margin-right: -100px; */
   gap: var(--sB);
-  
 }
 
 .rr-timeline__time.svelte-19ke1iv.svelte-19ke1iv {
   display: inline-block;
-  /* width: 10px; */
-  /* text-align: center; */
-  /* color: #11103e; */
   color: var(--general-font-color);
-  /* color: var(--main-app-color); */
 }
 .rr-progress.svelte-19ke1iv.svelte-19ke1iv {
   flex: 2;
   height: var(--sA);
   background: #2b2b2b;
   background: rgb(41, 41, 41);
-  /* background: #1b1010; */
+
   position: relative;
-  /* border-radius: 3px; */
+
   cursor: pointer;
   box-sizing: border-box;
-  /* border-top: solid 4px #fff; */
-  /* border-bottom: solid 4px #fff; */
-  /* border-top: solid 4px #0a8877;
-  border-bottom: solid 4px #0a8877; */
+
 }
 .rr-progress.disabled.svelte-19ke1iv.svelte-19ke1iv {
   cursor: not-allowed;
@@ -186,12 +162,10 @@
 .rr-progress__handler.svelte-19ke1iv.svelte-19ke1iv {
   width: 10px;
   height: 10px;
-  /* border-radius: 10px; */
   position: absolute;
   top: 2px;
   transform: translate(-50%, -50%);
-  /* background: rgb(73, 80, 246); */
-  /* background: var(--complementary); */
+
 }
 
 /* Player Controls wrapper */
@@ -201,11 +175,8 @@
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  /* background-color: pink;*/
-  /* background-color: purple; */
   width: 100%;
 
-  /* display: none; */
 }
 
 /* Individual Buttons */
@@ -213,24 +184,19 @@
   width: 72px;
   height: 32px;
   display: flex;
-  /* padding: 0; */
   align-items: center;
   justify-content: center;
   background: none;
   border: none;
-  /* border-radius: 50%; */
   cursor: pointer;
   color: var(--general-font-color);
-  /* border: 1px solid pink; */
 }
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:active {
   background: #e0e1fe;
 }
 .rr-controller__btns.svelte-19ke1iv button.active.svelte-19ke1iv {
   color: #fff;
-  /* background: rgb(42, 73, 77); */
   background: var(--cG);
-  /* background: red; */
 }
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:disabled {
   cursor: not-allowed;
@@ -271,15 +237,13 @@
   left: 0.1em;
   transition: background 0.1s ease;
   background: rgba(73, 80, 246, 0.5);
-  /* background: var(--complementary); */
-  /* border-radius: 50px; */
 }
 .switch.svelte-9brlez label.svelte-9brlez.svelte-9brlez:after {
   content: "";
   position: absolute;
   width: 1em;
   height: 1em;
-  /* border-radius: 50px; */
+
   left: 0;
   transition: all 0.2s ease;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
@@ -289,24 +253,8 @@
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:before {
   background: rgb(73, 80, 246);
-  /* background: var(--complementary); */
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:after {
   animation: switch-on 0.2s ease-out;
   left: 1.1em;
-}
-
-.rr-timeline {
-  /* font-family: 'Courier New', Courier, monospace; */
-  /* font-weight: 600;*/
-}
-
-/* @media (max-width: 800px) {
-  .rr-timeline.svelte-19ke1iv.svelte-19ke1iv {
-    width: 10px;
-  }
-} */
-
-button.rr-controller__btns.svelte-19ke1iv {
-  /* background-color: #e0e1fe; */
 }

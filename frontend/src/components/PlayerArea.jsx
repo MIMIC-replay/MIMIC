@@ -23,7 +23,6 @@ const PlayerArea = ({session}) => {
           target: document.getElementById("replayer"),
           props: {
             events: session.events,
-            // showController: false,
             width: 600,
             height: 270,
           },

@@ -73,10 +73,7 @@
   /* Fonts */
 
   --general-font: Montserrat, system-ui, Tahoma, Verdana, sans-serif;
-  /* --general-font: Inter, system-ui, Tahoma, Verdana, sans-serif; */
-  /* --general-font: Roboto, system-ui, Tahoma, Verdana, sans-serif; */
 
-  /* --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue; */
 
   --base-font-weight: 500;
   --bold-font-weight: 600;
@@ -186,7 +183,6 @@
 
   /* Borders */
 
-  /* --main-components-border: 1px solid lightblue; */
   --main-components-border: 1px solid var(--border-color);
   --general-border-radius: 3px;
 }

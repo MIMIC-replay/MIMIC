@@ -1,7 +1,6 @@
 import ExtraInfo from "./ExtraInfo"
 import MainContentRightBar from "./MainContentRightBar"
 import SessionContentHeader from './singles/SessionContentHeader'
-// import PlayerArea from "./PlayerArea"
 import PlayerTest from "./PlayerTest"
 
 const MainContentArea = ({session}) => {

@@ -3,7 +3,7 @@ import axios from 'axios'
 const PORT = 3001
 const BASE_URL = `http://localhost:${PORT}/api/project`
 
-let token = null // private variable to this module
+let token = null 
 
 export const setToken = newToken => {
   token = `Bearer ${newToken}`

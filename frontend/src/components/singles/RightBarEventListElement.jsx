@@ -12,14 +12,6 @@ import PluginIcon from "../iconComponents/plugin"
 
 const RightBarEventListElement = ({event, session}) =>{
   const location = useLocation()
-  // {
-  //   numberType,
-  //   decodedType,
-  //   isUserInteraction,
-  //   source,
-  //   isMouseInteraction,
-  //   mouseInteraction,
-  // } = eventAnalyzer(event)
 
   const eventData = eventAnalyzer(event)
 

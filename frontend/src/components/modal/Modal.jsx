@@ -88,8 +88,6 @@ const TraceElement = ({traceElement, index, showTraceDetails}) => {
   return (
     <tr 
       className="trace"
-      // onMouseEnter={() => showTraceDetails(traceElement)}
-      // onMouseLeave={() => showTraceDetails(null)}
     >
       <td className="trace-index">{index}</td>
       <td className="trace-function">{shortFunction}</td>

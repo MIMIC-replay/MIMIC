@@ -22,7 +22,7 @@ body {
     "header header"
     "left-bar main-content-area";
   column-gap:var(--sC);
-  /* overflow-x: auto; */
+
 }
 
 input {
@@ -40,7 +40,6 @@ input {
   align-items: center;
   gap: var(--sB);
   background-color: var(--light-background-color);
-  /* box-shadow: 8px 10px 10px rgba(34, 33, 33, 0.5); */
   letter-spacing: 0.1rem;
 }
 
@@ -167,9 +166,8 @@ input {
 }
 
 .session-numbers svg {
-  /* border: 1px solid pink; */
+
   padding: 0px;
-  /* margin: 0px; */
   height: var(--sC);
 }
 
@@ -219,32 +217,18 @@ input {
 
 /* Player */
 
-/* .player-area {
-  grid-area: player-area;
-  display: flex;
-  flex-direction: column;
-
-} */
-
 #replayer {
   width: 100%;
 
-  /* min-width: 600px; DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH */
-
   display: flex;
-  /* align-items: end; */
+
   justify-content: center; 
-  /* border-bottom: var(--main-components-border); */
-  /* border: 1px solid pink; */
-  /* justify-content: stretch; */
+
 }
 
 .player-controls {
   margin-top: auto;
   background-color: var(--cK);
-  /* border: var(--main-components-border); */
-  /* border-top: var(--main-components-border);
-  border-bottom: var(--main-components-border); */
   height: var(--sE);
   overflow-x: auto;
 }
@@ -253,10 +237,6 @@ input {
 
 .extra-info {
   grid-area: extra-info;
-  /* overflow: auto; */
-  /* height: 350px; */
-  /* max-height: auto; */
-  /* height: 62vh; */
   padding: var(--sD);
   background-color: var(--light-background-color);
   border-top: var(--main-components-border);
@@ -487,14 +467,12 @@ td.request-name {
 }
 
 .main-right-bar-session-tabs-content {
-  /* gap: var(--sC); */
   border: var(--main-components-border);
   border-bottom-right-radius: var(--general-border-radius);
   border-bottom-left-radius: var(--general-border-radius);
   border-top-right-radius: var(--general-border-radius);
   max-height: var(--sM);
   overflow: auto;
-  /* padding-top: var(--sC); */
   background-color: var(--light-background-color);
 }
 
@@ -502,12 +480,10 @@ td.request-name {
   display: flex;
   flex-direction: column;
   height: 350px;
-  /* gap: var(--sB); */
 }
 
 .main-right-bar-session-tabs-content ul li {
   border-bottom: var(--main-components-border);
-  /* padding: var(--sB) var(--sB); */
   padding-left: var(--sB); 
   border-color: var(--cJ);
 }
@@ -524,7 +500,6 @@ td.request-name {
 }
 
 .right-bar-event-element:hover {
-  /* background-color: var(--cK); */
   background-color: var(--table-key);
 }
 
@@ -532,7 +507,6 @@ td.request-name {
   display: flex;
   gap: var(--sF);
   align-items: center;
-  /* justify-content: space-between; */
   padding: var(--sB)
 }
 
@@ -551,12 +525,10 @@ td.request-name {
   align-items: center;
   top: 0;
   left: 35vw;
-  /* display: none; */
   opacity: 0;
 }
 
 .notification.fail {
-  /* display: inline-block; */
   opacity: 1;
   background-color: rgb(179, 72, 90);
   color: rgb(36, 2, 2);
@@ -567,9 +539,3 @@ td.request-name {
   background-color: lightgreen;
   color: rgb(31, 29, 39);
 }
-
-/* Tooltip */
-
-
-
-/* To Remove Later */
