@@ -109,7 +109,10 @@ const retrieveMetadata = async (sessionId) => {
 
 const findSessionIds = (projectId) => {
   return postgres.db
-    .query("SELECT id FROM sessions WHERE project_id = $1", [projectId])
+    .query(
+      "SELECT id FROM sessions WHERE project_id = $1 AND session_end IS NOT NULL",
+      [projectId]
+    )
     .catch((error) => {
       console.log(
         "Unable to retrieve relevant session IDs from PostgreSQL:",
