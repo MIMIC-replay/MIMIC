@@ -1,12 +1,13 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-import rrwebPlayer from 'rrweb-player';
-import 'rrweb-player/dist/style.css';
+import rrwebPlayer from 'rrweb-player'
+// import 'rrweb-player/dist/style.css'
 // import '../style/unminified-rrplayer.css'
 
 const PlayerTest = ({session}) => {
   const [player, setPlayer] = useState(null)
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     if (session.events.length < 1) return
@@ -20,15 +21,14 @@ const PlayerTest = ({session}) => {
       }
   
       try {
-        console.log('player activated')
         const newPlayer = 
           new rrwebPlayer({
             target: document.getElementById("replayer"),
             props: {
               events: session.events,
               // showController: false,
-              width: 600,
-              height: 270,
+              width: 1245,
+              height: 304,
               // autoPlay: true,
             },
           })
@@ -39,76 +39,143 @@ const PlayerTest = ({session}) => {
         console.log(error)
       }
 
-      // const newPlayer = await loadSessionPlayer()
     })() 
   }, [session])
 
-  return (
-    <div className="player-area"> 
-      <div id="replayer"></div>
-      <PlayerControls player={player}/>    
-    </div>
-  )
-}
+  const playerNavigate = () => {
+    const goToSeconds = searchParams.get('time')
 
-const PlayerControls = ({player}) => {
-  const [searchParams] = useSearchParams()
-  const [playing, setPlaying] = useState(false)
-  
-  const playerNavigate = (player) => {
+    if (!goToSeconds || !player) return
+
     let playerState
-
     player.addEventListener('ui-update-current-state', (event) => {
       playerState = event.payload
     })
-    
-    const seconds = searchParams.get('time')
 
     if (playerState === 'paused') {
       player.play(); // prevents session replay from restarting from beginning if replay was at end
-      player.goto(Math.floor(seconds * 1000));
+      player.goto(Math.floor(goToSeconds * 1000));
       player.pause(); // returns to paused state for UX
     } else {
-      player.goto(Math.floor(seconds * 1000));
-    }
+      player.goto(Math.floor(goToSeconds * 1000));
+     }
   }
 
-  if (searchParams.get('time') && player) {
-    playerNavigate(player)
-    // setPlaying(true)
-  }
-
-  // const play = () => {
-  //   if (playing) return
-
-  //   player.play()
-  //   setPlaying(true)
-  // }
-
-  const pause = () => {
-    player.pause()
-    setPlaying(false)
-  }
+  playerNavigate()
 
   return (
-    <div className="player-controls">
-      <button
-        onClick={() => player.toggle()}
-      >
-        ⏯
-      </button>
-      <button
-        onClick={pause}
-      >
-        ⏸
-      </button>
-      <button
-        onClick={pause}
-      >
-        💻
-      </button>
-    </div>    
+      <div id="replayer"></div>
   )
 }
+
+// const PlayerControls = ({player}) => {
+
+//   const [playing, setPlaying] = useState(false)
+//   const [currentSpeed, setCurrentSpeed] = useState('2')
+
+//   const playerNavigate = (player) => {
+//     let playerState
+
+//     player.addEventListener('ui-update-current-state', (event) => {
+//       playerState = event.payload
+//     })
+    
+//     const seconds = searchParams.get('time')
+
+//     if (playerState === 'paused') {
+//       player.play(); // prevents session replay from restarting from beginning if replay was at end
+//       player.goto(Math.floor(seconds * 1000));
+//       player.pause(); // returns to paused state for UX
+//     } else {
+//       player.goto(Math.floor(seconds * 1000));
+//     }
+//   }
+
+//   if (searchParams.get('time') && player) {
+//     // setPlaying(true)
+//     playerNavigate(player)
+//   }
+
+//   // const play = () => {
+//   //   if (playing) return
+
+//   //   player.play()
+//   //   setPlaying(true)
+//   // }
+
+//   const pause = () => {
+//     player.pause()
+//     setPlaying(false)
+//   }
+
+//   const isPlaying = () => {
+//     if (!player) return
+//     let playerState
+
+//     player.addEventListener('ui-update-current-state', (event) => {
+//       playerState = event.payload
+//       console.log(playerState)
+//     })
+
+//     return playerState
+//   }
+
+//   const [isChecked, setIsChecked] = useState(true);
+
+//   const handleToggle = () => {
+//     player.toggleSkipInactive()
+//     setIsChecked(!isChecked);
+//   };
+
+//   return (
+//     <div className="player-controls">
+//       <button
+//         onClick={() => player.toggle()}
+//       >
+//       {isPlaying() === 'paused' ? `not playing` : 'playing'}
+//       </button>
+
+//       {/* <button
+//         onClick={() => {
+//           player.$set({width: window.screen.width, height: window.screen.height})
+//           player.triggerResize()
+//           document.addEventListener('keydown', (event) => {
+//             if (event.key === 'Escape') {
+//               player.$set({width: 600, height: 275})
+//               player.triggerResize()
+//             }
+//           });
+//         }
+//         }
+//       >
+//         💻
+//       </button> */}
+//       <button
+//         onClick={() => player.setSpeed(2)}
+//       >
+//         {}
+//       </button>
+//       <button
+//         onClick={() => player.setSpeed(2)}
+//       >
+//       5
+//       </button>
+//       <button
+//         onClick={() => player.setSpeed(4)}
+//       >
+//         4x
+//       </button>
+//       <button
+//         onClick={() => player.setSpeed(8)}
+//       >
+//         8x
+//       </button>
+//       <label className="toggle-button">
+//         <input type="checkbox" checked={isChecked} onChange={handleToggle} />
+//         <span className="slider"></span>
+//       </label>
+//     </div>    
+//   )
+// }
 
 export default PlayerTest

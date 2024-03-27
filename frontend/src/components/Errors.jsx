@@ -17,7 +17,7 @@ const Errors = ({errors, session}) => {
         <thead>
           <tr>
             <th>Time</th>
-            <th>Last Trigger</th>
+            <th className='errors-list-trigger-header'>Last Trigger</th>
             <th>Payload</th>
             <th>Line</th>
           </tr>

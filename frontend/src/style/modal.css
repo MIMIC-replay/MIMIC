@@ -41,6 +41,7 @@
 .modal button {
   align-self: end;
   position: relative;
+  left: 24px;
   /* top: -25px; */
   cursor: pointer;
 }
@@ -117,6 +118,11 @@
 
 .modal .metadata td, .modal .metadata h2 {
   padding: var(--sA);
+}
+
+.modal .metadata th,
+.modal .metadata td {
+  padding: 11px var(--sB);
 }
 
 .modal .stacktrace {

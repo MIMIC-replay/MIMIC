@@ -133,15 +133,6 @@ export const recentEventsFromError = (error, events) => {
   const MAX_EVENTS = 7
   if (events.length <= MAX_EVENTS) return events
   
-  /*
-     get error timestamp
-     traverse events in reverse order
-     if timestamp is greater, skip
-     if timestamp is smaller, get index, return
-
-     return events: [i - 2, i - 1, i]
-  */
-
   // TO OPTIMIZE = MAKE IT O(LOG)
   const errorTimestamp = error.timestamp
   let event
@@ -164,8 +155,8 @@ export const originalViewport = (session) => {
   const viewport = session.events.find(e => e.data.width && e.data.height )
 
   return {
-    width: viewport ? viewport.data.width : 'x' ,
-    height: viewport ? viewport.data.height : 'y',
+    width: viewport ? viewport.data.width : 0 ,
+    height: viewport ? viewport.data.height : 0,
   }
 }
 
@@ -182,8 +173,9 @@ export const getDeviceFromSize = (viewport) => {
   */
 
   const width = viewport.width
-  if (width <= 480) return 'phone'
-  if (width <= 1025) return 'tablet'
+  if (width === 0) return 'unknown'
+  else if (width <= 480) return 'phone'
+  else if (width <= 1025) return 'tablet'
   else return 'desktop'
 }
 

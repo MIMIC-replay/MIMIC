@@ -4,7 +4,8 @@ import {
   Route, 
   Routes,
   useMatch,
-  Navigate
+  Navigate,
+  useNavigate
 } from 'react-router-dom'
 
 import SiteHeader from "./components/singles/SiteHeader"
@@ -23,13 +24,18 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  const [project, setProject] = useState(null)
-
-  // DEVELOPMENT:
-  // const [project, setProject] = useState({id: 1234123, name: 'super_project'})
-
+  const [project, setProject] = useState(() => {
+    const storedProject = window.localStorage.getItem('loggedMimicProject')
+    if (storedProject) {
+      const project = JSON.parse(storedProject)
+      setToken(project.token)
+      return project
+    }
+  })
 
   const match = useMatch('/sessions/:id')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!project) return 
@@ -54,9 +60,17 @@ function App() {
   
   useEffect(() => {
     if (sessions.length < 1 || !match) return
+
+    const session = findSessionById(match.params.id)
+
+    if (!session) {
+      displayNotification({type: 'fail', message: 'Invalid session id'})
+      navigate('/')
+      return
+    }
     
     setCurrentSession(findSessionById(match.params.id))
-  }, [sessions, findSessionById, match])
+  }, [sessions, findSessionById, match, navigate])
   
   
   useEffect(() => {
@@ -83,6 +97,7 @@ function App() {
         return true
       } catch (exception) {
         displayNotification({ type: 'fail', message: 'Wrong credentials' })
+        console.error(exception)
       }
     }
     
@@ -93,7 +108,7 @@ function App() {
     }
         
     document.title = 
-      `M I M I C ${project ? `: ${project.id}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
+      `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => String(s.id).includes(string))

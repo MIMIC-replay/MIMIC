@@ -6,8 +6,8 @@ const ConsoleLogs = ({logs, session}) => {
     <table className="console-logs">
       <thead>
         <tr>
-          <th>Time</th>
-          <th>Type</th>
+          <th className='console-logs-time-header'>Time</th>
+          <th className='console-logs-type-header'>Type</th>
           <th>Content</th>
         </tr>
       </thead>
