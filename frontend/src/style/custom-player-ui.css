@@ -1,9 +1,13 @@
 @import url(systems.css);
 
+/* Actual screen representation */
+
 .replayer-wrapper {
   position: relative;
   /* background-color: pink; */
+  /* border: 2px solid red; */
 }
+
 .replayer-mouse {
   position: absolute;
   width: 20px;
@@ -79,6 +83,8 @@
   }
 }
 
+
+
 .rr-player {
   position: relative;
   background: white;
@@ -112,7 +118,7 @@
   height: 80px;
   /* background: #fff;
   background: pink; */
-  background: green;
+  /* background: green; */
   /* background-color: var(--background-color); */
   display: flex;
   flex-direction: column;
@@ -129,9 +135,11 @@
   /* width: 60vw; */
   /* width: 50%; */
   /* width: clamp(10%, 20%, 40vh); */
-  width: 100%;
+  width: 98%;
   display: flex;
   align-items: center;
+  /* padding-left: 10px;
+  padding-right: 10px; */
   /* align-items: space-around; */
   /* margin-left: -150px; */
   /* margin-right: -100px; */
@@ -150,15 +158,15 @@
   flex: 2;
   height: 12px;
   background: #eee;
-  background: #1b1010;
+  /* background: #1b1010; */
   position: relative;
   /* border-radius: 3px; */
   cursor: pointer;
   box-sizing: border-box;
-  /* border-top: solid 4px #fff;
-  border-bottom: solid 4px #fff; */
-  border-top: solid 4px #0a8877;
-  border-bottom: solid 4px #0a8877;
+  border-top: solid 4px #fff;
+  border-bottom: solid 4px #fff;
+  /* border-top: solid 4px #0a8877;
+  border-bottom: solid 4px #0a8877; */
 }
 .rr-progress.disabled.svelte-19ke1iv.svelte-19ke1iv {
   cursor: not-allowed;
@@ -169,7 +177,7 @@
   left: 0;
   top: 0;
   background: #e0e1fe;
-  background: var(--main-app-color);
+  /* background: var(--main-app-color); */
 }
 .rr-progress__handler.svelte-19ke1iv.svelte-19ke1iv {
   width: 10px;
@@ -179,7 +187,7 @@
   top: 2px;
   transform: translate(-50%, -50%);
   background: rgb(73, 80, 246);
-  background: var(--complementary);
+  /* background: var(--complementary); */
 }
 
 /* Player Controls wrapper */
@@ -189,8 +197,8 @@
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  background-color: pink;
-  background-color: purple;
+  /* background-color: pink;
+  background-color: purple; */
   width: 100%;
 
   /* display: none; */
@@ -213,11 +221,15 @@
 }
 .rr-controller__btns.svelte-19ke1iv button.active.svelte-19ke1iv {
   color: #fff;
-  background: rgb(73, 80, 246);
+  background: rgb(148, 148, 148);
+  /* background: red; */
 }
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:disabled {
   cursor: not-allowed;
 }
+
+
+
 .switch.svelte-9brlez.svelte-9brlez.svelte-9brlez {
   height: 1em;
   display: flex;
@@ -269,7 +281,7 @@
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:before {
   background: rgb(73, 80, 246);
-  background: var(--complementary);
+  /* background: var(--complementary); */
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:after {
   animation: switch-on 0.2s ease-out;
@@ -277,7 +289,7 @@
 }
 
 .rr-timeline {
-  font-family: 'Courier New', Courier, monospace;
+  /* font-family: 'Courier New', Courier, monospace; */
   /* font-weight: 600;*/
 }
 
@@ -286,3 +298,7 @@
     width: 10px;
   }
 } */
+
+button.rr-controller__btns.svelte-19ke1iv {
+  /* background-color: #e0e1fe; */
+}
