@@ -24,11 +24,7 @@ function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
   const [notification, setNotification] = useState(null)
-  // const [project, setProject] = useState(null)
-
-  // DEVELOPMENT:
-  const [project, setProject] = useState({id: 1234123, name: 'super_project'})
-
+  const [project, setProject] = useState(null)
 
   const match = useMatch('/sessions/:id')
 
