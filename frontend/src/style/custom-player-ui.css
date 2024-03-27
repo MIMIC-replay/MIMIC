@@ -115,11 +115,11 @@
   position: relative;
   /* left: -28%; */
   /* width: 156%; */
-  height: 80px;
+  height: 79px;
   /* background: #fff;
   background: pink; */
   /* background: green; */
-  /* background-color: var(--background-color); */
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -152,7 +152,8 @@
   /* width: 10px; */
   /* text-align: center; */
   /* color: #11103e; */
-  color: var(--general-font-color)
+  color: var(--general-font-color);
+  /* color: var(--main-app-color); */
 }
 .rr-progress.svelte-19ke1iv.svelte-19ke1iv {
   flex: 2;
@@ -163,8 +164,8 @@
   /* border-radius: 3px; */
   cursor: pointer;
   box-sizing: border-box;
-  border-top: solid 4px #fff;
-  border-bottom: solid 4px #fff;
+  /* border-top: solid 4px #fff; */
+  /* border-bottom: solid 4px #fff; */
   /* border-top: solid 4px #0a8877;
   border-bottom: solid 4px #0a8877; */
 }
@@ -177,7 +178,7 @@
   left: 0;
   top: 0;
   background: #e0e1fe;
-  /* background: var(--main-app-color); */
+  background: var(--cE);
 }
 .rr-progress__handler.svelte-19ke1iv.svelte-19ke1iv {
   width: 10px;
@@ -186,7 +187,7 @@
   position: absolute;
   top: 2px;
   transform: translate(-50%, -50%);
-  background: rgb(73, 80, 246);
+  /* background: rgb(73, 80, 246); */
   /* background: var(--complementary); */
 }
 
@@ -197,8 +198,8 @@
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  /* background-color: pink;
-  background-color: purple; */
+  /* background-color: pink;*/
+  /* background-color: purple; */
   width: 100%;
 
   /* display: none; */
@@ -221,7 +222,8 @@
 }
 .rr-controller__btns.svelte-19ke1iv button.active.svelte-19ke1iv {
   color: #fff;
-  background: rgb(148, 148, 148);
+  /* background: rgb(42, 73, 77); */
+  background: var(--cG);
   /* background: red; */
 }
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:disabled {
