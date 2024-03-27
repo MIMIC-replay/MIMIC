@@ -48,10 +48,12 @@
 .replayer-mouse.touch-device.active:after {
   animation: touch-click 0.2s ease-in-out 1;
 }
+
 .replayer-mouse-tail {
   position: absolute;
   pointer-events: none;
 }
+
 @keyframes click {
   0% {
       opacity: 0.3;
@@ -76,13 +78,16 @@
       height: 10px;
   }
 }
+
 .rr-player {
   position: relative;
   background: white;
   float: left;
   /* border-radius: 5px; */
   box-shadow: 0 24px 48px rgba(17, 16, 62, 0.12);
-  background-color: pink;
+  /* background-color: pink;
+  background-color: blue; */
+  /* width: 100%; */
 }
 .rr-player__frame {
   overflow: hidden;
@@ -102,8 +107,8 @@
 
 .rr-controller.svelte-19ke1iv.svelte-19ke1iv {
   position: relative;
-  left: -28%;
-  width: 156%;
+  /* left: -28%; */
+  /* width: 156%; */
   height: 80px;
   /* background: #fff;
   background: pink; */
@@ -121,16 +126,19 @@
 /* Progress Bar */
 
 .rr-timeline.svelte-19ke1iv.svelte-19ke1iv {
-  width: 60vw;
-  /* width: clamp(40%, 50%, 50vh); */
+  /* width: 60vw; */
+  /* width: 50%; */
+  /* width: clamp(10%, 20%, 40vh); */
+  width: 100%;
   display: flex;
   align-items: center;
   /* align-items: space-around; */
   /* margin-left: -150px; */
   /* margin-right: -100px; */
-  gap: var(--sA);
+  gap: var(--sB);
   
 }
+
 .rr-timeline__time.svelte-19ke1iv.svelte-19ke1iv {
   display: inline-block;
   /* width: 10px; */
@@ -147,8 +155,8 @@
   /* border-radius: 3px; */
   cursor: pointer;
   box-sizing: border-box;
-  border-top: solid 4px #fff;
-  border-bottom: solid 4px #fff;
+  /* border-top: solid 4px #fff;
+  border-bottom: solid 4px #fff; */
   border-top: solid 4px #0a8877;
   border-bottom: solid 4px #0a8877;
 }
@@ -174,15 +182,16 @@
   background: var(--complementary);
 }
 
-
+/* Player Controls wrapper */
 
 .rr-controller__btns.svelte-19ke1iv.svelte-19ke1iv {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: 13px;
   background-color: pink;
   background-color: purple;
+  width: 100%;
 
   /* display: none; */
 }
