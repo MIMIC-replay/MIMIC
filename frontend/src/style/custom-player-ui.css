@@ -159,8 +159,9 @@
 }
 .rr-progress.svelte-19ke1iv.svelte-19ke1iv {
   flex: 2;
-  height: 12px;
-  background: #eee;
+  height: var(--sA);
+  background: #2b2b2b;
+  background: rgb(41, 41, 41);
   /* background: #1b1010; */
   position: relative;
   /* border-radius: 3px; */
