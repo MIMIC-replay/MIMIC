@@ -208,7 +208,7 @@ const websocketSendInterceptor = (data, networkEventObj) => {{
   events.push(networkEventObj);
 }};
 
-const stopRecording = rrweb.record({{
+let stopRecording = rrweb.record({{
   emit(event) {{
     events.push(event);
 
@@ -235,15 +235,32 @@ const save = () => {{
   }});
 }};
 
-const saveEventsInterval = setInterval(save, 5000);
+let saveEventsInterval = setInterval(save, 5000);
 
 window.addEventListener("visibilitychange", (e) => {{
-  stopRecording();
-  clearInterval(saveEventsInterval);
+  if (document.visibilityState === "hidden") {{
+    //When user minimizes browser, switches to a different tab, navigates to different url, closes the tab/browser
+    //  stop recording, clear the interval
+    //  user has 5 seconds to come back to the tab/reopen minimized window to not be assigned a new session cookie
+    stopRecording();
+    clearInterval(saveEventsInterval);
+  }} else if (document.visibilityState === "visible") {{
+    //When user reopens minimized browser, switches back to this tab
+    //  initialize new recorder, reassign stopRecording, reassign the saveEventsInterval
+    stopRecording = rrweb.record({{
+      emit(event) {{
+        events.push(event);
+
+        const defaultLog = console.log["__rrweb_original__"]
+          ? console.log["__rrweb_original__"]
+          : console.log;
+      }},
+      maskAllInputs: true,
+      plugins: [rrweb.getRecordConsolePlugin()],
+    }});
+    saveEventsInterval = setInterval(save, 5000);
+  }}
+  //save in order to capture most recent events since prior save, and refresh cookie if they only minimized browser/switched tabs for < 5s
   save();
-  // May be unnecessary to reassign original handlers
-  window.fetch = originalFetch;
-  window.XMLHttpRequest.prototype.open = originalXHROpen;
-  window.WebSocket = OriginalWebSocket;
 }});
 """
