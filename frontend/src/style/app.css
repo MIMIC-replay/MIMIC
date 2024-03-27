@@ -246,6 +246,7 @@ input {
   /* border-top: var(--main-components-border);
   border-bottom: var(--main-components-border); */
   height: var(--sE);
+  overflow-x: auto;
 }
 
 /* Extra info */

@@ -10,14 +10,10 @@ const MainContentArea = ({session}) => {
   return (
     <section className="main-content-area">
       <SessionContentHeader session={session}/>
-        
-      {/* <PlayerArea session={session}/> */}
       <PlayerTest session={session}/>
-
       <ExtraInfo session={session}/>
-
       <MainContentRightBar session={session}/>
-  </section>
+    </section>
   )
 }
 

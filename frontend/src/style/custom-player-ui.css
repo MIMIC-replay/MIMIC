@@ -5,7 +5,8 @@
 .replayer-wrapper {
   position: relative;
   /* background-color: pink; */
-  /* border: 2px solid red; */
+  border: 2px solid var(--cE);
+  background-color: white;
 }
 
 .replayer-mouse {
@@ -88,6 +89,7 @@
 .rr-player {
   position: relative;
   background: white;
+  background-color: var(--background-color);
   /* float: left; */
   /* border-radius: 5px; */
   box-shadow: 0 24px 48px rgba(17, 16, 62, 0.12);
@@ -205,17 +207,20 @@
   /* display: none; */
 }
 
+/* Individual Buttons */
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv {
   width: 72px;
   height: 32px;
   display: flex;
-  padding: 0;
+  /* padding: 0; */
   align-items: center;
   justify-content: center;
   background: none;
   border: none;
   /* border-radius: 50%; */
   cursor: pointer;
+  color: var(--general-font-color);
+  /* border: 1px solid pink; */
 }
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:active {
   background: #e0e1fe;
