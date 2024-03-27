@@ -227,13 +227,13 @@ input {
 } */
 
 #replayer {
-  /* width: 100%; */
+  width: 100%;
 
-  min-width: 600px; /*DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH */
+  /* min-width: 600px; DON'T CHANGE THIS - THIS IS THE RRWEB PLAYER'S WIDTH */
 
   display: flex;
   /* align-items: end; */
-  justify-content: center; 
+  justify-content: stretch; 
   /* border-bottom: var(--main-components-border); */
   /* border: 1px solid pink; */
   /* justify-content: stretch; */
@@ -252,7 +252,7 @@ input {
 
 .extra-info {
   grid-area: extra-info;
-  overflow: auto;
+  /* overflow: auto; */
   /* height: 350px; */
   /* max-height: auto; */
   /* height: 62vh; */
@@ -482,7 +482,6 @@ td.request-name {
 }
 
 .events-search .feather-search {
-  
   margin-bottom: var(--sB)
 }
 
