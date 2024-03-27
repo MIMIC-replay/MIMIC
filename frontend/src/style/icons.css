@@ -23,10 +23,20 @@
 }
 
 [class*="plugin"]{
-  fill: none;
+  stroke: rgb(219, 219, 219);
+  fill: none
 }
 
 [class*="user"]{
   stroke: rgb(148, 148, 148);
   width: var(--sC);
 }
+
+[class*="unknown"]{
+  /* stroke: rgb(148, 148, 148); */
+  /* stroke: white; */
+  width: var(--sC);
+  height: 15px;
+}
+
+

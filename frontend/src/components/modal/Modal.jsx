@@ -10,14 +10,7 @@ const Modal = ({error, session, toggle}) => {
   const triggerSubtitle = triggerMatch ? triggerMatch[1] : trace[0]
   const lines = triggerMatch ? 
     traceDataExtractor(trace[0]).link.match(/:(\d+):\d+$/)[1] :
-    null                          
-
-  // we should see
-  
-  // session data table
-  // when that error ocurred (relative time)
-  // last three events (all kinds) that happened before that error
-  // hover on that event shows event details ????
+    null
 
   return (
     <div className='modal'>
@@ -88,8 +81,8 @@ const TraceElement = ({traceElement, index, showTraceDetails}) => {
   const shortFunction = functionCall.length >= 30 ? 
     `${functionCall.slice(0, 26)}...` :
     functionCall
-  const shortLink = link.length >= 78 ?
-    `${link.slice(0, 78)}...` :
+  const shortLink = link.length >= 98 ?
+    `${link.slice(0, 98)}...` :
     link
 
   return (
