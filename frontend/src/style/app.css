@@ -298,6 +298,11 @@ input {
   color: var(--general-font-color);
   width: var(--sL);
   background-color: var(--background-color);
+  margin-bottom: var(--sB);
+}
+
+.extra-info-search .feather-search {
+  margin-bottom: var(--sB);
 }
 
 .extra-info-content th:first-child {
@@ -472,7 +477,13 @@ td.request-name {
 
 .events-search input {
   background-color: transparent;
-  color: var(--general-font-color)
+  color: var(--general-font-color);
+  margin-bottom: var(--sB)
+}
+
+.events-search .feather-search {
+  
+  margin-bottom: var(--sB)
 }
 
 .main-right-bar-session-tabs-content {
