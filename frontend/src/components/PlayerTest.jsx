@@ -27,7 +27,7 @@ const PlayerTest = ({session}) => {
             props: {
               events: session.events,
               // showController: false,
-              width: 800,
+              width: 1245,
               height: 304,
               // autoPlay: true,
             },
