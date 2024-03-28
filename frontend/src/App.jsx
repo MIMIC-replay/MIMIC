@@ -78,13 +78,13 @@ function App() {
   useEffect(() => {
     const storedProject = window.localStorage.getItem('loggedMimicProject')
     const expired = isExpired(storedProject)
+    
+    if (expired) {
+      handleLogout()
+      return
+    }
 
-    // install jwt here
-    // add env with secret (and other variables)
-    // if storedProject AND token is not expired!!
-
-    // if (storedProject) {
-    if (storedProject && !expired) { // !
+    if (storedProject && !expired) {
       const project = JSON.parse(storedProject)
       setProject(project)
       setToken(project.token)
