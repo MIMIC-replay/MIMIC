@@ -236,7 +236,7 @@
   height: 1em;
   left: 0.1em;
   transition: background 0.1s ease;
-  background: rgba(73, 80, 246, 0.5);
+  background: var(--cK);
 }
 .switch.svelte-9brlez label.svelte-9brlez.svelte-9brlez:after {
   content: "";
@@ -252,7 +252,7 @@
   z-index: 2;
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:before {
-  background: rgb(73, 80, 246);
+  background: var(--cD);
 }
 .switch.svelte-9brlez input[type="checkbox"].svelte-9brlez:checked + label.svelte-9brlez:after {
   animation: switch-on 0.2s ease-out;
