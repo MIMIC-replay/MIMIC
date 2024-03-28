@@ -20,6 +20,8 @@ import LoginForm from "./components/login/LoginForm"
 
 import { login } from "./services/login"
 
+import { isExpired } from "react-jwt";
+
 function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
@@ -75,8 +77,14 @@ function App() {
   
   useEffect(() => {
     const storedProject = window.localStorage.getItem('loggedMimicProject')
+    const expired = isExpired(storedProject)
 
-    if (storedProject) {
+    // install jwt here
+    // add env with secret (and other variables)
+    // if storedProject AND token is not expired!!
+
+    // if (storedProject) {
+    if (storedProject && !expired) { // !
       const project = JSON.parse(storedProject)
       setProject(project)
       setToken(project.token)
