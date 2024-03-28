@@ -47,21 +47,13 @@ const PlayerTest = ({session}) => {
 
     if (!goToSeconds || !player) return
 
-    let playerState
-    player.addEventListener('ui-update-current-state', (event) => {
-      playerState = event.payload
-    })
-
-    if (playerState === 'paused') {
-      player.play(); // prevents session replay from restarting from beginning if replay was at end
-      player.goto(Math.floor(goToSeconds * 1000));
-      player.pause(); // returns to paused state for UX
-    } else {
-      player.goto(Math.floor(goToSeconds * 1000));
-     }
+    player.play(); // prevents session replay from restarting from beginning if replay was at end
+    player.goto(Math.floor(goToSeconds * 1000));
+    player.pause(); // returns to paused state for UX
   }
 
   playerNavigate()
+
 
   return (
       <div id="replayer"></div>
