@@ -4,7 +4,7 @@ UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
 def process():
   backendUrl = getBackendLocation()
-  subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID])
+  subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID, backendUrl])
   name, password = credentials(backendUrl)
   print("🛑 Please keep the project name and password for your records - you will be unable to access or change them later 🛑")
   subprocess.run(['python3', 'injector.py'])

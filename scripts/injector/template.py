@@ -1,13 +1,14 @@
 MIMIC_TEMPLATE = """
 let events = [];
 const projectId = "{projectId}";
+const backendUrl = "{backendUrl}";
 
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {{
   let [resource, config] = args;
 
   // Conditionally returns to avoid capture of requests sending events to our server
-  if (resource === "http://localhost:3001/api/record") {{
+  if (resource === `${{backendUrl}}/api/record`) {{
     const response = await originalFetch(resource, config);
     return response;
   }}
@@ -224,7 +225,7 @@ const save = () => {{
   const body = JSON.stringify(events);
   events = [];
 
-  fetch("http://localhost:3001/api/record", {{
+  fetch(`${{backendUrl}}/api/record`, {{
     credentials: "include",
     method: "POST",
     headers: {{
