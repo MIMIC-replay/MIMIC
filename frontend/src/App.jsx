@@ -111,7 +111,10 @@ function App() {
       `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
     
     const searchSessions = (string) => {
-      const filteredById = sessions.filter(s => String(s.id).includes(string))
+      const filteredById = sessions.filter(s => {
+        return s.id.toLowerCase().includes(string.toLowerCase()) ||
+          s.metadata.ip.includes(string)
+      })
       setSessionsInList(filteredById)
     }
     

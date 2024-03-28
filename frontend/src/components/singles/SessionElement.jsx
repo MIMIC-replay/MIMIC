@@ -24,7 +24,8 @@ const SessionElement = ({session, currentSession, setCurrentSession}) => {
       onClick={() => setCurrentSession(session)}
     >
       <li className={`session-list-element ${session?.id.includes(currentSession?.id) ? 'active' : ''}`}>
-        <p className='id'>{`#${searchMode ? session.id.toUpperCase() : shorten(session.id)}`}</p>
+        <p className={`id ${searchMode ? 'found': ''}`}>{`#${searchMode ? session.id.toUpperCase() : shorten(session.id)}`}</p>
+        {searchMode ? <p className='search-ip'>{session.metadata.ip}</p>: null}
         <p className='time'>{`${date} at ${exactTime}`}</p>
 
         <MiniChart session={session}/>

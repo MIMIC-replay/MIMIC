@@ -99,7 +99,8 @@ input {
 
 .search > input {
   background-color: transparent;
-  color: var(--general-font-color)
+  color: var(--general-font-color);
+  width: var(--sK);
 }
 
 /* Session List */
@@ -127,7 +128,11 @@ input {
 .session-list-element .time {
   margin-bottom: var(--sB);
   color: var(--low-contrast-font);
+}
 
+.session-list-element .search-ip {
+  font-size: var(--fC);
+  color: var(--complementary);
 }
 
 .session-element-latency-chart {

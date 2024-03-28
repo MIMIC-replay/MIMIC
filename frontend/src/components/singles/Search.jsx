@@ -7,7 +7,7 @@ const Search = ({searchSessions}) => {
       <input
         className="search-input" 
         type="text" 
-        placeholder="Search by session ID"
+        placeholder="Search by session ID or IP"
         onChange={(e) => searchSessions(e.target.value)}
       ></input>
     </div>
