@@ -3,23 +3,38 @@ import subprocess, sys, uuid, requests, bcrypt
 UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
 def process():
+  backendUrl = getBackendLocation()
   subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID])
-  name, password = credentials()
+  name, password = credentials(backendUrl)
   print("🛑 Please keep the project name and password for your records - you will be unable to access or change them later 🛑")
   subprocess.run(['python3', 'injector.py'])
-  send_project_info(name, password)
+  send_project_info(name, password, backendUrl)
 
-def send_project_info(name, password):
-  r = requests.post("http://localhost:3001/api/project/new", json={ 'projectId': UNIQUE_PROJECT_ID, "name": name, "password": password })
+def getBackendLocation():
+  print("Including the scheme, please provide the URL of your currently active MIMIC server:")
+  backendUrl = input()
+  if backendUrl.endswith('/'):
+    backendUrl = backendUrl[:-1]
+  print("Communicating with your MIMIC server...")
+  try:
+    r = requests.get(f'{backendUrl}/api/test/random')
+  except:
+    sys.exit("💔There was an error connecting to your MIMIC server, installer unable to proceed💔")
+  print("🎉Connection to MIMIC server successful🎉")  
+  return backendUrl  
+
+
+def send_project_info(name, password, backendUrl):
+  r = requests.post(f'{backendUrl}/api/project/new', json={ 'projectId': UNIQUE_PROJECT_ID, "name": name, "password": password })
   print("Sending new project information to MIMIC server...")
   print(r.status_code, r.reason)
-  print("MIMIC is successfully installed🔥") if r.status_code == 200 else print("💔There was an error installing MIMIC💔")
+  print("🔥MIMIC is successfully installed🔥") if r.status_code == 200 else print("💔There was an error installing MIMIC💔")
   
-def credentials():
+def credentials(backendUrl):
   unique_name = False
   while unique_name == False:
     name = name_credentials()
-    r = requests.post("http://localhost:3001/api/project/validate", json={ "name": name })
+    r = requests.post(f'{backendUrl}/api/project/validate', json={ "name": name })
     print(r.status_code, r.reason)
     if r.status_code == 200:
       unique_name = True
