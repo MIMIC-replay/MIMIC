@@ -14,7 +14,7 @@ const Request = ({request, session}) => {
       <td>{type}</td>
       <td className={method}>{method}</td>
       <td>{responseStatus}</td>
-      <td className='request-name'>{url.length > 40 ? `${url.slice(0, 40)}...` : url}</td>
+      <td className='request-name'>{url.length > 70 ? `${url.slice(0, 70)}...` : url}</td>
       <td>{latency}</td>
     </tr>
   )

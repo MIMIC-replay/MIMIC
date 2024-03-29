@@ -13,7 +13,7 @@ const Log = ({log, session}) => {
       <td className="log-time">{time}</td>
       <td className="log-type">{log.type}</td>
       <td className="log-content">
-        {content.length > 40 ? `${content.slice(0, 40)}...` : content }
+        {content.length > 90 ? `${content.slice(0, 90)}...` : content }
       </td>
     </tr>
   )
