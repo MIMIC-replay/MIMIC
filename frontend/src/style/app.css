@@ -17,7 +17,7 @@ body {
   
   display: grid;
 
-  grid-template: var(--sF) auto / var(--sL) auto;
+  grid-template: var(--sG) auto / var(--sL) auto;
   grid-template-areas: 
     "header header"
     "left-bar main-content-area";
