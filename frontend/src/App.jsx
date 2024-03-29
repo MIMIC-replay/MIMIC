@@ -114,16 +114,27 @@ function App() {
       setProject(null)
       window.localStorage.clear()
     }
-        
-    document.title = 
-      `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
-    
+   
     const searchSessions = (string) => {
       const filteredById = sessions.filter(s => {
         return s.id.toLowerCase().includes(string.toLowerCase()) ||
           s.metadata.ip.includes(string)
       })
       setSessionsInList(filteredById)
+    }
+
+    const searchSessionsWithErrors = () => {
+      const sessionsWithErrors = sessions.filter(s => hasErrors(s))
+      setSessionsInList(sessionsWithErrors)
+    }
+
+    const hasErrors = (session) => {
+      return session.errors.length > 0 ||
+        session.network.some(event => event.data?.status && event.data.status >= 400)
+    }
+
+    const resetSessions = () => {
+      setSessionsInList(sessions)
     }
     
     const displayNotification = (notification, delay=4000) => {
@@ -145,6 +156,8 @@ function App() {
         currentSession={currentSession}
         setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
+        searchSessionsWithErrors={searchSessionsWithErrors}
+        resetSessions={resetSessions}
       />
 
       <Routes>
@@ -152,8 +165,8 @@ function App() {
           path="/sessions/:id" 
           element={
             <MainContentArea 
-            session={currentSession}
-            displayNotification={displayNotification}
+              session={currentSession}
+              displayNotification={displayNotification}
             />
           }
         />
@@ -172,6 +185,9 @@ function App() {
   const loginForm = () => {
     return <LoginForm loginUser={loginUser}/>
   }
+
+  document.title = 
+  `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
   
   return (
     project ? loggedProjectUI() : loginForm()

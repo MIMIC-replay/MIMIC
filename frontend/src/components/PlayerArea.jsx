@@ -32,7 +32,6 @@ const PlayerArea = ({session}) => {
           })
         
         setPlayer(newPlayer)
-        // return newPlayer
       } catch (error) {
         console.log(error)
       }

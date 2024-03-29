@@ -94,13 +94,23 @@ input {
   justify-content: center;
   border-bottom: var(--main-components-border);
   border-left: var(--main-components-border);
-  gap: var(--sA);
+  gap: var(--sB);
 }
 
 .search > input {
   background-color: transparent;
   color: var(--general-font-color);
-  width: var(--sK);
+  width: 160px;
+}
+
+.feather.error {
+  background-color: none;
+  background: none;
+}
+
+.only-error-sessions.active {
+  stroke: var(--complementary);
+  fill: var(--complementary);
 }
 
 /* Session List */
@@ -224,11 +234,8 @@ input {
 
 #replayer {
   width: 100%;
-
   display: flex;
-
   justify-content: center; 
-
 }
 
 .player-controls {
