@@ -95,17 +95,21 @@ function App() {
   const loginUser = async (projectName, password) => {
     try {
       const project = await login({ projectName, password })
-      
+
+      if (!project) {
+        displayNotification({ type: 'fail', message: 'Wrong credentials' })
+        return
+      }
+
       window.localStorage.setItem(
         'loggedMimicProject', JSON.stringify(project)
       )
-        
+              
         setToken(project.token)
         setProject(project)
         return true
-      } catch (exception) {
-        displayNotification({ type: 'fail', message: 'Wrong credentials' })
-        console.error(exception)
+      } catch (e) {
+        console.error(e.message)
       }
     }
     
@@ -183,7 +187,13 @@ function App() {
   }
   
   const loginForm = () => {
-    return <LoginForm loginUser={loginUser}/>
+    return (
+      <>
+        <Notification notification={notification}/>
+        <LoginForm loginUser={loginUser}/>
+      </>
+
+    )
   }
 
   document.title = 

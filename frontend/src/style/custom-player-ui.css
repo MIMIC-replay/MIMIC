@@ -91,7 +91,6 @@
   background: white;
   background-color: var(--background-color);
   box-shadow: 0 24px 48px rgba(17, 16, 62, 0.12);
-
 }
 .rr-player__frame {
   overflow: hidden;
@@ -139,7 +138,6 @@
 .rr-progress.svelte-19ke1iv.svelte-19ke1iv {
   flex: 2;
   height: var(--sA);
-  background: #2b2b2b;
   background: rgb(41, 41, 41);
 
   position: relative;
@@ -156,7 +154,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: #e0e1fe;
   background: var(--cE);
 }
 .rr-progress__handler.svelte-19ke1iv.svelte-19ke1iv {
