@@ -1,7 +1,5 @@
 import { errorTrigger, line, relativeTime } from "../../helpers/dataExtractors"
 
-import { Link } from "react-router-dom"
-
 const Error = ({error, session, toggleErrorModal}) => {
 
   const time = relativeTime(error, session)
