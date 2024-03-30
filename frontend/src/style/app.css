@@ -113,6 +113,10 @@ input {
   fill: var(--complementary);
 }
 
+.feather.error.only-error-sessions:hover  {
+  background-color: transparent;
+}
+
 /* Session List */
 
 .sessions-list li {
