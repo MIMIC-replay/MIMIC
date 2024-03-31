@@ -171,8 +171,8 @@ tr.trace:hover {
   border: 1px solid var(--complementary);
   display: flex;
   flex-direction: column;
-  gap: var(--sB);
-  font-size: var(--fE);
+  gap: var(--sD);
+  font-size: var(--fD);
 }
 
 .trace-hovering-details.active {
