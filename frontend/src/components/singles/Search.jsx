@@ -5,18 +5,8 @@ const Search = ({
   searchSessions, 
   resetSessions, 
   searchSessionsWithErrors,
-  onlyErrorsMode,
-  setOnlyErrorsMode
 }) => {
   const[onlyErrors, setOnlyErrors] = useState(false)
-
-  const search = (string) => {
-    // if (string === '' && !onlyErrors) {
-    //   setOnlyErrorsMode(false)
-    // }
-    searchSessions
-  }
-
   return (
     <div className="search">
       <SearchIcon/>

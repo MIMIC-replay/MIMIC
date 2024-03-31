@@ -34,7 +34,6 @@ function App() {
       return project
     }
   })
-  const [onlyErrorsMode, setOnlyErrorsMode] = useState(false)
 
   const match = useMatch('/sessions/:id')
 
@@ -166,8 +165,6 @@ function App() {
         searchSessions={searchSessions}
         searchSessionsWithErrors={searchSessionsWithErrors}
         resetSessions={resetSessions}
-        onlyErrorsMode={onlyErrorsMode}
-        setOnlyErrorsMode={setOnlyErrorsMode}
       />
 
       <Routes>
@@ -198,12 +195,13 @@ function App() {
         <Notification notification={notification}/>
         <LoginForm loginUser={loginUser}/>
       </>
-
     )
   }
 
   document.title = 
-  `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
+    `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession 
+      ? ` #${shorten(currentSession.id)}` :
+       ''}`
   
   return (
     project ? loggedProjectUI() : loginForm()
