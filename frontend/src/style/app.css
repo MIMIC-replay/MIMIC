@@ -116,6 +116,10 @@ input {
   fill: var(--complementary);
 }
 
+.feather.error.only-error-sessions:active  {
+  fill: white;
+}
+
 /* Session List */
 
 .sessions-list li {
