@@ -204,6 +204,12 @@ export const eventAnalyzer = (event) => {
   }
 }
 
+export const mouseEventType = ({source, mouseInteraction}) => {
+  console.log(mouseInteraction)
+  if (source === 'MouseMove') return source
+  else return mouseInteraction
+}
+
 export const totalDuration = (session) => {
   return relativeTime(session.events[session.events.length - 1], session)
 }
