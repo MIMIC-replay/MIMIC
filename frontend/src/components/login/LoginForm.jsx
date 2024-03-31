@@ -24,7 +24,7 @@ const LoginForm = ({ loginUser }) => {
     <div className='login-background'>
       <div className='login-container'>
         <h1 className='login-title'>M I M I C</h1>
-        <div className='login-form'>
+        <form className='login-form'>
           <div>
             <input
               id='login-projectName-input'
@@ -45,9 +45,9 @@ const LoginForm = ({ loginUser }) => {
               />
           </div>
           <div className='login-buttons'>
-            <button onClick={login}>log in</button>
+            <button type='submit' onClick={login}>log in</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
