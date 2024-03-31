@@ -204,7 +204,7 @@ input {
 .main-content-area {
   display: grid;
   grid-area: main-content-area;
-  grid-template: var(--sF) var(--sM) 521px / auto var(--sM);
+  grid-template: var(--sF) var(--sM) auto / auto var(--sM);
   grid-template-areas: 
     "content-header content-header"
     "player-area main-right-bar"
