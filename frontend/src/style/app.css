@@ -553,19 +553,28 @@ td.request-name {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
-  left: 35vw;
+  top: 36px;
+  left: 37vw;
   opacity: 0;
+  border-width: 2px;
+  border-style: solid;
+  font-size: var(--fE);
 }
 
 .notification.fail {
   opacity: 1;
-  background-color: rgb(179, 72, 90);
-  color: rgb(36, 2, 2);
+  letter-spacing: 3px;
+  background-color: var(--background-color);
+  color: rgb(179, 72, 90);
+
+  border-color: rgb(179, 72, 90);
 }
 
 .notification.success {
   opacity: 1;
-  background-color: lightgreen;
-  color: rgb(31, 29, 39);
+  letter-spacing: 3px;
+  background-color: var(--background-color);
+  color: var(--main-app-color);
+
+  border-color: var(--main-app-color);
 }

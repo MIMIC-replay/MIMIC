@@ -107,7 +107,7 @@ function App() {
         
         setToken(project.token)
         setProject(project)
-        displayNotification({type: 'success', message: 'Welcome to Mimic'})
+        displayNotification({type: 'success', message: 'Welcome to MIMIC'})
         return true
       } catch (e) {
         console.error(e.message)
@@ -144,7 +144,7 @@ function App() {
       setSessionsInList(sessions)
     }
     
-    const displayNotification = (notification, delay=4000) => {
+    const displayNotification = (notification, delay=5000) => {
       setNotification(notification)
       setTimeout(() => {
         setNotification(null)
