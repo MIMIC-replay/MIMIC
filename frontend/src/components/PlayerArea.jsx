@@ -24,12 +24,10 @@ const PlayerArea = ({session}) => {
             target: document.getElementById("replayer"),
             props: {
               events: session.events,
-              // showController: false,
               width: 1245,
               height: 304,
               // autoPlay: true,
               inactiveColor: ``,
-              // maxScale: 0,
               mouseTail: {
                 strokeStyle: '#ff842d'
               }
