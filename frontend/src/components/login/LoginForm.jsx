@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ loginUser }) => {
@@ -10,7 +10,7 @@ const LoginForm = ({ loginUser }) => {
     navigate('/')
   }, [navigate])
 
-  const login = async (event) => {
+  const login = useCallback(async (event) => {
     event.preventDefault()
     const success = await loginUser(projectName, password)
 
@@ -18,7 +18,21 @@ const LoginForm = ({ loginUser }) => {
       setProjectName('')
       setPassword('')
     } else setPassword('')
-  }
+  }, [loginUser, password, projectName])
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        login(event)
+      }
+    }
+
+    document.addEventListener("keydown", listener)
+
+    return () => {
+      document.removeEventListener("keydown", listener)
+    }
+  }, [login])
 
   return (
     <div className='login-background'>

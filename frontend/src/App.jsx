@@ -199,7 +199,7 @@ function App() {
   }
 
   document.title = 
-    `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession 
+    `M I M I C ${project ? `:: ${shorten(project.id)}` : ''}${currentSession 
       ? ` #${shorten(currentSession.id)}` :
        ''}`
   
