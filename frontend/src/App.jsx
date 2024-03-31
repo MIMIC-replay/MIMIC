@@ -120,7 +120,7 @@ function App() {
     }
    
     const searchSessions = (string) => {
-      const filteredById = sessions.filter(s => {
+      const filteredById = sessionsInList.filter(s => {
         return s.id.toLowerCase().includes(string.toLowerCase()) ||
           s.metadata.ip.includes(string)
       })
@@ -128,7 +128,7 @@ function App() {
     }
 
     const searchSessionsWithErrors = () => {
-      const sessionsWithErrors = sessions.filter(s => hasErrors(s))
+      const sessionsWithErrors = sessionsInList.filter(s => hasErrors(s))
       setSessionsInList(sessionsWithErrors)
     }
 
