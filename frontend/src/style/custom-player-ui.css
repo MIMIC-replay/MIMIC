@@ -11,8 +11,8 @@
 
 .replayer-mouse {
   position: absolute;
-  width: 45px;
-  height: 45px;
+  width: 25px;
+  height: 25px;
   transition: left 0.05s linear, top 0.05s linear;
   background-size: contain;
   background-position: 50%;
@@ -23,8 +23,8 @@
 .replayer-mouse:after {
   content: "";
   display: inline-block;
-  width: 45px;
-  height: 45px;
+  width: 25px;
+  height: 25px;
   background: var(--main-app-color);
   border-radius: 100%;
   transform: translate(-50%, -50%);
