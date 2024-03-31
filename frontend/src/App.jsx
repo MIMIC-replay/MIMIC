@@ -122,7 +122,9 @@ function App() {
     }
    
     const searchSessions = (string) => {
-      const filteredById = sessions.filter(s => {
+      const errorMode = document.querySelector('.only-error-sessions.active')
+      const baseSessions = errorMode ? sessions.filter(s => hasErrors(s)) : sessions
+      const filteredById = baseSessions.filter(s => {
         return s.id.toLowerCase().includes(string.toLowerCase()) ||
           s.metadata.ip.includes(string)
       })
