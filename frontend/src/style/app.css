@@ -408,6 +408,11 @@ td.request-name {
   background-color: var(--table-key);
 }
 
+.no-errors {
+  margin: 20px;
+  font-size: var(--fF);
+}
+
 /* Main content right bar */
 
 .main-right-bar {
