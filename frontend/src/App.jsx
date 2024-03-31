@@ -34,6 +34,7 @@ function App() {
       return project
     }
   })
+  const [onlyErrorsMode, setOnlyErrorsMode] = useState(false)
 
   const match = useMatch('/sessions/:id')
 
@@ -104,9 +105,10 @@ function App() {
       window.localStorage.setItem(
         'loggedMimicProject', JSON.stringify(project)
       )
-              
+        
         setToken(project.token)
         setProject(project)
+        displayNotification({type: 'success', message: 'Welcome to Mimic'})
         return true
       } catch (e) {
         console.error(e.message)
@@ -120,7 +122,7 @@ function App() {
     }
    
     const searchSessions = (string) => {
-      const filteredById = sessionsInList.filter(s => {
+      const filteredById = sessions.filter(s => {
         return s.id.toLowerCase().includes(string.toLowerCase()) ||
           s.metadata.ip.includes(string)
       })
@@ -128,7 +130,7 @@ function App() {
     }
 
     const searchSessionsWithErrors = () => {
-      const sessionsWithErrors = sessionsInList.filter(s => hasErrors(s))
+      const sessionsWithErrors = sessions.filter(s => hasErrors(s))
       setSessionsInList(sessionsWithErrors)
     }
 
@@ -162,6 +164,8 @@ function App() {
         searchSessions={searchSessions}
         searchSessionsWithErrors={searchSessionsWithErrors}
         resetSessions={resetSessions}
+        onlyErrorsMode={onlyErrorsMode}
+        setOnlyErrorsMode={setOnlyErrorsMode}
       />
 
       <Routes>

@@ -1,6 +1,7 @@
 import { useNavigate, useLocation} from "react-router-dom"
 
 import { eventDataExtractor, relativeSeconds } from "../../helpers/dataExtractors"
+import { isLoaded } from "../../helpers/dataFormatters"
 
 const Request = ({request, session}) => {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ const Request = ({request, session}) => {
 
   return (
     <tr className='request' onClick={() => navigate(`${location.pathname}?time=${seconds}`)}>
-      <td>{time}</td>
+      <td>{isLoaded(time, session) ? time : ''}</td>
       <td>{type}</td>
       <td className={method}>{method}</td>
       <td>{responseStatus}</td>
