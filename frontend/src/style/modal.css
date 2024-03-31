@@ -161,6 +161,27 @@
   color: var(--complementary);
 }
 
+tr.trace:hover {
+  background-color: var(--light-background-color);
+}
+
+.trace-hovering-details {
+  background-color: var(--background-color);
+  padding: var(--sC);
+  border: 1px solid var(--complementary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sB);
+  font-size: var(--fE);
+}
+
+.trace-hovering-details.active {
+  position: absolute;
+}
+
+.trace-tooltip-function {
+  color: var(--main-app-color);
+}
 
 
 

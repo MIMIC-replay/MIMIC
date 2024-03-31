@@ -43,22 +43,43 @@ const Modal = ({error, session, toggle}) => {
 }
 
 const StackTrace = ({trace}) => {
-  const [hoveringTrace, setHoveringTrace] = useState(null)
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [hoveringTrace, setHoveringTrace] = useState({})
 
-  const showTraceDetails = (trace) => {
-    if (!trace) {
-      setHoveringTrace(null)
-      return
-    }
+  const handleMouseMove = (e) => {
 
+    setTooltipPosition(
+        { 
+          x: e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft, 
+          y: e.clientY + document.body.scrollTop + document.documentElement.scrollTop
+        }
+      );
+    };
+    
+  const handleMouseEnter = (trace) => {
     setHoveringTrace(trace)
-  }
+    document.addEventListener('mousemove', handleMouseMove)
+  };
+  
+  const handleMouseLeave = () => {
 
+    setHoveringTrace({})
+    document.removeEventListener('mousemove', handleMouseMove)
+  };
+
+  const modalOffset = {y: -80, x: -150}
 
   return (
     <>
-      <div className="trace-hovering-details">
-      </div>
+      { hoveringTrace.functionCall &&
+        <div 
+          className={`trace-hovering-details ${hoveringTrace.functionCall ? 'active' : ''}`}
+          style={{ top: tooltipPosition.y + modalOffset.y, left: tooltipPosition.x + modalOffset.x }}
+        >
+          <p className="trace-tooltip-function">{hoveringTrace.functionCall}</p>
+          <p className="trace-tooltip-link">{hoveringTrace.link}</p>
+        </div>
+      }
       <table className="stacktrace">
         <thead>
           <tr>
@@ -68,14 +89,20 @@ const StackTrace = ({trace}) => {
           </tr>
         </thead>
         <tbody>
-          {trace.map((e, i) => <TraceElement key={e} traceElement={e} index={i} showTraceDetails={showTraceDetails}/>)}
+          {trace.map((e, i) => <TraceElement 
+            key={e} 
+            traceElement={e} 
+            index={i} 
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave} 
+        />)}
         </tbody>
       </table>
     </>
   )
 }
 
-const TraceElement = ({traceElement, index, showTraceDetails}) => {
+const TraceElement = ({traceElement, index, handleMouseEnter, handleMouseLeave}) => {
   const {functionCall, link} = traceDataExtractor(traceElement)
 
   const shortFunction = functionCall.length >= 30 ? 
@@ -84,15 +111,16 @@ const TraceElement = ({traceElement, index, showTraceDetails}) => {
   const shortLink = link.length >= 98 ?
     `${link.slice(0, 98)}...` :
     link
-
   return (
-    <tr 
-      className="trace"
-    >
-      <td className="trace-index">{index}</td>
-      <td className="trace-function">{shortFunction}</td>
-      <td className="trace-link">{shortLink}</td>
-    </tr>
+      <tr 
+        className="trace"
+        onMouseEnter={() => handleMouseEnter({functionCall, link})} 
+        onMouseLeave={handleMouseLeave}
+      >
+        <td className="trace-index">{index}</td>
+        <td className="trace-function">{shortFunction}</td>
+        <td className="trace-link">{shortLink}</td>
+      </tr>
   )
 }
 
