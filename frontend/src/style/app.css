@@ -48,6 +48,7 @@ input {
 .site-header .project-name {
   font-size: var(--fF);
   font-weight: 600;
+  color: var(--main-app-color);
 }
 
 .site-header .project-id {
