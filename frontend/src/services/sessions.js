@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const PORT = 3001
-const BASE_URL = `http://localhost:${PORT}/api/project`
+const PORT = import.meta.env.VITE_REACT_APP_PORT
+const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}:${PORT}/api/project`
 
 let token = null 
 
