@@ -43,7 +43,7 @@ function App() {
     if (!project) return 
 
     getSessions(project.id).then((res) => {
-      setSessions(res)
+      setSessions(res.reverse())
       setSessionsInList(res)
     })
   }, [project])

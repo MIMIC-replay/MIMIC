@@ -11,7 +11,6 @@ const Errors = ({errors, session}) => {
 
   return (
     <>
-        
       <div className={`modal-overlay ${activeError ? 'active' : ''}`} onClick={toggleErrorModal}></div>
 
         { (errors.length > 0 && 
