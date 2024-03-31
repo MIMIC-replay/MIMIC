@@ -28,6 +28,11 @@ const PlayerArea = ({session}) => {
               width: 1245,
               height: 304,
               // autoPlay: true,
+              inactiveColor: ``,
+              // maxScale: 0,
+              mouseTail: {
+                strokeStyle: '#ff842d'
+              }
             },
           })
         
