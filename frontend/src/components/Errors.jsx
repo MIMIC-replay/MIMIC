@@ -28,7 +28,7 @@ const Errors = ({errors, session}) => {
             </tbody>
           </table>) ||
 
-          <p className='no-errors'>No errors ocurred duding this session</p>
+          <p className='no-errors'>No errors ocurred during this session</p>
         }
       
       {activeError && <Modal error={activeError} session={session} toggle={toggleErrorModal}/>}
