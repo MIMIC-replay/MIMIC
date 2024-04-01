@@ -5,7 +5,7 @@ const SiteHeader = ({handleLogout, project}) => {
     <header className="site-header">
       <img src="/transparent-logo.png" className="site-logo" alt="Mimic Logo"></img>
       <p className="project-name">{project.name}</p>
-      <p className="project-id">{`:: ${project.id}`}</p>
+      <p className="project-id"><span className="project-id-dots">::</span>{` ${project.id}`}</p>
       <ThemeSwitcher/>
       {/* <div className="checkbox-container">
         <input type="checkbox"></input>
