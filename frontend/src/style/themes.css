@@ -1,0 +1,12 @@
+@import url(./systems.css);
+
+html.light-theme {
+  --main-app-color: var(--cE);
+  --background-color: rgb(235, 235, 235);
+  --light-background-color: rgb(247, 247, 247);
+  --general-font-color: rgb(36, 36, 36);
+  --cK: var(--cA);
+  --tab-background: var(--cA);
+  --table-header-color: var(--cJ);
+  --map-filter: none;
+}

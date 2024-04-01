@@ -1,5 +1,7 @@
 @import url(./systems.css);
 
+@import url(./themes.css);
+
 body {
   color: var(--general-font-color);
   font-family: var(--general-font);
@@ -55,8 +57,23 @@ input {
   font-size: var(--fD);
 }
 
-.logout-button {
+.theme-switcher {
   margin-left: auto;
+  margin-right: var(--sE);
+  background: none;
+  border: none;
+  font-size: var(--fE);
+}
+
+.theme-switcher:hover {
+  cursor: pointer;
+}
+
+.theme-switcher:active {
+  cursor: pointer;
+}
+
+.logout-button {
   margin-right: var(--sD);
   background-color: transparent;
   border: var(--main-components-border);
@@ -72,6 +89,10 @@ input {
   border-color: transparent;
   cursor: pointer;
 }
+
+/* Theme Switcher  */
+
+
 
 /* Left bar */
 
@@ -345,8 +366,8 @@ input {
 .network-requests th, 
 .console-logs th,
 .errors-list th {
-  background-color: var(--cK);
-  color: var(--cD);
+  background-color: var(--tab-background);
+  color: var(--table-header-color);
 }
 
 .network-requests th, .network-requests td, 
@@ -447,7 +468,8 @@ td.request-name {
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out,
 .leaflet-control-attribution {
-  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  /* filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); */
+  filter: var(--map-filter);
 }
 
 .main-right-bar-session-details {
