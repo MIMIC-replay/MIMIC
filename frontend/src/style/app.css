@@ -81,7 +81,7 @@ input {
   border-radius: var(--general-border-radius);
   padding: var(--sA) var(--sC);
   color: var(--main-app-color);
-  box-shadow: 5px 5px 5px rgba(51, 51, 51, 0.5);
+  box-shadow: 2px 2px 5px rgba(109, 109, 109, 0.5);
 }
 
 .logout-button:hover {
