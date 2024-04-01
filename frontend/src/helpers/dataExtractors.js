@@ -132,8 +132,7 @@ export const line = (error) => {
 export const recentEventsFromError = (error, events) => {
   const MAX_EVENTS = 7
   if (events.length <= MAX_EVENTS) return events
-  
-  // TO OPTIMIZE = MAKE IT O(LOG)
+
   const errorTimestamp = error.timestamp
   let event
   let index
@@ -205,10 +204,12 @@ export const eventAnalyzer = (event) => {
   }
 }
 
+export const mouseEventType = ({source, mouseInteraction}) => {
+  if (source === 'MouseMove') return source
+  else return mouseInteraction
+}
+
 export const totalDuration = (session) => {
-  if (session.events.length === 0) {
-    return "00:00"
-  }
   return relativeTime(session.events[session.events.length - 1], session)
 }
 

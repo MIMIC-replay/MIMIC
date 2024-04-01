@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ loginUser }) => {
@@ -10,7 +10,7 @@ const LoginForm = ({ loginUser }) => {
     navigate('/')
   }, [navigate])
 
-  const login = async (event) => {
+  const login = useCallback(async (event) => {
     event.preventDefault()
     const success = await loginUser(projectName, password)
 
@@ -18,13 +18,27 @@ const LoginForm = ({ loginUser }) => {
       setProjectName('')
       setPassword('')
     } else setPassword('')
-  }
+  }, [loginUser, password, projectName])
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        login(event)
+      }
+    }
+
+    document.addEventListener("keydown", listener)
+
+    return () => {
+      document.removeEventListener("keydown", listener)
+    }
+  }, [login])
 
   return (
     <div className='login-background'>
       <div className='login-container'>
         <h1 className='login-title'>M I M I C</h1>
-        <div className='login-form'>
+        <form className='login-form' onSubmit={login}>
           <div>
             <input
               id='login-projectName-input'
@@ -45,9 +59,9 @@ const LoginForm = ({ loginUser }) => {
               />
           </div>
           <div className='login-buttons'>
-            <button onClick={login}>log in</button>
+            <button type='submit'>log in</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )

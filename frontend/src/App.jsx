@@ -20,6 +20,8 @@ import LoginForm from "./components/login/LoginForm"
 
 import { login } from "./services/login"
 
+import { isExpired } from "react-jwt";
+
 function App() {
   const [sessions, setSessions] = useState([])
   const [sessionsInList, setSessionsInList] = useState([])
@@ -41,7 +43,7 @@ function App() {
     if (!project) return 
 
     getSessions(project.id).then((res) => {
-      setSessions(res)
+      setSessions(res.reverse())
       setSessionsInList(res)
     })
   }, [project])
@@ -75,8 +77,14 @@ function App() {
   
   useEffect(() => {
     const storedProject = window.localStorage.getItem('loggedMimicProject')
+    const expired = isExpired(storedProject)
+    
+    if (expired) {
+      handleLogout()
+      return
+    }
 
-    if (storedProject) {
+    if (storedProject && !expired) {
       const project = JSON.parse(storedProject)
       setProject(project)
       setToken(project.token)
@@ -87,17 +95,22 @@ function App() {
   const loginUser = async (projectName, password) => {
     try {
       const project = await login({ projectName, password })
-      
+
+      if (!project) {
+        displayNotification({ type: 'fail', message: 'Wrong credentials' })
+        return
+      }
+
       window.localStorage.setItem(
         'loggedMimicProject', JSON.stringify(project)
       )
         
         setToken(project.token)
         setProject(project)
+        displayNotification({type: 'success', message: 'Welcome to MIMIC'})
         return true
-      } catch (exception) {
-        displayNotification({ type: 'fail', message: 'Wrong credentials' })
-        console.error(exception)
+      } catch (e) {
+        console.error(e.message)
       }
     }
     
@@ -106,16 +119,32 @@ function App() {
       setProject(null)
       window.localStorage.clear()
     }
-        
-    document.title = 
-      `M I M I C ${project ? `: ${shorten(project.id)}` : ''}${currentSession ? ` #${shorten(currentSession.id)}` : ''}`
-    
+   
     const searchSessions = (string) => {
-      const filteredById = sessions.filter(s => String(s.id).includes(string))
+      const errorMode = document.querySelector('.only-error-sessions.active')
+      const baseSessions = errorMode ? sessions.filter(s => hasErrors(s)) : sessions
+      const filteredById = baseSessions.filter(s => {
+        return s.id.toLowerCase().includes(string.toLowerCase()) ||
+          s.metadata.ip.includes(string)
+      })
       setSessionsInList(filteredById)
     }
+
+    const searchSessionsWithErrors = () => {
+      const sessionsWithErrors = sessions.filter(s => hasErrors(s))
+      setSessionsInList(sessionsWithErrors)
+    }
+
+    const hasErrors = (session) => {
+      return session.errors.length > 0 ||
+        session.network.some(event => event.data?.status && event.data.status >= 400)
+    }
+
+    const resetSessions = () => {
+      setSessionsInList(sessions)
+    }
     
-    const displayNotification = (notification, delay=4000) => {
+    const displayNotification = (notification, delay=5000) => {
       setNotification(notification)
       setTimeout(() => {
         setNotification(null)
@@ -134,6 +163,8 @@ function App() {
         currentSession={currentSession}
         setCurrentSession={setCurrentSession}
         searchSessions={searchSessions}
+        searchSessionsWithErrors={searchSessionsWithErrors}
+        resetSessions={resetSessions}
       />
 
       <Routes>
@@ -141,8 +172,8 @@ function App() {
           path="/sessions/:id" 
           element={
             <MainContentArea 
-            session={currentSession}
-            displayNotification={displayNotification}
+              session={currentSession}
+              displayNotification={displayNotification}
             />
           }
         />
@@ -159,8 +190,18 @@ function App() {
   }
   
   const loginForm = () => {
-    return <LoginForm loginUser={loginUser}/>
+    return (
+      <>
+        <Notification notification={notification}/>
+        <LoginForm loginUser={loginUser}/>
+      </>
+    )
   }
+
+  document.title = 
+    `M I M I C ${project ? `:: ${shorten(project.id)}` : ''}${currentSession 
+      ? ` #${shorten(currentSession.id)}` :
+       ''}`
   
   return (
     project ? loggedProjectUI() : loginForm()

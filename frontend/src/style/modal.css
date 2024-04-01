@@ -24,7 +24,6 @@
   flex-direction: column;
   z-index: 999;
   top: 5vh;
-  /* left: 20%; */
   left: 10vw;
   padding: var(--sD);
   padding-top: var(--sD);
@@ -42,7 +41,6 @@
   align-self: end;
   position: relative;
   left: 24px;
-  /* top: -25px; */
   cursor: pointer;
 }
 
@@ -78,13 +76,8 @@
   color: var(--low-contrast-font);
 }
 
-/* .modal .trigger-line-number {
-  color: var(--general-font-color);
-} */
-
 .modal .data-container {
   display: flex;
-  /* justify-content: ; */
 }
 
 .data-container h2 {
@@ -93,8 +86,6 @@
 
 .modal .metadata, .modal .last-three-events {
   border: var(--main-components-border);
-  /* width: var(--sH); */
-  /* padding: var(--sB); */
 }
 
 .modal .last-three-events {
@@ -128,9 +119,7 @@
 .modal .stacktrace {
   font-family: 'Courier New', Courier, monospace;
   font-size: var(--sC);
-  /* display: flex; */
-  /* flex-direction: column; */
-  background-color: rgb(15, 15, 15);
+  background-color: var(--stack-trace-background);
 }
 
 .modal .stacktrace th,
@@ -169,11 +158,29 @@
 }
 
 .stacktrace .trace-function {
-  color: var(--complementary);
+  color: var(--stack-trace-trigger);
 }
 
-.stacktrace .trace-link {
-  /* text-decoration: underline; */
+tr.trace:hover {
+  background-color: var(--light-background-color);
+}
+
+.trace-hovering-details {
+  background-color: var(--background-color);
+  padding: var(--sC);
+  border: 1px solid var(--complementary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sD);
+  font-size: var(--fD);
+}
+
+.trace-hovering-details.active {
+  position: absolute;
+}
+
+.trace-tooltip-function {
+  color: var(--main-app-color);
 }
 
 

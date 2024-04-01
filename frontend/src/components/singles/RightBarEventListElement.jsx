@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 
-import { eventAnalyzer, relativeSeconds, relativeTime } from "../../helpers/dataExtractors"
+import { eventAnalyzer, mouseEventType, relativeSeconds, relativeTime } from "../../helpers/dataExtractors"
 import MouseIcon from "../iconComponents/mouse"
 import NetworkIcon from "../iconComponents/network"
 import MetaIcon from "../iconComponents/meta"
@@ -10,32 +10,29 @@ import LoadIcon from "../iconComponents/load"
 import CustomIcon from "../iconComponents/custom"
 import PluginIcon from "../iconComponents/plugin"
 
-const RightBarEventListElement = ({event, session}) =>{
+import { isLoaded } from "../../helpers/dataFormatters"
+
+const RightBarEventListElement = ({event, session, inModal, toggle}) =>{
   const location = useLocation()
-  // {
-  //   numberType,
-  //   decodedType,
-  //   isUserInteraction,
-  //   source,
-  //   isMouseInteraction,
-  //   mouseInteraction,
-  // } = eventAnalyzer(event)
 
   const eventData = eventAnalyzer(event)
 
   const time = relativeTime(event, session)
   let type
-  if (eventData.source.includes('Mouse')) type = 'MouseInteraction'
+  if (eventData.source.includes('Mouse')) type = mouseEventType(eventData)
   else if (eventData.decodedType === 'IncrementalSnapshot') type = eventData.source
   else type = eventData.decodedType
 
   return (
-    <li className="right-bar-event-element">
+    <li 
+      className="right-bar-event-element"
+      onClick={inModal ? toggle : null}
+    >
       <Link
         to={`${location.pathname}?time=${Math.floor(relativeSeconds(event, session))}`}
       >
         <div>
-          <p>{time}</p>
+          <p>{isLoaded(time, session) ? time : ''}</p>
           <EventTypeIcon eventData={eventData}/>
           <p>{type}</p>
         </div>
@@ -44,6 +41,7 @@ const RightBarEventListElement = ({event, session}) =>{
     </li>
   )  
 }
+
 
 const EventTypeIcon = ({eventData}) => {
   if (eventData.source.includes('Mouse')) {

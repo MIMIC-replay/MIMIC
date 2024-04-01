@@ -27,6 +27,7 @@
 .login-title {
   margin-bottom: var(--sG);
   font-size: var(--fF);
+  color: rgb(199, 199, 199);
 }
 
 .login-form {

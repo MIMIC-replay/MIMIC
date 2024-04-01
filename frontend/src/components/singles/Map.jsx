@@ -13,7 +13,6 @@ const Map = ({session}) => {
 
     let map = L.map('map', {
       zoomControl: false,
-      // attributionControl: false,
     }).setView([latitude, longitude], 1);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

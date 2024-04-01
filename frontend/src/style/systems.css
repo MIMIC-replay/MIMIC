@@ -73,10 +73,7 @@
   /* Fonts */
 
   --general-font: Montserrat, system-ui, Tahoma, Verdana, sans-serif;
-  /* --general-font: Inter, system-ui, Tahoma, Verdana, sans-serif; */
-  /* --general-font: Roboto, system-ui, Tahoma, Verdana, sans-serif; */
 
-  /* --safe-font: -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue; */
 
   --base-font-weight: 500;
   --bold-font-weight: 600;
@@ -120,7 +117,7 @@
   --light-green-border: hsl(180, 93%, 23%);
 
   --main-app-color: #3AD0E6;
-  --complementary: #e6813a;
+  --complementary: #ff842d;
 
   --border-color: #1a8494;
 
@@ -164,6 +161,11 @@
   --cK: hsl(198, 71%, 7%);
 
   --low-contrast-font:  #5d8aad;
+  --tab-background: var(--cK);
+
+  --table-header-color: var(--cD);
+
+  --map-filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 
   /* Methods */
 
@@ -174,6 +176,15 @@
   --patch-color:rgb(240, 225, 55);
   --head-color:rgb(209, 162, 238);
 
+  --stack-trace-background: rgb(15, 15, 15);
+
+  --stack-trace-trigger: var(--complementary);
+
+  --subtle-shadow: 0 4px 4px rgba(255, 255, 255, 0.1);
+
+  --icon-color: rgb(110, 110, 110);
+
+  --input-color: var(--main-app-color);
 
   /* Accents */
 
@@ -186,7 +197,6 @@
 
   /* Borders */
 
-  /* --main-components-border: 1px solid lightblue; */
   --main-components-border: 1px solid var(--border-color);
   --general-border-radius: 3px;
 }

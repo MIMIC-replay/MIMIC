@@ -20,8 +20,8 @@ const SessionContentHeader = ({session}) => {
 
 const SecureIcon = ({secure}) => {
   return secure ? 
-    <HTTPIcon/> :
-    <HTTPSIcon/>
+  <HTTPSIcon/> :
+  <HTTPIcon/>
 }
 
 const DeviceIcon = ({session}) => {

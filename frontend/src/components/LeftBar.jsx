@@ -1,10 +1,14 @@
 import Search from './singles/Search'
 import SessionsList from './SessionsList'
 
-const LeftBar = ({sessions, searchSessions, currentSession, setCurrentSession}) => {
+const LeftBar = ({sessions, searchSessions, resetSessions, currentSession, setCurrentSession, searchSessionsWithErrors}) => {
   return (
     <nav className="left-bar">
-      <Search searchSessions={searchSessions}/>
+      <Search 
+        searchSessions={searchSessions}
+        searchSessionsWithErrors={searchSessionsWithErrors}
+        resetSessions={resetSessions}
+      />
 
       <SessionsList 
         sessions={sessions} 

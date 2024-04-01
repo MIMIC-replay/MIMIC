@@ -1,6 +1,6 @@
 import { errorTrigger, line, relativeTime } from "../../helpers/dataExtractors"
 
-import { Link } from "react-router-dom"
+import { isLoaded } from "../../helpers/dataFormatters"
 
 const Error = ({error, session, toggleErrorModal}) => {
 
@@ -8,10 +8,10 @@ const Error = ({error, session, toggleErrorModal}) => {
   const payload = error.data.payload.payload.join(', ')
   return (  
     <tr className="error" onClick={() => toggleErrorModal(error)}>   
-        <td> {time}</td>
+        <td>{isLoaded(time, session) ? time : ''}</td>
         <td className="error-trigger">{`${errorTrigger(error)}`}</td>
         <td className="error-payload">
-          {payload.length > 40 ? `${payload.slice(0, 40)}...` : payload }
+          {payload.length > 80 ? `${payload.slice(0, 80)}...` : payload }
         </td>
         <td className="error-line">{line(error)}</td>
     </tr>

@@ -1,6 +1,12 @@
 import Request from "./singles/Request"
 
 const NetworkRequests = ({requests, session}) => {
+  if (requests.length === 0 ) return (
+    <p className="no-requests">
+      No Network Requests or Web Socket Messages ocurred in this session
+    </p>
+  )
+  
   return (
     <table className="network-requests">
       <thead>
