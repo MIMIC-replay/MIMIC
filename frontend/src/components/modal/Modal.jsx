@@ -28,7 +28,12 @@ const Modal = ({error, session, toggle}) => {
         
         <div className="last-three-events">
           <h2>Recent Events</h2>
-          <MainContentRightBarEvents events={recentEventsFromError(error, session.events)} session={session}/>
+          <MainContentRightBarEvents 
+            events={recentEventsFromError(error, session.events)} 
+            session={session}
+            inModal={true}
+            toggle={toggle}
+          />
         </div>
 
         <div className="metadata">

@@ -12,7 +12,7 @@ import PluginIcon from "../iconComponents/plugin"
 
 import { isLoaded } from "../../helpers/dataFormatters"
 
-const RightBarEventListElement = ({event, session}) =>{
+const RightBarEventListElement = ({event, session, inModal, toggle}) =>{
   const location = useLocation()
 
   const eventData = eventAnalyzer(event)
@@ -24,7 +24,10 @@ const RightBarEventListElement = ({event, session}) =>{
   else type = eventData.decodedType
 
   return (
-    <li className="right-bar-event-element">
+    <li 
+      className="right-bar-event-element"
+      onClick={inModal ? toggle : null}
+    >
       <Link
         to={`${location.pathname}?time=${Math.floor(relativeSeconds(event, session))}`}
       >
