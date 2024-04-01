@@ -184,6 +184,8 @@
 
   --icon-color: rgb(110, 110, 110);
 
+  --input-color: var(--main-app-color);
+
   /* Accents */
 
   /* ----Greys */
