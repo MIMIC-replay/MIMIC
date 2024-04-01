@@ -6,13 +6,13 @@
 }
 
 [class*="network"]{
-  fill: rgb(184, 184, 184);
+  fill: var(--icon-color);
 }
 [class*="error"],
 [class*="load"], 
 [class*="custom"] 
 {
-  fill: rgb(148, 148, 148);
+  fill: var(--icon-color);
 }
 
 [class*="snapshot"],
@@ -23,7 +23,7 @@
 }
 
 [class*="plugin"]{
-  stroke: rgb(219, 219, 219);
+  stroke: rgb(117, 117, 117);
   fill: none
 }
 

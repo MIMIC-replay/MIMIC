@@ -180,6 +180,10 @@
 
   --stack-trace-trigger: var(--complementary);
 
+  --subtle-shadow: 0 4px 4px rgba(255, 255, 255, 0.1);
+
+  --icon-color: rgb(110, 110, 110);
+
   /* Accents */
 
   /* ----Greys */

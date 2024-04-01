@@ -41,6 +41,7 @@ input {
   gap: var(--sB);
   background-color: var(--light-background-color);
   letter-spacing: 0.1rem;
+  box-shadow: var(--subtle-shadow);
 }
 
 .site-logo {
@@ -202,6 +203,10 @@ input {
   cursor: pointer;
 }
 
+.session-list-element:last-child {
+  box-shadow: var(--subtle-shadow);
+}
+
 .session-list-element:hover {
   background-color: var(--table-key);
 }
@@ -272,6 +277,7 @@ input {
   width: 100%;
   display: flex;
   justify-content: center; 
+  
 }
 
 .player-controls {
@@ -279,6 +285,7 @@ input {
   background-color: var(--cK);
   height: var(--sE);
   overflow-x: auto;
+  
 }
 
 /* Extra info */
@@ -292,6 +299,7 @@ input {
 
 .extra-info-content {
   background-color: var(--background-color);
+  box-shadow: var(--subtle-shadow);
 }
 
 .extra-info-search svg {
@@ -328,7 +336,7 @@ input {
   width: var(--sL);
   background-color: var(--background-color);
   margin-bottom: var(--sB);
-  box-shadow: 2px 3px 5px rgba(82, 82, 82, 0.5);
+  box-shadow: 0 2px 4px rgba(82, 82, 82, 0.5);
 }
 
 .extra-info-search .feather-search {
@@ -486,6 +494,7 @@ td.request-name {
   border-radius: var(--general-border-radius);
   padding: var(--sC);
   background-color: var(--light-background-color);
+  box-shadow: var(--subtle-shadow);
 }
 
 .main-right-bar-session-details h2 {
@@ -532,6 +541,7 @@ td.request-name {
   max-height: var(--sM);
   overflow: auto;
   background-color: var(--light-background-color);
+  box-shadow: var(--subtle-shadow);
 }
 
 .main-right-bar-session-tabs-content ul {

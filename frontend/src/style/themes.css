@@ -19,4 +19,5 @@ html.light-theme {
 
   --stack-trace-background: rgb(233, 233, 233);
   --stack-trace-trigger: rgb(0, 160, 160);
+  --subtle-shadow: 0 4px 4px rgba(59, 59, 59, 0.1);
 }
