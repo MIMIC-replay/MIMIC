@@ -9,7 +9,6 @@ const SiteHeader = ({handleLogout, project}) => {
       <p className="project-name">{project.name}</p>
       <p className="project-id"><span className="project-id-dots">::</span>{` ${shorten(project.id)}`}</p>
       <ThemeSwitcher/>
-    
       <button className="logout-button" onClick={handleLogout}>Log out</button>
     </header>
   )
@@ -30,12 +29,12 @@ const ThemeSwitcher = () => {
   }
 
   return (
-    <button
-      className="theme-switcher"
-      onClick={toggleTheme}
-    >
-      {lightTheme ? '🌙' : '🌞'}
-    </button>
+  
+      <div className="switch svelte-9brlez">
+        <span className="label svelte-9brlez">☀</span>
+        <input type="checkbox" id="switch-theme" className="svelte-9brlez" onChange={toggleTheme}></input> 
+        <label htmlFor="switch-theme" className="svelte-9brlez"></label> 
+      </div>
   )
 }
 

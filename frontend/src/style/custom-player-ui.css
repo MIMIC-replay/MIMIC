@@ -256,12 +256,9 @@
 @media screen and (min-width: 1921px)  {
   div.rr-controller.svelte-19ke1iv.svelte-19ke1iv { 
     border-color: var(--background-color);
-    /* border: 2px solid pink; */
   }
 
   div.rr-player__frame {
     border-color: black;
-    /* border-bottom: 1px solid pink; */
-
   }
 }
