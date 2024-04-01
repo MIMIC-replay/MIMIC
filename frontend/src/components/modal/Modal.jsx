@@ -62,7 +62,6 @@ const StackTrace = ({trace}) => {
   };
   
   const handleMouseLeave = () => {
-
     setHoveringTrace({})
     document.removeEventListener('mousemove', handleMouseMove)
   };

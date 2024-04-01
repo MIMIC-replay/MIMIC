@@ -277,7 +277,6 @@ input {
   width: 100%;
   display: flex;
   justify-content: center; 
-  
 }
 
 .player-controls {
@@ -621,3 +620,4 @@ input:focus {
   border-radius: var(--general-border-radius);
   border-color: var(--cD);
 }
+
