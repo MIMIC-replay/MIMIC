@@ -176,6 +176,10 @@
   --patch-color:rgb(240, 225, 55);
   --head-color:rgb(209, 162, 238);
 
+  --stack-trace-background: rgb(15, 15, 15);
+
+  --stack-trace-trigger: var(--complementary);
+
   /* Accents */
 
   /* ----Greys */

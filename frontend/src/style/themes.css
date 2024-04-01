@@ -9,4 +9,14 @@ html.light-theme {
   --tab-background: var(--cA);
   --table-header-color: var(--cJ);
   --map-filter: none;
+
+  --get-color:rgb(38, 150, 86);
+  --post-color:rgb(235, 144, 25);
+  --put-color: rgb(41, 135, 206);
+  --delete-color:rgb(199, 52, 69);
+  --patch-color:rgb(0, 170, 156);
+  --head-color:rgb(171, 62, 238);
+
+  --stack-trace-background: rgb(233, 233, 233);
+  --stack-trace-trigger: rgb(0, 160, 160);
 }

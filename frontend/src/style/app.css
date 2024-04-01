@@ -27,7 +27,7 @@ body {
 
 input {
   padding: var(--sA);
-  border: 1px solid var(--table-key)
+  border: 1px solid var(--table-key);
 }
 
 /* Header */
@@ -120,9 +120,14 @@ input {
 
 .search > input {
   background-color: transparent;
-  color: var(--general-font-color);
+  color: var(--main-app-color);
   width: 160px;
   box-shadow: 2px 3px 5px rgba(51, 51, 51, 0.5);
+}
+
+.search > input:focus {
+  border-radius: var(--general-border-radius);
+  border-color: var(--cD);
 }
 
 .feather.error {
@@ -319,7 +324,7 @@ input {
 }
 
 .extra-info-search input {
-  color: var(--general-font-color);
+  color: var(--main-app-color);
   width: var(--sL);
   background-color: var(--background-color);
   margin-bottom: var(--sB);
@@ -510,7 +515,7 @@ td.request-name {
 
 .events-search input {
   background-color: transparent;
-  color: var(--general-font-color);
+  color: var(--main-app-color);
   margin-bottom: var(--sB);
   box-shadow: 2px 3px 5px rgba(82, 82, 82, 0.5);
 }
@@ -600,4 +605,9 @@ td.request-name {
   color: var(--main-app-color);
 
   border-color: var(--main-app-color);
+}
+
+input:focus {
+  border-radius: var(--general-border-radius);
+  border-color: var(--cD);
 }
