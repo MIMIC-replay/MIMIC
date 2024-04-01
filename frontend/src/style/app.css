@@ -257,6 +257,7 @@ input {
   margin-top: var(--sC);
   margin-right: var(--sC);
   margin-bottom: var(--sC);
+  box-shadow: var(--subtle-shadow);
 }
 
 /* Main Content Area Header  */
