@@ -44,7 +44,7 @@ sessionsRouter.get("/:projectId", async (req, res) => {
     const session = { id: sessionId };
 
     let events = await retrieveEventData(sessionId);
-
+    
     events = events.flat();
     session.events = events;
     session.network = extractNetworkEvents(events);

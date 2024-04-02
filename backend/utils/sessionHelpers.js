@@ -1,6 +1,7 @@
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
-const { getObjectContent } = require("../models/minio.js");
+// const { getObjectContent } = require("../models/minio.js");
+const { getObjectContent } = require("../models/s3.js");
 
 const addProjectCredentials = (
   projectId,
@@ -59,7 +60,7 @@ const extractErrorEvents = (eventsArr) => {
 };
 
 const retrieveEventData = async (sessionId) => {
-  return getObjectContent("mimic", sessionId)
+  return getObjectContent(sessionId) //"mimic", as first arg with minio
     .then((data) => new Uint8Array(data))
     .then((data) => JSON.parse(fflate.strFromU8(fflate.decompressSync(data))))
     .catch((error) => {

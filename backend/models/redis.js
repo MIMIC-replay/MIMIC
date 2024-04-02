@@ -1,14 +1,16 @@
 const { createClient } = require("redis");
 const { compressEvents } = require("../utils/recordHelpers");
 const { updateSessionEndTime } = require("../utils/sessionHelpers");
-const { uploadToEventStorage } = require("../models/minio");
+//const { uploadToEventStorage } = require("../models/minio");
+const { uploadToEventStorage } = require("../models/s3");
+const config = require("../utils/config.js");
 
 // redis connection (will act as publisher of expiration messages and main data mangement client)
 const publisher = createClient({
-  password: process.env.REDIS_PASSWORD,
+  password: config.REDIS_PASSWORD,
   socket: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host: config.REDIS_HOST,
+    port: config.REDIS_PORT,
   },
 });
 
@@ -22,10 +24,10 @@ publisher.on("ready", async () => {
 
 // Separate instance for subscribing to messages
 const subscriber = createClient({
-  password: process.env.REDIS_PASSWORD,
+  password: config.REDIS_PASSWORD,
   socket: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host: config.REDIS_HOST,
+    port: config.REDIS_PORT,
   },
 });
 
@@ -39,10 +41,10 @@ subscriber.on("connect", async () => {
     if (expiredKey.endsWith("_exp")) {
       // Retrieve the data from the actual key
       const sessionId = expiredKey.replace("_exp", "");
+      console.log("sessionId: ", sessionId);
       const expiredValue = await publisher.json.get(sessionId);
 
       // Handle the expired key and its associated value here (send to minio/s3)
-      console.log("Expired value:", expiredValue);
       const compressedEvents = compressEvents(expiredValue);
       uploadToEventStorage(sessionId, compressedEvents)
         .then(async (data) => {
