@@ -18,7 +18,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(express.static('dist'))
 // app.use(express.json());
 app.use(express.json({ limit: "10mb", extended: true }));
 app.use(
