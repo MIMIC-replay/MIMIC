@@ -1,6 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from "react-router-dom"
+// import { BrowserRouter } from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 import { CustomScroll } from 'react-custom-scroll'
 
 import App from './App'
@@ -15,9 +16,9 @@ import './style/login.css'
 import './style/custom-player-ui.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <HashRouter>
     <CustomScroll>
       <App />
     </CustomScroll>
-  </BrowserRouter>
+  </HashRouter>
 )
