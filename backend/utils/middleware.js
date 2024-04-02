@@ -19,6 +19,8 @@ const sessionCookie = (req, res, next) => {
       { id: newSessionId, lastActivity: currentTime },
       {
         maxAge: SESSION_DURATION,
+	sameSite: 'None',
+	secure: true,
       }
     );
     req.sessionData = { id: newSessionId, lastActivity: currentTime };
@@ -30,6 +32,8 @@ const sessionCookie = (req, res, next) => {
     sessionData.lastActivity = currentTime;
     res.cookie("sessionData", sessionData, {
       maxAge: SESSION_DURATION,
+	sameSite: 'None',
+        secure: true,
     });
     req.sessionData = { id: sessionData.id, lastActivity: currentTime };
   }

@@ -24,7 +24,6 @@ app.use(express.json({ limit: "10mb", extended: true }));
 app.use(
   express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
 );
-
 if (process.env.NODE_ENV === "development") {
   app.use(morgan(":method :url :status :body"));
 }
