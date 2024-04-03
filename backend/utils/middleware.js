@@ -73,20 +73,22 @@ const tokenExtractor = (request, response, next) => {
 const projectExtractor = async (request, response, next) => {
   let decodedToken;
   try {
-    decodedToken = jwt.verify(request.token, process.env.SECRET, (error) => {
-      if (error) return response.status(401).json({ error: "invalid token" });
-    });
+    decodedToken = await jwt.verify(request.token, process.env.SECRET);// (error, projectId) => {
+      //if (error) response.status(401).json({ error: "invalid token" });
+      //decodedToken = projectId
+    //});
   } catch (e) {
     console.log(e)
     return response.status(401).json({ error: "invalid token" });
   }  
 
-  if (!decodedToken.id) {
+  if (!decodedToken?.id) {
     return response.status(401).json({ error: "token invalid" });
   }
-
+  console.log('🐔🐔🐔🐔', decodedToken);
   // request.user = await User.findById(decodedToken.id); // replace with findByProjectId
   request.project = await findProjectById(decodedToken.id);
+  //request.project = true;
 
   next();
 };

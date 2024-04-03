@@ -6,13 +6,13 @@ const config = require("../utils/config.js");
 
 async function extractMetadata(req, userMetadata) {
   if (!userMetadata.ip) {
-    let testIP = "68.145.123.233";
-    userMetadata.ip = testIP;
+    // let testIP = "68.145.123.233";
+    // userMetadata.ip = testIP;
 
-    // userMetadata.ip = requestIp.getClientIp(req);
+    userMetadata.ip = requestIp.getClientIp(req);
 
     await fetch(
-      `${config.LOCATION_API_URL}/${testIP}/?token=${config.LOCATION_API_TOKEN}`
+      `${config.LOCATION_API_URL}/${userMetadata.ip}/?token=${config.LOCATION_API_TOKEN}`
     )
       .then((res) => res.json())
       .then((data) => {
