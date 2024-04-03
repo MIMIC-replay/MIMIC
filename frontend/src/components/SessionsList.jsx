@@ -4,23 +4,8 @@ const SessionsList = ({sessions, currentSession, setCurrentSession, searchMode})
   if (!sessions) return
 
   const changeSession = (session) => {
-    // if (session === currentSession) return
-    
-    // killPlayer()
     setCurrentSession(session)
   }
-
-  const killPlayer = () => {
-    const player = document.querySelector('#replayer')
-    if (!player) return
-
-
-    if (player?.firstChild) {
-      console.log('player killed')
-      player.removeChild(player.firstChild)
-    }
-  }
-  
 
   return (
     <div className="sessions-container">
