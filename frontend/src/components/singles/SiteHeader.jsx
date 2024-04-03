@@ -15,7 +15,9 @@ const SiteHeader = ({handleLogout, project}) => {
 }
 
 const ThemeSwitcher = () => {
-  const [lightTheme, setLightTheme] = useState(false)
+  const [lightTheme, setLightTheme] = useState(() => {
+    return !!document.querySelector('html.light-theme')
+  })
 
   const toggleTheme = () => {
     const html = document.querySelector('html')
