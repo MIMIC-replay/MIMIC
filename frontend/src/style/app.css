@@ -601,7 +601,7 @@ td.request-name {
   justify-content: center;
   align-items: center;
   top: 36px;
-  left: 40vw;
+  left: 41vw;
   opacity: 0;
   border-width: 2px;
   border-style: solid;
@@ -634,5 +634,11 @@ input:focus {
 @media screen and (max-width: 1919px)  {
   body {
     overflow-x: visible;
+  }
+}
+
+@media screen and (min-width: 2200) {
+  .notification {
+   left: 45vw;
   }
 }
