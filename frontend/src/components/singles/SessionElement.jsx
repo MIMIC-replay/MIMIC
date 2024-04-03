@@ -48,7 +48,7 @@ const MiniChart = ({session}) => {
 
   if (data.length < 1) return (
     <div className='session-element-latency-chart'>
-      <p>No network requests yet!</p>
+      <p>No network requests.</p>
     </div>
   )
 

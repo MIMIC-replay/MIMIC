@@ -7,14 +7,13 @@ body {
   font-family: var(--general-font);
   font-size: var(--frB);
   font-weight: var(--base-font-weight);
-
-  width: max-content;
   background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
 .main-grid {
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   
   display: grid;
 
@@ -551,6 +550,7 @@ td.request-name {
   overflow: auto;
   background-color: var(--light-background-color);
   box-shadow: var(--subtle-shadow);
+  scrollbar-width: thin;
 }
 
 .main-right-bar-session-tabs-content ul {
@@ -601,7 +601,7 @@ td.request-name {
   justify-content: center;
   align-items: center;
   top: 36px;
-  left: 37vw;
+  left: 40vw;
   opacity: 0;
   border-width: 2px;
   border-style: solid;
@@ -631,3 +631,8 @@ input:focus {
   border-color: var(--cD);
 }
 
+@media screen and (max-width: 1919px)  {
+  body {
+    overflow-x: visible;
+  }
+}

@@ -1,15 +1,17 @@
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import L from 'leaflet'
 
 const Map = ({session}) => {
-
   const latitude = session.metadata.location.latitude
   const longitude = session.metadata.location.longitude
 
   useEffect(() => {
-    if (document.querySelector('.leaflet-container')) return
+    let container = L.DomUtil.get('map');
+    if(container != null){
+      container._leaflet_id = null;
+    }
 
     let map = L.map('map', {
       zoomControl: false,
@@ -21,11 +23,11 @@ const Map = ({session}) => {
     }).addTo(map);
 
     L.marker([latitude, longitude]).addTo(map);
-
-  }, [latitude, longitude]);
+  }, [latitude, longitude, session]);
 
   return (
-    <div id="map"></div>
+    <div id="map">
+    </div>
   )
 }
 
