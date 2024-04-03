@@ -142,6 +142,19 @@ const updateSessionEndTime = (sessionId) => {
     });
 };
 
+const findProjectById = async (projectId) => {
+  let project
+  await postgres.db.one('SELECT * FROM projects WHERE id = $1', [projectId])
+             .then((r) => {
+              project = r 
+            })
+             .catch(e => {
+              console.log("Error: ", e)
+             })
+
+  return project
+}
+
 module.exports = {
   addProjectCredentials,
   validateProjectName,
@@ -152,4 +165,5 @@ module.exports = {
   retrieveMetadata,
   findSessionIds,
   updateSessionEndTime,
+  findProjectById,
 };

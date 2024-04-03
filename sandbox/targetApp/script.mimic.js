@@ -1,6 +1,6 @@
 
 let events = [];
-const projectId = "4d8b9aa2-e5bc-4c26-ae5d-5ea28ac2698e";
+const projectId = "4ccdcc2d-e914-4e62-9923-2cf752dc0b7f";
 const backendUrl = "https://mimic-replay.com";
 
 const originalFetch = window.fetch;

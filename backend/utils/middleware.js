@@ -1,6 +1,8 @@
 const SESSION_DURATION = 1000 * 10;
 const logger = require("./logger.js");
 const uuid = require("uuid");
+const { findProjectById } = require("./sessionHelpers.js");
+const jwt = require('jsonwebtoken');
 
 const sessionCookie = (req, res, next) => {
   const sessionData = req.cookies.sessionData;
@@ -68,13 +70,23 @@ const tokenExtractor = (request, response, next) => {
   next();
 };
 
-const userExtractor = async (request, response, next) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET);
+const projectExtractor = async (request, response, next) => {
+  let decodedToken;
+  try {
+    decodedToken = jwt.verify(request.token, process.env.SECRET, (error) => {
+      if (error) return response.status(401).json({ error: "invalid token" });
+    });
+  } catch (e) {
+    console.log(e)
+    return response.status(401).json({ error: "invalid token" });
+  }  
+
   if (!decodedToken.id) {
     return response.status(401).json({ error: "token invalid" });
   }
 
-  request.user = await User.findById(decodedToken.id); // replace with findByProjectId
+  // request.user = await User.findById(decodedToken.id); // replace with findByProjectId
+  request.project = await findProjectById(decodedToken.id);
 
   next();
 };
@@ -87,6 +99,6 @@ module.exports = {
   errorHandler,
   sessionCookie,
   tokenExtractor,
-  userExtractor,
+  projectExtractor,
   unknownEndpoint,
 };

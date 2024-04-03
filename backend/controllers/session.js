@@ -25,15 +25,16 @@ sessionsRouter.post("/new", async (req, res) => {
   addProjectCredentials(projectId, projectName, projectPassword, res);
 });
 
-// const { userExtractor } = require('../utils/middleware')
+const { projectExtractor } = require('../utils/middleware')
 
-// the idea is to add a userExtractor middleware function to
-// allow only to authorized users access to the session database:
-// (you can see the function signature above the actual signature)
 
-// sessionsRouter.get("/:projectId", userExtractor, async (req, res) => {
-sessionsRouter.get("/:projectId", async (req, res) => {
+sessionsRouter.get("/:projectId", projectExtractor, async (req, res) => {
+// sessionsRouter.get("/:projectId", async (req, res) => {
   // requests all sessions associated with a project id
+  if (!req.project) {
+    return res.status(401).json({ error: "invalid project id" });
+  }
+	
 
   const validSessionIds = await findSessionIds(req.params.projectId); // ["02bc742b-e176-4780-ae1c-5d62d569d9f0"]
 
