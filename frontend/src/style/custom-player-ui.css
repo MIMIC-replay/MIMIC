@@ -197,6 +197,9 @@
 .rr-controller__btns.svelte-19ke1iv button.svelte-19ke1iv:disabled {
   cursor: not-allowed;
 }
+.rr-controller svg.icon {
+  fill: var(--general-font-color);
+}
 
 .switch.svelte-9brlez.svelte-9brlez.svelte-9brlez {
   height: 1em;
