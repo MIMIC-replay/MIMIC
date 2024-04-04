@@ -43,4 +43,4 @@ files = glob.glob('./**/*.html', recursive=True)
 for file in files:
   inject_scripts(file)
   
-print("Mimic script injected into html file(s)")
+print("🔹 Mimic script injected into html file(s)")
