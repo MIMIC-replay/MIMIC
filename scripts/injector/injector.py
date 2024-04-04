@@ -17,10 +17,12 @@ def inject_scripts(raw_file):
     rrweb_script = soup.new_tag('script') 
     rrweb_script['src'] = "https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb-all.min.js"
     rrweb_script['class'] = 'mimic'
+    rrweb_script.attrs['defer'] = None
 
     mimic_script = soup.new_tag('script')
     mimic_script['src'] = os.path.join(rel_dir, 'script.mimic.js') #"./script.mimic.js"
     mimic_script['class'] = 'mimic'
+    rrweb_script.attrs['defer'] = None
 
     soup.head.extend([ 
       Comment('Mimic Start'),   
