@@ -27,39 +27,39 @@ sessionsRouter.post("/new", async (req, res) => {
 
 const { projectExtractor } = require('../utils/middleware')
 
-
 sessionsRouter.get("/:projectId", projectExtractor, async (req, res) => {
-// sessionsRouter.get("/:projectId", async (req, res) => {
-  // requests all sessions associated with a project id
   if (!req.project) {
     return res.status(401).json({ error: "invalid project id" });
   }
-	
 
-  const validSessionIds = await findSessionIds(req.params.projectId); // ["02bc742b-e176-4780-ae1c-5d62d569d9f0"]
+  try {
+    const validSessionIds = await findSessionIds(req.params.projectId);
 
-  const sessions = [];
-  for (index = 0; index < validSessionIds.length; index++) {
-    const sessionId = validSessionIds[index].id;
+    const sessionPromises = validSessionIds.map(async (session) => {
+      const sessionId = session.id;
+      const sessionObj = { id: sessionId };
+      
+      let events = await retrieveEventData(sessionId);
+      events = events.flat();
+      
+      sessionObj.events = events;
+      sessionObj.network = extractNetworkEvents(events);
+      sessionObj.logs = extractLogEvents(events);
+      sessionObj.errors = extractErrorEvents(events);
+      
+      const metadata = await retrieveMetadata(sessionId);
+      sessionObj.metadata = metadata;
+      
+      return sessionObj;
+    });
 
-    const session = { id: sessionId };
+    const sessions = await Promise.all(sessionPromises);
 
-    let events = await retrieveEventData(sessionId);
-    
-    events = events.flat();
-    session.events = events;
-    session.network = extractNetworkEvents(events);
-    session.logs = extractLogEvents(events);
-    session.errors = extractErrorEvents(events);
-
-    const metadata = await retrieveMetadata(sessionId);
-    session.metadata = metadata;
-    sessions.push(session);
+    res.json({ sessions });
+  } catch (error) {
+    console.error("Error retrieving sessions:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  res.json({
-    sessions: sessions,
-  });
 });
 
 module.exports = sessionsRouter;

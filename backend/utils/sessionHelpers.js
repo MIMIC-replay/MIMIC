@@ -108,7 +108,7 @@ const retrieveMetadata = async (sessionId) => {
   return metadata;
 };
 
-const findSessionIds = (projectId) => {
+const findSessionIds = async (projectId) => {
   return postgres.db
     .query(
       "SELECT id FROM sessions WHERE project_id = $1 AND session_end IS NOT NULL",
