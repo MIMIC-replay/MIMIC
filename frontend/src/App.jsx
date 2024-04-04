@@ -97,6 +97,7 @@ function App() {
 
     if (storedProject && !expired) {
       const project = parsedProject
+      // console.log(parsedProject, parsedProject.token)
       setProject(project)
       setToken(project.token)
     }
