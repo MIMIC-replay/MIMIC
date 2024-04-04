@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup, Comment
 import glob, os
 
-root_dir = os.path.dirname(__file__)
+root_dir = "."
 
 def inject_scripts(raw_file):
   current_dir = os.path.dirname(raw_file)
