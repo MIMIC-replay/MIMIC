@@ -8,7 +8,7 @@ export const sessionMetadataExtractor = (session) => {
 
   const url = metadata.url
   const time = metadata.date
-  const https = metadata.https
+  const https = metadata.https || /^https:/.test(url)
   const os = metadata.os
   const ip = metadata.ip
   const browser = metadata.browser
