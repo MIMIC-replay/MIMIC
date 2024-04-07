@@ -28,8 +28,11 @@ def getBackendLocation():
 def send_project_info(name, password, backendUrl):
   r = requests.post(f'{backendUrl}/api/project/new', json={ 'projectId': UNIQUE_PROJECT_ID, "name": name, "password": password })
   print("🔹 Sending new project information to MIMIC server...")
-  print("🔹", r.status_code, r.reason)
-  print("🔥 MIMIC is successfully installed 🔥") if r.status_code == 200 else print("💔 There was an error installing MIMIC 💔")
+  if r.status_code == 200:
+    print("🔹 Credentials received by MIMIC server!")
+    print("🔥 MIMIC is successfully installed 🔥")
+  else:
+    print("💔 There was an error communicating with to your MIMIC server, installer unable to proceed 💔")
   
 def credentials(backendUrl):
   unique_name = False
