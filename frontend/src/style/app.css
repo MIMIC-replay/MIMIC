@@ -201,6 +201,10 @@ header .switch {
   font-weight: 600;
 }
 
+.no-requests-message {
+	margin-bottom: var(--sB);
+}
+
 
 .session-list-element.active {
   border-left: 7px solid var(--complementary);
