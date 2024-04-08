@@ -20,7 +20,6 @@ export const getSessions = async (projectId) => {
       `${BASE_URL}/${projectId}`,
       config
      )
-
      return response.data.sessions
   } catch (e) {
     console.error(e)
