@@ -1,13 +1,14 @@
 
 let events = [];
-const projectId = "334f3c90-c3e8-4735-88a2-66b903f78eb6";
+const projectId = "62eb7d4e-41c9-45af-9e67-3f1cb772e90a";
+const backendUrl = "https://mimic-replay.com";
 
 const originalFetch = window.fetch;
 window.fetch = async (...args) => {
   let [resource, config] = args;
 
   // Conditionally returns to avoid capture of requests sending events to our server
-  if (resource === "http://localhost:3001/api/record") {
+  if (resource === `${backendUrl}/api/record`) {
     const response = await originalFetch(resource, config);
     return response;
   }
@@ -208,7 +209,7 @@ const websocketSendInterceptor = (data, networkEventObj) => {
   events.push(networkEventObj);
 };
 
-const stopRecording = rrweb.record({
+let stopRecording = rrweb.record({
   emit(event) {
     events.push(event);
 
@@ -224,7 +225,7 @@ const save = () => {
   const body = JSON.stringify(events);
   events = [];
 
-  fetch("http://localhost:3001/api/record", {
+  fetch(`${backendUrl}/api/record`, {
     credentials: "include",
     method: "POST",
     headers: {
@@ -235,14 +236,31 @@ const save = () => {
   });
 };
 
-const saveEventsInterval = setInterval(save, 5000);
+let saveEventsInterval = setInterval(save, 5000);
 
-window.addEventListener("beforeunload", (e) => {
-  stopRecording();
-  clearInterval(saveEventsInterval);
+window.addEventListener("visibilitychange", (e) => {
+  if (document.visibilityState === "hidden") {
+    //When user minimizes browser, switches to a different tab, navigates to different url, closes the tab/browser
+    //  stop recording, clear the interval
+    //  user has 5 seconds to come back to the tab/reopen minimized window to not be assigned a new session cookie
+    stopRecording();
+    clearInterval(saveEventsInterval);
+  } else if (document.visibilityState === "visible") {
+    //When user reopens minimized browser, switches back to this tab
+    //  initialize new recorder, reassign stopRecording, reassign the saveEventsInterval
+    stopRecording = rrweb.record({
+      emit(event) {
+        events.push(event);
+
+        const defaultLog = console.log["__rrweb_original__"]
+          ? console.log["__rrweb_original__"]
+          : console.log;
+      },
+      maskAllInputs: true,
+      plugins: [rrweb.getRecordConsolePlugin()],
+    });
+    saveEventsInterval = setInterval(save, 5000);
+  }
+  //save in order to capture most recent events since prior save, and refresh cookie if they only minimized browser/switched tabs for < 5s
   save();
-  // May be unnecessary to reassign original handlers
-  window.fetch = originalFetch;
-  window.XMLHttpRequest.prototype.open = originalXHROpen;
-  window.WebSocket = OriginalWebSocket;
 });

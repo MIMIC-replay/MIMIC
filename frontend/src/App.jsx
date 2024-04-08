@@ -20,7 +20,7 @@ import LoginForm from "./components/login/LoginForm"
 
 import { login } from "./services/login"
 
-import { isExpired } from "react-jwt";
+import { isExpired, decodeToken } from "react-jwt";
 
 function App() {
   const [sessions, setSessions] = useState([])
@@ -77,15 +77,27 @@ function App() {
   
   useEffect(() => {
     const storedProject = window.localStorage.getItem('loggedMimicProject')
+    let parsedProject
+    let token
+    	try {
+		parsedProject = storedProject && JSON.parse(storedProject)
+		token = parsedProject ? decodeToken(parsedProject?.token) : null 
+	} catch (e) {
+		handleLogout()
+		return
+	}
+    const isValidToken = token?.id === parsedProject?.id && 
+		  token?.name === parsedProject?.name 
     const expired = isExpired(storedProject)
     
-    if (expired) {
-      handleLogout()
+    if (!isValidToken || expired) {
+	handleLogout()
       return
     }
 
     if (storedProject && !expired) {
-      const project = JSON.parse(storedProject)
+      const project = parsedProject
+      // console.log(parsedProject, parsedProject.token)
       setProject(project)
       setToken(project.token)
     }

@@ -15,7 +15,9 @@ const SiteHeader = ({handleLogout, project}) => {
 }
 
 const ThemeSwitcher = () => {
-  const [lightTheme, setLightTheme] = useState(false)
+  const [lightTheme, setLightTheme] = useState(() => {
+    return !!document.querySelector('html.light-theme')
+  })
 
   const toggleTheme = () => {
     const html = document.querySelector('html')
@@ -32,7 +34,7 @@ const ThemeSwitcher = () => {
   
       <div className="switch svelte-9brlez">
         <span className="label svelte-9brlez">{lightTheme ? '☾' : '☀'}</span>
-        <input type="checkbox" id="switch-theme" className="svelte-9brlez" onChange={toggleTheme}></input> 
+        <input type="checkbox" defaultChecked={lightTheme} id="switch-theme" className="svelte-9brlez" onChange={toggleTheme}></input> 
         <label htmlFor="switch-theme" className="svelte-9brlez"></label> 
       </div>
   )

@@ -25,40 +25,41 @@ sessionsRouter.post("/new", async (req, res) => {
   addProjectCredentials(projectId, projectName, projectPassword, res);
 });
 
-// const { userExtractor } = require('../utils/middleware')
+const { projectExtractor } = require('../utils/middleware')
 
-// the idea is to add a userExtractor middleware function to
-// allow only to authorized users access to the session database:
-// (you can see the function signature above the actual signature)
-
-// sessionsRouter.get("/:projectId", userExtractor, async (req, res) => {
-sessionsRouter.get("/:projectId", async (req, res) => {
-  // requests all sessions associated with a project id
-
-  const validSessionIds = await findSessionIds(req.params.projectId); // ["02bc742b-e176-4780-ae1c-5d62d569d9f0"]
-
-  const sessions = [];
-  for (index = 0; index < validSessionIds.length; index++) {
-    const sessionId = validSessionIds[index].id;
-
-    const session = { id: sessionId };
-
-    let events = await retrieveEventData(sessionId);
-    
-    events = events.flat();
-    session.events = events;
-    session.network = extractNetworkEvents(events);
-    session.logs = extractLogEvents(events);
-    session.errors = extractErrorEvents(events);
-
-    const metadata = await retrieveMetadata(sessionId);
-    session.metadata = metadata;
-    sessions.push(session);
+sessionsRouter.get("/:projectId", projectExtractor, async (req, res) => {
+  if (!req.project) {
+    return res.status(401).json({ error: "invalid project id" });
   }
 
-  res.json({
-    sessions: sessions,
-  });
+  try {
+    const validSessionIds = await findSessionIds(req.params.projectId);
+
+    const sessionPromises = validSessionIds.map(async (session) => {
+      const sessionId = session.id;
+      const sessionObj = { id: sessionId };
+      
+      let events = await retrieveEventData(sessionId);
+      events = events.flat();
+      
+      sessionObj.events = events;
+      sessionObj.network = extractNetworkEvents(events);
+      sessionObj.logs = extractLogEvents(events);
+      sessionObj.errors = extractErrorEvents(events);
+      
+      const metadata = await retrieveMetadata(sessionId);
+      sessionObj.metadata = metadata;
+      
+      return sessionObj;
+    });
+
+    const sessions = await Promise.all(sessionPromises);
+
+    res.json({ sessions });
+  } catch (error) {
+    console.error("Error retrieving sessions:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 module.exports = sessionsRouter;

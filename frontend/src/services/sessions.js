@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const PORT = import.meta.env.VITE_REACT_APP_PORT
-const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}:${PORT}/api/project`
+// const PORT = import.meta.env.VITE_REACT_APP_PORT
+// const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}:${PORT}/api/project`
+const BASE_URL = '/api/project'
 
 let token = null 
 
@@ -19,7 +20,6 @@ export const getSessions = async (projectId) => {
       `${BASE_URL}/${projectId}`,
       config
      )
-
      return response.data.sessions
   } catch (e) {
     console.error(e)

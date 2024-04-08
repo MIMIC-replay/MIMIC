@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const PORT = import.meta.env.VITE_REACT_APP_PORT
-const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}:${PORT}/api/login`
+// const PORT = import.meta.env.VITE_REACT_APP_PORT
+// const BASE_URL = `${import.meta.env.VITE_REACT_APP_BASE_URL}:${PORT}/api/login`
+const BASE_URL = '/api/login'
 
 export const login = async (credentials) => {
   try {

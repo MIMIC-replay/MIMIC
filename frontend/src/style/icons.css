@@ -37,4 +37,8 @@
   height: 15px;
 }
 
+.session-list-element [class*=network],
+.session-list-element [class*=error] {
+	fill: darkgray;
+}
 

@@ -1,6 +1,8 @@
 const SESSION_DURATION = 1000 * 10;
 const logger = require("./logger.js");
 const uuid = require("uuid");
+const { findProjectById } = require("./sessionHelpers.js");
+const jwt = require('jsonwebtoken');
 
 const sessionCookie = (req, res, next) => {
   const sessionData = req.cookies.sessionData;
@@ -19,6 +21,8 @@ const sessionCookie = (req, res, next) => {
       { id: newSessionId, lastActivity: currentTime },
       {
         maxAge: SESSION_DURATION,
+	sameSite: 'None',
+	secure: true,
       }
     );
     req.sessionData = { id: newSessionId, lastActivity: currentTime };
@@ -30,6 +34,8 @@ const sessionCookie = (req, res, next) => {
     sessionData.lastActivity = currentTime;
     res.cookie("sessionData", sessionData, {
       maxAge: SESSION_DURATION,
+	sameSite: 'None',
+        secure: true,
     });
     req.sessionData = { id: sessionData.id, lastActivity: currentTime };
   }
@@ -64,13 +70,19 @@ const tokenExtractor = (request, response, next) => {
   next();
 };
 
-const userExtractor = async (request, response, next) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET);
-  if (!decodedToken.id) {
+const projectExtractor = async (request, response, next) => {
+  let decodedToken;
+  try {
+    decodedToken = await jwt.verify(request.token, process.env.SECRET);
+  } catch (e) {
+    console.log(e)
+    return response.status(401).json({ error: "invalid token" });
+  }  
+
+  if (!decodedToken?.id) {
     return response.status(401).json({ error: "token invalid" });
   }
-
-  request.user = await User.findById(decodedToken.id); // replace with findByProjectId
+  request.project = await findProjectById(decodedToken.id);
 
   next();
 };
@@ -83,6 +95,6 @@ module.exports = {
   errorHandler,
   sessionCookie,
   tokenExtractor,
-  userExtractor,
+  projectExtractor,
   unknownEndpoint,
 };
