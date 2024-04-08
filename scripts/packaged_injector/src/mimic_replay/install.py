@@ -4,11 +4,11 @@ UNIQUE_PROJECT_ID = str(uuid.uuid4())
 
 def process():
   backendUrl = getBackendLocation()
-  subprocess.run(['python3', 'config.py', UNIQUE_PROJECT_ID, backendUrl])
+  subprocess.run(['python3', '-m', 'mimic_replay.config', UNIQUE_PROJECT_ID, backendUrl])
   name, password = credentials(backendUrl)
   print("🛑   Please keep the project name and password for your records  🛑")
   print("🛑 You will be unable to access or change your credentials later 🛑")
-  subprocess.run(['python3', 'injector.py'])
+  subprocess.run(['python3', '-m', 'mimic_replay.injector'])
   send_project_info(name, password, backendUrl)
 
 def getBackendLocation():
@@ -58,7 +58,7 @@ def name_credentials():
   return name
 
 def pw_credentials():
-  prompt = "🔹 Please enter a password for logging in, between 8 and 64 characters"
+  prompt = "🔹 Please enter a password for logging in, between 8 and 64 characters:"
   password = None
   valid_password = False
   while valid_password == False:

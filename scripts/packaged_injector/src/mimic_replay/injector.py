@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup, Comment
 import glob, os
 
-root_dir = "."
+root_dir = '.'
 
 def inject_scripts(raw_file):
   current_dir = os.path.dirname(raw_file)
@@ -22,7 +22,7 @@ def inject_scripts(raw_file):
     mimic_script = soup.new_tag('script')
     mimic_script['src'] = os.path.join(rel_dir, 'script.mimic.js') #"./script.mimic.js"
     mimic_script['class'] = 'mimic'
-    rrweb_script.attrs['defer'] = None
+    mimic_script.attrs['defer'] = None
 
     soup.head.extend([ 
       Comment('Mimic Start'),   
