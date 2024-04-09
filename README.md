@@ -43,7 +43,10 @@ MIMIC's setup involves two main steps:
 
 ## MIMIC Team
 [Louis Mascari](https://github.com/Louis-Mascari) • Software Engineer • Knoxville, TN
+
 [Lucas Sorribes](https://github.com/devluxor) • Software Engineer • Valencia, Spain
+
 [Veronika Todd](https://github.com/VSTodd) • Software Engineer • Hartford, CT
+
 [Erik Wiens](https://github.com/ErikWiens) • Software Engineer • New York, NY
 
