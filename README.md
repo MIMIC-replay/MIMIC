@@ -32,5 +32,12 @@ MIMIC's setup involves two main steps:
 - Run `npm install`
 - Run the client with `npm run dev`
 
-
+### Using MIMIC in your application
+- Before doing this step **ensure** your backend server is running, otherwise you will be unable to set up MIMIC in your application
+- Download our [MIMIC installer python package](https://pypi.org/project/mimic-replay/)
+- In the root folder of your application, run the installer with the command `python3 -m mimic_replay.install`
+- **Note** if your application is not made up by vanilla HTML files, the installer will not be able to run properly
+  - To enable MIMIC in these applications, in deployed version of your HTML files, you must have the following two script tags:
+  - `<script class="mimic" defer src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb-all.min.js"></script>`
+  - `<script class="mimic" defer src="THE/PATH/FROM/THE/FILE/TO/YOUR/PROJECT/ROOT/script.mimic.js"></script>` 
 
