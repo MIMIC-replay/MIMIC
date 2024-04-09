@@ -1,4 +1,5 @@
 # MIMIC
+![MIMIC's Logo](https://drive.google.com/uc?export=download&id=1T-yxxqTpc6nv7nydOF5TJ1tTAgcJFfRE)
 ## Description
 MIMIC is an open source, self-hosted session replay framework which abstracts away the intricacies of recording and replaying users' sessions on web applications. It is tailored towards user experience improvement and debugging, providing granular insights into application malfunctions in a streamlined and cost-effective manner. With its ready-made telemetry pipeline, MIMIC automates instrumentation and deployment, providing an in depth replay interface that is intuitive and easy to learn. 
 
