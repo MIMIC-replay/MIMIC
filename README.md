@@ -27,4 +27,10 @@ MIMIC's setup involves two main steps:
 - Navigate to `./models`, following the instruction in the `initialize.sql` file to initialize your database
 - Run the server with `npm start`
 
-####  
+####  Client(Frontend)
+- Navigate to `./MIMIC/frontend`
+- Run `npm install`
+- Run the client with `npm run dev`
+
+
+
