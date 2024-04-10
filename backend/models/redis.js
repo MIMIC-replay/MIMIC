@@ -1,7 +1,6 @@
 const { createClient } = require("redis");
 const { compressEvents } = require("../utils/recordHelpers");
 const { updateSessionEndTime } = require("../utils/sessionHelpers");
-//const { uploadToEventStorage } = require("../models/minio");
 const { uploadToEventStorage } = require("../models/s3");
 const config = require("../utils/config.js");
 
