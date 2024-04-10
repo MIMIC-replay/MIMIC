@@ -21,8 +21,7 @@ MIMIC's setup involves two main steps:
 ### Installation of MIMIC pipeline
 - Navigate to `./MIMIC/backend`
 - Run `npm install`
-<details> <summary>While still in the backend root directory, create the `.env` file necessary for MIMIC to work, see the below template:</summary>
-
+- While still in the backend root directory, create the `.env` file necessary for MIMIC to work, see the below template:
 ```ruby
 # .env template
 PORT = *** # this is the port your entire MIMIC pipeline with utilize 
@@ -37,8 +36,6 @@ AWS_ACCESS_KEY_ID = ***
 AWS_SECRET_ACCESS_KEY = ***
 AWS_BUCKET_NAME = ***
 ```
-</details>
-
 - Navigate to `./models`, following the instructions at the top of the `initialize.sql` file to initialize your database
 - From the backend's root directory, run `npm run build:ui`
 - Run MIMIC from the backend root folder with `npm start`
