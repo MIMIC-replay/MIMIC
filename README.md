@@ -24,7 +24,7 @@ MIMIC's setup involves two main steps:
 - <details>
 <summary>While still in the backend root directory, create the `.env` file necessary for MIMIC to work, see the below template:</summary>
 
-```text
+```ruby
 # .env template
 PORT = *** # this is the port your entire MIMIC pipeline with utilize 
 PSQL_PASSWORD = *** # the password for your PostgreSQL 'postgres' user 
