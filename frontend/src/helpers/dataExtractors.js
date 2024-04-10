@@ -130,25 +130,22 @@ export const line = (error) => {
 }
 
 export const recentEventsFromError = (error, events) => {
-  const MAX_EVENTS = 7
-  if (events.length <= MAX_EVENTS) return events
+  const MAX_EVENTS = 7;
+  if (events.length <= MAX_EVENTS) return events;
 
-  const errorTimestamp = error.timestamp
-  let event
-  let index
-  for (index = events.length - 1; index >= MAX_EVENTS; index -= 1) {
-    event = events[index]
-
-    if (errorTimestamp <= event.timestamp) break
+  const errorIndex = events.findIndex(
+    (event) =>
+      event.timestamp === error.timestamp &&
+      event.data.payload?.level === "error"
+  );
+  // If the error occurs at or after the 8th element, return the 7 events prior to the error
+  if (errorIndex >= MAX_EVENTS) {
+    return events.slice(errorIndex - MAX_EVENTS, errorIndex);
   }
 
-  let result = []
-  for (let i = index - (MAX_EVENTS - 1); i <= index; i++) {
-    result.push(events[i])
-  }
-
-  return result
-}
+  // If the error is found in the first 7 events, return only the events leading up to the error
+  return events.slice(0, errorIndex);
+};
 
 export const originalViewport = (session) => {
   const viewport = session.events.find(e => e.data.width && e.data.height )
