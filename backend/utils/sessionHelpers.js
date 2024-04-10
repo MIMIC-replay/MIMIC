@@ -1,6 +1,5 @@
 const fflate = require("fflate");
 const postgres = require("../models/postgres.js");
-// const { getObjectContent } = require("../models/minio.js");
 const { getObjectContent } = require("../models/s3.js");
 
 const addProjectCredentials = (
@@ -60,7 +59,7 @@ const extractErrorEvents = (eventsArr) => {
 };
 
 const retrieveEventData = async (sessionId) => {
-  return getObjectContent(sessionId) //"mimic", as first arg with minio
+  return getObjectContent(sessionId)
     .then((data) => new Uint8Array(data))
     .then((data) => JSON.parse(fflate.strFromU8(fflate.decompressSync(data))))
     .catch((error) => {
@@ -124,7 +123,7 @@ const findSessionIds = async (projectId) => {
 };
 
 const updateSessionEndTime = (sessionId) => {
-  //Send query to postgres which updates `session_end` column to current time for provided `sessionId`
+  // Sends query to postgres which updates `session_end` column to current time for provided `sessionId`
   postgres.db
     .none("UPDATE sessions SET session_end = CURRENT_TIMESTAMP WHERE id = $1", [
       sessionId,
@@ -145,12 +144,12 @@ const updateSessionEndTime = (sessionId) => {
 const findProjectById = async (projectId) => {
   let project
   await postgres.db.one('SELECT * FROM projects WHERE id = $1', [projectId])
-             .then((r) => {
+            .then((r) => {
               project = r 
             })
-             .catch(e => {
+            .catch(e => {
               console.log("Error: ", e)
-             })
+            })
 
   return project
 }

@@ -21,8 +21,8 @@ const sessionCookie = (req, res, next) => {
       { id: newSessionId, lastActivity: currentTime },
       {
         maxAge: SESSION_DURATION,
-	sameSite: 'None',
-	secure: true,
+        sameSite: 'None',
+        secure: true,
       }
     );
     req.sessionData = { id: newSessionId, lastActivity: currentTime };
@@ -30,12 +30,12 @@ const sessionCookie = (req, res, next) => {
     console.log("Valid sessionData cookie attached");
     console.log("Id: ", sessionData.id);
     console.log("--------------------------------------------------");
-    // Update last activity time
+    // Updates last activity time
     sessionData.lastActivity = currentTime;
     res.cookie("sessionData", sessionData, {
       maxAge: SESSION_DURATION,
-	sameSite: 'None',
-        secure: true,
+    	sameSite: 'None',
+      secure: true,
     });
     req.sessionData = { id: sessionData.id, lastActivity: currentTime };
   }
