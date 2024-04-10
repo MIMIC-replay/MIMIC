@@ -9,16 +9,16 @@ loginRouter.post('/', async (request, response) => {
 
   let project
   await postgres.db.one('SELECT * FROM projects WHERE name = $1', [projectName.toLowerCase()])
-             .then((r) => {
+            .then((r) => {
               console.log("result: ", r)
               project = r 
             })
-             .catch(e => {
+            .catch(e => {
               console.log("Error: ", e)
                 response.status(401).json({
                   error: 'invalid project name'
                 })
-             })
+            })
 
   if (!project) {
     response.send()

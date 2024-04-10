@@ -20,7 +20,7 @@ recordRouter.post("/", async (req, res) => {
   if (keyExists) {
     // if the batch wasn't empty - so we don't make unneccesary requests to redis
     if (batchOfEvents.length > 0) {
-      //json.arrAppend adds the JSON values to the end of the array
+      // json.arrAppend adds the JSON values to the end of the array
       await redis.publisher.json.arrAppend(sessionId, "$", batchOfEvents);
     }
   } else {
@@ -38,7 +38,7 @@ recordRouter.post("/", async (req, res) => {
     await extractMetadata(req, userMetadata);
     console.log("Updated metadata: ", userMetadata);
 
-    //JSON.SET: Will creates new path adds the values to a JSON object.
+    // JSON.SET: Will creates new path adds the values to a JSON object.
     //$ represents root path
     await redis.publisher.json.set(sessionId, "$", [batchOfEvents]);
     await redis.publisher.set(sessionId + "_exp", "");
