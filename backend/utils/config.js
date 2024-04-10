@@ -13,11 +13,6 @@ AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
 AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 
-// MINIO_USER = process.env.MINIO_USER;
-// MINIO_USER_PASSWORD = process.env.MINIO_USER_PASSWORD;
-// MINIO_URL = process.env.MINIO_URL;
-// MINIO_PORT = Number(process.env.MINIO_PORT);
-
 module.exports = {
   PORT,
   POSTGRES_PORT,
@@ -30,10 +25,5 @@ module.exports = {
   AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY,
   AWS_BUCKET_NAME,
-
-  // MINIO_USER,
-  // MINIO_USER_PASSWORD,
-  // MINIO_URL,
-  // MINIO_PORT,
   SECRET,
 };
