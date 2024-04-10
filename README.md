@@ -21,7 +21,8 @@ MIMIC's setup involves two main steps:
 ### Installation of MIMIC pipeline
 - Navigate to `./MIMIC/backend`
 - Run `npm install`
-- <details> <summary>While still in the backend root directory, create the `.env` file necessary for MIMIC to work, see the below template:</summary>
+<details> <summary>While still in the backend root directory, create the `.env` file necessary for MIMIC to work, see the below template:</summary>
+
 ```ruby
 # .env template
 PORT = *** # this is the port your entire MIMIC pipeline with utilize 
