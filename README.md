@@ -51,7 +51,10 @@ npm start
 ```terminal
 pip install mimic-replay
 ```
-- In the root folder of your application, run the installer with the command `python3 -m mimic_replay.install`
+- In the root folder of your application, run the installer with the command:
+```terminal
+python3 -m mimic_replay.install
+```
 - **Note**: if your application is not made up of vanilla HTML files, the installer will not be able to run properly
   - To enable MIMIC in these applications, after running the installer, ensure the following two script tags are present in the deployed HTML files:
 ```html
