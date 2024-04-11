@@ -48,7 +48,10 @@ npm run build:ui
 
 ### Using MIMIC in your application
 - Before doing this step **ensure** your MIMIC pipeline is running, otherwise you will be unable to set up MIMIC functionality in your application
-- Download our [MIMIC installer python package](https://pypi.org/project/mimic-replay/)
+- Download our [MIMIC installer python package](https://pypi.org/project/mimic-replay/) with the following command:
+```terminal
+pip install mimic-replay
+```
 - In the root folder of your application, run the installer with the command `python3 -m mimic_replay.install`
 - **Note**: if your application is not made up of vanilla HTML files, the installer will not be able to run properly
   - To enable MIMIC in these applications, after running the installer, ensure the following two script tags are present in the deployed HTML files:
