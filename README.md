@@ -36,15 +36,14 @@ AWS_SECRET_ACCESS_KEY = ***
 AWS_BUCKET_NAME = ***
 ```
 - Navigate to `./models`, following the instructions at the top of the `initialize.sql` file to initialize your database
-- Returning to the backend's root directory, run the following:
+- Returning to the backend's root directory, build your MIMIC pipeline with the following:
 ```terminal
-npm --prefix ../frontend install
-npm --prefix ../frontend run build
-npm install
 npm run build:ui
 ```
-- Run MIMIC from the backend root folder with `npm start`
-- You can now communicate with the MIMIC backend and access the frontend interface with the PORT specified in your `.env` file!
+- You can now communicate with both your MIMIC backend and frontend interface with the PORT specified in your `.env` file by running:
+```terminal
+npm start
+```
 
 ### Using MIMIC in your application
 - Before doing this step **ensure** your MIMIC pipeline is running, otherwise you will be unable to set up MIMIC functionality in your application
