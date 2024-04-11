@@ -46,6 +46,7 @@ const LoginForm = ({ loginUser }) => {
               value={projectName}
               name="ProjectName"
               placeholder='User...'
+              pattern='^[^\s]{8,64}$'
               onChange={({ target }) => setProjectName(target.value)}
               />
           </div>
@@ -55,6 +56,7 @@ const LoginForm = ({ loginUser }) => {
               type="password"
               value={password}
               name="Password"
+              pattern='^[^\s]{8,64}$'
               onChange={({ target }) => setPassword(target.value)}
               />
           </div>
