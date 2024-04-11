@@ -1,67 +1,65 @@
-import { useSearchParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import rrwebPlayer from 'rrweb-player'
+import rrwebPlayer from "rrweb-player";
 
-const PlayerArea = ({session}) => {
-  const [player, setPlayer] = useState(null)
-  const [searchParams] = useSearchParams()
+const PlayerArea = ({ session }) => {
+  const [player, setPlayer] = useState(null);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    if (session.events.length < 1) return
+    if (session.events.length < 1) return;
 
     (() => {
-
-      let replayerDiv = document.getElementById("replayer")
+      let replayerDiv = document.getElementById("replayer");
 
       if (replayerDiv.firstChild) {
-        replayerDiv.removeChild(replayerDiv.firstChild)
-      }
-  
-      try {
-        const newPlayer = 
-          new rrwebPlayer({
-            target: document.getElementById("replayer"),
-            props: {
-              events: session.events,
-              width: 1245,
-              height: 304,
-              // autoPlay: true,
-              inactiveColor: ``,
-              mouseTail: {
-                strokeStyle: '#ff842d'
-              }
-            },
-          })
-        
-        setPlayer(newPlayer)
-      } catch (error) {
-        console.log(error)
+        replayerDiv.removeChild(replayerDiv.firstChild);
       }
 
-    })() 
-  }, [session])
+      try {
+        const newPlayer = new rrwebPlayer({
+          target: document.getElementById("replayer"),
+          props: {
+            events: session.events,
+            width: 1245,
+            height: 304,
+            // autoPlay: true,
+            inactiveColor: ``,
+            mouseTail: {
+              strokeStyle: "#ff842d",
+            },
+          },
+        });
+
+        setPlayer(newPlayer);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [session]);
 
   const playerNavigate = async () => {
-    const goToSeconds = searchParams.get('time')
+    const goToSeconds = searchParams.get("time");
 
-    if (!goToSeconds || !player) return
+    if (!goToSeconds || !player) return;
 
+    // Toggling player state prevents replayer from starting at beginning if session was finished playing prior to navigation.
+    player.toggle();
     player.goto(Math.floor(goToSeconds * 1000));
+    player.toggle();
 
-    let getCurrentState
-    player.addEventListener('ui-update-player-state', (event) => {
+    let getCurrentState;
+    player.addEventListener("ui-update-player-state", (event) => {
       getCurrentState = () => event.payload;
     });
-    
-    if (getCurrentState && getCurrentState() !== 'playing') player.pause();
-  }
 
-  playerNavigate()
+    if (getCurrentState && getCurrentState() !== "playing") player.pause();
+  };
 
-  return (
-      <div id="replayer"></div>
-  )
-}
+  playerNavigate();
 
-export default PlayerArea
+  return <div id="replayer"></div>;
+};
+
+export default PlayerArea;
