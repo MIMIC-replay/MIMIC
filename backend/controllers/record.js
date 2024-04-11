@@ -1,18 +1,17 @@
-const express = require("express");
+const express = require('express');
 
 const recordRouter = express.Router();
-const redis = require("../models/redis.js");
+const redis = require('../models/redis');
 
 const {
   extractMetadata,
   createNewSession,
-} = require("../utils/recordHelpers.js");
+} = require('../utils/recordHelpers');
 
-const app = express();
 const SESSION_DURATION = 10000;
 
-recordRouter.post("/", async (req, res) => {
-  console.log("sessionData is: ", req.sessionData);
+recordRouter.post('/', async (req, res) => {
+  console.log('sessionData is: ', req.sessionData);
   const sessionId = req.sessionData.id;
   const batchOfEvents = req.body;
 
@@ -21,11 +20,11 @@ recordRouter.post("/", async (req, res) => {
     // if the batch wasn't empty - so we don't make unneccesary requests to redis
     if (batchOfEvents.length > 0) {
       // json.arrAppend adds the JSON values to the end of the array
-      await redis.publisher.json.arrAppend(sessionId, "$", batchOfEvents);
+      await redis.publisher.json.arrAppend(sessionId, '$', batchOfEvents);
     }
   } else {
-    const projectId = req.get("Project-ID");
-    console.log("The project ID is: ", projectId);
+    const projectId = req.get('Project-ID');
+    console.log('The project ID is: ', projectId);
 
     const userMetadata = {
       ip: null,
@@ -36,18 +35,18 @@ recordRouter.post("/", async (req, res) => {
       url: null,
     };
     await extractMetadata(req, userMetadata);
-    console.log("Updated metadata: ", userMetadata);
+    console.log('Updated metadata: ', userMetadata);
 
     // JSON.SET: Will creates new path adds the values to a JSON object.
-    //$ represents root path
-    await redis.publisher.json.set(sessionId, "$", [batchOfEvents]);
-    await redis.publisher.set(sessionId + "_exp", "");
+    // $ represents root path
+    await redis.publisher.json.set(sessionId, '$', [batchOfEvents]);
+    await redis.publisher.set(`${sessionId}_exp`, '');
 
     createNewSession(sessionId, userMetadata, projectId, res);
   }
-  console.log("events saved");
+  console.log('events saved');
   // Refresh (reset) expiry time for the key
-  redis.publisher.expire(sessionId + "_exp", SESSION_DURATION / 1000);
+  redis.publisher.expire(`${sessionId}_exp`, SESSION_DURATION / 1000);
   return res.sendStatus(200);
 });
 

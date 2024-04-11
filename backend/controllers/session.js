@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require('express');
+
 const sessionsRouter = express.Router();
 const {
   addProjectCredentials,
@@ -9,27 +10,27 @@ const {
   retrieveEventData,
   retrieveMetadata,
   findSessionIds,
-} = require("../utils/sessionHelpers.js");
+} = require('../utils/sessionHelpers');
 
-sessionsRouter.post("/validate", async (req, res) => {
+sessionsRouter.post('/validate', async (req, res) => {
   // checks if the provided project name exists in the database
   const projectName = req.body.name;
   validateProjectName(projectName, res);
 });
 
-sessionsRouter.post("/new", async (req, res) => {
+sessionsRouter.post('/new', async (req, res) => {
   // collects all new project IDs and add them to the database
-  const projectId = req.body.projectId;
+  const { projectId } = req.body;
   const projectName = req.body.name;
   const projectPassword = req.body.password;
   addProjectCredentials(projectId, projectName, projectPassword, res);
 });
 
-const { projectExtractor } = require('../utils/middleware')
+const { projectExtractor } = require('../utils/middleware');
 
-sessionsRouter.get("/:projectId", projectExtractor, async (req, res) => {
+sessionsRouter.get('/:projectId', projectExtractor, async (req, res) => {
   if (!req.project) {
-    return res.status(401).json({ error: "invalid project id" });
+    return res.status(401).json({ error: 'invalid project id' });
   }
 
   try {
@@ -38,27 +39,27 @@ sessionsRouter.get("/:projectId", projectExtractor, async (req, res) => {
     const sessionPromises = validSessionIds.map(async (session) => {
       const sessionId = session.id;
       const sessionObj = { id: sessionId };
-      
+
       let events = await retrieveEventData(sessionId);
       events = events.flat();
-      
+
       sessionObj.events = events;
       sessionObj.network = extractNetworkEvents(events);
       sessionObj.logs = extractLogEvents(events);
       sessionObj.errors = extractErrorEvents(events);
-      
+
       const metadata = await retrieveMetadata(sessionId);
       sessionObj.metadata = metadata;
-      
+
       return sessionObj;
     });
 
     const sessions = await Promise.all(sessionPromises);
 
-    res.json({ sessions });
+    return res.json({ sessions });
   } catch (error) {
-    console.error("Error retrieving sessions:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error('Error retrieving sessions:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 });
 
