@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
+    "build:ui": "rm -rf dist && npm install && cd ../frontend && npm install && npm run build && cp -r dist ../backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
