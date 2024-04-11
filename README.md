@@ -12,6 +12,7 @@ MIMIC's setup involves two main steps:
 ### Prerequisites
 - `node` installed, 20.9.0 or greater
 - `python3` installed, 3.8.0 or greater
+- `pip` installed, the version compatible with your `python3` version
 - `PostgreSQL` installed, with a user `postgres` and password of your choice
 - An API token from `https://findip.net/`
 - [Redis](https://redis.io/) host, port, and password
