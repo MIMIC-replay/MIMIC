@@ -35,13 +35,11 @@ app.set("trust proxy", true);
 const testRouter = require("./controllers/test.js");
 const recordRouter = require("./controllers/record.js");
 const sessionRouter = require("./controllers/session.js");
-const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 
 app.use("/api/test", testRouter);
 app.use("/api/project", sessionRouter);
 
-app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 
 app.use(middleware.sessionCookie);
