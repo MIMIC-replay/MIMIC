@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mimic_replay"
-version = "1.1.4"
+version = "1.1.6"
 authors = [
   { name="Veronika Todd", email="veronika.todd@gmail.com" },
   { name="Lucas Sorribes", email="lucas.sorribes@gmail.com" },
@@ -15,7 +15,7 @@ dependencies = [
     "uuid",
     "requests",
     "bcrypt",
-    "bs4"
+    "BeautifulSoup4>=4.11.0"
 ]
 description = "MIMIC installation script, which enables your application to communicate with your MIMIC server."
 readme = "README.md"
@@ -28,4 +28,4 @@ classifiers = [
 
 [project.urls]
 MIMIC = "https://mimic-replay.com"
-Github = "https://github.com/2401-Team-4/capstone"
+Github = "https://github.com/2401-Team-4/MIMIC"
