@@ -45,16 +45,11 @@ const PlayerArea = ({ session }) => {
     if (!goToSeconds || !player) return;
 
     // Toggling player state prevents replayer from starting at beginning if session was finished playing prior to navigation.
-    player.toggle();
+    // Prevents flickering if timestamp present in URL while searching for a different session.
+    player.play();
+    player.pause();
+
     player.goto(Math.floor(goToSeconds * 1000));
-    player.toggle();
-
-    let getCurrentState;
-    player.addEventListener("ui-update-player-state", (event) => {
-      getCurrentState = () => event.payload;
-    });
-
-    if (getCurrentState && getCurrentState() !== "playing") player.pause();
   };
 
   playerNavigate();
