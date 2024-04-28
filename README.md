@@ -69,11 +69,11 @@ python3 -m mimic_replay.install
 - Interested in more customization options? Visit the [RRWeb documentation](https://github.com/rrweb-io/rrweb/blob/master/guide.md#options)
 
 ## MIMIC Team
-[Louis Mascari](https://github.com/Louis-Mascari) • Software Engineer • Knoxville, TN
+[Louis Mascari](https://louis-mascari.com/) • Software Engineer • Knoxville, TN
 
-[Lucas Sorribes](https://github.com/devluxor) • Software Engineer • Madrid, Spain
+[Lucas Sorribes](https://luxor.dev/) • Software Engineer • Madrid, Spain
 
-[Veronika Todd](https://github.com/VSTodd) • Software Engineer • Hartford, CT
+[Veronika Todd](https://veronika-todd.com) • Software Engineer • Hartford, CT
 
-[Erik Wiens](https://github.com/ErikWiens) • Software Engineer • New York, NY
+[Erik Wiens](https://www.erikwiens.com/) • Software Engineer • New York, NY
 
