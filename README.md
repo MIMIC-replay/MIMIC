@@ -15,7 +15,7 @@ MIMIC's setup involves two main steps:
 - `pip` installed, the version compatible with your `python3` version
 - `PostgreSQL` installed, with a user `postgres` and password of your choice
 - An API token from `https://findip.net/`
-- [Redis](https://redis.io/) host, port, and password
+- [Redis](https://redis.io/) cloud database host, port, and password (must be configured for Redis Stack capability)
 - [AWS S3 Bucket](https://aws.amazon.com/s3/) dedicated to this project
 - Clone the MIMIC repository to your machine
 
